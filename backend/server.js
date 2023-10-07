@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 5000 // the app can use either the hosting port during production 0r 5000 is not available
 const cors = require("cors")
 
-
+//const AuthRouter = require('./routers/auth')
 
 
 
@@ -13,5 +13,8 @@ const cors = require("cors")
 const start = () => {
     app.listen(port, () => console.log(`Server is running on port ${port}`))
 }
+
+
+//app.use('/api', AuthRouter)
 
 start()
