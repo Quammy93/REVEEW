@@ -1,7 +1,7 @@
 //defining a schema for a user {a schema is a pre define structure for documentation}
 
 const mongoose = require('mongoose')
-const schema   = require('schema')
+const schema   = mongoose.schema
 
 //function in a structure of schema
 const userschema = new schema({
