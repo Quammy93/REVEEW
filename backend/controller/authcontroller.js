@@ -1,6 +1,6 @@
 // we need import the user model into the authcontroller file inside controller folder
 
-const User   = require('../model/user')
+const User   = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt    = require('jsonwebtoken')
 
