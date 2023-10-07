@@ -75,7 +75,7 @@ const login = (req, res, next) {
 
 
 
-module.exports = {
+modules.exports = {
     register, login
 }
 
