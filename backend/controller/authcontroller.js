@@ -38,7 +38,7 @@ const register = (req, res, next) => {
 }
     
 //login function
-const login = (req, res, next) {
+const login = (req, res, next) => {
     //variables to keep or store the username and password.
     
     var username = req.body.username
