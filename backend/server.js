@@ -1,21 +1,20 @@
-const express = require("express")
-const app = express()
-const port = process.env.PORT || 5000 // the app can use either the hosting port during production 0r 5000 is not available
-const cors = require("cors")
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 5000;
+const cors = require("cors");
 
-const AuthRoute = require('./routes/auth')
+const AuthRoute = require('./routes/auth');
 
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-
-// middleware
-
+// Register and Login Routes
+app.use('/api', AuthRoute.register);
+app.use('/api', AuthRoute.login);
 
 const start = () => {
-    app.listen(port, () => console.log(`Server is running on port ${port}`))
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
 }
 
-
-app.use('/api', AuthController.register)
-app.use('/api', AuthController.login)
-
-start()
+start();
