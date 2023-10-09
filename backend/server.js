@@ -15,7 +15,7 @@ const start = () => {
 }
 
 
-app.use('/api', AuthController.register)
-app.use('/api', AuthController.login)
+app.use('/api', AuthRoute)
+//app.use('/api', AuthController.login)
 
 start()

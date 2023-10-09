@@ -1,7 +1,7 @@
 //defining a schema for a user {a schema is a pre define structure for documentation}
 
 const mongoose = require('mongoose')
-const schema   = mongoose.schema
+const schema   = mongoose.Schema
 
 //function in a structure of schema
 const userschema = new schema({
@@ -12,7 +12,7 @@ const userschema = new schema({
         type : String
     },
     phone: {
-        type : number
+        type : Number
     },
     password: {
         type : String
