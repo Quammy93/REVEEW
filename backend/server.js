@@ -6,6 +6,8 @@ const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const path = require("path");
 
+const connectDb = require("./db/ConnectDb"); 
+require("dotenv").config() //   
 const AuthRoute = require("./routes/auth");
 
 
@@ -14,14 +16,20 @@ const AuthRoute = require("./routes/auth");
 app.use(express.static(path.resolve(__dirname,"../client/dist")))
 
 //routes
-app.use("/api", AuthRoute);
-//app.use("/api", AuthController.login);
+app.use("/api", AuthController.register);
+app.use("/api", AuthController.login);
 
 app.use(notFound);
 app.use(errorHandler);
 
-const start = () => {
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
+const start = async() => {
+await connectDb(process.env.MONGO_URL);         
+    app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
-start();
+
+//routes
+app.use('/api', AuthRoute)
+//app.use('/api', AuthRoute)
+
+start()
