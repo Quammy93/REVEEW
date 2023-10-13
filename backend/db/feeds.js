@@ -2,7 +2,7 @@ export const feeds= [
   {
     id: 1,
     poster: "dee",
-    feed_img: "http://dummyimage.com/228x100.png/5fa2dd/ffffff",
+    feed_img: "http:/ummyimage.com/228x100.png/5fa2dd/ffffff",
     content: `SilverCrest is a brand that is typically associated with Lidl, a European supermarket chain. They offer a variety of products, including kitchen appliances such as air fryers. Here's some general information about SilverCrest air fryers:
     Air Frying: SilverCrest air fryers use hot air circulation and a small amount of oil to cook food. They are designed to mimic the results of deep frying but with significantly less oil, making the food healthier and lower in calories.
     Capacity: SilverCrest air fryers come in various sizes, with capacities ranging from smaller units suitable for a couple or single person to larger ones that can handle meals for a family.
