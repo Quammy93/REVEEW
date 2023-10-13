@@ -25,10 +25,15 @@ export const feeds= [
     content: 'Hisense, like many other manufacturers, produces inverter air conditioners. Inverter technology in air conditioners is designed to make the cooling or heating process more energy-efficient and precise. Here are some key features and benefits of Hisense inverter air conditioners:
 
     Energy Efficiency: Inverter technology allows the air conditioner to adjust its compressor speed and cooling/heating capacity according to the specific cooling or heating needs of a room. This results in reduced energy consumption compared to traditional non-inverter models.
+    
     Precise Temperature Control: Inverter air conditioners can maintain the set temperature more accurately because they continuously adjust the compressor speed. This helps in preventing overcooling or overheating and ensures greater comfort.
+    
     Quieter Operation: Inverter air conditioners typically run at lower speeds when the desired temperature is achieved, leading to quieter operation compared to non-inverter models that frequently cycle on and off at full power.
+    
     Faster Cooling and Heating: Inverter air conditioners can achieve the desired temperature faster because they can start at a higher speed and then reduce it as needed to maintain comfort.
+    
     Extended Lifespan: The gradual startup and shutdown of the compressor in inverter air conditioners can reduce wear and tear, potentially leading to a longer lifespan for the unit.
+    
     Reduced Electricity Bills: Since inverter air conditioners are more energy-efficient, they can lead to lower electricity bills, especially during extended periods of use'.
     title:
       "The power of HiSense inverter AirConditioner"   
@@ -40,7 +45,8 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
     id: 3,
     poster: "joe",
     feed_img: "http://dummyimage.com/110x100.png/5fa2dd/ffffff",
-    content: `Lulu & Georgia was launched in 2012 and based in Los Angeles, LG is a home decor and furniture retailer known for its stylish and curated selection of furniture and decor items. They offer a wide range of products to help you decorate your home. Here's an overview of what you might find when shopping for furniture at Lulu & Georgia:
+    content: `Lulu & Georgia was launched in 2012 and based in Los Angeles, LG is a home decor and furniture retailer known for its stylish and curated selection of furniture and decor items. 
+    They offer a wide range of products to help you decorate your home. Here's an overview of what you might find when shopping for furniture at Lulu & Georgia:
     Sofas and Seating: Lulu & Georgia offers a variety of sofas, loveseats, sectionals, and other seating options in different styles and materials. You can find both contemporary and traditional designs.
     Tables: This includes coffee tables, side tables, dining tables, and more. Lulu & Georgia provides options made from various materials like wood, metal, and glass.
     Storage Furniture: You can find storage solutions such as cabinets, dressers, and shelving units that are not only functional but also aesthetically pleasing.
@@ -107,14 +113,120 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
   },
   {
     id: 6,
-    poster: "davido",
+    poster: "hannah",
     feed_img: "http://dummyimage.com/109x100.png/dddddd/000000",
-    content: ``,
+    content: `Help restore your skin's protective barrier with CeraVe Moisturizing Cream, Face and Body Moisturizer for normal to dry skin. It's made with a unique formula that contains three essential ceramides and hyaluronic acid to help retain your skin's natural moisture. This 19-oz CeraVe moisturizing cream is non-irritating and provides 24 hours of hydration. It will not clog your pores and is non-greasy for easy application. Developed with dermatologists, this CeraVe moisturizer for normal to dry skin is also safe for sensitive skin. MVE technology: Ensures moisturizing ingredients are delivered to the skin slowly over time, lasting long after you apply it Hyaluronic Acid: Helps retain skin's natural moisture Ceramides: Help restore and maintain its natural protective barrier. Accepted by the National Eczema Association. CeraVe moisturizer for dry skin is suitable for sensitive skin.
+    Provides 24-hour hydration and helps restore the protective skin barrier with three essential ceramides (1,3,6-II)
+    Formulated with hyaluronic acid to help retain skin's natural moisture
+    Utilizes patented MVE controlled-release technology to help replenish ceramides and deliver long lasting moisturization
+    Free of fragrance and oil, hypoallergenic, non-comedogenic and non-irritating
+    Ideal for normal to dry skin.Help restore your skin's protective barrier with CeraVe Moisturizing Cream, Face and Body Moisturizer for normal to dry skin. It's made with a unique formula that contains three essential ceramides and hyaluronic acid to help retain your skin's natural moisture. This 19-oz CeraVe moisturizing cream is non-irritating and provides 24 hours of hydration. It will not clog your pores and is non-greasy for easy application. Developed with dermatologists, this CeraVe moisturizer for normal to dry skin is also safe for sensitive skin. MVE technology: Ensures moisturizing ingredients are delivered to the skin slowly over time, lasting long after you apply it Hyaluronic Acid: Helps retain skin's natural moisture Ceramides: Help restore and maintain its natural protective barrier. Accepted by the National Eczema Association. CeraVe moisturizer for dry skin is suitable for sensitive skin.
+    Provides 24-hour hydration and helps restore the protective skin barrier with three essential ceramides (1,3,6-II)
+    Formulated with hyaluronic acid to help retain skin's natural moisture
+    Utilizes patented MVE controlled-release technology to help replenish ceramides and deliver long lasting moisturization
+    Free of fragrance and oil, hypoallergenic, non-comedogenic and non-irritating
+    Ideal for normal to dry skin.
+    
+    KEY FEATURES
+
+    Provides 24-hour hydration and helps restore the protective skin barrier with three essential ceramides (1,3,6-II)
+    Formulated with hyaluronic acid to help retain skin's natural moisture
+    Utilizes patented MVE controlled-release technology to help replenish ceramides and deliver long lasting moisturization
+    Free of fragrance and oil, hypoallergenic, non-comedogenic and non-irritating
+    Ideal for normal to dry skin.`,
     title:
-      "I'm considering writing about a car brand here, BUT which one would it be"
+      "Cerave Moisturizing Body Cream-Normal-Dry Skin."
     poster_img: "http://dummyimage.com/202x100.png/ff4444/ffffff",
     date_posted: "01/17/2023",
     read_time: "5min",
   },
   {
+    id: 7,
+    poster: "preya",
+    feed_img: "http://dummyimage.com/204x100.png/ff4444/ffffff",
+    content: `So far I’m in love with my new LG washer. Keep in mind I was using a 14 year old whirlpool 
+    cabrio that basically stopped going through the proper cycles and took forever to wash one load. 
     
+    This LG is so fast and really gets my clothes clean. I still have some issues with stuck on stains on my 
+    kids’ clothes, but that’s mostly my fault for not pretreating the stains right away. It’s sort of fun to watch 
+    the cycles through the glass top. I hope this LG lives up to its reputation as one of the top washers in consumer 
+    reports and lasts for many years. 
+    
+    No regrets so far, I’ll update if I run into any issues, but so far it’s amazing in every single way! 
+    By the way, I researched washers for over 6 months before I broke down and bought one, so believe me when I tell you
+    this is one of the best out there in the price category I was aiming for ($600 and under). Also, it’s 57 inches tall with the lid open so I had to pull it further away from the wall than I would have liked because of my overhead cabinets, but I knew this ahead of time and it doesn’t bother me. So far I’m in love with my new LG washer. Keep in mind I was using a 14 year old whirlpool cabrio that basically stopped going through the proper cycles and took forever to wash one load. This LG is so fast and really gets my clothes clean. 
+    
+    I hope this LG lives up to its reputation as one of the top washers in consumer reports and lasts for many years. No regrets so far, I’ll update if I run into any issues, but so far it’s amazing in every single way! By the way, I researched washers for over 6 months before I broke down and bought one, so believe me when I tell you this is one of the best out there in the price category I was aiming for ($600 and under). Also, it’s 57 inches tall with the lid open so I had to pull it further away from the wall than I would have liked because of my overhead cabinets, but I knew this ahead of time and it doesn’t bother me.`,
+    title:
+      "LG washing machine - the grand washer",
+    poster_img: "http://dummyimage.com/117x100.png/dddddd/000000",
+    date_posted: "03/07/2023",
+    read_time: "5min",
+  },
+  {
+    id: 8,
+    poster: "hassan",
+    feed_img: "http://dummyimage.com/223x100.png/5fa2dd/ffffff",
+    content: `Ferrari`,
+    title:
+      "Fast cars",
+    poster_img: "http://dummyimage.com/102x100.png/5fa2dd/ffffff",
+    date_posted: "05/24/2023",
+    read_time: "5min",
+  },
+  {
+    id: 9,
+    poster: "meaggie",
+    feed_img: "http://dummyimage.com/188x100.png/dddddd/000000",
+    content: ` Bio-Oil was developed to help prevent and heal scars and stretch marks.
+
+    Bio-Oil is the name of the oil as well as the name of the oil’s manufacturer. Ingredients include:
+    
+    mineral oil
+    sunflower seed oil
+    tocopheryl acetate (vitamin E)
+    anthemis nobilis flower (chamomile) oil
+    lavandula angustifolia (lavender) oil
+    rosmarinus officinalis (rosemary) oil
+    calendula officinalis (marigold) extract
+    glycine soja (soybean) oil
+    Keep reading to learn about the uses and benefits of Bio-Oil for your skin.
+    
+    What is Bio-Oil used for?
+    Bio-Oil can help:
+    
+    improve the appearance of new and old scars
+    improve the appearance of stretch marks
+    improve the appearance of hyperpigmentation (uneven skin tone) for both dark and light skin types
+    smooth and tone aging skin on the face and body
+    retain skin moisture
+    `,
+    title:
+      "The Power of Bio Oil.",
+    poster_img: "http://dummyimage.com/143x100.png/dddddd/000000",
+    date_posted: "06/16/2023",
+    read_time: "2min",
+  },
+  {
+    id: 10,
+    poster: "robert",
+    feed_img: "http://dummyimage.com/183x100.png/5fa2dd/ffffff",
+    content: `A familiar-looking rear four-camera rear array hides a new 200MP lead sensor that offers 16-to-1 pixel-binning, 
+    with the aim of advancing the S23 Ultra's 'Nightography' abilities for everything from general snaps, to portrait photography, 
+    to videos of the night sky using the new Astro Hyperlapse mode and in practice, although imperfect, you'll be hard-pressed to find
+    an alternative phone with the same level of consistency, quality and confidence across its various sensors.
+
+    Those who want to shoot with greater control now also benefit from enhanced editing control too, 
+    with the ability to work with shots at up to 50MP captured in Expert RAW mode.
+
+    You still get a 12MP ultrawide and dual telephoto lenses at 3x and 10x (periscopic) zoom, respectively, 
+    granting the S23 Ultra the same degree of class-leading camera versatility offered up by the last couple of generations of Ultra.
+
+    Samsung has also renewed its commitment to offering up to four years of OS updates and five years of security updates, 
+    across the Galaxy S23 series. All three arrive with One UI 5.1 atop Android 13, which folds in better collaborative working in Samsung Notes and an enhanced Privacy Dashboard, among other things.`,
+    title:
+      "Have you tried any of the samsung S23 series?",
+    poster_img: "http://dummyimage.com/210x100.png/dddddd/000000",
+    date_posted: "01/08/2023",
+    read_time: "6min",
+  },
