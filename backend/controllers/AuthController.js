@@ -65,7 +65,7 @@ const login = (req, res, next) => {
                     }
                 })
         }else {
-            res.json({
+                res.json({
                 message: 'no user found!'
             })
         }

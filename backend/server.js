@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000; // the app can use either the hosting port during production 0r 5000 is not available
-//const cors = require("cors");
+const cors = require("cors");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const connectDb = require("./db/ConnectDb"); 
@@ -23,6 +23,6 @@ await connectDb(process.env.MONGO_URL);
 
 //routes
 app.use('/api', AuthRoute)
-//app.use('/api', AuthRoute)
+app.use('/api', AuthRoute)
 
 start()
