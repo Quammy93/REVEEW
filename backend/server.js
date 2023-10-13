@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 // Register and Login Routes
-app.use('/api', AuthRoute.register);
-app.use('/api', AuthRoute.login);
+app.use('/api', AuthRoute);
+//app.use('/api', AuthRoute.login);
 
 const start = () => {
     app.listen(port, () => console.log(`Server is running on port ${port}`));
