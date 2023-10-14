@@ -16,14 +16,11 @@ const AuthRoute = require("./routes/auth");
 app.use(express.static(path.resolve(__dirname,"../client/dist")))
 
 //routes
-app.use("/api", AuthController.register);
-app.use("/api", AuthController.login);
-
 app.use(notFound);
 app.use(errorHandler);
 
 const start = async() => {
-await connectDb(process.env.MONGO_URL);         
+//await connectDb(process.env.MONGO_URL);         
     app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
