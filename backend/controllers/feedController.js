@@ -1,25 +1,49 @@
-const createFeed=(req,res)=>{
+const Feed = require("../models/Feed");
+const NotFoundError = require("../errors/NotFoundError");
+const { StatusCodes } = require("http-status-codes");
 
-    req.status(200).json('Creating feed')
-}
+const createFeed = async (req, res) => {
+  await Feed.create(req.body);
 
-const getSingleFeed=(req,res)=>{
+  req.status(StatusCodes.OK).json("feed created successfully");
+};
 
-    req.status(200).json('get single feed')
-}
+const getSingleFeed = async (req, res) => {
+  const { id } = req.params;
+  const feed = await Feed.findOne({ _id: id });
+  if (!feed) {
+    throw new NotFoundError("feed not found");
+  }
+  req.status(StatusCodes.Ok).json({ feed });
+};
 
-const getAllFeeds=(req,res)=>{
+const getAllFeeds = async (req, res) => {
+  const feeds = await Feed.find({});
+  req.status(StatusCodes.OK).json({ feeds });
+};
+const updateFeed = async (req, res) => {
+  const { id } = req.params;
+  const feed = await Feed.findByIdAndUpdate({ _id: id }, req.body);
 
-    req.status(200).json('getting all feeds')
-}
-const updateFeed=(req,res)=>{
+  if (!feed) {
+    throw new NotFoundError("feed not found");
+  }
+  req.status(StatusCodes.OK).json({ feed });
+};
+const deleteFeed = async (req, res) => {
+  const { id } = req.params;
+  const feed = await Feed.findByIdAndDelete({ _id: id });
 
-    req.status(200).json('úpdating feed')
-}
-const deleteFeed=(req,res)=>{
+  if (!feed) {
+    throw new NotFoundError("feed not found");
+  }
+  req.status(StatusCodes.OK).json("Feed deleted successfully");
+};
 
-    req.status(200).json('deleting feed')
-}
-
-
-module.exports={getAllFeeds,getSingleFeed,updateFeed,createFeed,deleteFeed}
+module.exports = {
+  getAllFeeds,
+  getSingleFeed,
+  updateFeed,
+  createFeed,
+  deleteFeed,
+};
