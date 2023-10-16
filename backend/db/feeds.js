@@ -266,7 +266,7 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
   {
     id: 12,
     poster: "jewel",
-    feed_img: "http://dummyimage.com/196x100.png/cc0000/ffffff",
+    feed_img: "images/victoria's secret",
     content: `It’s undeniable the impact that Victoria’s Secret has had in the world of underwear, from its iconic Bombshell bras and silky robes, to its expansion into activewear 
   and not forgetting those sweet-smelling body mists *smiles in nostalgia*. Victoria’s Secret also prides itself on the changes it has made to create a brand that uplifts women of all shapes and sizes, 
   at different stages of their life, whether it’s their teen years, post-partum, menopause, you name it, all with a focus to make us – the consumers – feel unapologetically good about our bodies.
@@ -287,3 +287,43 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
     date_posted: "04/14/2023",
     read_time: "10min",
   },
+  {
+    id: 13,
+    poster: "monique",
+    feed_img: "http://dummyimage.com/191x100.png/cc0000/ffffff",
+    content: `Crocs aren’t for everyone, but they can be great for the right person. Essentially, they’re multi-purpose clogs that are ideal for wearing around the house and for some casual activities. 
+    However, they’re comfortable and durable enough to handle some more rigorous outings.
+
+  I always knew Crocs were comfy — I had a neon green pair when I was 12 that I wore at summer camp — but it wasn't until I tried them as an adult that I really understood why people love them. 
+  They are a perfect house and errand shoe: easy to slip on, supportive while cooking and cleaning, and very cushy for quick walks around the neighborhood. They feel like walking on giant foam sponges.
+
+  We both found that Crocs were much more comfortable to wear with socks than without if you're going on long walks, but personally, I don't mind wearing them without socks around the house.
+ 
+  They're simple and not that different than a pair of chunky sneakers. I'm not buying up the super bright patterned ones, but if that's your vibe, I'm proud of you and your spunk!
+
+  And anyway, I'm kind of sick of people saying that styles and trends are ugly and no one should wear them. If you're happy with how something looks or feels, then go for it!`,
+    title:
+      "Multi-purpose clogs - Crocs .",
+    poster_img: "http://dummyimage.com/117x100.png/ff4444/ffffff",
+    date_posted: "08/28/2023",
+    read_time: "5min",
+  }, 
+  {
+    id: 14,
+    poster: "Mocha",
+    feed_img: "http://dummyimage.com/144x100.png/dddddd/000000",
+    content: `The powder itself is amazing. It’s soft, silky and surprisingly easy to apply. The sponge applicator that comes with it, is perfect for on the go touch ups although 
+  I wouldn’t apply the powder initially with it. It sets your base into place for hours without it creasing or transferring. It’s particularly good at shine control without looking cakey at any point. 
+  Personally, I love wearing this powder alone particularly on oily skin days as it gives you a matte looking finish to the skin. It works well with other powder products too.
+
+  Overall, I am pretty happy with the Maybelline Fit Me Pressed Powder but I do wish there was a better shade range. Although the packaging is a little bit bulky, it is sturdy and kind of the perfect 
+  travelling companion due to the mirror and sponge holder. The powder itself is amazing. Soft, silky and easy to apply, it sets your base in place for hours and controls shine over the day.
+
+  Thanks for reading. Have this product…let us know your thoughts in the comments below or send us your looks for a social media feature. Don’t forget to hit that like button`,
+    title:
+      "Maybelline Fit Me Matte + poreless foundation.",
+    poster_img: "http://dummyimage.com/229x100.png/dddddd/000000",
+    date_posted: "09/19/2023",
+    read_time: "3min",
+  },
+  
