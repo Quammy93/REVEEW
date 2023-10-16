@@ -26,7 +26,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 const start = async () => {
-  //await connectDb(process.env.MONGO_URL);
+  await connectDb(process.env.MONGO_URL);
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
