@@ -230,3 +230,53 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
     date_posted: "01/08/2023",
     read_time: "6min",
   },
+  {
+    id: 11,
+    poster: "walter",
+    feed_img: "http://dummyimage.com/196x100.png/ff4444/ffffff",
+    content: `I will like to talk about the 3 Lattafa Mahir perfumes. These perfumes are great, and can be used by men and women. In no particular order I present:
+
+	Lattafa Mahir Black
+    Maahir Black Edition by Lattafa Perfumes is a Amber Spicy fragrance for women and men. It has a Long-Lasting fragrance. Maahir Black Edition was launched in 2019. 
+    
+  Top notes: Black Pepper, Pink Pepper and Saffron 
+  Middle notes: Labdanum, Cade oil, Gurjan balsam and Rhubarb 
+  Base notes: Leather, Cedar, Patchouli, Guaiac Wood, Musk and Moss.
+
+	Lattafa Mahir Gold
+﻿  Mahir Gold is a soft scent that exudes a charming aroma with its fruity, woody, and floral bouquets. The perfume’s core includes flowers of peony, pink lily and jasmine. 
+    base is velvety due to accords of sandalwood, musk and vanilla blossom.
+
+  Top Notes:  Bergamot, Red Berries, & Peach Bellini
+  Middle Notes: Peony, Pink Lily, &  Jasmine
+  Base Notes:  Sandalwood, Musk, & Vanilla Blossom
+
+	Lattafa Mahir Legacy
+    Mahir Legacy is an ethereal and fresh fragrance that opens with an energizing scent with citrus and fruity notes. It has a Wood and vanilla tones, which are the final notes, 
+    add refinement and lightness. This combination results in a delightful scent for you.
+
+  Top Notes: Lavender, Grapefruit, Lime, Pineapple, Pine cones
+  Middle Notes: Black pepper, Geranium, Juniper berry, Rosemary, Olibanum resinoids
+  Base Notes: Ambrox, Cashmere, Oakmoss, Tonka bean, Vetiver, Vanilla, Bergamot`,
+    title: "Lattafa MAHIR perfumes.",
+    poster_img: "http://dummyimage.com/228x100.png/ff4444/ffffff",
+    date_posted: "09/15/2022",
+    read_time: "3min",
+  },
+  {
+    id: 12,
+    poster: "jewel",
+    feed_img: "http://dummyimage.com/196x100.png/cc0000/ffffff",
+    content: `It’s undeniable the impact that Victoria’s Secret has had in the world of underwear, from its iconic Bombshell bras and silky robes, to its expansion into activewear and not forgetting those sweet-smelling body mists *smiles in nostalgia*. Victoria’s Secret also prides itself on the changes it has made to create a brand that uplifts women of all shapes and sizes, at different stages of their life, whether it’s their teen years, post-partum, menopause, you name it, all with a focus to make us – the consumers – feel unapologetically good about our bodies.
+
+    The bra collections at Victoria’s Secret are impressively extensive, from the Very Sexy logomania bras for the OG fans, to the Body By Victoria maternity and mastectomy bras, to the Dream Angels collection, which comes in lace galore, to the super-comfy wireless T-shirt Bras, which are available every colour of the rainbow, not forgetting the sports selection… the list goes on. They have it all and have even expanded the range with a new Love Cloud collection, which features a cloud-like pad and soft-to-the-touch fabric, launching in five silhouettes. *Insert heart eyes emoji*
+
+  For Victoria’s Secret, customer experience is everything and although we’ve all been used to getting everything with one click of a button by shopping online, it’s important to note that when it comes to underwear, an in-person experience is important.
+
+Victoria’s Secret has reported that 70% of women are wearing the wrong bra size, and this statistic aligns with many more studies conducted by other brands. So, we’re all out there wearing the wrong bra and doing nothing about it? Well, apparently that can be fixed quickly by a trip to a VS store. We decided to put the experience to the test. Five GLAMOUR staffers with five different bra sizes (or so we thought) headed over to the Victoria’s Secret Flagship Store in New Bond Street, London for a complimentary bra fitting service (available for all customers). This is what they thought of their experience and the bras they picked up.`,
+    title:
+      "The Victoria Secret incredible bra: The Actual Review.",
+    poster_img: "http://dummyimage.com/169x100.png/cc0000/ffffff",
+    date_posted: "04/14/2023",
+    read_time: "5min",
+  },
