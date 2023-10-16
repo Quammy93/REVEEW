@@ -1,5 +1,6 @@
 const Review = require("../models/Review");
 const BadRequestError = require("../errors/BadrequestError");
+const NotFoundError = require("../errors/NotFoundError");
 const { StatusCodes } = require("http-status-codes");
 
 const createReview = async (req, res) => {
@@ -15,7 +16,8 @@ const createReview = async (req, res) => {
 };
 const deleteReview = async (req, res) => {
   const { id } = req.params;
-  await Review.findOneAndDelete({ _id: id });
+ const review= await Review.findOneAndDelete({ _id: id });
+ if (!review){throw new  NotFoundError(`No review with this ${id}`)}
   res.status(StatusCodes.OK).json("deleted successfully");
 };
 const updateReview = (req, res) => {

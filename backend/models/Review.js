@@ -12,7 +12,7 @@ const ReviewSchema = new mongoose.Schema(
     product_reviewed: { type: mongoose.Types.ObjectId, ref: "Product" },
     productId: { type: String },
   },
-  { timestamps }
+  { timestamps:true }
 );
 
 module.exports = mongoose.model("Review", ReviewSchema);
