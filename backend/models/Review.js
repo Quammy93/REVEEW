@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema(
   {
-    like: { type: Number },
-    dislike: { type: Number },
     review_date: { type: Date },
     title: { type: String },
     detail: { type: String },
