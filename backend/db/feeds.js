@@ -261,22 +261,29 @@ poster_img: "http://dummyimage.com/235x100.png/dddddd/000000",
     title: "Lattafa MAHIR perfumes.",
     poster_img: "http://dummyimage.com/228x100.png/ff4444/ffffff",
     date_posted: "09/15/2022",
-    read_time: "3min",
+    read_time: "6min",
   },
   {
     id: 12,
     poster: "jewel",
     feed_img: "http://dummyimage.com/196x100.png/cc0000/ffffff",
-    content: `It’s undeniable the impact that Victoria’s Secret has had in the world of underwear, from its iconic Bombshell bras and silky robes, to its expansion into activewear and not forgetting those sweet-smelling body mists *smiles in nostalgia*. Victoria’s Secret also prides itself on the changes it has made to create a brand that uplifts women of all shapes and sizes, at different stages of their life, whether it’s their teen years, post-partum, menopause, you name it, all with a focus to make us – the consumers – feel unapologetically good about our bodies.
+    content: `It’s undeniable the impact that Victoria’s Secret has had in the world of underwear, from its iconic Bombshell bras and silky robes, to its expansion into activewear 
+  and not forgetting those sweet-smelling body mists *smiles in nostalgia*. Victoria’s Secret also prides itself on the changes it has made to create a brand that uplifts women of all shapes and sizes, 
+  at different stages of their life, whether it’s their teen years, post-partum, menopause, you name it, all with a focus to make us – the consumers – feel unapologetically good about our bodies.
 
-    The bra collections at Victoria’s Secret are impressively extensive, from the Very Sexy logomania bras for the OG fans, to the Body By Victoria maternity and mastectomy bras, to the Dream Angels collection, which comes in lace galore, to the super-comfy wireless T-shirt Bras, which are available every colour of the rainbow, not forgetting the sports selection… the list goes on. They have it all and have even expanded the range with a new Love Cloud collection, which features a cloud-like pad and soft-to-the-touch fabric, launching in five silhouettes. *Insert heart eyes emoji*
+  The bra collections at Victoria’s Secret are impressively extensive, from the Very Sexy logomania bras for the OG fans, to the Body By Victoria maternity and mastectomy bras, to the Dream Angels collection, 
+  which comes in lace galore, to the super-comfy wireless T-shirt Bras, which are available every colour of the rainbow, not forgetting the sports selection… the list goes on. They have it all and have even 
+  expanded the range with a new Love Cloud collection, which features a cloud-like pad and soft-to-the-touch fabric, launching in five silhouettes. *Insert heart eyes emoji*
 
-  For Victoria’s Secret, customer experience is everything and although we’ve all been used to getting everything with one click of a button by shopping online, it’s important to note that when it comes to underwear, an in-person experience is important.
+  For Victoria’s Secret, customer experience is everything and although we’ve all been used to getting everything with one click of a button by shopping online, it’s important to note that when it comes to underwear, 
+  an in-person experience is important.
 
-Victoria’s Secret has reported that 70% of women are wearing the wrong bra size, and this statistic aligns with many more studies conducted by other brands. So, we’re all out there wearing the wrong bra and doing nothing about it? Well, apparently that can be fixed quickly by a trip to a VS store. We decided to put the experience to the test. Five GLAMOUR staffers with five different bra sizes (or so we thought) headed over to the Victoria’s Secret Flagship Store in New Bond Street, London for a complimentary bra fitting service (available for all customers). This is what they thought of their experience and the bras they picked up.`,
+  Victoria’s Secret has reported that 70% of women are wearing the wrong bra size, and this statistic aligns with many more studies conducted by other brands. So, we’re all out there wearing the wrong bra and doing nothing about it? Well, 
+  apparently that can be fixed quickly by a trip to a VS store. We decided to put the experience to the test. Five GLAMOUR staffers with five different bra sizes (or so we thought) headed over to the Victoria’s Secret Flagship Store in New Bond Street, 
+  London for a complimentary bra fitting service (available for all customers). This is what they thought of their experience and the bras they picked up.`,
     title:
       "The Victoria Secret incredible bra: The Actual Review.",
     poster_img: "http://dummyimage.com/169x100.png/cc0000/ffffff",
     date_posted: "04/14/2023",
-    read_time: "5min",
+    read_time: "10min",
   },
