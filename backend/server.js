@@ -30,13 +30,8 @@ const start = async () => {
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
-<<<<<<< HEAD
-
 //routes
 app.use('/api', AuthRoute)
 app.use('/api', AuthRoute)
 
 start()
-=======
-start();
->>>>>>> 37469bcae1230937195850cf290f570d31315f53
