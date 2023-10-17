@@ -4,25 +4,39 @@ const port = process.env.PORT || 5000; // the app can use either the hosting por
 const cors = require("cors");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
-const connectDb = require("./db/ConnectDb"); 
-require("dotenv").config() //   
+const path = require("path");
+
+const connectDb = require("./db/ConnectDb");
+require("dotenv").config(); //
 const AuthRoute = require("./routes/auth");
+const reviewRoute = require("./routes/reviewRoute");
+const feedRoutes = require("./routes/feedRoute");
 
 // middleware
 
+app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
+//routes
+app.use("/api", AuthRoute);
+app.use("/api/reviews", reviewRoute);
+//app.use('/api', AuthRoute)
+app.use("/api/feeds", feedRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
 
-const start = async() => {
-await connectDb(process.env.MONGO_URL);         
-    app.listen(port, () => console.log(`Server is running on port ${port}`));
+const start = async () => {
+  await connectDb(process.env.MONGO_URL);
+  app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
+<<<<<<< HEAD
 
 //routes
 app.use('/api', AuthRoute)
 app.use('/api', AuthRoute)
 
 start()
+=======
+start();
+>>>>>>> 37469bcae1230937195850cf290f570d31315f53
