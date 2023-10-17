@@ -12,8 +12,10 @@ const AuthRoute = require("./routes/auth");
 const reviewRoute = require("./routes/reviewRoute");
 const feedRoutes = require("./routes/feedRoute");
 
-// middleware
 
+const Feed = require("./models/Feed");
+// middleware
+app.use(express.json())
 app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
 //routes
@@ -27,6 +29,7 @@ app.use(errorHandler);
 
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
+ 
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
