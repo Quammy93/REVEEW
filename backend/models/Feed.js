@@ -9,6 +9,7 @@ const FeedSchema = new mongoose.Schema({
   poster_img: { type: String },
   content: { type: String },
   title: { type: String },
+  userLike: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("Feed", FeedSchema);

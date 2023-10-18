@@ -5,6 +5,8 @@ const cors = require("cors");
 const notFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+require("express-async-errors");
 
 const connectDb = require("./db/ConnectDb");
 require("dotenv").config(); //
@@ -12,10 +14,11 @@ const AuthRoute = require("./routes/auth");
 const reviewRoute = require("./routes/reviewRoute");
 const feedRoutes = require("./routes/feedRoute");
 
-
 const Feed = require("./models/Feed");
 // middleware
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser(process.env.JWT_SECRET));
 app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
 //routes
@@ -29,12 +32,8 @@ app.use(errorHandler);
 
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
- 
+
   app.listen(port, () => console.log(`Server is running on port ${port}`));
 };
 
-//routes
-app.use('/api', AuthRoute)
-app.use('/api', AuthRoute)
-
-start()
+start();

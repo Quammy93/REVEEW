@@ -5,9 +5,11 @@ const { StatusCodes } = require("http-status-codes");
 
 const createReview = async (req, res) => {
   const { id } = req.params;
+  const {userId}=req.user
 
   const { title, detail, rating } = req.body;
   req.body.productId = id;
+  req.body.reviewer=userId
   if (!title || !detail || !rating) {
     throw new BadRequestError("Please Provide all the fields");
   }

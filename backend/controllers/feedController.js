@@ -4,6 +4,8 @@ const { StatusCodes } = require("http-status-codes");
 
 const createFeed = async (req, res) => {
   console.log(req.body);
+  const { userId } = req.user;
+  req.body.poster = userId;
   await Feed.create(req.body);
 
   res.status(StatusCodes.OK).json("feed created successfully");
