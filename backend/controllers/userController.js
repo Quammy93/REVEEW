@@ -1,10 +1,9 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
-const {
-  BadRequestError,
-  NotFoundError,
-  UnauthenticatedError,
-} = require("../errors/indexError");
+const BadrequestError = require("../errors/BadrequestError");
+const NotFoundError = require("../errors/NotFoundError");
+const UnAunthenticatedError = require("../errors/UnAunthenticatedError");
+
 const { createTokenUser, attachCookiesToResponse } = require("../JWT");
 const checkPermisions = require("../JWT/checkPermision");
 
@@ -33,7 +32,7 @@ const updateUser = async (req, res) => {
   const { name, email } = req.body;
   const id = req.user.userId;
   if (!email || !name) {
-    throw new BadRequestError("Please enter name and email");
+    throw new BadrequestError("Please enter name and email");
   }
   const user = await User.findOne({ _id: id });
   user.email = email;

@@ -13,6 +13,7 @@ require("dotenv").config(); //
 const AuthRoute = require("./routes/auth");
 const reviewRoute = require("./routes/reviewRoute");
 const feedRoutes = require("./routes/feedRoute");
+const userRoute = require("./routes/userRoute");
 
 const Feed = require("./models/Feed");
 // middleware
@@ -26,6 +27,7 @@ app.use("/api", AuthRoute);
 app.use("/api/reviews", reviewRoute);
 //app.use('/api', AuthRoute)
 app.use("/api/feeds", feedRoutes);
+app.use("/api/users", userRoute);
 
 app.use(notFound);
 app.use(errorHandler);

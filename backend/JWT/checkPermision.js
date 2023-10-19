@@ -1,4 +1,4 @@
-const UnauthorizedError = require("../errors/unathourizedError");
+const UnauthorizedError = require("../errors/UnauthorizedError")
 
 const checkPermissions = (requestUser, resourceUserId) => {
   // console.log(requestUser);
