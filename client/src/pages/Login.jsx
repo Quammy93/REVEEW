@@ -1,6 +1,6 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "http://localhost:5000/api";
+const url = "/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";

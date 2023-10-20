@@ -27,7 +27,7 @@ const Feed = require("./models/Feed");
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser(process.env.JWT_SECRET));
-app.use(express.static(path.resolve(__dirname, "../client/dist")));
+app.use(express.static("../client/dist"));
 
 //routes
 app.use("/api", AuthRoute);
@@ -37,7 +37,7 @@ app.use("/api/feeds", feedRoutes);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 
-app.use(notFound);
+//app.use(notFound);
 app.use(errorHandler);
 
 const start = async () => {

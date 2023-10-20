@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+const url = "/api";
 
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import "../assets/css/navbar.css";
@@ -116,8 +116,8 @@ const Register = () => {
           </main>
         </main>
         <main className="register-main">
-          <h2 className="reg-heading">REVEEW</h2>
-          <h4 className="reg-sub-heading">Register Your account</h4>
+          <h2 className="reg-heading" style={{color:"white"}}>REVEEW</h2>
+          <h4 className="reg-sub-heading" style={{color:"white"}}>Register Your account</h4>
           <Form
             // {...formItemLayout}
             // layout="vertical"
