@@ -10,10 +10,17 @@ require("express-async-errors");
 
 const connectDb = require("./db/ConnectDb");
 require("dotenv").config(); //
+
+const corsOptions = {
+  origin: "http://127.0.0.1:5173", // Replace with the actual origin of your frontend application
+  credentials: true,
+};
+
 const AuthRoute = require("./routes/auth");
 const reviewRoute = require("./routes/reviewRoute");
 const feedRoutes = require("./routes/feedRoute");
 const userRoute = require("./routes/userRoute");
+const productRoute = require("./routes/productRoute");
 
 const Feed = require("./models/Feed");
 // middleware
@@ -28,6 +35,7 @@ app.use("/api/reviews", reviewRoute);
 //app.use('/api', AuthRoute)
 app.use("/api/feeds", feedRoutes);
 app.use("/api/users", userRoute);
+app.use("/api/products", productRoute);
 
 app.use(notFound);
 app.use(errorHandler);

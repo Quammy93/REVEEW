@@ -1,0 +1,169 @@
+
+
+.navbar-section{position: fixed;width: 100%;top: 0;}
+.single-product-link {
+  background-color: white;
+  padding: 20px;
+  margin-top: 45px;
+
+}
+
+.single-product-wrapper {
+  background-color: white;
+  width: 100%;
+
+  padding: 20px 60px 20px 60px;
+}
+.images-container {
+  width: 100%;
+  height: 500px;
+
+}
+.product-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+ 
+}
+
+
+.product-details {
+  width: 80%;
+  background-color: white;
+
+  margin: 20px 20px 20px 0;
+ 
+}
+.product-navigate {
+  background-color:  rgb(11, 11, 87);;
+  height: 150px;
+  width: 20%;
+  margin: 20px 0 0 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  right: 30px;
+  z-index: 1;
+  color: white;
+  padding: 10px;
+
+}
+a{color: white;}
+.product-navigate h2{font-size: 16px;cursor: pointer ;}
+
+.product-details-heading,
+.product-review-heading {
+  padding: 20px 0 0 20px;
+  font-size: 20px;
+}
+
+.key-features-heading {
+  padding: 20px 0 0 20px;
+  font-size: 20px;
+}
+.underline {
+  width: 100%;
+  height: 1px;
+  background-color: gainsboro;
+  margin-top: 0;
+}
+.description {
+  padding: 20px 0 0 20px;
+}
+.product-desc-section_2 {
+  background-color: white;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.product-desc-section_1 {
+  background-color: white;
+  padding-bottom: 20px;
+}
+
+.product-key-features,
+.product-key-spec {
+  border: 1px solid gainsboro;
+  width: 40%;
+  border-radius: 5px;
+}
+.product-key-spec {
+  margin-top: 10px;
+}
+.key-lists {
+  padding: 20px;
+}
+.average-rating-container {
+  background-color: gainsboro;
+  width: 350px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.avg-rate-p {
+  font-size: 50px;
+}
+
+.rating-first-layer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rate-desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 300px;
+}
+
+.rating-first-layer-right {
+  width: 300px;
+}
+.user-reviews {
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.the-review {
+  padding: 20px;
+}
+.reviewer-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.reviewer-container {
+  display: flex;
+  justify-content: space-between;
+  width: 170px;
+}
+.reviewer-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.margin-off {
+  margin: 0;
+}
+.review-title {
+  font-size: medium;
+  font-weight: bold;
+}
+.post-review-btn {
+  margin: 60px 0 20px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color:  rgb(11, 11, 87);;
+  color: white;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress{width: 200px;}

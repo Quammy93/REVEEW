@@ -1,0 +1,7 @@
+.recommend-img {
+  height: 200px;
+  width: 200px;
+}
+
+.recommend-wrapper{display: flex; flex-direction: row;justify-content: center;align-items: center;overflow: scroll;;padding: 10px;}
+.recommend-container{border: 1px solid grey;display: flex;justify-content: center;align-items: center;padding: 10px;margin: 10px;flex-direction: column; border-radius: 10px;}

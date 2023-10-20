@@ -2,7 +2,13 @@ const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
 const BadRequestError = require("../errors/BadrequestError");
 const UnAunthenticatedError = require("../errors/UnAunthenticatedError");
-const { createTokenUser, attachCookiesToResponse } = require("../JWT");
+const jwt = require("jsonwebtoken");
+const {
+  createTokenUser,
+  attachCookiesToResponse,
+  createJWTToken,
+} = require("../JWT");
+const { TokenExpiredError } = require("jsonwebtoken");
 
 const register = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -23,9 +29,14 @@ const register = async (req, res) => {
     role: role,
   });
   // Signing /creating jwt token
-  const tokenUser = createTokenUser(user);
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(StatusCodes.OK).json({ user: tokenUser });
+  const tokenUser = { name: user.name, userId: user._id, role: user.role };
+
+  const token = jwt.sign(tokenUser, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
+
+  //attachCookiesToResponse({ res, user: tokenUser });
+  res.status(StatusCodes.OK).json({ user: tokenUser, token });
 };
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -44,11 +55,15 @@ const login = async (req, res) => {
     throw new UnAunthenticatedError("Invalid Credentials");
   }
   //creating tokenUser
-  const tokenUser = createTokenUser(user);
-  //creating token and attaching it to response
 
-  attachCookiesToResponse({ res, user: tokenUser });
-  res.status(StatusCodes.OK).json({ user: tokenUser });
+  const tokenUser = { name: user.name, userId: user._id, role: user.role };
+
+  const token = jwt.sign(tokenUser, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
+
+  // attachCookiesToResponse({ res, user: tokenUser });
+  res.status(StatusCodes.OK).json({ user: tokenUser, token: token });
 };
 
 //loging out ,we reset the available actual token to dummy string logout

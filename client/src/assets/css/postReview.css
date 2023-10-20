@@ -1,0 +1,17 @@
+.post-review-container {
+     width: 500px;
+  background-color: bisque;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 5%;
+}
+
+.post-review-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rating-click{display: flex;justify-content: space-between;align-items: start;width: 200px;}
+
+.post-btn{width: 100%; margin: 0;}
