@@ -1,0 +1,75 @@
+.reg-input {
+  width: 90%;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.register-container {
+  width: 900px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+.register-left {
+  background-color: gainsboro;
+  border-radius: 10px 0 0 10px;
+  padding: 90px 10px 0 20px;
+  
+}
+
+.register-main {
+  background-color:  rgb(11, 11, 87);;
+  border-radius: 0 10px 10px 0;
+
+  padding: 15px 0 0 30px;
+}
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4%;
+ 
+}
+.reg-check {
+  display: flex;
+}
+.reg-btn {
+  width: 90%;
+  height: 40px;
+  background-color:  white;
+  color:  rgb(11, 11, 87);;
+}
+.reg-heading {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+
+}
+.reg-sub-heading {
+  text-align: center;
+  font-size: 15px;
+ 
+}
+.reg-left-item {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.reg-left-article {
+  background-color: gainsboro;
+  margin-bottom: 20px;
+  width: 80%;
+  color: black;
+}
+
+.reg-left-heading {
+  font-size: medium;
+  font-weight: bold;
+}
+.left-heading-detail {
+  font-size: 13px;
+  line-height: 10px;
+  margin-top: -30px;
+}
+.icon-style {
+  font-size: 60px;
+  color:  rgb(11, 11, 87);;
+}

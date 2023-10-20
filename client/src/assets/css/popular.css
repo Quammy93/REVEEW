@@ -1,0 +1,6 @@
+.popular-container{padding: 5px;}
+.popular-heading{font-size: small;font-weight: bold;}
+.item-img{width: 40px; height: 40px}
+.popular-p{font-size:12px; display:inline;width: 90%;margin-left: 5px;height: 40px;margin-top: 10px;overflow: hidden;justify-content: center;align-items: center;}
+.popular-article{display:inline-flex;justify-content:space-around;align-items: center;width: 250px;
+}

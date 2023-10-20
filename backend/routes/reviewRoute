@@ -2,18 +2,24 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAlReviews,
+  getAllReviews,
   getSingleReview,
   deleteReview,
   updateReview,
   createReview,
 } = require("../controllers/reviewController");
 
-router.route("/").post(createReview).get(getAlReviews);
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require("../middleware/authentication");
+
+router.route("/:id").post(createReview);
+router.route("/:id").get(getAllReviews);
 router
   .route("/modify/:id")
   .patch(updateReview)
   .delete(deleteReview)
   .get(getSingleReview);
 
-  module.exports=router
+module.exports = router;

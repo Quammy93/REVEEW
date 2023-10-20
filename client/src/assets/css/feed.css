@@ -1,0 +1,59 @@
+.article-container {
+  height: 400px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: normal;
+  padding: 5px;
+  border: 1px solid gray;
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+
+.feed-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+
+.article{margin-bottom: 20px;
+}
+.heading{height: 90px;}
+
+.title {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  display: inline;
+}
+.content {
+  margin: 10px 0 10px 0;
+}
+.poster {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 120px;
+}
+.read-time {
+  margin-left: 10px;
+}
+
+.poster-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.feed-image {
+  width: 90%;
+  height: 180px;
+}
+
+.article-footer {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 25%;
+}

@@ -1,0 +1,27 @@
+.hero-container {
+ justify-content: space-between;
+  display: flex;
+
+  flex-direction: row;
+  margin-top: 40px;
+ 
+}
+
+.nav-container{
+    height: 700px;
+    width: 350px;
+    background-color: red;
+}
+.other-container{
+     height:700px;
+    width: 350px;
+  
+}
+.feed-container{
+    height: 700px;
+    overflow-y: scroll;
+
+    width: 74%;
+    margin:0 10px 0 10px;
+
+}

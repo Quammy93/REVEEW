@@ -1,14 +1,13 @@
-const mongoose=require('mongoose')
+const mongoose = require("mongoose");
 
-const FeedSchema=new mongoose.Schema({
-like:{type :Number},
-dislike:{type:Number},
-posted_date:{type:Date},
-userId: {type:mongoose.Types.ObjectId},
-commentId: {type:mongoose.Types.ObjectId},
-feed_img:{type:String}
-})
+const FeedSchema = new mongoose.Schema({
+  date_posted: { type: Date, default: Date.now() },
+  poster: { type: String },
+  feed_img: { type: String },
+  poster_img: { type: String },
+  content: { type: String },
+  title: { type: String },
+  userLike: { type: Boolean, default: false },
+});
 
-
-
-module.exports=mongoose.model("Feed",FeedSchema)
+module.exports = mongoose.model("Feed", FeedSchema);

@@ -1,80 +1,78 @@
-// we need import the user model into the authcontroller file inside controller folder
+const User = require("../models/User");
+const { StatusCodes } = require("http-status-codes");
+const BadRequestError = require("../errors/BadrequestError");
+const UnAunthenticatedError = require("../errors/UnAunthenticatedError");
+const jwt = require("jsonwebtoken");
+const {
+  createTokenUser,
+  attachCookiesToResponse,
+  createJWTToken,
+} = require("../JWT");
+const { TokenExpiredError } = require("jsonwebtoken");
 
-const User   = require('../models/User')
-const bcrypt = require('bcryptjs')
-const jwt    = require('jsonwebtoken')
+const register = async (req, res) => {
+  const { name, email, password, role } = req.body;
+  //another way to check for the existence of the email
+  const isEmailAlreadyExist = await User.findOne({ email });
+  if (isEmailAlreadyExist) {
+    throw new BadRequestError(
+      "Email Already exist,Please use another mail address"
+    );
+  }
+  //making the first user that resgister to be the admin
+  // const isFirstUser = (await User.countDocuments({})) === 0;
+  //  const role = isFirstUser ? "admin" : "user";
+  const user = await User.create({
+    name: name,
+    email: email,
+    password: password,
+    role: role,
+  });
+  // Signing /creating jwt token
+  const tokenUser = { name: user.name, userId: user._id, role: user.role };
 
-// function for registration process
+  const token = jwt.sign(tokenUser, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
 
-const register = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-        if (err) {
-            res.json({
-                error: err
-            })
-        }
-    })   //this or process will encrypt the password submitted
+  //attachCookiesToResponse({ res, user: tokenUser });
+  res.status(StatusCodes.OK).json({ user: tokenUser, token });
+};
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new BadRequestError("Please provide email and password");
+  }
+  const user = await User.findOne({ email });
 
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
-        password: hashedPass
-        
-    })
-    user.save()
-        .then(user => {
-            res.json({
-                message: 'user add successfully'
-            })
-        })
-        .catch(error => {
-                res.json({
-                    message: 'An error occure'
-                })
-        })
-    
-}
-    
-//login function
-const login = (req, res, next) => {
-    //variables to keep or store the username and password.
-    
-    var username = req.body.username
-    var password = req.body.password
+  if (!user) {
+    throw new UnAunthenticatedError("Invalid credentials,user not found");
+  }
+  //comparing the user password
+  const isPasswordCorrect = await user.comparePassword(password);
+  console.log(isPasswordCorrect);
+  if (!isPasswordCorrect) {
+    throw new UnAunthenticatedError("Invalid Credentials");
+  }
+  //creating tokenUser
 
-    user.findOne({ $or: [{ email: username }, { phone: username }] })
-    .then(user => {
-            if (user) {
-                bcrypt.compare(password, user.password, function (err, result) {
-                    if (err) {
-                        res.json({
-                            error:err
-                        })
-                    }
-                    if (result) {
-                        let token = jwt.sign({name: user.name}, 'verySecretValue', {expireIn: '1h'})
-                        res.json({
-                            message: 'Login Successful',
-                            token
-                        })
-                    } else {
-                        res.json({
-                            message: 'password does not matched!'
-                        })
-                    }
-                })
-        }else {
-                res.json({
-                message: 'no user found!'
-            })
-        }
-    })
-}  
+  const tokenUser = { name: user.name, userId: user._id, role: user.role };
 
+  const token = jwt.sign(tokenUser, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_LIFETIME,
+  });
 
+  // attachCookiesToResponse({ res, user: tokenUser });
+  res.status(StatusCodes.OK).json({ user: tokenUser, token: token });
+};
 
-module.exports = {
-    register, login
-}
+//loging out ,we reset the available actual token to dummy string logout
+const logout = (req, res) => {
+  res.cookie("token", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000),
+  });
+  res.status(StatusCodes.OK).json({ msg: "user logged out!" });
+};
 
+module.exports = { register, login, logout };

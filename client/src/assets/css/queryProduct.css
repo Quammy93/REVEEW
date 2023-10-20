@@ -1,0 +1,36 @@
+.query-top {
+
+  height: 110px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.left-query {
+  height: 80px;
+  width: 300px;
+  cursor: pointer;
+}
+.right-query {
+  height: 80px;
+  width: 300px;
+}
+
+.heading-link,
+.per-page {
+  font-size: 14px;
+}
+.product-heading {
+  font-size: 26px;
+}
+.sort-div {
+  font-size: 12px;
+}
+.sort-1,
+.sort-2 {
+  border: 1px solid gainsboro;
+  padding: 5px;
+  cursor: pointer;
+}
