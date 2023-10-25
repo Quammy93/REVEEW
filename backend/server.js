@@ -27,7 +27,8 @@ const Feed = require("./models/Feed");
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser(process.env.JWT_SECRET));
-app.use(express.static("../client/dist"));
+//app.use(express.static("../client/dist"));
+app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
 //routes
 app.use("/api", AuthRoute);
