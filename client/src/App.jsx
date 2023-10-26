@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Home from "./pages/Home";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProductDisplay from "./pages/products/ProductDisplay";
@@ -20,15 +22,15 @@ function App() {
           <Route path="/" Component={Home}></Route>
           <Route path="/login" Component={Login}></Route>
           <Route path="/register" Component={Register}></Route>
-          <Route path="/products/:selectedCategory" Component={ProductDisplay}></Route>
+          <Route
+            path="/products/:selectedCategory"
+            Component={ProductDisplay}
+          ></Route>
           <Route
             path="/products/:selectedCategory/:product/:id"
             Component={SingleProduct}
           ></Route>
-          <Route
-            path="/products/feedback/:id"
-            Component={PostReview}
-          ></Route>
+          <Route path="/products/feedback/:id" Component={PostReview}></Route>
 
           <Route path="/admin" Component={Admin}></Route>
         </Routes>

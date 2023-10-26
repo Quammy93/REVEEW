@@ -16,10 +16,12 @@
   padding: 10px;
 }
 
-
-.article{margin-bottom: 20px;
+.article {
+  margin-bottom: 20px;
 }
-.heading{height: 90px;}
+.heading {
+  height: 90px;
+}
 
 .title {
   font-size: 12px;
@@ -56,4 +58,16 @@
   justify-content: space-around;
   align-items: center;
   width: 25%;
+}
+
+.content-style {
+  margin-top: 100px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-spin {
+  margin-top: 300px;
 }

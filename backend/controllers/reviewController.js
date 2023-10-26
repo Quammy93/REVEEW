@@ -5,16 +5,25 @@ const { StatusCodes } = require("http-status-codes");
 
 const createReview = async (req, res) => {
   const { id } = req.params;
- // const { userId } = req.user;
+  const { userId } = req.user;
   console.log(userId);
 
-  const { title, detail, rating } = req.body;
-  req.body.product_reviewed = id;
-  //req.body.reviewer = userId;
-  if (!title || !detail || !rating) {
+  const { feedback } = req.body;
+  const title = feedback.title;
+  const comment = feedback.comment;
+  const value = feedback.value;
+  // req.body.product_reviewed = id;
+  // req.body.reviewer = userId;
+  if (!title || !comment || !value) {
     throw new BadRequestError("Please Provide all the fields");
   }
-  const review = await Reviews.create(req.body);
+  const review = await Reviews.create({
+    title: title,
+    comment: comment,
+    value: value,
+    product_reviewed: id,
+    reviewer: userId,
+  });
   res.status(StatusCodes.OK).json({ review });
 };
 const deleteReview = async (req, res) => {
@@ -30,6 +39,7 @@ const updateReview = (req, res) => {
 };
 const getAllReviews = async (req, res) => {
   const { id } = req.params;
+  console.log("id", id);
   const product_reviewed = id;
   const reviews = await Reviews.find({
     product_reviewed: product_reviewed,

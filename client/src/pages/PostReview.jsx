@@ -3,12 +3,14 @@ import { Input, Rate, Form } from "antd";
 import "../assets/css/postReview.css";
 import axios from "axios";
 const url = "/api";
+//const url = "http://localhost:5000/api";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PostReview = () => {
-  const token = localStorage.getItem("token");
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  const user = localStorage.getItem("user");
+  // const token = localStorage.getItem("token");
+  // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //const user = localStorage.getItem("user");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,21 +25,18 @@ const PostReview = () => {
     postFeedbaack(feedback);
   };
 
-
-
   const postFeedbaack = (feedback) => {
     axios
-      .post(
-        `${url}/reviews/${id}}`,
-        { feedback }
-    
-      )
+      .post(`${url}/reviews/${id}`, { feedback })
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error.response.status);
-      
+        if (error.response.status == "401") {
+          navigate("/login");
+          toast.warning("Login to Post a Review");
+        }
       });
   };
 
@@ -83,7 +82,7 @@ const PostReview = () => {
 
           <Form.Item
             label="Review"
-            name="review"
+            name="comment"
             rules={[
               {
                 required: true,

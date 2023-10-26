@@ -1,10 +1,15 @@
 import React from "react";
+import logo from "../assets/images/revlogo.png";
 
 const Footer = () => {
   return (
     <div className="footer-container">
       <div className="footer-logo">
-        <span style={{ font: "30px", fontWeight: 100 }}>Reveew</span>
+        <span style={{ font: "30px", fontWeight: 100 }}>
+          {" "}
+          <img src="" alt="" />
+          Reveew
+        </span>
       </div>
       <div className="sections">
         <div className="section2">

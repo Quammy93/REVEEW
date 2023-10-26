@@ -3,6 +3,8 @@ import "../assets/css/hero.css";
 import NavLinks from "./NavLinks";
 import Feeds from "./Feeds";
 import Popular from "./Popular";
+import { useGlobalContext } from "../utils/context";
+
 
 const Hero = () => {
   return (
@@ -10,10 +12,13 @@ const Hero = () => {
       <article className="nav-container">
         <NavLinks />
       </article>
+      <section>
+     
 
-      <article className="feed-container">
-        <Feeds />
-      </article>
+        <article className="">
+          <Feeds />
+        </article>
+      </section>
       <article className="other-container">
         <Popular />
       </article>

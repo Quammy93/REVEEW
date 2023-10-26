@@ -15,17 +15,40 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../utils/context";
 
 const Login = () => {
-  const [loading, setLoading] = React.useState(false);
+  const { user, setUser, loading, setLoading } = useGlobalContext();
+  //const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
   const userLogin = async (credentials) => {
-    return await axios.post(`${url}/login`, credentials).catch((error) => {
-      console.log(error.response.data.msg);
-      console.log(error.response.data.msg);
-      setLoading(false);
-      //setErrorMessage(error.response.data.msg);
-      toast.error(error.response.data.msg);
-    });
+    setLoading(true);
+    return await axios
+      .post(`${url}/login`, credentials)
+      .then((response) => {
+        setLoading(false);
+        if (response.status == "200") {
+          console.log(response.data.user);
+          setUser(response.data.user);
+        
+
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem(
+            "loggedUser",
+            JSON.stringify(response.data.user)
+          );
+          toast.success("Login successfully");
+        }
+      })
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error.response.data.msg);
+        console.log(error.response.data.msg);
+
+        //setErrorMessage(error.response.data.msg);
+        toast.error(error.response.data.msg);
+      });
   };
 
   const onFinish = (e) => {
@@ -38,10 +61,8 @@ const Login = () => {
           setLoading(false);
           console.log(response);
           toast.success("Login successfully");
-          const user = response.data.user;
-          const token = response.data.token;
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", user);
+          //  localStorage.setItem("token", token);
+          //  localStorage.setItem("user", user);
         }
       })
       .then(() => {

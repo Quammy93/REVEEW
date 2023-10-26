@@ -26,7 +26,7 @@ const Feed = require("./models/Feed");
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(cookieParser(process.env.JWT_SECRET));
+app.use(cookieParser());
 //app.use(express.static("../client/dist"));
 app.use(express.static(path.resolve(__dirname, "../client/dist")));
 
@@ -37,6 +37,10 @@ app.use("/api/reviews", reviewRoute);
 app.use("/api/feeds", feedRoutes);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
+});
 
 //app.use(notFound);
 app.use(errorHandler);

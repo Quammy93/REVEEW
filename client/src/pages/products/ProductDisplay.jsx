@@ -6,7 +6,9 @@ import { AiOutlineRight, AiOutlineDown } from "react-icons/ai";
 import { useGlobalContext } from "../../utils/context";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
+import { Alert, Spin } from "antd";
 //import { getAllProducts } from "../../utils/axios";
 import axios from "axios";
 
@@ -17,6 +19,7 @@ import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
 const ProductDisplay = () => {
   let { selectedCategory } = useParams();
   //const { categoryClicked } = useGlobalContext();
+  const [isProductLoading, setIsProductLoading] = React.useState(false);
   let clickedCategory = selectedCategory;
   if (clickedCategory === "All Products") {
     clickedCategory = "";
@@ -55,12 +58,14 @@ const ProductDisplay = () => {
   };
 
   const fetchData = async () => {
+    setIsProductLoading(true);
     try {
       const response = await getAllProducts();
 
       const { products, totalCount, numOfPages } = response.data;
       setProducts(products);
       setTotalCount(totalCount);
+      setIsProductLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -123,202 +128,230 @@ const ProductDisplay = () => {
   return (
     <div>
       <Navbar />
-      {/**  <QueryProduct />*/}
-      <div className="query-top">
-        <div className="left-query">
-          <p className="heading-link">
-            Home <span>/</span>
-            {selectedCategory}
-          </p>
-          <h2 className="product-heading">{selectedCategory}</h2>
-        </div>
-
-        <div className="right-query">
-          <p className="per-page">
-          
-          </p>
-          <div className="sort-div">
-            Sort By:
-            <span
-              className="sort-1"
-              onClick={() => {
-                setSort("a-z");
-              }}
-            >
-              Price -High To Low
-            </span>
-            <span
-              className="sort-2"
-              onClick={() => {
-                setSort("z-a");
-              }}
-            >
-              Price -Low To High
-            </span>
-          </div>
-        </div>
-      </div>
-      {/** */}
-      <section className="products-wrapper">
-        <div className="product-menu">
-          <ul>
-            <li className="browse-cat ">
-              <div onClick={openCategorySubLinks} className="link-title">
-                <p className="cat-title">Browse Category </p>
-                <span>
-                  {" "}
-                  {toggleCategory ? <AiOutlineDown /> : <AiOutlineRight />}
-                </span>
-              </div>
-              <ul
-                className={`${
-                  toggleCategory ? " list-sub-container" : " hide-sub-container"
-                }`}
-              >
-                <li>
-                  {browseCategory?.map((item, id) => {
-                    return (
-                      <p className="brw-cat-p" key={id}>
-                        {item}
-                      </p>
-                    );
-                  })}
-                </li>
-              </ul>
-            </li>
-
-            <li className="browse-cat">
-              <div onClick={openBrandSubLinks} className="link-title">
-                {" "}
-                <p className="cat-title">Brand </p>
-                <span>
-                  {" "}
-                  {toggleBrand ? <AiOutlineDown /> : <AiOutlineRight />}
-                </span>
-              </div>
-              <ul
-                className={`${
-                  toggleBrand ? " list-sub-container" : " hide-sub-container"
-                }`}
-              >
-                <li>
-                  <Input.Search placeholder="search product" />
-                </li>
-                <li className="filter-cat">
-                  <Checkbox.Group
-                    options={brand}
-                    defaultValue={[""]}
-                    onChange={onChecked}
-                    className="check"
-                  />
-                </li>
-              </ul>
-            </li>
-
-            <li className="browse-cat">
-              <div onClick={openRatingSubLinks} className="link-title">
-                {" "}
-                <p className="cat-title">Ratings </p>
-                <span>
-                  {" "}
-                  {toggleRating ? <AiOutlineDown /> : <AiOutlineRight />}
-                </span>
-              </div>
-              <ul
-                className={`${
-                  toggleRating ? " list-sub-container" : " hide-sub-container"
-                }`}
-              >
-                <li>
-                  <Radio.Group
-                    onChange={onChange}
-                    value={value}
-                    className="label-s"
-                  >
-                    <Space direction="vertical">
-                      <Radio value={5}>
-                        <Rate disabled defaultValue={5} />
-                      </Radio>
-                      <Radio value={4}>
-                        <Rate disabled defaultValue={4} />
-                      </Radio>
-                      <Radio value={3}>
-                        <Rate disabled defaultValue={3} />
-                      </Radio>
-                      <Radio value={2}>
-                        <Rate disabled defaultValue={2} />
-                      </Radio>
-                      <Radio value={1}>
-                        <Rate disabled defaultValue={1} />
-                      </Radio>
-                    </Space>
-                  </Radio.Group>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <main className="products-container-main">
-          <main className="products-container">
-            {products?.map((product) => {
-              const {
-                _id,
-                product_category,
-                product_name,
-                product_Avgrating,
-                img,
-              } = product;
-
-              return (
-                <section className="product-section-container" key={_id}>
-                  <div className="product-intro">
-                    <img src={img} alt="" className="product-img" />
-                    <p className="product-title">{product_name} </p>
-                  </div>
-                  <span className="rev-rate-span">
-                    {" "}
-                    <Rate
-                      disabled
-                      defaultValue={product_Avgrating}
-                      value={product_Avgrating}
-                      className="rev-rate"
-                    />{" "}
-                    <span>5 Reviews</span>
-                  </span>
-                  <button
-                    className="prod-rev-btn"
-                    onClick={() =>
-                      handleProduct(product_category, product_name, _id)
-                    }
-                  >
-                    Reviews
-                  </button>
-                </section>
-              );
-            })}
-          </main>
-          <Pagination
-            total={totalCount}
-            pageSize={limit}
-            itemRender={(_, type, page) => {
-              if (type === "prev") {
-                return "Prev";
-              }
-              if (type === "next") {
-                return "Next";
-              }
-
-              return page;
+      {isProductLoading && (
+        <div className="product-spin">
+          <Space
+            direction="vertical"
+            style={{
+              width: "100%",
             }}
-            showSizeChanger={false}
-            current={currentPage}
-            onChange={handlePagechange}
-            className="paginate"
-          />
-        </main>
-      </section>
-      <Footer />
+          >
+            <Spin tip="Loading" size="large">
+              <div className="content " />
+            </Spin>{" "}
+          </Space>
+        </div>
+      )}
+      {!isProductLoading && products.length == [] && <div>No Result Found</div>}
+      {!isProductLoading && products.length > 0 && (
+        <div>
+          {" "}
+          <div className="query-top">
+            <div className="left-query">
+              <p className="heading-link">
+                Home <span>/</span>
+                {selectedCategory}
+              </p>
+              <h2 className="product-heading">{selectedCategory}</h2>
+            </div>
+
+            <div className="right-query">
+              <p className="per-page"></p>
+              <div className="sort-div">
+                Sort By:
+                <span
+                  className="sort-1"
+                  onClick={() => {
+                    setSort("a-z");
+                  }}
+                >
+                  Price -High To Low
+                </span>
+                <span
+                  className="sort-2"
+                  onClick={() => {
+                    setSort("z-a");
+                  }}
+                >
+                  Price -Low To High
+                </span>
+              </div>
+            </div>
+          </div>
+          {/** */}
+          <section className="products-wrapper">
+            <div className="product-menu">
+              <ul>
+                <li className="browse-cat ">
+                  <div onClick={openCategorySubLinks} className="link-title">
+                    <p className="cat-title">Browse Category </p>
+                    <span>
+                      {" "}
+                      {toggleCategory ? <AiOutlineDown /> : <AiOutlineRight />}
+                    </span>
+                  </div>
+                  <ul
+                    className={`${
+                      toggleCategory
+                        ? " list-sub-container"
+                        : " hide-sub-container"
+                    }`}
+                  >
+                    <li>
+                      {browseCategory?.map((item, id) => {
+                        return (
+                          <p className="brw-cat-p" key={id}>
+                            {item}
+                          </p>
+                        );
+                      })}
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="browse-cat">
+                  <div onClick={openBrandSubLinks} className="link-title">
+                    {" "}
+                    <p className="cat-title">Brand </p>
+                    <span>
+                      {" "}
+                      {toggleBrand ? <AiOutlineDown /> : <AiOutlineRight />}
+                    </span>
+                  </div>
+                  <ul
+                    className={`${
+                      toggleBrand
+                        ? " list-sub-container"
+                        : " hide-sub-container"
+                    }`}
+                  >
+                    <li>
+                      <Input.Search placeholder="search product" />
+                    </li>
+                    <li className="filter-cat">
+                      <Checkbox.Group
+                        options={brand}
+                        defaultValue={[""]}
+                        onChange={onChecked}
+                        className="check"
+                      />
+                    </li>
+                  </ul>
+                </li>
+
+                <li className="browse-cat">
+                  <div onClick={openRatingSubLinks} className="link-title">
+                    {" "}
+                    <p className="cat-title">Ratings </p>
+                    <span>
+                      {" "}
+                      {toggleRating ? <AiOutlineDown /> : <AiOutlineRight />}
+                    </span>
+                  </div>
+                  <ul
+                    className={`${
+                      toggleRating
+                        ? " list-sub-container"
+                        : " hide-sub-container"
+                    }`}
+                  >
+                    <li>
+                      <Radio.Group
+                        onChange={onChange}
+                        value={value}
+                        className="label-s"
+                      >
+                        <Space direction="vertical">
+                          <Radio value={5}>
+                            <Rate disabled defaultValue={5} />
+                          </Radio>
+                          <Radio value={4}>
+                            <Rate disabled defaultValue={4} />
+                          </Radio>
+                          <Radio value={3}>
+                            <Rate disabled defaultValue={3} />
+                          </Radio>
+                          <Radio value={2}>
+                            <Rate disabled defaultValue={2} />
+                          </Radio>
+                          <Radio value={1}>
+                            <Rate disabled defaultValue={1} />
+                          </Radio>
+                        </Space>
+                      </Radio.Group>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <main className="products-container-main">
+              <main className="products-container">
+                {products?.map((product) => {
+                  const {
+                    _id,
+                    product_category,
+                    product_name,
+                    product_Avgrating,
+                    img,
+                  } = product;
+
+                  return (
+                    <section className="product-section-container" key={_id}>
+                      <div className="product-intro">
+                        <img src={img} alt="" className="product-img" />
+                        <p className="product-title">{product_name} </p>
+                      </div>
+                      <span className="rev-rate-span">
+                        {" "}
+                        <Rate
+                          disabled
+                          defaultValue={product_Avgrating}
+                          value={product_Avgrating}
+                          className="rev-rate"
+                        />{" "}
+                        <span>5 Reviews</span>
+                      </span>
+                      <button
+                        className="prod-rev-btn"
+                        onClick={() =>
+                          handleProduct(product_category, product_name, _id)
+                        }
+                      >
+                        Reviews
+                      </button>
+                    </section>
+                  );
+                })}
+              </main>
+
+              {products.length != [] && (
+                <Pagination
+                  total={totalCount}
+                  pageSize={limit}
+                  itemRender={(_, type, page) => {
+                    if (type === "prev") {
+                      return "Prev";
+                    }
+                    if (type === "next") {
+                      return "Next";
+                    }
+
+                    return page;
+                  }}
+                  showSizeChanger={false}
+                  current={currentPage}
+                  onChange={handlePagechange}
+                  className="paginate"
+                />
+              )}
+            </main>
+          </section>
+          <Footer />
+        </div>
+      )}
+
+      {/**  <QueryProduct />*/}
     </div>
   );
 };

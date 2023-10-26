@@ -18,10 +18,11 @@
   
 }
 .feed-container{
-    height: 700px;
+    max-height: 700px;
     overflow-y: scroll;
+     min-width: 500px;
 
-    width: 74%;
+    width: 90%;
     margin:0 10px 0 10px;
 
 }

@@ -18,8 +18,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 
 const Register = () => {
-  //const { erroMessage, setErrorMessage } = useGlobalContext();
-  const [loading, setLoading] = React.useState(false);
+  const { loading, setLoading } = useGlobalContext();
+
   const navigate = useNavigate();
 
   const userRegistration = async (user) => {
@@ -39,18 +39,19 @@ const Register = () => {
 
     userRegistration(e)
       .then((response) => {
-        if (response.status === 200) {
-          setLoading(false);
+        console.log("response", response);
+        if (response.status === 201) {
           console.log(response.data.token);
 
-          const token = response.data.token;
-          localStorage.setItem("token", token);
+          //  const token = response.data.token;
+          //  localStorage.setItem("token", token);
           toast.success("Registered successfully");
 
           //  const userRegistered = response.data.tokenUser;
 
           console.log("done");
         }
+        setLoading(false);
       })
       .then(() => {
         navigate("/login");
@@ -116,8 +117,12 @@ const Register = () => {
           </main>
         </main>
         <main className="register-main">
-          <h2 className="reg-heading" style={{color:"white"}}>REVEEW</h2>
-          <h4 className="reg-sub-heading" style={{color:"white"}}>Register Your account</h4>
+          <h2 className="reg-heading" style={{ color: "white" }}>
+            REVEEW
+          </h2>
+          <h4 className="reg-sub-heading" style={{ color: "white" }}>
+            Register Your account
+          </h4>
           <Form
             // {...formItemLayout}
             // layout="vertical"
@@ -254,7 +259,7 @@ const Register = () => {
               </Button>
             </Form.Item>
           </Form>
-          <p style={{color:"red"}}>
+          <p style={{ color: "red" }}>
             Already Registered? <Link to="/login">Login</Link>
           </p>
         </main>
