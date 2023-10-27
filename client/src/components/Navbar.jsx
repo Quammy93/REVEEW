@@ -8,9 +8,11 @@ import { FaUser, FaSortDown, FaCaretRight } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 
 const Navbar = () => {
+  const [showLogout, setShowLogout] = React.useState(false);
   const navigate = useNavigate();
   let name = "";
   const loggedIn = localStorage.getItem("loggedIn");
@@ -72,16 +74,70 @@ const Navbar = () => {
               <span className="ad-name">{name}</span>
             </span>
             <span>
-              <FaSortDown />
+              {showLogout ? (
+                <FaCaretRight
+                  onClick={() => {
+                    setShowLogout(!showLogout);
+                  }}
+                  className="logout-icon"
+                />
+              ) : (
+                <FaSortDown
+                  onClick={() => {
+                    setShowLogout(!showLogout);
+                  }}
+                  className="logout-icon"
+                />
+              )}
             </span>
           </main>
-          <main className="logout">
-            <span className="logout-span" onClick={logout}>
-              <span>
-                <MdOutlineExitToApp />
-              </span>{" "}
-              <span>Logout</span>
-            </span>
+          <main>
+            <div className={`${showLogout ? "logout show" : "logout"}`}>
+              <span className="logout-span" onClick={logout}>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+                <div>
+                  <span>
+                    <MdOutlineExitToApp />
+                  </span>
+                  <span>Logout</span>
+                </div>
+              </span>
+            </div>
           </main>
         </div>
       )}

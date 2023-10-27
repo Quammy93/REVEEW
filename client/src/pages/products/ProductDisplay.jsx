@@ -127,7 +127,10 @@ const ProductDisplay = () => {
   };
   return (
     <div>
-      <Navbar />
+      <div className="product-nav">
+        <Navbar />
+      </div>
+
       {isProductLoading && (
         <div className="product-spin">
           <Space
@@ -146,7 +149,7 @@ const ProductDisplay = () => {
       {!isProductLoading && products.length > 0 && (
         <div>
           {" "}
-          <div className="query-top">
+          <div className="query-top product-query">
             <div className="left-query">
               <p className="heading-link">
                 Home <span>/</span>
@@ -263,19 +266,39 @@ const ProductDisplay = () => {
                       >
                         <Space direction="vertical">
                           <Radio value={5}>
-                            <Rate disabled defaultValue={5} />
+                            <Rate
+                              disabled
+                              defaultValue={5}
+                              style={{ backgroundColor: "white" }}
+                            />
                           </Radio>
                           <Radio value={4}>
-                            <Rate disabled defaultValue={4} />
+                            <Rate
+                              disabled
+                              defaultValue={4}
+                              style={{ backgroundColor: "white" }}
+                            />
                           </Radio>
                           <Radio value={3}>
-                            <Rate disabled defaultValue={3} />
+                            <Rate
+                              disabled
+                              defaultValue={3}
+                              style={{ backgroundColor: "white" }}
+                            />
                           </Radio>
                           <Radio value={2}>
-                            <Rate disabled defaultValue={2} />
+                            <Rate
+                              disabled
+                              defaultValue={2}
+                              style={{ backgroundColor: "white" }}
+                            />
                           </Radio>
                           <Radio value={1}>
-                            <Rate disabled defaultValue={1} />
+                            <Rate
+                              disabled
+                              defaultValue={1}
+                              style={{ backgroundColor: "white" }}
+                            />
                           </Radio>
                         </Space>
                       </Radio.Group>

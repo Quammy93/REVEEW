@@ -335,23 +335,22 @@ const SingleProduct = () => {
                 <div className="product-navigate">
                   <h2>
                     {" "}
-                    <HashLink to="/products/:selectedCategory/:product/:id#product-details">
+                    {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-details">
                       Product Details
-                    </HashLink>
-                    {/**<a href="#product-details"></a> */}
+                    </HashLink>*/}
+                    <a href="#product-details">Product Details</a>
                   </h2>
                   <h2>
-                    {/**<a href="#product-specificaton">Product Specification</a> */}
-                    <HashLink to="/products/:selectedCategory/:product/:id#product-specificaton">
+                    <a href="#product-specificaton">Product Specification</a>{" "}
+                    {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-specificaton"> 
                       Product Specification
-                    </HashLink>
+                    </HashLink>  */}
                   </h2>
                   <h2>
-                    {/**<a href="#product-review">Reviews</a> */}
-
-                    <HashLink to="/products/:selectedCategory/:product/:id#product-review">
+                    <a href="#product-review">Reviews</a>
+                    {/** <HashLink to="/products/:selectedCategory/:product/:id#product-review">
                       Reviews
-                    </HashLink>
+                    </HashLink>*/}
                   </h2>
                 </div>
               </section>

@@ -1,41 +1,48 @@
 import React from "react";
 import logo from "../assets/images/revlogo.png";
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <div className="footer-container">
-      <div className="footer-logo">
-        <span style={{ font: "30px", fontWeight: 100 }}>
-          {" "}
-          <img src="" alt="" />
-          Reveew
-        </span>
-      </div>
-      <div className="sections">
-        <div className="section2">
-          <p>Links</p>
-          <p>Chrome extension</p>
-          <p>Login</p>
-          <p>Sign Up</p>
-        </div>
-        <div className="section3">
-          <p>Product</p>
-          <p>Pricing</p>
-          <p>Browse Products</p>
-          <p>Browse Brand</p>
-          <p>How it Works</p>
-          <p>New Features</p>
-        </div>
-        <div className="section1">
-          <p>Developers</p>
-          <p>Maxwell</p>
-          <p>Joy</p>
-          <p>Adedolapo</p>
-          <p>Ifeoluwa</p>
-        </div>
-      </div>
-    </div>
+    <>
+      <section className="footer-section">
+        <article className="footer-article">
+          <div className="footer-links">
+            <span>
+              <img src={logo} alt="" className="footer-logo" />
+            </span>
+          </div>
+          <div className="footer-links">
+            <h4>QUICK LINKS</h4>
+            <ul>
+              <li>Feeds</li>
+              <li>Product of the week</li>
+              <li>Reviews</li>
+              <li>Privacy Policy</li>
+            </ul>
+          </div>
+          <div className="footer-links">
+            <h4>OTHER LINKS</h4>
+            <ul>
+              <li>Login</li>
+              <li>Sign Up</li>
+              <li>Post Review</li>
+            </ul>
+          </div>
+          <div className="divider"></div>
+          <div className="footer-links">
+            <h4>GET IN TOUCH</h4>
+            <ul>
+              <li>Contact Developers</li>
+              <li>Maxwell</li>
+              <li>Adedolapo</li>
+              <li>Joy</li>
+              <li>Ifeoluwa</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+      <footer className="footer-foot">
+        <p>©{new Date().getFullYear()} by MDJI. All rights reserved.</p>
+      </footer>
+    </>
   );
-};
-
-export default Footer;
+}
