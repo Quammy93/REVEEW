@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import "../assets/css/navbar.css";
@@ -11,6 +11,7 @@ import {
   BsReverseLayoutTextWindowReverse,
 } from "react-icons/bs";
 import "../assets/css/register.css";
+import logo from "../assets/images/revlogo.png"
 //import { userRegistration } from "../utils/axios";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../utils/context";
@@ -19,7 +20,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 
 const Register = () => {
-  const { loading, setLoading } = useGlobalContext();
+  const { loading, setLoading } = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -119,8 +120,10 @@ const Register = () => {
         </main>
         <main className="register-main">
           <h2 className="reg-heading" style={{ color: "white" }}>
-            REVEEW
+            Reveew
           </h2>
+          {/**  <img src={logo} alt="" className="logo-reg" /> */}
+
           <h4 className="reg-sub-heading" style={{ color: "white" }}>
             Register Your account
           </h4>

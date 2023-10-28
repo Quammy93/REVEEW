@@ -2,16 +2,17 @@ import React from "react";
 import { Input, Rate, Form } from "antd";
 import "../assets/css/postReview.css";
 import axios from "axios";
-const url = "/api";
-//const url = "http://localhost:5000/api";
-import { useParams, useNavigate } from "react-router-dom";
+//const url = "/api";
+const url = "http://localhost:5000/api";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const PostReview = () => {
   // const token = localStorage.getItem("token");
   // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   //const user = localStorage.getItem("user");
-
+  const location = useLocation();
+  const single = location.state?.single?.pathname || "/";
   const navigate = useNavigate();
   const { id } = useParams();
   const [value, setValue] = React.useState(3);
@@ -30,11 +31,16 @@ const PostReview = () => {
       .post(`${url}/reviews/${id}`, { feedback })
       .then((response) => {
         console.log(response);
+
+        if (response.status == "200") {
+          toast.success("Your review has been posted");
+          navigate(single, { replace: true });
+        }
       })
       .catch((error) => {
         console.log(error.response.status);
         if (error.response.status == "401") {
-          navigate("/login");
+          navigate("/login", { state: { from: location }, replace: true });
           toast.warning("Login to Post a Review");
         }
       });

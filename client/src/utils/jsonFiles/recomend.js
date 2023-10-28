@@ -50,22 +50,22 @@ export const recomend = [
     product_name: "Infinix Hot 12",
   },
   {
-    id: "1",
+    id: "11",
     img: "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/02/373998/1.jpg?1105",
     product_name: "Oraimo",
   },
   {
-    id: "1",
+    id: "12",
     img: "https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/55/7046932/1.jpg?2739",
     product_name: "Itel Power Bank",
   },
   {
-    id: "1",
+    id: "13",
     img: "https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/03/9939552/1.jpg?3313",
     product_name: "Bowl Mixer",
   },
   {
-    id: "1",
+    id: "14",
     img: "https://ng.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/03/9939552/1.jpg?3313",
     product_name: "Bowl Mixer",
   },

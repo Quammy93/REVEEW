@@ -1,11 +1,12 @@
-
-
-.navbar-section{position: fixed;width: 100%;top: 0;}
+.navbar-section {
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
 .single-product-link {
   background-color: white;
   padding: 20px;
   margin-top: 45px;
-
 }
 
 .single-product-wrapper {
@@ -18,26 +19,22 @@
   width: 70%;
   height: 500px;
 
- box-shadow: 0 1px 1px 1px black;
-
+  box-shadow: 0 1px 1px 1px black;
 }
 .product-details-container {
   display: flex;
   justify-content: space-between;
   align-items: start;
- 
 }
-
 
 .product-details {
   width: 80%;
   background-color: white;
 
   margin: 20px 20px 20px 0;
- 
 }
 .product-navigate {
-  background-color:  rgb(11, 11, 87);;
+  background-color: rgb(11, 11, 87);
   height: 150px;
   width: 20%;
   margin: 20px 0 0 0;
@@ -48,10 +45,14 @@
   z-index: 1;
   color: white;
   padding: 10px;
-
 }
-a{color: white;}
-.product-navigate h2{font-size: 16px;cursor: pointer ;}
+a {
+  color: white;
+}
+.product-navigate h2 {
+  font-size: 16px;
+  cursor: pointer;
+}
 
 .product-details-heading,
 .product-review-heading {
@@ -146,6 +147,8 @@ a{color: white;}
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 .margin-off {
   margin: 0;
@@ -154,13 +157,33 @@ a{color: white;}
   font-size: medium;
   font-weight: bold;
 }
+
+.user-avatar-container {
+  background-color: rgb(11, 11, 87);
+  color: white;
+  width: 70px;
+  height: 70px;
+  padding:0 10px 10px 10px;
+  margin: 0;
+  border-radius: 50%;
+  
+}
+.user-avatar {
+  font-size: 43px;
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+}
+.user-name{text-transform: capitalize;}
 .post-review-btn {
   margin: 60px 0 20px 0;
   padding: 10px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color:  rgb(11, 11, 87);;
+  background-color: rgb(11, 11, 87);
   color: white;
 }
 .btn-container {
@@ -168,4 +191,6 @@ a{color: white;}
   justify-content: center;
   align-items: center;
 }
-.progress{width: 200px;}
+.progress {
+  width: 200px;
+}

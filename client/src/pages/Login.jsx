@@ -1,14 +1,14 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";
 import { MdEmail, MdOutlineEmail } from "react-icons/md";
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import { LockOutlined } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 //import { userLogin } from "../utils/axios";
 import { toast } from "react-toastify";
 
@@ -16,12 +16,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../utils/context";
 
 const Login = () => {
-  const { user, setUser, loading, setLoading } = useGlobalContext();
-  //const [loading, setLoading] = React.useState(false);
+  const { user, setUser,} = useGlobalContext();
+  const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const userLogin = async (credentials) => {
-    setLoading(true);
+   
     return await axios
       .post(`${url}/login`, credentials)
       .then((response) => {
@@ -29,7 +31,6 @@ const Login = () => {
         if (response.status == "200") {
           console.log(response.data.user);
           setUser(response.data.user);
-        
 
           localStorage.setItem("loggedIn", true);
           localStorage.setItem(
@@ -40,7 +41,7 @@ const Login = () => {
         }
       })
       .then(() => {
-        navigate("/");
+        navigate(from, { replac: true });
       })
       .catch((error) => {
         setLoading(false);
@@ -77,6 +78,7 @@ const Login = () => {
         //  console.log(error.request);
         //  console.log(error.message);
       });
+      setLoading(false)
   };
   return (
     <div className="login-wrapper">
@@ -138,7 +140,7 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-btn">
+            <Button type="primary" htmlType="submit" className="login-btn" loading={loading}>
               Log in
             </Button>
             <p style={{ color: "red" }}>

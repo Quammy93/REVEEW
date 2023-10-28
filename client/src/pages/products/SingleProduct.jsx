@@ -1,15 +1,16 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import "../../assets/css/singleProduct.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 import { Alert, Space, Spin } from "antd";
 import { HashLink } from "react-router-hash-link";
 
 const SingleProduct = () => {
+  const location = useLocation();
   const { category, product, id } = useParams();
   const navigate = useNavigate();
   const [productInfo, setProductInfo] = React.useState({});
@@ -294,18 +295,22 @@ const SingleProduct = () => {
                           return (
                             <article className="the-review" key={_id}>
                               <div className="reviewer-container">
-                                <img
-                                  src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                <div className="user-avatar-container">
+                                  {" "}
+                                  <p className="user-avatar"> {name.charAt(0)}</p>
+                                </div>
+                                {/**<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                                   alt=""
                                   className="reviewer-img"
-                                />{" "}
+                                /> */}{" "}
                                 <p className="reviewer-2">
-                                  <span>{name}</span>
+                                  <span className="user-name">{name}</span>
                                   <span style={{ fontSize: "12px" }}>
                                     {formattedTimestamp}
                                   </span>
                                 </p>
                               </div>
+
                               <div>
                                 <Rate defaultValue={value} value={value} />
                               </div>
@@ -324,7 +329,11 @@ const SingleProduct = () => {
                       <button
                         className="post-review-btn"
                         onClick={() => {
-                          navigate(`/products/feedback/${id}`);
+                          // navigate(`/products/feedback/${id}`);
+                          navigate(`/products/feedback/${id}`, {
+                            state: { single: location },
+                            replace: true,
+                          });
                         }}
                       >
                         Post A Review

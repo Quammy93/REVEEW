@@ -15,6 +15,7 @@
   position: absolute;
   top: 15px;
   right: 22px;
+  border-radius: 3px;
 }
 .ad-name {
   margin-left: 5px;
@@ -30,6 +31,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 10px 0 10px;
+  
 }
 .logout {
   width: 200px;
@@ -61,4 +63,5 @@
   justify-content: space-around;
   align-items: self-start;
   padding-left: 10px;
+  border-radius: 3px;
 }
