@@ -4,6 +4,9 @@ const { StatusCodes } = require("http-status-codes");
 
 const createFeed = async (req, res) => {
   console.log(req.body);
+  const { userId } = req.user;
+  console.log(userId);
+  req.body.poster = userId;
   await Feed.create(req.body);
 
   res.status(StatusCodes.OK).json("feed created successfully");
@@ -19,7 +22,7 @@ const getSingleFeed = async (req, res) => {
 };
 
 const getAllFeeds = async (req, res) => {
-  const feeds = await Feed.find({});
+  const feeds = await Feed.find({}).populate("poster");
   res.status(StatusCodes.OK).json({ feeds });
 };
 const updateFeed = async (req, res) => {

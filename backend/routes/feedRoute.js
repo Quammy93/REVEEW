@@ -9,7 +9,15 @@ const {
   deleteFeed,
 } = require("../controllers/feedController");
 
-router.route("/").post(createFeed).get(getAllFeeds);
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require("../middleware/authentication");
+
+router
+  .route("/")
+  .post(authenticateUser, authorizeRoles("admin"), createFeed)
+  .get(getAllFeeds);
 router.route("/:id").patch(updateFeed).get(getSingleFeed).delete(deleteFeed);
 
 module.exports = router;
