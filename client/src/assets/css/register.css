@@ -79,6 +79,14 @@
 
 @media screen and (min-width: 300px) and (max-width: 780px) {
 
+.register-left{display: none;}
+.register-main {
+  background-color: rgb(11, 11, 87);
+  border-radius: 10px 10px 10px 10px;
 
+  padding: 15px 0 0 30px;
+  width: 300px;
+  margin-left: 40px;
+}
 
 }
