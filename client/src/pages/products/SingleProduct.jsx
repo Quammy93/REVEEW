@@ -4,8 +4,8 @@ import "../../assets/css/singleProduct.css";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
-const url = "http://localhost:5000/api";
-//const url = "/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 import { Alert, Space, Spin } from "antd";
 import { HashLink } from "react-router-hash-link";
 

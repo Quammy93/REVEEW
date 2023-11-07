@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-//const url = "/api";
-const url = "http://localhost:5000/api";
+const url = "/api";
+//const url = "http://localhost:5000/api";
 
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import "../assets/css/navbar.css";

@@ -2,8 +2,8 @@ import React from "react";
 import { Input, Rate, Form } from "antd";
 import "../assets/css/postReview.css";
 import axios from "axios";
-//const url = "/api";
-const url = "http://localhost:5000/api";
+const url = "/api";
+//const url = "http://localhost:5000/api";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 

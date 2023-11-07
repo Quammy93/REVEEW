@@ -12,8 +12,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-const url = "http://localhost:5000/api";
-//const url = "/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 import User from "./User";
 
 const Sidebar = () => {
