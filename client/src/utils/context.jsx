@@ -13,6 +13,8 @@ const AppProvider = ({ children }) => {
   const [categoryClicked, setCategoryClicked] = React.useState("");
   const [feeds, setFeeds] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
+  const [showSidebar, setShowSidebar] = React.useState(false);
+  const [isProductLoading, setIsProductLoading] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = React.useState("");
 
@@ -37,6 +39,10 @@ const AppProvider = ({ children }) => {
         setCategoryClicked,
         user,
         setUser,
+        showSidebar,
+        setShowSidebar,
+        isProductLoading,
+        setIsProductLoading,
       }}
     >
       {children}

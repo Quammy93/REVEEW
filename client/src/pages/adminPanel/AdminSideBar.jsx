@@ -22,78 +22,103 @@ const AdminSideBar = () => {
         defaultOpenKeys={["/dashboard"]}
         items={[
           {
-            label: "Dashbord",
-            key: "/dashboard",
+            label: "Main",
+            key: "/main",
+            type: "group",
             children: [
               {
-                label: "Stat",
-                key: "/stat",
+                label: "Dashboard ",
+                key: "/dashboard",
               },
             ],
           },
 
-          {
-            label: "Reviews",
-            key: "/review",
-
+          {type:"group",
+            label: "List",
+            ket: "/list",
             children: [
               {
-                label: "Delete Review",
-                key: "/del-rev",
-              },
-            ],
-          },
+                label: "Reviews",
+                key: "/review",
 
-          {
-            label: "Products",
-            key: "/products",
+                children: [
+                  {
+                    label: "Delete Review",
+                    key: "/del-rev",
+                  },
+                ],
+              },
+              {
+                label: "Products",
+                key: "/products",
 
-            children: [
-              {
-                label: "Post Product",
-                key: "/post-pro",
+                children: [
+                  {
+                    label: "Post Product",
+                    key: "/post-pro",
+                  },
+                  {
+                    label: "Update Product",
+                    key: "/update-pro",
+                  },
+                  {
+                    label: "Delete Product",
+                    key: "/delete-pro",
+                  },
+                ],
               },
               {
-                label: "Update Product",
-                key: "/update-pro",
-              },
-              {
-                label: "Delete Product",
-                key: "/delete-pro",
-              },
-            ],
-          },
-          {
-            label: "Feeds",
-            key: "/feed-link",
+                label: "Feeds",
+                key: "/feed-link",
 
-            children: [
-              {
-                label: "Post Feed",
-                key: "/post-feed",
+                children: [
+                  {
+                    label: "Post Feed",
+                    key: "/post-feed",
+                  },
+                  {
+                    label: "Update Feed",
+                    key: "/update-feed",
+                  },
+                  {
+                    label: "Delete Feed",
+                    key: "/delete-feed",
+                  },
+                ],
               },
               {
-                label: "Update Feed",
-                key: "/update-feed",
-              },
-              {
-                label: "Delete Feed",
-                key: "/delete-feed",
-              },
-            ],
-          },
-          {
-            label: "Users",
-            key: "/user",
+                label: "Feeds",
+                key: "/feed-link",
 
-            children: [
-              {
-                label: "update User",
-                key: "/post-user",
+                children: [
+                  {
+                    label: "Post Feed",
+                    key: "/post-feed",
+                  },
+                  {
+                    label: "Update Feed",
+                    key: "/update-feed",
+                  },
+                  {
+                    label: "Delete Feed",
+                    key: "/delete-feed",
+                  },
+                ],
               },
               {
-                label: "Delete User",
-                key: "/delete-user",
+                label: "Users",
+                key: "/user",
+
+                children: [
+                  {
+                    label: "update User",
+                    key: "/post-user",
+                  },
+                  {
+                    label: "Delete User",
+                    key: "/delete-user",
+                  },
+                ],
               },
             ],
           },

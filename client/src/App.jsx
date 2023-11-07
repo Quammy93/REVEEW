@@ -12,6 +12,7 @@ import UserFeature from "./components/UserFeature";
 import Admin from "./pages/adminPanel/Admin";
 import Stat from "./pages/adminPanel/adminPages/Stat";
 import { ToastContainer } from "react-toastify";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <ToastContainer position="top-center" />
       <BrowserRouter>
         <Routes>
+       
           <Route path="/" Component={Home}></Route>
           <Route path="/login" Component={Login}></Route>
           <Route path="/register" Component={Register}></Route>

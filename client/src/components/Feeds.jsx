@@ -31,6 +31,9 @@ const Feeds = () => {
   }, []);
 
   return (
+
+
+    
     <div style={{ paddingBottom: "80px" }}>
       {isfeedLoading && (
         <div className="content-style">
@@ -38,9 +41,10 @@ const Feeds = () => {
             direction="vertical"
             style={{
               width: "100%",
-            }}
+              
+            }}className="spinner"
           >
-            <Spin tip="Loading" size="large">
+            <Spin tip="Loading" size="large" >
               <div className="content " />
             </Spin>{" "}
           </Space>
@@ -65,16 +69,6 @@ const Feeds = () => {
 
             return (
               <article key={_id} className="article-container">
-                <main className="feed-heading">
-                  <div className="poster">
-                    <img src={poster_img} alt="" className="poster-image" />
-                    <span>{poster}</span>
-                  </div>
-                  <div>
-                    <span className="read-time">{read_time}</span>
-                  </div>
-                </main>
-
                 <section className="article">
                   <main className="heading">
                     <h4 className="title">{title}</h4>

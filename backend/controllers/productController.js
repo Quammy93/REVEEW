@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
+const NotFoundError = require("../errors/NotFoundError");
 
 const createProduct = async (req, res) => {
   const { product_Avgrating } = req.body;
@@ -72,7 +73,7 @@ const getSingleProduct = async (req, res) => {
   const product = await Product.findOne({ _id: productId });
 
   if (!product) {
-    throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    throw new NotFoundError(`No product with id : ${productId}`);
   }
 
   res.status(StatusCodes.OK).json({ product });
@@ -83,7 +84,7 @@ const deleteProduct = async (req, res) => {
   const product = await Product.findOne({ _id: productId });
 
   if (!product) {
-    throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    throw new NotFoundError(`No product with id : ${productId}`);
   }
 
   await product.remove();
@@ -98,7 +99,7 @@ const updateProduct = async (req, res) => {
   });
 
   if (!product) {
-    throw new CustomError.NotFoundError(`No product with id : ${productId}`);
+    throw new NotFoundError(`No product with id : ${productId}`);
   }
 
   res.status(StatusCodes.OK).json({ product });

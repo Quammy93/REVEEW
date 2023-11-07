@@ -1,7 +1,68 @@
+
+
+  .login-button {
+    background-color: transparent;
+    margin-left: 3px;
+    border: 1px solid rgb(11, 11, 87);
+    color: rgb(11, 11, 87);
+  }
+  .login-button:hover {
+    border: 2px solid blue;
+  }
+  .signup-button {
+    color: white;
+    background-color: rgb(11, 11, 87);
+  }
+ nav {
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input {
+    padding: 0;
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button:not(.ant-btn-primary) {
+    height: 24px;
+    width: 32px;
+  }
+
+ 
+
+  .input {
+    width: 170px;
+    height: 5px;
+    margin: 0;
+    margin-top: -15px;
+  }
+
+  .rev-logo {
+    font-size: 14px;
+  }
+
+
+
+
+
+
+
+/**/
+
+
 .img-logo {
   width: 230px;
   height: 230px;
 }
+
+.menu {
+  display: block;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+.nav-btn {
+  display: none;
+}
+
 nav {
   width: 100%;
   height: 9vh;
@@ -26,27 +87,9 @@ nav {
   margin-top: 20px;
 }
 
-.input {
-  width: 35%;
-}
-.nav-btn {
-  width: 12%;
-  display: flex;
-  justify-content: space-around;
-  margin-right: 30px;
-}
-.login-button {
-  background-color: transparent;
-  margin-left: 3px;
-  border: 1px solid blue;
-  color: white;
-}
-.login-button:hover {
-  border: 2px solid blue;
-}
-.signup-button {
-  color: rgb(11, 11, 87);
-}
+
+
+
 .logo {
   color: white;
   font-weight: 40;
@@ -74,7 +117,12 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 400px;
+  min-height: 300px;
+}
+.footer-article h4 {
+  font-size: 12px;
+  padding: 2px;
+  margin: 0;
 }
 
 .footer-links {
@@ -85,10 +133,14 @@ nav {
   height: 400px;
   margin-top: 50px;
 }
+.footer-links li {
+  font-size: 10px;
+}
 .divider {
   background: white;
   width: 1px;
-  height: 400px;
+  height: 150px;
+  margin-top: -200px;
 }
 
 .contactlink-container {
@@ -113,18 +165,111 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  background-color: white;
-  color: #232c59;
+  height: 50px;
+  background-color: #232c59;
+  color: white;
 }
 .footer-logo {
   height: 200px;
   width: 200px;
 }
-
+.footer-foot p {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  margin-top: -30px;
+}
 .footer p {
   font-size: 10px !important;
 }
 .footer h4 {
   font-size: 10px !important;
 }
+
+@media screen and (min-width: 300px) and(max-width: 700px) {
+  /**
+  .rev-logo {
+    font-size: 14px;
+  }
+    .input {
+    width: 170px;
+    height: 5px;
+    margin: 0;
+    margin-top: -15px;
+  }
+  */
+
+  .menu {
+    display: block;
+  }
+  nav {
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input {
+    padding: 0;
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button:not(.ant-btn-primary) {
+    height: 24px;
+    width: 32px;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  .login-button {
+    background-color: transparent;
+    margin-left: 3px;
+    border: 1px solid rgb(11, 11, 87);
+    color: rgb(11, 11, 87);
+  }
+  .login-button:hover {
+    border: 2px solid blue;
+  }
+  .signup-button {
+    color: white;
+    background-color: rgb(11, 11, 87);
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .nav-btn {
+    width: 12%;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 30px;
+  }
+  .menu{display: none;}
+  .input {
+  width: 35%;
+}
+ nav {
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input {
+    padding: 5px;
+  }
+  :where(.css-dev-only-do-not-override-pr0fja).ant-input-search
+    > .ant-input-group
+    > .ant-input-group-addon:last-child
+    .ant-input-search-button:not(.ant-btn-primary) {
+    height: 34px;
+    width: 32px;
+  }
+  .login-button {
+  background-color: transparent;
+  margin-left: 3px;
+  border: 1px solid blue;
+  color: white;
+}
+.login-button:hover {
+  border: 2px solid blue;
+}
+.signup-button {
+  color: rgb(11, 11, 87);
+  background-color: white;
+}
+
+}
+

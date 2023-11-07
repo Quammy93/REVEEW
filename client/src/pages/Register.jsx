@@ -80,10 +80,7 @@ const Register = () => {
               <p className="reg-left-heading">Market Survey</p>
               <p className="left-heading-detail">
                 {" "}
-                this is what i want to say this is what i want to say this is
-                what i want to say this is what i want to say this is what i
-                want to say this is what i want to say this is what i want to
-                say this is what i want to say{" "}
+                Each review has a personal story,Post yours
               </p>
             </article>
           </main>
@@ -95,10 +92,7 @@ const Register = () => {
               <p className="reg-left-heading">Product Review</p>
               <p className="left-heading-detail">
                 {" "}
-                this is what i want to say this is what i want to say this is
-                what i want to say this is what i want to say this is what i
-                want to say this is what i want to say this is what i want to
-                say this is what i want to say{" "}
+                Share your experience to help other make the right decision
               </p>
             </article>
           </main>
@@ -110,10 +104,7 @@ const Register = () => {
               <p className="reg-left-heading">User Feed Back</p>
               <p className="left-heading-detail">
                 {" "}
-                this is what i want to say this is what i want to say this is
-                what i want to say this is what i want to say this is what i
-                want to say this is what i want to say this is what i want to
-                say this is what i want to say{" "}
+               Make best use of other people feedback on your desire brand or product
               </p>
             </article>
           </main>

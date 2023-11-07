@@ -4,8 +4,18 @@ import "../assets/css/navlinks.css";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../utils/context";
+import axios from "axios";
+const url = "http://localhost:5000/api";
 
 const NavLinks = () => {
+  const {
+    showSidebar,
+    setShowSidebar,
+    products,
+    setProducts,
+    isProductLoading,
+    setIsProductLoading,
+  } = useGlobalContext();
   const navigate = useNavigate();
 
   const [current, setCurrent] = React.useState("feeds");
@@ -14,9 +24,43 @@ const NavLinks = () => {
     setCurrent(e.key);
     console.log(e.key);
     if (e.key === "feeds") {
+      setShowSidebar(false);
+      localStorage.setItem("category", e.key);
       return navigate("/");
     } else {
+      setShowSidebar(false);
+      localStorage.setItem("category", e.key);
+
+      if (e.key === "All Products") {
+        fetchData("");
+        return navigate(`/products/${e.key}?category=`);
+      }
+
+      fetchData(e.key);
       return navigate(`/products/${e.key}?category=${e.key}`);
+    }
+  };
+
+  const getAllProducts = async (category) => {
+    return await axios
+      .get(`${url}/products?page=${1}&limit=${6}&product_category=${category}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchData = async (category) => {
+     setIsProductLoading(true);
+    try {
+      const response = await getAllProducts(category);
+
+      const { products, totalCount, numOfPages } = response.data;
+      setProducts(products);
+      // setTotalCount(totalCount);
+        setIsProductLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -62,7 +106,7 @@ const NavLinks = () => {
               },
               {
                 label: "Appliances",
-                key: "Aplliances",
+                key: "Appliances",
               },
             ],
           },

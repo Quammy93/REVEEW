@@ -27,8 +27,8 @@ const QueryProduct = () => {
         </p>
         <div className="sort-div">
           Sort By:
-          <span className="sort-1">Price -High To Low</span>
-          <span className="sort-2">Price -Low To High</span>
+          <p className="sort-1">Price -High To Low</p>
+          <p className="sort-2">Price -Low To High</p>
         </div>
       </div>
     </div>

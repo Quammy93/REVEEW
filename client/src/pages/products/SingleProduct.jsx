@@ -15,8 +15,16 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const [productInfo, setProductInfo] = React.useState({});
   const [reviews, setReviews] = React.useState([]);
+  const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
+  const [numOfFourReview, setNumOfFourReview] = React.useState(0);
+  const [numOfThreeReview, setNumOfThreeReview] = React.useState(0);
+  const [numOfTwoReview, setNumOfTwoReview] = React.useState(0);
+  const [numOfOneReview, setNumOfOneReview] = React.useState(0);
+  const [numOfZeroReview, setNumOfZeroReview] = React.useState(0);
   const [isproductLoading, setIsProductLoading] = React.useState(false);
   const [isReviewLoading, setIsReviewLoading] = React.useState(false);
+
+  let totalReviews = 0;
 
   const getAllProducts = async () => {
     return await axios.get(`${url}/products/${id}`).catch((error) => {
@@ -59,6 +67,7 @@ const SingleProduct = () => {
     product_desc,
     price,
     product_Avgrating,
+    numOfReview,
     img,
     products_imgs,
     product_brand,
@@ -71,12 +80,29 @@ const SingleProduct = () => {
     try {
       const response = await getAllReviews();
 
-      const { reviews } = response.data;
+      const { reviews } = await response.data;
 
       console.log(response);
 
       setReviews(reviews);
       setIsReviewLoading(false);
+      setNumOfZeroReview(response?.data?.numOfZeroReview);
+      setNumOfOneReview(response?.data?.numOfOneReview);
+      setNumOfTwoReview(response?.data?.numOfTwoReview);
+      setNumOfThreeReview(response?.data?.numOfThreeReview);
+      setNumOfFourReview(response?.data?.numOfFourReview);
+      setNumOfFiveReview(response?.data?.numOfFiveReview);
+
+      totalReviews =
+        numOfZeroReview +
+        numOfOneReview +
+        numOfTwoReview +
+        numOfThreeReview +
+        numOfFourReview +
+        numOfFiveReview;
+
+      console.log("totalreview", totalReviews);
+      console.log("num", numOfFiveReview);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -131,10 +157,9 @@ const SingleProduct = () => {
             {/**single product container */}
             <section className="single-product-container">
               {/**single images display container */}
-              <div className="images-container">
-                <div>
-                  <img src={img} alt="" className="image-container" />
-                </div>
+
+              <div>
+                <img src={img} alt="" className="image-container" />
               </div>
 
               <section className="product-details-container">
@@ -203,58 +228,105 @@ const SingleProduct = () => {
                                 defaultValue={product_Avgrating}
                               />
                             </div>
-                            <p>89 verified ratings</p>
+                            <p>{numOfReview} verified ratings</p>
                           </main>
                           <main className="rating-first-layer-right">
                             <article className="rate-desc">
                               {" "}
-                              <p>5 Star</p>{" "}
+                              <p className="rate-star">5 Star</p>{" "}
                               <Progress
-                                percent={50}
+                                percent={
+                                  (numOfFiveReview /
+                                    (numOfZeroReview +
+                                      numOfOneReview +
+                                      numOfTwoReview +
+                                      numOfThreeReview +
+                                      numOfFourReview +
+                                      numOfFiveReview)) *
+                                  100
+                                }
                                 showInfo={false}
                                 className="progress"
                               />
-                              <span>3</span>
+                              <span className="rate-num-rating">
+                                {numOfFiveReview}
+                              </span>
                             </article>
                             <article className="rate-desc">
                               {" "}
-                              <p>4 Star</p>{" "}
+                              <p className="rate-star">4 Star</p>{" "}
                               <Progress
-                                percent={50}
+                                percent={
+                                  (numOfFourReview /
+                                    (numOfZeroReview +
+                                      numOfOneReview +
+                                      numOfTwoReview +
+                                      numOfThreeReview +
+                                      numOfFourReview +
+                                      numOfFiveReview)) *
+                                  100
+                                }
                                 showInfo={false}
                                 className="progress"
                               />
-                              <span>3</span>
+                              <span>{numOfFourReview}</span>
                             </article>
                             <article className="rate-desc">
                               {" "}
-                              <p>3 Star</p>{" "}
+                              <p className="rate-star">3 Star</p>{" "}
                               <Progress
-                                percent={50}
+                                percent={
+                                  (numOfThreeReview /
+                                    (numOfZeroReview +
+                                      numOfOneReview +
+                                      numOfTwoReview +
+                                      numOfThreeReview +
+                                      numOfFourReview +
+                                      numOfFiveReview)) *
+                                  100
+                                }
                                 showInfo={false}
                                 className="progress"
                               />{" "}
-                              <span>3</span>
+                              <span>{numOfThreeReview}</span>
                             </article>
                             <article className="rate-desc">
                               {" "}
-                              <p>2 Star</p>{" "}
+                              <p className="rate-star">2 Star</p>{" "}
                               <Progress
-                                percent={50}
+                                percent={
+                                  (numOfTwoReview /
+                                    (numOfZeroReview +
+                                      numOfOneReview +
+                                      numOfTwoReview +
+                                      numOfThreeReview +
+                                      numOfFourReview +
+                                      numOfFiveReview)) *
+                                  100
+                                }
                                 showInfo={false}
                                 className="progress"
                               />
-                              <span>3</span>
+                              <span>{numOfTwoReview}</span>
                             </article>
                             <article className="rate-desc">
                               {" "}
-                              <p>1 Star</p>{" "}
+                              <p className="rate-star">1 Star</p>{" "}
                               <Progress
-                                percent={50}
+                                percent={
+                                  (numOfOneReview /
+                                    (numOfZeroReview +
+                                      numOfOneReview +
+                                      numOfTwoReview +
+                                      numOfThreeReview +
+                                      numOfFourReview +
+                                      numOfFiveReview)) *
+                                  100
+                                }
                                 showInfo={false}
                                 className="progress"
                               />
-                              <span>3</span>
+                              <span>{numOfOneReview}</span>
                             </article>
                           </main>
                         </div>
@@ -290,14 +362,20 @@ const SingleProduct = () => {
                             formattedTimestamp,
                             _id,
                           } = review;
-                          const { name } = reviewer;
+                          console.log(reviewer);
+                          const name = reviewer?.name || "user";
+
+                          // const { name } = reviewer;
 
                           return (
                             <article className="the-review" key={_id}>
                               <div className="reviewer-container">
                                 <div className="user-avatar-container">
                                   {" "}
-                                  <p className="user-avatar"> {name.charAt(0)}</p>
+                                  <p className="user-avatar">
+                                    {" "}
+                                    {name.charAt(0)}
+                                  </p>
                                 </div>
                                 {/**<img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                                   alt=""
@@ -347,10 +425,10 @@ const SingleProduct = () => {
                     {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-details">
                       Product Details
                     </HashLink>*/}
-                    <a href="#product-details">Product Details</a>
+                    <a href="#product-details">Product Overview</a>
                   </h2>
                   <h2>
-                    <a href="#product-specificaton">Product Specification</a>{" "}
+                    <a href="#product-specificaton">Product Features</a>{" "}
                     {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-specificaton"> 
                       Product Specification
                     </HashLink>  */}

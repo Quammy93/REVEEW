@@ -1,28 +1,124 @@
+
+
+
+.nav-container {
+    height: 700px;
+    width: 350px;
+    background-color: red;
+    display: none;
+  }
+
+  .hero-container {
+    margin-top: 0;
+  }
+  .other-container {
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
 .hero-container {
- justify-content: space-between;
+  justify-content: space-between;
   display: flex;
 
   flex-direction: row;
   margin-top: 40px;
- 
+}
+.hero-container p{padding: 0;margin: 0;}
+
+.home-intro {
+  height: 400px;
+  width: 100%;
+  background-color: rgb(5, 40, 5);
+  padding: 40px;
+  margin-bottom: 20px;
 }
 
-.nav-container{
+.home-btn{padding: 10px;border-radius: 5px;border: none;}
+.nav-container {
+  height: 700px;
+  width: 350px;
+  background-color: red;
+}
+.other-container {
+  height: 700px;
+  width: 350px;
+}
+.feed-container {
+  max-height: 700px;
+  overflow-y: scroll;
+  min-width: 500px;
+
+  width: 90%;
+  margin: 0 10px 0 10px;
+}
+
+@media screen and (min-width: 300px) {
+  .nav-container {
     height: 700px;
     width: 350px;
     background-color: red;
-}
-.other-container{
-     height:700px;
-    width: 350px;
-  
-}
-.feed-container{
-    max-height: 700px;
-    overflow-y: scroll;
-     min-width: 500px;
+    display: none;
+  }
 
-    width: 90%;
-    margin:0 10px 0 10px;
+  .hero-container {
+    margin-top: 0;
+  }
+  .other-container {
+  display: none;
+}
+}
+
+@media screen and (min-width: 800px) {
+
+.hero-container {
+  justify-content: space-between;
+  display: flex;
+
+  flex-direction: row;
+  margin-top: 40px;
+
+}
+.hero-container p{padding: 0;margin: 0;}
+
+.home-intro {
+  height: 400px;
+  width: 100%;
+  background-color: rgb(5, 40, 5);
+  padding: 40px;
+  margin-bottom: 20px;
+}
+
+.home-btn{padding: 10px;border-radius: 5px;border: none;}
+.nav-container {
+  height: 700px;
+  width: 350px;
+  background-color: red;
+  display: block;
+}
+.other-container {
+  height: 700px;
+  width: 350px;
+}
+.feed-container {
+  max-height: 700px;
+  overflow-y: scroll;
+  min-width: 500px;
+
+  width: 90%;
+  margin: 0 10px 0 10px;
+}
+
+ .other-container {
+  display: block;
+}
+
 
 }

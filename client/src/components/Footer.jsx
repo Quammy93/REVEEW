@@ -7,7 +7,8 @@ export default function Footer() {
         <article className="footer-article">
           <div className="footer-links">
             <span>
-              <img src={logo} alt="" className="footer-logo" />
+              REVEEW
+              {/** <img src={logo} alt="" className="footer-logo" />*/}
             </span>
           </div>
           <div className="footer-links">
@@ -39,9 +40,10 @@ export default function Footer() {
             </ul>
           </div>
         </article>
+    
       </section>
       <footer className="footer-foot">
-        <p>©{new Date().getFullYear()} by MDJI. All rights reserved.</p>
+        <p>©{new Date().getFullYear()} Developed by MDJI. All rights reserved.</p>
       </footer>
     </>
   );

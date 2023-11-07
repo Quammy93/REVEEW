@@ -15,12 +15,17 @@ const ProductSchema = new mongoose.Schema({
     ],
   },
   price: { type: Number },
+  numOfReview: { type: Number, default: 0 },
   product_subCategory: { type: String },
   product_brand: { type: String },
   product_desc: { type: String },
   product_features: { type: [String] },
   specification: { type: [String] },
-  product_Avgrating: { type: Number, default: 1 },
+  product_Avgrating: { type: Number, default: 0 },
+});
+
+ProductSchema.pre("remove", async function () {
+  await this.model("Reviews").deleteMany({ product: this._id });
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

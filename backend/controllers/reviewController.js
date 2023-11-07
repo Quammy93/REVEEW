@@ -28,10 +28,11 @@ const createReview = async (req, res) => {
 };
 const deleteReview = async (req, res) => {
   const { id } = req.params;
-  const review = await Reviews.findOneAndDelete({ _id: id });
+  const review = await Reviews.findOne({ _id: id });
   if (!review) {
     throw new NotFoundError(`No review with this ${id}`);
   }
+  await review.remove();
   res.status(StatusCodes.OK).json("deleted successfully");
 };
 const updateReview = (req, res) => {
@@ -44,7 +45,41 @@ const getAllReviews = async (req, res) => {
   const reviews = await Reviews.find({
     product_reviewed: product_reviewed,
   }).populate({ path: "reviewer", select: "name " });
-  res.status(StatusCodes.OK).json({ reviews });
+
+  const numOfZeroReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 0,
+  });
+  const numOfOneReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 1,
+  });
+  const numOfTwoReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 2,
+  });
+  const numOfThreeReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 3,
+  });
+  const numOfFourReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 4,
+  });
+  const numOfFiveReview = await Reviews.countDocuments({
+    product_reviewed: product_reviewed,
+    value: 5,
+  });
+
+  res.status(StatusCodes.OK).json({
+    reviews,
+    numOfFiveReview,
+    numOfFourReview,
+    numOfThreeReview,
+    numOfTwoReview,
+    numOfOneReview,
+    numOfZeroReview,
+  });
 };
 const getSingleReview = async (req, res) => {
   const { id } = req.params;

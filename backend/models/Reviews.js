@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 const { format } = require("date-fns");
 const { enUS } = require("date-fns/locale");
 
-
-
 const ReviewsSchema = new mongoose.Schema(
   {
     formattedTimestamp: String,
@@ -17,16 +15,47 @@ const ReviewsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-ReviewsSchema.pre("save", function (next) {
+ReviewsSchema.index({ product_reviewed: 1, reviewer: 1 }, { unique: true });
+
+ReviewsSchema.pre("save", function () {
   // Format the timestamp before saving
   this.formattedTimestamp = format(this.review_date, "d MMMM yyyy", {
     locale: enUS,
   });
-  next();
 });
 
+ReviewsSchema.statics.computeAvgRating = async function (productId) {
+  const result = await this.aggregate([
+    { $match: { product_reviewed: productId } },
+    {
+      $group: {
+        _id: null,
+        product_Avgrating: { $avg: "$value" },
+        numOfReview: { $sum: 1 },
+      },
+    },
+  ]);
 
+  try {
+    await this.model("Product").findOneAndUpdate(
+      { _id: productId },
+      {
+        product_Avgrating: Math.ceil(result[0]?.product_Avgrating || 0),
+        numOfReview: result[0]?.numOfReview || 0,
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-module.exports = mongoose.model("Review", ReviewsSchema);
+ReviewsSchema.post("save", async function () {
+  await this.constructor.computeAvgRating(this.product_reviewed);
+});
+ReviewsSchema.post("remove", async function () {
+  await this.constructor.computeAvgRating(this.product_reviewed);
+});
+
+module.exports = mongoose.model("Reviews", ReviewsSchema);
 
 //ReviewSchema.index({ product_reviewed: 1, reviewer: 1 }, { unique: true });

@@ -1,10 +1,10 @@
 import React from 'react'
-import AdminRoutes from './AdminRoutes'
+
 
 const AdminPageContent = () => {
   return (
     <div>
-      <AdminRoutes/>
+  Page Content
     </div>
   )
 }

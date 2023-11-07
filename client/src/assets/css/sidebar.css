@@ -1,0 +1,22 @@
+.user-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px;
+  margin-left: -20px;
+}
+
+.show-sidebar {
+  display: block;
+}
+.hide-sidebar {
+  display: none;
+}
+
+.hide-home-content {
+  opacity: 0;
+}
+
+.show-home-content {
+  opacity: 1;
+}

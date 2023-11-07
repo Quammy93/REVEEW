@@ -4,7 +4,7 @@ import "../assets/css/navbar.css";
 import { Button, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import logo1 from "../assets/images/revlogo.png";
-import { FaUser, FaSortDown, FaCaretRight } from "react-icons/fa";
+import { FaUser, FaSortDown, FaCaretRight, FaBars } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
@@ -23,7 +23,7 @@ const Navbar = () => {
   // console.log("name", name);
 
   //console.log("loggedUser", loggedUser);
-  const { user } = useGlobalContext();
+  const { user, showSidebar, setShowSidebar } = useGlobalContext();
 
   // console.log("name", loggedUser.name);
 
@@ -43,21 +43,28 @@ const Navbar = () => {
       });
   };
 
+  const opensidebar = () => {
+    setShowSidebar(true);
+    console.log(showSidebar);
+  };
   return (
     <nav>
       <Link to={"/"}>
-        <div className="logo">
-          <img src={logo1} alt="" className="img-logo" />
+        <div className="logo rev-logo">
+          REVEEW
+          {/**<img src={logo1} alt="" className="img-logo" /> */}
         </div>
       </Link>
       <div className="input">
         <Input.Search placeholder="search Reveev" />
       </div>
 
+      <FaBars className="menu" onClick={() => opensidebar()} />
+
       {!loggedIn ? (
         <div className="nav-btn">
           <Link to={"/register"}>
-            <Button className="signup-button">Sing up</Button>
+            <Button className="signup-button">Sign up</Button>
           </Link>
           <Link to={"/login"}>
             {" "}
@@ -65,7 +72,7 @@ const Navbar = () => {
           </Link>
         </div>
       ) : (
-        <div className="adnin-nav-info">
+        <div className="admin-nav-info">
           <main className="admin-user">
             <span>
               <span>
@@ -100,42 +107,11 @@ const Navbar = () => {
                   </span>
                   <span>Logout</span>
                 </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
-                <div>
-                  <span>
-                    <MdOutlineExitToApp />
-                  </span>
-                  <span>Logout</span>
-                </div>
+               
+                
+               
+               
+              
               </span>
             </div>
           </main>
