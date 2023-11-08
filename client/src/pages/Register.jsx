@@ -11,7 +11,7 @@ import {
   BsReverseLayoutTextWindowReverse,
 } from "react-icons/bs";
 import "../assets/css/register.css";
-import logo from "../assets/images/revlogo.png"
+import logo from "../assets/images/revlogo.png";
 //import { userRegistration } from "../utils/axios";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../utils/context";
@@ -20,7 +20,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input } from "antd";
 
 const Register = () => {
-  const { loading, setLoading } = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -104,7 +104,8 @@ const Register = () => {
               <p className="reg-left-heading">User Feed Back</p>
               <p className="left-heading-detail">
                 {" "}
-               Make best use of other people feedback on your desire brand or product
+                Make best use of other people feedback on your desire brand or
+                product
               </p>
             </article>
           </main>
