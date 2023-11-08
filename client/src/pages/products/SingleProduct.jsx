@@ -7,7 +7,7 @@ import axios from "axios";
 //const url = "http://localhost:5000/api";
 const url = "/api";
 import { Alert, Space, Spin } from "antd";
-import { HashLink } from "react-router-hash-link";
+
 
 const SingleProduct = () => {
   const location = useLocation();
