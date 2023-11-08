@@ -7,6 +7,7 @@ import { BiDislike, BiLike, BiComment } from "react-icons/bi";
 import { Badge } from "antd";
 import { useGlobalContext } from "../utils/context";
 import { Alert, Space, Spin } from "antd";
+import { Link } from "react-router-dom";
 
 import { getAllFeeds } from "../utils/axios";
 
@@ -31,9 +32,6 @@ const Feeds = () => {
   }, []);
 
   return (
-
-
-    
     <div style={{ paddingBottom: "80px" }}>
       {isfeedLoading && (
         <div className="content-style">
@@ -41,10 +39,10 @@ const Feeds = () => {
             direction="vertical"
             style={{
               width: "100%",
-              
-            }}className="spinner"
+            }}
+            className="spinner"
           >
-            <Spin tip="Loading" size="large" >
+            <Spin tip="Loading" size="large">
               <div className="content " />
             </Spin>{" "}
           </Space>
@@ -63,8 +61,7 @@ const Feeds = () => {
               feed_img,
               content,
               title,
-              poster_img,
-              read_time,
+              feed_link,
             } = feed;
 
             return (
@@ -73,27 +70,18 @@ const Feeds = () => {
                   <main className="heading">
                     <h4 className="title">{title}</h4>
                     <article className="content">
-                      {content.substring(0, 250)}
+                      {content}{" "}
+                      <Link
+                        className="read-more"
+                        to={{ pathname: feed_link }}
+                        target="_blank"
+                      >
+                        Read more
+                      </Link>
                     </article>
                   </main>
                   <img src={feed_img} alt="" className="feed-image" />
                 </section>
-                <div className="article-footer">
-                  {/*
-     <span>
-       <Badge count={10} style={{ fontSize: 10, padding: "0px" }}>
-         <BiLike style={{ fontSize: 24, cursor: "pointer" }} />
-       </Badge>
-     </span>
-
-     <Badge count={4} style={{ fontSize: 9, padding: "0px" }}>
-       <BiDislike style={{ fontSize: 24, cursor: "pointer" }} />
-     </Badge>
-     <span>
-       <BiComment />
-     </span>
-     * */}
-                </div>
               </article>
             );
           })}

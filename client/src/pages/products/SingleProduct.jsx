@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import "../../assets/css/singleProduct.css";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
 //const url = "http://localhost:5000/api";
@@ -141,11 +141,14 @@ const SingleProduct = () => {
           <section className="single-product-link">
             <div className="left-query">
               <p className="heading-link">
-                Home <span></span>
+                <Link to="/" style={{ color: "black" }}>
+                  Home{" "}
+                </Link>{" "}
+                <span>/</span>
                 {category}{" "}
                 <span>
                   {" "}
-                  <span>/</span>
+                  <span style={{ color: "black" }}></span>
                   {product}
                 </span>
               </p>
@@ -171,6 +174,7 @@ const SingleProduct = () => {
                     <div className="underline"></div>
                     <main className="description">
                       <p>{product_desc}</p>
+                      <p>Price:${price}</p>
                     </main>
                   </div>
                   <div

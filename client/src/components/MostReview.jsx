@@ -1,7 +1,7 @@
 import React from "react";
 
 const MostReview = () => {
-  return <div>Most Review</div>;
+  return <div></div>;
 };
 
 export default MostReview;

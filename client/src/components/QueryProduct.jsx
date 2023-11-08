@@ -3,7 +3,7 @@ import "../assets/css/queryProduct.css";
 
 import { useGlobalContext } from "../utils/context";
 
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 
 
 const QueryProduct = () => {
@@ -15,7 +15,7 @@ const QueryProduct = () => {
     <div className="query-top">
       <div className="left-query">
         <p className="heading-link">
-          Home <span>/</span>
+          <Link to="/">Home </Link> <span>/</span>
           {selectedCategory}
         </p>
         <h2 className="product-heading">{selectedCategory}</h2>

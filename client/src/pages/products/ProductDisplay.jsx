@@ -9,7 +9,7 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { useGlobalContext } from "../../utils/context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Sidebar from "../../components/Sidebar";
 //const url = "http://localhost:5000/api";
@@ -27,8 +27,13 @@ const ProductDisplay = () => {
   //console.log("select", selectedCategory);
   // let selectedCategory = localStorage.getItem("category");
   console.log(selectedCategory);
-  const { showSidebar, isProductLoading, setIsProductLoading } =
-    useGlobalContext();
+  const {
+    showSidebar,
+    isProductLoading,
+    setIsProductLoading,
+    products,
+    setProducts,
+  } = useGlobalContext();
 
   let clickedCategory = selectedCategory;
   if (clickedCategory === "All Products") {
@@ -36,7 +41,6 @@ const ProductDisplay = () => {
   }
 
   const navigate = useNavigate();
-  const { products, setProducts } = useGlobalContext();
 
   const [currentPage, setCurrentPage] = React.useState(1);
   const [limit, setLimit] = React.useState(8);
@@ -97,12 +101,12 @@ const ProductDisplay = () => {
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
-    setShowFilter(false)
+    setShowFilter(false);
   };
   const onChecked = async (checkedValues) => {
     console.log("checked", checkedValues);
     setFilter(checkedValues);
-    setShowFilter(false)
+    setShowFilter(false);
     //localStorage.setItem("filteredBrand", checkedValues);
     //setFiltered(checkedValues);
   };
@@ -174,7 +178,7 @@ const ProductDisplay = () => {
             <div className="query-top product-query">
               <div className="left-query">
                 <p className="heading-link">
-                  Home <span>/</span>
+                  <Link to="/" style={{color:"black"}}>Home </Link> <span>/</span>
                   {selectedCategory}
                 </p>
                 <h2 className="product-heading">{selectedCategory}</h2>

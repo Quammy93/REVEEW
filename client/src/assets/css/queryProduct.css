@@ -87,6 +87,10 @@
 
 @media screen and (min-width: 800px) {
 
-
+.left-query {
+  height: 80px;
+  width: 300px;
+  cursor: pointer;
+}
 
 }

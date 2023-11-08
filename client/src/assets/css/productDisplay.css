@@ -316,7 +316,12 @@ li {
   .ant-checkbox-group-item {
     color: rgba(255, 255, 255, 0.754);
   }
-
+.rev-num {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+ 
+}
   .product-menu {
     color: rgba(255, 255, 255, 0.754);
     width: 300px;

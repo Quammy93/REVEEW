@@ -13,7 +13,7 @@ const Hero = () => {
       </article>
       <section>
         <article>
-          <main className="home-intro">
+          {/** <main className="home-intro">
             <h4>
               Read reviews on a any product , Post Review on a product .Find the
               brand and product you can trust
@@ -23,7 +23,7 @@ const Hero = () => {
               {" "}
               <button className="home-btn">Get Started</button>
             </div>
-          </main>
+          </main> */}
           <p>Feeds</p>
           Be informed and get updated with news and features of your favourite
           brand and products

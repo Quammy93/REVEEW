@@ -8,8 +8,8 @@ import { FaUser, FaSortDown, FaCaretRight, FaBars } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
+//const url = "http://localhost:5000/api";
 const url = "/api";
-//const url = "/api";
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = React.useState(false);
@@ -23,7 +23,15 @@ const Navbar = () => {
   // console.log("name", name);
 
   //console.log("loggedUser", loggedUser);
-  const { user, showSidebar, setShowSidebar } = useGlobalContext();
+  const {
+    user,
+    showSidebar,
+    setShowSidebar,
+    products,
+    setProducts,
+    isProductLoading,
+    setIsProductLoading,
+  } = useGlobalContext();
 
   // console.log("name", loggedUser.name);
 
@@ -47,6 +55,37 @@ const Navbar = () => {
     setShowSidebar(true);
     console.log(showSidebar);
   };
+
+  const getAllProducts = async (searchValue) => {
+    return await axios
+      .get(
+        `${url}/products?page=${1}&limit=${8}&search=${searchValue}`
+      )
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchData = async (searchValue) => {
+    setIsProductLoading(true);
+    try {
+      const response = await getAllProducts(searchValue);
+
+      const { products,numOfPages } = response.data;
+      setProducts(products);
+     
+      setIsProductLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const onSearch = (value, _e, info) => {
+    console.log(info?.source, value);
+    fetchData(value);
+  };
+
   return (
     <nav>
       <Link to={"/"}>
@@ -56,7 +95,7 @@ const Navbar = () => {
         </div>
       </Link>
       <div className="input">
-        <Input.Search placeholder="search Reveev" />
+        <Input.Search placeholder="search Product" onSearch={onSearch} />
       </div>
 
       <FaBars className="menu" onClick={() => opensidebar()} />
@@ -107,11 +146,6 @@ const Navbar = () => {
                   </span>
                   <span>Logout</span>
                 </div>
-               
-                
-               
-               
-              
               </span>
             </div>
           </main>
