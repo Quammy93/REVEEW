@@ -29,7 +29,7 @@ const Register = () => {
       console.log(error.response.data.msg);
       console.log(error.response.data.msg);
       setLoading(false);
-      //setErrorMessage(error.response.data.msg);
+    
       toast.error(error.response.data.msg);
     });
   };
@@ -45,12 +45,10 @@ const Register = () => {
         if (response.status === 201) {
           console.log(response.data.token);
 
-          //  const token = response.data.token;
-          //  localStorage.setItem("token", token);
+          
           toast.success("Registered successfully");
 
-          //  const userRegistered = response.data.tokenUser;
-
+        
           console.log("done");
         }
         setLoading(false);
@@ -60,11 +58,7 @@ const Register = () => {
       })
       .catch((error) => {
         // console.log(error.response);
-        //  console.log(error.response.data.msg);
-        // console.log(error.response.status);
-        // console.log(error.response.headers);
-        //  console.log(error.request);
-        //  console.log(error.message);
+       
       });
   };
 
@@ -114,14 +108,13 @@ const Register = () => {
           <h2 className="reg-heading" style={{ color: "white" }}>
             Reveew
           </h2>
-          {/**  <img src={logo} alt="" className="logo-reg" /> */}
+          
 
           <h4 className="reg-sub-heading" style={{ color: "white" }}>
             Register Your account
           </h4>
           <Form
-            // {...formItemLayout}
-            // layout="vertical"
+           
             form={form}
             name="register"
             onFinish={onFinish}
@@ -158,7 +151,7 @@ const Register = () => {
             </Form.Item>
             <Form.Item
               name="email"
-              //  label="E-mail"
+            
               rules={[
                 {
                   type: "email",
@@ -197,7 +190,7 @@ const Register = () => {
 
             <Form.Item
               name="confirm"
-              //label="Confirm Password"
+              
               dependencies={["password"]}
               hasFeedback
               rules={[

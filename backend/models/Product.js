@@ -23,7 +23,7 @@ const ProductSchema = new mongoose.Schema({
   specification: { type: [String] },
   product_Avgrating: { type: Number, default: 0 },
 });
-
+//deleting the review if a product is remove
 ProductSchema.pre("remove", async function () {
   await this.model("Reviews").deleteMany({ product: this._id });
 });

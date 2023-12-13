@@ -3,6 +3,8 @@ const BadRequestError = require("../errors/BadrequestError");
 const NotFoundError = require("../errors/NotFoundError");
 const { StatusCodes } = require("http-status-codes");
 
+
+//creating review
 const createReview = async (req, res) => {
   const { id } = req.params;
   const { userId } = req.user;
@@ -26,6 +28,8 @@ const createReview = async (req, res) => {
   });
   res.status(StatusCodes.OK).json({ review });
 };
+
+//deleting review
 const deleteReview = async (req, res) => {
   const { id } = req.params;
   const review = await Reviews.findOne({ _id: id });
@@ -81,6 +85,8 @@ const getAllReviews = async (req, res) => {
     numOfZeroReview,
   });
 };
+
+//getting a single review
 const getSingleReview = async (req, res) => {
   const { id } = req.params;
   const review = await Reviews.findOne({ _id: id });

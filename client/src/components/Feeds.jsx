@@ -1,6 +1,6 @@
 import React from "react";
 
-//simport { feeds } from "../utils/jsonFiles/feeds";
+
 import "../assets/css/feed.css";
 import imag1 from "../assets/images/computer-1.jpeg";
 import { BiDislike, BiLike, BiComment } from "react-icons/bi";
@@ -14,9 +14,7 @@ import { getAllFeeds } from "../utils/axios";
 const Feeds = () => {
   const { feeds, setFeeds } = useGlobalContext();
   const [isfeedLoading, setIsFeedLoading] = React.useState(false);
-  //setLoading(true);
-
-  // Use an async function to fetch data
+ 
   const fetchData = async () => {
     setIsFeedLoading(true);
     try {

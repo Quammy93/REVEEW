@@ -14,7 +14,7 @@ const ReviewsSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+//preventing a review by user on a product
 ReviewsSchema.index({ product_reviewed: 1, reviewer: 1 }, { unique: true });
 
 ReviewsSchema.pre("save", function () {
@@ -24,6 +24,7 @@ ReviewsSchema.pre("save", function () {
   });
 });
 
+// calculating average reviews rates
 ReviewsSchema.statics.computeAvgRating = async function (productId) {
   const result = await this.aggregate([
     { $match: { product_reviewed: productId } },
@@ -58,4 +59,4 @@ ReviewsSchema.post("remove", async function () {
 
 module.exports = mongoose.model("Reviews", ReviewsSchema);
 
-//ReviewSchema.index({ product_reviewed: 1, reviewer: 1 }, { unique: true });
+

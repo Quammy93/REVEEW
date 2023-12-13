@@ -9,7 +9,7 @@ const authenticateUser = async (req, res, next) => {
   if (!token) {
     throw new UnAunthenticatedError("No token found");
   }
-
+//attaching user to request
   try {
     const { name, userId, role } = isTokenValid({ token });
     req.user = { name, userId, role };

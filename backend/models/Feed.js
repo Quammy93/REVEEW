@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { format } = require("date-fns");
 const { enUS } = require("date-fns/locale");
+
+
 const FeedSchema = new mongoose.Schema(
   {
     formattedTimestamp: String,
@@ -15,9 +17,9 @@ const FeedSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+//formatting the date
 FeedSchema.pre("save", function (next) {
-  // Format the timestamp before saving
+
   this.formattedTimestamp = format(this.date_posted, "d MMMM yyyy", {
     locale: enUS,
   });

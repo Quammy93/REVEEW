@@ -8,8 +8,8 @@ const {
   attachCookiesToResponse,
   createJWTToken,
 } = require("../JWT");
-//const { TokenExpiredError } = require("jsonwebtoken");
 
+// user registration
 const register = async (req, res) => {
   const { name, email, password, role } = req.body;
   //another way to check for the existence of the email
