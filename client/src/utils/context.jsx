@@ -1,5 +1,6 @@
 import React from "react";
 //import { data } from "../utils/jsonFiles/product";
+import sublinks from "./data";
 
 const AppContext = React.createContext();
 
@@ -17,10 +18,28 @@ const AppProvider = ({ children }) => {
   const [isProductLoading, setIsProductLoading] = React.useState(false);
 
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
+  const [page, setPage] = React.useState({ page: "", links: [] });
+  const [location, setLocation] = React.useState({});
+
+  const openSubmenu = (text, coordinates) => {
+    const page = sublinks.find((link) => {
+      if (link.page === text) {
+        return link;
+      }
+    });
+    setPage(page);
+    setLocation(coordinates);
+    setIsShowSubmenu(true);
+  };
+  const closeSubmenu = () => {
+    setIsShowSubmenu(false);
+  };
 
   return (
     <AppContext.Provider
       value={{
+        setIsShowSubmenu,
         products,
         setProducts,
         brands,
@@ -43,6 +62,11 @@ const AppProvider = ({ children }) => {
         setShowSidebar,
         isProductLoading,
         setIsProductLoading,
+        openSubmenu,
+        closeSubmenu,
+        isShowSubmenu,
+        page,
+        location,
       }}
     >
       {children}
