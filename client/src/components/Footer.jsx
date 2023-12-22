@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/images/revlogo.png";
+import logo from "../assets/images/Group 2.png";
 export default function Footer() {
   return (
     <>
@@ -7,8 +7,8 @@ export default function Footer() {
         <article className="footer-article">
           <div className="footer-links">
             <span>
-              REVEEW
-              {/** <img src={logo} alt="" className="footer-logo" />*/}
+             
+            <img src={logo} alt="" className="footer-logo" />
             </span>
           </div>
           <div className="footer-links">

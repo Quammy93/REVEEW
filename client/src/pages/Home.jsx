@@ -37,7 +37,7 @@ import icon18 from "../assets/images/icon18.gif";
 import icon19 from "../assets/images/icon19.gif";
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
-import logo from "../assets/images/Group 2.png"
+import logo from "../assets/images/Group 2.png";
 
 const Home = () => {
   const { showSidebar, closeSubmenu } = useGlobalContext();
@@ -271,8 +271,27 @@ const Home = () => {
             </div>
           </section>
           <main className="hero3">
-            <section>Contact Us</section>
-            <Footer/>
+            <section className="hero-contact-us">
+              <div className="hero-contact">
+                <span>
+                  <h4>
+                    <b>
+                      Need to Integrate with ur Busineess or Want us to List a
+                      Product?
+                    </b>
+                  </h4>
+                  <p>
+                    Trustpilot is a review platform that’s open to everyone.
+                    Share your experiences to help others make better choices
+                    and
+                  </p>
+                </span>
+                <div>
+                  <button> Contact Us</button>
+                </div>
+              </div>
+            </section>
+            <Footer />
           </main>
         </aside>
       </div>
