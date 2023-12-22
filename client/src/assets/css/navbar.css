@@ -185,7 +185,7 @@ aside {
 }
 .hero-image,
 .overlay {
-  height: 600px;
+  height: 650px;
   width: 100%;
   position: absolute;
 }
@@ -198,7 +198,7 @@ aside {
   width: 520px;
   height: 300px;
   margin-left: 40px;
-  top: 25%;
+  top: 30%;
   color: white;
   padding: 10px;
   border-radius: 10px;
