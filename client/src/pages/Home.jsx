@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Navbar2 from "../components/Navbar2";
 import SubMenu from "antd/es/menu/SubMenu";
+import { useGlobalContext } from "../utils/context";
+import sublinks from "../utils/data";
 
 import "../assets/css/hero.css";
 
@@ -10,7 +12,6 @@ import Recommend from "./Recommend";
 import Footer from "../components/Footer";
 import MostReview from "../components/MostReview";
 import Sidebar from "../components/Sidebar";
-import { useGlobalContext } from "../utils/context";
 import img from "../assets/images/main8.jpg";
 import img4 from "../assets/images/main6.jpg";
 import img49 from "../assets/images/main49.jpg";
@@ -40,7 +41,11 @@ import icon21 from "../assets/images/icon21.gif";
 import logo from "../assets/images/Group 2.png";
 
 const Home = () => {
-  const { showSidebar, closeSubmenu } = useGlobalContext();
+  const {
+    showSidebar,
+    closeSubmenu,
+   
+  } = useGlobalContext();
   let loggedUser = { name: "", role: "" };
   // localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
   return (
@@ -225,23 +230,27 @@ const Home = () => {
               <div className="explore-category-heading">
                 <h2>Explore categories</h2>
                 <span className="explore-btn">
-                  <p>View all</p>
+                  <p>Explore More</p>
                 </span>
               </div>
 
               <ul className="explore-category-list">
-                <li className="cat-list">Fashion</li>
-                <li className="cat-list">Travel</li>
-                <li className="cat-list">Hotel</li>
-                <li className="cat-list">Resturants</li>
-                <li className="cat-list">Electronic & Tech</li>
-                <li className="cat-list">Computing</li>
-                <li className="cat-list">Mobile & Tablet</li>
-                <li className="cat-list">Location</li>
-                <li className="cat-list"> services</li>
-                <li className="cat-list">Education</li>
-                <li className="cat-list">Entertainment</li>
-                <li className="cat-list">Entertainment</li>
+                {
+sublinks[0].links.map((link,index)=>{
+const {label,icon}=link
+
+return (
+  <li className="cat-list">
+    <span className="list-icon">{icon}</span> <span className="list-label">{label}</span>
+  </li>
+);
+
+
+})
+
+
+                }
+              
               </ul>
             </main>
           </article>
