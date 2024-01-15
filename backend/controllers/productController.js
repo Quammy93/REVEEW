@@ -11,7 +11,7 @@ const createProduct = async (req, res) => {
 };
 //getting all products
 const getAllProducts = async (req, res) => {
-  const { search, filter, product_Avgrating, product_category, sort } =
+  const { search, filter, product_Avgrating, product_category, sort,search1 } =
     req.query;
   console.log(product_Avgrating);
   const queryObj = {};
@@ -32,8 +32,16 @@ const getAllProducts = async (req, res) => {
 
   //searching
   if (search) {
-    queryObj.product_name = { $regex: search, $options: "i" };
+    queryObj.product_name   = { $regex: search, $options: "i" };
+     queryObj.product_brand = { $regex: search, $options: "i" };
+   
   }
+if(search1){
+queryObj={$or:[{product_name:{ $regex: search1, $options: "i" }},{product_brand:{ $regex: search1, $options: "i" }}]
+
+}
+
+}
 
   let result = Product.find(queryObj);
 //sorting

@@ -37,6 +37,11 @@ app.use("/api/reviews", reviewRoute);
 app.use("/api/feeds", feedRoutes);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.get("/doc");
+
+app.get("/doc", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./doc", "reveew.html"));
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/dist", "index.html"));
