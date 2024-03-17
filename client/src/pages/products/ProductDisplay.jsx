@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
+import Navbar2 from "../../components/Navbar2";
 import "../../assets/css/productDisplay.css";
 import QueryProduct from "../../components/QueryProduct";
 import {
@@ -12,8 +13,8 @@ import { useGlobalContext } from "../../utils/context";
 import { useNavigate, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Sidebar from "../../components/Sidebar";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 import { Alert, Spin } from "antd";
 //import { getAllProducts } from "../../utils/axios";
 import axios from "axios";
@@ -33,6 +34,7 @@ const ProductDisplay = () => {
     setIsProductLoading,
     products,
     setProducts,
+    closeSubmenu,
   } = useGlobalContext();
 
   let clickedCategory = selectedCategory;
@@ -152,7 +154,7 @@ const ProductDisplay = () => {
         className={`${showSidebar ? "hide-home-content" : "show-home-content"}`}
       >
         <div className="product-nav">
-          <Navbar />
+          <Navbar2 />
         </div>
 
         {isProductLoading && (
@@ -173,12 +175,15 @@ const ProductDisplay = () => {
           <div>No Result Found</div>
         )}
         {!isProductLoading && products.length > 0 && (
-          <div>
+          <div onMouseOver={closeSubmenu}>
             {" "}
             <div className="query-top product-query">
               <div className="left-query">
                 <p className="heading-link">
-                  <Link to="/" style={{color:"black"}}>Home </Link> <span>/</span>
+                  <Link to="/" style={{ color: "black" }}>
+                    Home{" "}
+                  </Link>{" "}
+                  <span>/</span>
                   {selectedCategory}
                 </p>
                 <h2 className="product-heading">{selectedCategory}</h2>

@@ -1,13 +1,53 @@
 import React from "react";
 import { useGlobalContext } from "../utils/context";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 
 const Submenu = () => {
   const container = React.useRef();
   const {
+    setProducts,
+    setIsShowSubmenu,
+    setIsProductLoading,
     location,
     isShowSubmenu,
     page: { page, links },
+    closeSubmenu,
   } = useGlobalContext();
+
+  const navigate = useNavigate();
+
+  const loadProduct = async (category) => {
+    closeSubmenu();
+    await fetchData(category);
+    // return navigate(`/products/${category}?category=${category}`);
+  };
+
+  const getAllProducts = async (category) => {
+    console.log(category);
+    return await axios
+      .get(`${url}/products?page=${1}&limit=${6}&product_category=${category}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchData = async (category) => {
+    setIsProductLoading(true);
+    try {
+      const response = await getAllProducts(category);
+
+      const { products, totalCount, numOfPages } = response.data;
+      setProducts(products);
+      // setTotalCount(totalCount);
+      setIsProductLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   // setting up usestate ref
   const [columns, setColumns] = React.useState("col-2");
@@ -32,6 +72,7 @@ const Submenu = () => {
     <aside
       className={`${isShowSubmenu ? "submenu show" : "submenu"}`}
       ref={container}
+    
     >
       <div className="sub-page-title">
         {" "}
@@ -73,6 +114,7 @@ const Submenu = () => {
     <aside
       className={`${isShowSubmenu ? "submenu show" : "submenu"}`}
       ref={container}
+    
     >
       <div className="sub-page-title">
         {" "}
@@ -84,10 +126,15 @@ const Submenu = () => {
           const { url, icon, label } = link;
 
           return (
-            <a key={index} href={url} className="submenu-links">
+            <Link
+              key={index}
+              to={url}
+              className="submenu-links"
+              onClick={() => loadProduct(label)}
+            >
               {icon}
               {label}
-            </a>
+            </Link>
           );
         })}
       </div>

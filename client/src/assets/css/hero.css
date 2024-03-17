@@ -30,7 +30,7 @@ position: absolute;
 .hero-step h3{margin: 10px 0 0 0;padding: 0;}
 .hero-step p{margin:0;padding: 0;}
 .hero-step-icon{height: 80px;width: 80px;border: 1px solid gainsboro; border-radius: 100%;color: white;display: flex;justify-content: center;align-items: center;font-size: 34px;}
-.hero-step-container{height: 300px;;display: flex;justify-content: center;align-items: center;flex-direction: column;}
+.hero-step-container{height: 300px;;display: flex;justify-content: center;align-items: center;flex-direction: column; color: white;}
 .hero-step-container h3{font-size: small;font-weight: bold;}
 .explore-category-heading{display: flex;justify-content: space-between;align-items: center;margin-top: 30px;}
 .explore-category-heading h2{font-weight: bold;font-size: 20px;}

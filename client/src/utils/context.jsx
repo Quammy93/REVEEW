@@ -16,11 +16,15 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [showSidebar, setShowSidebar] = React.useState(false);
   const [isProductLoading, setIsProductLoading] = React.useState(false);
+    const [productInfo, setProductInfo] = React.useState({});
 
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
   const [page, setPage] = React.useState({ page: "", links: [] });
   const [location, setLocation] = React.useState({});
+  const [searchItem,setSearchItem]=React.useState('')
+   const [searchResult, setSearchResult] = React.useState([]);
+   const [IsSearching,setIsSearching]=React.useState(false)
 
   const openSubmenu = (text, coordinates) => {
     const page = sublinks.find((link) => {
@@ -67,6 +71,14 @@ const AppProvider = ({ children }) => {
         isShowSubmenu,
         page,
         location,
+        searchItem,
+        setSearchItem,
+        searchResult,
+        setSearchResult,
+        productInfo,
+        setProductInfo,
+        IsSearching,
+        setIsSearching,
       }}
     >
       {children}

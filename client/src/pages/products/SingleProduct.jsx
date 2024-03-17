@@ -1,19 +1,22 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
+import Navbar2 from "../../components/Navbar2"
 import "../../assets/css/singleProduct.css";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+import { useGlobalContext } from "../../utils/context";
+//const url = "/api";
 import { Alert, Space, Spin } from "antd";
 
 
 const SingleProduct = () => {
+  const {productInfo, setProductInfo}=useGlobalContext()
   const location = useLocation();
   const { category, product, id } = useParams();
   const navigate = useNavigate();
-  const [productInfo, setProductInfo] = React.useState({});
+
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -117,7 +120,7 @@ const SingleProduct = () => {
   return (
     <div>
       <main className="navbar-section">
-        <Navbar />
+        <Navbar2 />
       </main>
       {isproductLoading && (
         <div className="product-spin">
