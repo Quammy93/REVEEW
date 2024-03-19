@@ -446,7 +446,7 @@ nav {
 /*.................................................Search result..............................................................................................................................*/
 .search-result-container {
   width: 500px;
- 
+
   background-color: black;
   position: absolute;
   transform: translate(50%, -1%);

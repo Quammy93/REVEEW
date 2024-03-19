@@ -21,8 +21,10 @@ export default function Navbar2() {
     setSearchResult,
     isSearching,
     setIsSearching,
+    isLoadingSearch,
+    setIsLoadingSearch,
   } = useGlobalContext();
-
+  
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closeSubmenu();
@@ -51,14 +53,17 @@ export default function Navbar2() {
 
   const fetchData = async (searchValue) => {
     // setIsProductLoading(true);
+    setIsLoadingSearch(true)
     try {
       const response = await getAllProducts(searchValue);
 
       // const { products, numOfPages } = response.data;
-      // setProducts(products);
-      setSearchResult(response.data.products);
+     // setProducts(products);
+      setSearchResult(response?.data?.products);
+      console.log("products", response?.data?.products);
 
-      //setIsProductLoading(false);
+    //  setIsProductLoading(false);
+    setIsLoadingSearch(false)
     } catch (error) {
       console.error("Error fetching data:", error);
     }

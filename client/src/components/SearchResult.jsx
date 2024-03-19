@@ -15,8 +15,12 @@ const SearchResult = () => {
     setSearchItem,
     IsSearching,
     setIsSearching,
+    isLoadingSearch,
+    setIsLoadingSearch,
   } = useGlobalContext();
   const navigate = useNavigate();
+
+ 
 
   console.log(searchResult);
 
@@ -28,22 +32,27 @@ const SearchResult = () => {
   };
 
   const fetchData = async (id) => {
+   
     try {
       const response = await getAllProducts(id);
+      setIsLoadingSearch(false);
 
       const { product } = response.data;
 
       console.log(response);
 
-      //  setProductInfo(product);
+      setProductInfo(product);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   const handleSearch = async (category, product, id) => {
-    console.log("hi");
+    //console.log("hllllllli");
+   // setIsLoadingSearch(true);
+     console.log("looading", isLoadingSearch);
     await fetchData(id);
+   // setIsLoadingSearch(false);
     navigate(`/products/${category}/${product}/${id}`);
     handlSearchResultClick();
   };
@@ -62,7 +71,12 @@ const SearchResult = () => {
       }`}
     >
       <section>
-        <h5 className="search-result-heading">Search results</h5>
+        <h5 className="search-result-heading">
+          {isLoadingSearch ? "Searching..." : "Search results"}
+        </h5>
+
+        <div>{!isLoadingSearch && searchResult.length == 0 && "No result found"}</div>
+
         <div>
           {searchResult.map((result) => {
             const {

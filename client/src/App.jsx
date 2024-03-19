@@ -20,7 +20,6 @@ function App() {
       <ToastContainer position="top-center" />
       <BrowserRouter>
         <Routes>
-       
           <Route path="/" Component={Home}></Route>
           <Route path="/login" Component={Login}></Route>
           <Route path="/register" Component={Register}></Route>
@@ -28,6 +27,7 @@ function App() {
             path="/products/:selectedCategory"
             Component={ProductDisplay}
           ></Route>
+         
           <Route
             path="/products/:selectedCategory/:product/:id"
             Component={SingleProduct}

@@ -1,19 +1,15 @@
-
 import React from "react";
 import { VscRemoteExplorer } from "react-icons/vsc";
 import { IoRestaurantOutline } from "react-icons/io5";
 import { PiBowlFood, PiDress, PiTelevision } from "react-icons/pi";
-import {  SiYourtraveldottv } from "react-icons/si";
+import { SiYourtraveldottv } from "react-icons/si";
 import { TiMediaPlay } from "react-icons/ti";
 import { FaComputer } from "react-icons/fa6";
-import feature1 from "../../public/feature1.jpg";;
+import feature1 from "../../public/feature1.jpg";
 import feature3 from "../assets/images/feature3.jpg";
 import feature4 from "../assets/images/feature4.jpg";
 import feature5 from "../assets/images/feature5.jpg";
 import feature6 from "../assets/images/feature6.jpg";
-
-
-
 
 import { FaLaptopHouse } from "react-icons/fa";
 
@@ -25,7 +21,6 @@ import {
   MdOutlineCastForEducation,
   MdOutlinePhoneAndroid,
 } from "react-icons/md";
-
 
 const sublinks = [
   {
@@ -97,7 +92,7 @@ const sublinks = [
       {
         label: "Product Review",
         icon: { feature1 },
-        url: "/Our Company",
+        url: "/products/All Products?category=All Products",
       },
       {
         label: "Service Review",

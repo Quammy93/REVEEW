@@ -25,6 +25,7 @@ const AppProvider = ({ children }) => {
   const [searchItem,setSearchItem]=React.useState('')
    const [searchResult, setSearchResult] = React.useState([]);
    const [IsSearching,setIsSearching]=React.useState(false)
+    const [isLoadingSearch, setIsLoadingSearch] = React.useState(false);
 
   const openSubmenu = (text, coordinates) => {
     const page = sublinks.find((link) => {
@@ -79,6 +80,8 @@ const AppProvider = ({ children }) => {
         setProductInfo,
         IsSearching,
         setIsSearching,
+        isLoadingSearch,
+        setIsLoadingSearch,
       }}
     >
       {children}
