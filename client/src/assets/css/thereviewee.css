@@ -1,0 +1,35 @@
+.find-reviewee-inpt1 {
+  width: 370px;
+  border-right: none;
+ 
+}
+.find-reviewee-inpt2 {
+  width: 220px;
+  border-left: none;
+}
+aside::after {
+  content: "|";
+  font-size: 30px;
+  margin-left: -7px;
+  
+}
+
+aside{margin-top: -2px;}
+
+.find-reviewee-inpt1,
+.find-reviewee-inpt2 {
+  height: 50px;
+  padding: 10px;
+  font-size: x-large;
+  outline: none;
+}
+
+.reviewee-form {
+  width: 600px;
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;padding: 0;
+}
+.therevieweeinput{display: flex; width: 600px;justify-content:center;align-items: center;}

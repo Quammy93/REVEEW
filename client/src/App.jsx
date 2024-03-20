@@ -13,6 +13,7 @@ import Admin from "./pages/adminPanel/Admin";
 import Stat from "./pages/adminPanel/adminPages/Stat";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
+import TheReviewee from "./pages/products/TheReviewee";
 
 function App() {
   return (
@@ -27,7 +28,9 @@ function App() {
             path="/products/:selectedCategory"
             Component={ProductDisplay}
           ></Route>
-         
+
+          <Route path="/write-review" Component={TheReviewee}></Route>
+
           <Route
             path="/products/:selectedCategory/:product/:id"
             Component={SingleProduct}
