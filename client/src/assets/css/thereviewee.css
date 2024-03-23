@@ -1,20 +1,21 @@
 .find-reviewee-inpt1 {
-  width: 370px;
+  width: 420px;
   border-right: none;
- 
 }
 .find-reviewee-inpt2 {
-  width: 220px;
+  width: 270px;
   border-left: none;
+  margin-left: -2px;
 }
 aside::after {
   content: "|";
   font-size: 30px;
   margin-left: -7px;
-  
 }
 
-aside{margin-top: -2px;}
+aside {
+  margin-top: -3px;
+}
 
 .find-reviewee-inpt1,
 .find-reviewee-inpt2 {
@@ -24,12 +25,105 @@ aside{margin-top: -2px;}
   outline: none;
 }
 
+.reviewee-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  height: 320px;
+  padding: 50px 0 0 50px;
+}
+.reviewee-container h4 {
+  font-size: 18px;
+}
+.reviewee-container h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.reviewee-section {
+  padding: 0 0 0 50px;
+}
+.reviewee-section h3 {
+  font-size: 23px;
+  font-weight: 600;
+}
+.reviewee-image {
+  width: 450px;
+  height: 70%;
+  background-color: beige;
+  margin-right: 30px;
+}
+.reviewee-illus {
+  width: 450px;
+  height: 250px;
+}
+
 .reviewee-form {
-  width: 600px;
-  background-color: aqua;
+  width: 740px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0;padding: 0;
+  margin: 0;
+  padding: 0;
 }
-.therevieweeinput{display: flex; width: 600px;justify-content:center;align-items: center;}
+.therevieweeinput {
+  display: flex;
+  width: 740px;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewee-icon {
+  color: white;
+  font-size: 30px;
+}
+.reviewee-icon-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232c59;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+.visited-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.visited-image {
+  height: 200px;
+  width: 200px;
+}
+.visited-article {
+  display: flex;
+  align-items: start;
+  width: 600px;
+  border: 1px solid gainsboro;
+  border-left: none;
+  height: 200px;
+}
+.visited-desc {
+  width: 380px;
+  height: 200px;
+  padding: 10px;
+}
+.visited-desc h3 {
+  padding: 0;
+  margin: 0;
+}
+.visited-desc p {
+  margin: 0;
+  padding: 0;
+}
+.close-visited {
+  font-size: 30px;
+  cursor: pointer;
+}
+.business-category{width: 410px;height: 450px;background-color:black;z-index: 100;position: absolute;margin-top: 5px; display: none;}
+.business-category.show{display: block;}
+.location-category{width: 260px;height: 250px;background-color: antiquewhite;z-index: 100;position: absolute;margin-top: 5px;transform: translateX(164%);}
+.bus-cat-list{padding: 8px;font-size: 20px;}
+.bus-cat-list:hover{background-color: gainsboro; border-radius: 5px;}
+.service-container{padding: 10px;}

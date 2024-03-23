@@ -16,16 +16,22 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [showSidebar, setShowSidebar] = React.useState(false);
   const [isProductLoading, setIsProductLoading] = React.useState(false);
-    const [productInfo, setProductInfo] = React.useState({});
+  const [productInfo, setProductInfo] = React.useState({});
 
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
   const [page, setPage] = React.useState({ page: "", links: [] });
   const [location, setLocation] = React.useState({});
-  const [searchItem,setSearchItem]=React.useState('')
-   const [searchResult, setSearchResult] = React.useState([]);
-   const [IsSearching,setIsSearching]=React.useState(false)
-    const [isLoadingSearch, setIsLoadingSearch] = React.useState(false);
+  const [searchItem, setSearchItem] = React.useState("");
+  const [searchResult, setSearchResult] = React.useState([]);
+  const [IsSearching, setIsSearching] = React.useState(false);
+  const [isLoadingSearch, setIsLoadingSearch] = React.useState(false);
+  const [serviceCategory, setServiceCategory] = React.useState("");
+  const [serviceLocation, setServiceLocation] = React.useState("");
+  const [isServiceContainerOpen, setIsServiceContainerOpen] =
+    React.useState(false);
+  const [isLocationContainerOpen, setIsLocationContainerOpen] =
+    React.useState(false);
 
   const openSubmenu = (text, coordinates) => {
     const page = sublinks.find((link) => {
@@ -82,6 +88,14 @@ const AppProvider = ({ children }) => {
         setIsSearching,
         isLoadingSearch,
         setIsLoadingSearch,
+        serviceCategory,
+        setServiceCategory,
+        serviceLocation,
+        setServiceLocation,
+        isServiceContainerOpen,
+        setIsServiceContainerOpen,
+        isLocationContainerOpen,
+        setIsLocationContainerOpen,
       }}
     >
       {children}
