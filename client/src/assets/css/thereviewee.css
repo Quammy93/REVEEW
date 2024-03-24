@@ -121,9 +121,39 @@ aside {
   font-size: 30px;
   cursor: pointer;
 }
-.business-category{width: 410px;height: 450px;background-color:black;z-index: 100;position: absolute;margin-top: 5px; display: none;}
-.business-category.show{display: block;}
-.location-category{width: 260px;height: 250px;background-color: antiquewhite;z-index: 100;position: absolute;margin-top: 5px;transform: translateX(164%);}
-.bus-cat-list{padding: 8px;font-size: 20px;}
-.bus-cat-list:hover{background-color: gainsboro; border-radius: 5px;}
-.service-container{padding: 10px;}
+.business-category {
+  width: 410px;
+  height: 450px;
+  background-color: black;
+  z-index: 100;
+  position: absolute;
+  margin-top: 5px;
+  display: none;
+}
+.business-category.show {
+  display: block;
+}
+.location-category.show {
+  display: block;
+}
+.location-category {
+  width: 260px;
+  height: 250px;
+  background-color: antiquewhite;
+  z-index: 100;
+  position: absolute;
+  margin-top: 5px;
+  transform: translateX(164%);
+  display: none;
+}
+.bus-cat-list {
+  padding: 8px;
+  font-size: 20px;
+}
+.bus-cat-list:hover {
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+.service-container {
+  padding: 10px;
+}

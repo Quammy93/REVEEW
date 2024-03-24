@@ -14,6 +14,7 @@ import Stat from "./pages/adminPanel/adminPages/Stat";
 import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
 import TheReviewee from "./pages/products/TheReviewee";
+import DisplayRevieweeResult from "./pages/products/DisplayRevieweeResult";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           ></Route>
 
           <Route path="/write-review" Component={TheReviewee}></Route>
+          <Route path="/search-review" Component={DisplayRevieweeResult}></Route>
 
           <Route
             path="/products/:selectedCategory/:product/:id"

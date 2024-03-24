@@ -10,7 +10,12 @@ const businessCategory = [
 
 const Location = () => {
 
-    const { serviceLocation, setServiceLocation } = useGlobalContext();
+    const {
+      serviceLocation,
+      setServiceLocation,
+      isLocationContainerOpen,
+      setIsLocationContainerOpen,
+    } = useGlobalContext();
  
   
 
@@ -19,11 +24,18 @@ const Location = () => {
     setServiceLocation(text.item)
   };
   return (
-    <article className="location-category">
+    <article className={`${
+        isLocationContainerOpen ? "location-category show" : "location-category"
+      }`} 
+   onMouseLeave={()=>{setIsLocationContainerOpen(false)}}>
       <ul className="service-container">
         {businessCategory.map((item) => {
           return (
-            <li className="bus-cat-list" onMouseOver={() => clicking({ item })}>
+            <li
+              className="bus-cat-list"
+              onMouseOver={() => clicking({ item })}
+              onClick={() => setIsLocationContainerOpen(false)}
+            >
               {item}
             </li>
           );

@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar2 from "../../components/Navbar2";
+import Navbar3 from "../../components/Navbar3";
 import "../../assets/css/thereviewee.css";
 import { IoSearch } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
@@ -11,20 +11,43 @@ import ServiceCategory from "../../components/ServiceCategory";
 import Location from "../../components/Location";
 import { useGlobalContext } from "../../utils/context";
 const TheReviewee = () => {
+
+const suggestions = [
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+  { name: "Gramma's Kitchen", img: "" },
+];
+
+
   const {
     serviceCategory,
     setServiceCategory,
     serviceLocation,
     setServiceLocation,
+    isLocationContainerOpen,
+    setIsLocationContainerOpen,
     isServiceContainerOpen,
     setIsServiceContainerOpen,
   } = useGlobalContext();
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [value, setValue] = React.useState(0);
- 
+
+
   return (
     <div>
-      <Navbar2 />
+      <Navbar3 />
       <div className="reviewee-container">
         <main>
           <h2>Find a business to review</h2>
@@ -40,15 +63,14 @@ const TheReviewee = () => {
                   type="text"
                   placeholder="try resturants,hotel..."
                   className="find-reviewee-inpt1"
-                  autoFocus={false}
-                  
                   name="serviceCategory"
                   value={serviceCategory}
-                  
                   onChange={(e) => setServiceCategory(e.target.value)}
-                  onClick={setIsServiceContainerOpen(true)}
-                  
-                 
+                  onClick={(e) => {
+                    if (e.target.className == "find-reviewee-inpt1") {
+                      setIsServiceContainerOpen(true);
+                    }
+                  }}
                 />
               </aside>
               <input
@@ -58,6 +80,11 @@ const TheReviewee = () => {
                 name="serviceLocation"
                 value={serviceLocation}
                 onChange={(e) => setServiceLocation(e.target.value)}
+                onClick={(e) => {
+                  if (e.target.className == "find-reviewee-inpt2") {
+                    setIsLocationContainerOpen(true);
+                  }
+                }}
               />{" "}
               <span className="reviewee-icon-div">
                 <IoSearch className="reviewee-icon" />
