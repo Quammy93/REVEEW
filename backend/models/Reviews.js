@@ -11,6 +11,7 @@ const ReviewsSchema = new mongoose.Schema(
     value: { type: Number, default: 0 },
     reviewer: { type: mongoose.Types.ObjectId, ref: "User" },
     product_reviewed: { type: mongoose.Types.ObjectId, ref: "Product" },
+    business_reviewed: { type: mongoose.Types.ObjectId, ref: "Business" },
   },
   { timestamps: true }
 );
