@@ -21,6 +21,7 @@ const reviewRoute = require("./routes/reviewRoute");
 const feedRoutes = require("./routes/feedRoute");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
+const businessRoute = require("./routes/businessRoute");
 
 const Feed = require("./models/Feed");
 // middleware
@@ -37,6 +38,7 @@ app.use("/api/reviews", reviewRoute);
 app.use("/api/feeds", feedRoutes);
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/business", businessRoute);
 app.get("/doc");
 
 app.get("/doc", (req, res) => {

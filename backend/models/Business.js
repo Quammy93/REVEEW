@@ -7,27 +7,19 @@ const BusinessSchema = new mongoose.Schema({
   business_category: {
     type: String,
     enum: [
-      "Appliances",
-      "Computing",
-      "Phone and tablet",
-      "Electronics",
-      "Fashion",
+      "Restaurants",
+      "Transport and Logistic",
+      "Hotel",
+      "Travel and Booking",
     ],
   },
   business_location: {
     type: String,
-    enum: [
-      "Lagos",
-      "Ibadan",
-      "Oyo",
-      "Osun",
-      "Ondo",
-    ],
+    enum: ["Lagos", "Ibadan", "Oyo", "Osun", "Ondo"],
   },
 
   numOfReview: { type: Number, default: 0 },
 
- 
   Business_desc: { type: String },
   Business_features: { type: [String] },
   specification: { type: [String] },
