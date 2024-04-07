@@ -2,10 +2,10 @@ import React from 'react'
 import { useGlobalContext } from "../utils/context";
 
 const businessCategory = [
-  "Restaurants",
-  "Transport and Logistic",
-  "Hotel",
-  "Travel and Booking",
+  "Lagos",
+  "Abuja",
+  "Ibadan",
+  "PH",
 ];
 
 const Location = () => {
