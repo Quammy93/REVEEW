@@ -1,12 +1,126 @@
-.display-review-top{display: flex;justify-content: space-between;align-items: center;padding: 20px 30px ;}
-.display-review-top h2{font-size: 28px; font-weight: 600;}
-.select-sort{margin-left: 5px;}
-.display-business-container{display: grid;
-grid-template-columns: 24% 74%;}
-.display-business-article{display: flex;justify-content: space-between;align-items: start;background-color: aqua;width: 100%;height: 150px; margin: 10px;padding: 0 20px;cursor: pointer;}
-.business-filter{width: 90%; height: 500px;background-color: bisque;margin-left: 15px;}
-.bsn-img{height: 120px;width: 120px;margin-right: 5px;}
-.bsn-art-container{display: flex;padding: 15px;}
-.bsn-art-container h2{font-size: 20px;font-weight: 600px;padding: 0;margin-bottom: 5px;}
+.display-review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+}
+.display-review-top h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+.select-sort {
+  margin-left: 5px;
+}
+.display-business-container {
+  display: grid;
+  grid-template-columns: 24% 74%;
+}
+.display-business-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background-color: aqua;
+  width: 100%;
+  height: 150px;
+  margin: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.business-filter {
+  width: 90%;
+  height: 500px;
+  background-color: bisque;
+  margin-left: 15px;
+  padding: 10px;
+}
+.bsn-img {
+  height: 120px;
+  width: 120px;
+  margin-right: 5px;
+}
+.bsn-art-container {
+  display: flex;
+  padding: 15px;
+}
+.bsn-art-container h2 {
+  font-size: 20px;
+  font-weight: 600px;
+  padding: 0;
+  margin-bottom: 5px;
+}
 
-.display-business-article p{margin-bottom: 0;}
+.display-business-article p {
+  margin-bottom: 0;
+}
+
+.radio-any {
+  border: 1px solid gainsboro;
+  padding: 5px;
+  font-weight: bold;
+  color: blue;
+}
+.select-service {
+  width: 80%;
+  padding: 5px;
+  font-size: 18px;
+  outline: none;
+}
+.location {
+  margin: 0;
+}
+.bsn-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 80%;
+}
+
+.display-business-article-single-bsn {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  background-color: aqua;
+  width: 100%;
+  height: 250px;
+  cursor: pointer;
+  font-weight: bolder;
+  align-items: center;
+}
+.bsn-img-single-bsn {
+  height: 200px;
+  width: 200px;
+  margin-right: 20px;
+}
+.bsn-art-container-single-bsn {
+  display: grid;
+  padding: 15px;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1.5fr;
+  align-items: center;
+}
+.bsn-art-container-single-bsn h2 {
+  font-size: 30px;
+  font-weight: 600px;
+  padding: 0;
+  margin-bottom: 5px;
+  font-family: sans-serif, Helvetica, sans-serif;
+}
+
+.website-link {
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid gainsboro;
+  width: 300px;
+  margin-left: -5%;
+  border-radius: 15px;
+}
+.bsn-div {
+  width: 300px;
+  border: 1px solid gainsboro;
+}
+
+.writer-container{height: 70px; width: 100%; background-color: black;}
+
+.bsn-review-info{width: 100%;height: 400px;margin-top: 20px;background-color: black;}
+
+.bsn-reviews{width: 100%;height: 400px;margin-top: 20px;background-color: black;}

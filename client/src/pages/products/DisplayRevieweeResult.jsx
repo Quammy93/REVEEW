@@ -1,18 +1,44 @@
 import React from "react";
 import Navbar4 from "../../components/Navbar4";
 import "../../assets/css/displayreview.css";
-import { Rate } from "antd";
+//import { Rate } from "antd";
 import axios from "axios";
 const url = "http://localhost:5000/api";
 //const url = "/api";
 
+import { useGlobalContext } from "../../utils/context";
+import { useNavigate } from "react-router-dom";
+
+import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
+
 const DisplayRevieweeResult = () => {
+
+  const navigate=useNavigate()
+
+const {businessInfo, setBusinessInfo}=useGlobalContext()
+
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 
   const [business, setBusiness] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [limit, setLimit] = React.useState(8);
+   const [value, setValue] = React.useState("");
+    const [totalCount, setTotalCount] = React.useState(30);
+
+const handleItemClick= async (item)=>{
+
+
+  await setBusinessInfo(item);
+
+  navigate("/business/hh")
+
+
+}
+
+
+
+
 
   const getAllBusiness = async () => {
     return await axios.get(`${url}/business`).catch((error) => {
@@ -20,6 +46,20 @@ const DisplayRevieweeResult = () => {
       //toast.error(error.message);
     });
   };
+   const handlePagechange = (page) => {
+     setCurrentPage(page);
+     console.log(page);
+   };
+  const onChange = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+   // setShowFilter(false);
+  };
+
+const onChecked=(e)=>{
+  console.log(e.target.checked)
+
+}
 
   const fetchData = async () => {
     //setIsProductLoading(true);
@@ -70,23 +110,110 @@ const DisplayRevieweeResult = () => {
       <section className="display-business-container">
         <main className="business-filter">
           <article>
-            <p>Rating</p>
             <ul>
-              <li>Any</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
+              <li className="browse-cat">
+                <div className="link-title">
+                  {" "}
+                  <p className="cat-title">Ratings </p>
+                  <span></span>
+                </div>
+                <ul className=" list-sub-container">
+                  <li>
+                    <Radio.Group
+                      onChange={onChange}
+                      value={value}
+                      className="label-s"
+                    >
+                      <Space direction="vertical">
+                        <Radio value={5}>
+                          <Rate
+                            disabled
+                            defaultValue={5}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={4}>
+                          <Rate
+                            disabled
+                            defaultValue={4}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={3}>
+                          <Rate
+                            disabled
+                            defaultValue={3}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={2}>
+                          <Rate
+                            disabled
+                            defaultValue={2}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={1}>
+                          <Rate
+                            disabled
+                            defaultValue={1}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={0}>
+                          <Rate
+                            disabled
+                            defaultValue={0}
+                            style={{ backgroundColor: "white" }}
+                          />
+                        </Radio>
+                        <Radio value={""}>
+                          <span className="radio-any">All Ratings</span>
+                        </Radio>
+                      </Space>
+                    </Radio.Group>
+                  </li>
+                </ul>
+              </li>
             </ul>
-            <p>Location</p>
-            <ul>
-              <li>Any</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-            </ul>
+            <p className="cat-title location">Location </p>
+
+            <select name="" id="" className="select-service">
+              <option value="Lagos">Lagos</option>
+              <option value="Ibadan">Ibadan</option>
+              <option value="Oyo">Oyo</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Ibadan">Ibadan</option>
+              <option value="Oyo">Oyo</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Ibadan">Ibadan</option>
+              <option value="Oyo">Oyo</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Ibadan">Ibadan</option>
+              <option value="Oyo">Oyo</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Ibadan">Ibadan</option>
+              <option value="Oyo">Oyo</option>
+            </select>
           </article>
+          <main>
+            <p className="cat-title location">Company Status </p>
+
+            <div>
+              <article className="bsn-status">
+                <span>Verified</span>
+                <span>
+                  <Checkbox onChange={onChecked} />
+                </span>
+              </article>
+              <article className="bsn-status">
+                <span>Claimed</span>
+                <span>
+                  <Checkbox onChange={onChecked} />
+                </span>
+              </article>
+            </div>
+          </main>
         </main>
         <section>
           {business.map((item) => {
@@ -101,8 +228,11 @@ const DisplayRevieweeResult = () => {
             } = item;
 
             return (
-              <article className="display-business-article">
-                <main className="bsn-art-container">
+              <article className="display-business-article" key={_id}>
+                <main
+                  className="bsn-art-container"
+                  onClick={() => handleItemClick(item)}
+                >
                   <div>
                     <img src={business_img} alt="" className="bsn-img" />
                   </div>
@@ -120,6 +250,29 @@ const DisplayRevieweeResult = () => {
               </article>
             );
           })}
+
+          <main>
+            {business.length != [] && (
+              <Pagination
+                total={totalCount}
+                pageSize={limit}
+                itemRender={(_, type, page) => {
+                  if (type === "prev") {
+                    return "Prev";
+                  }
+                  if (type === "next") {
+                    return "Next";
+                  }
+
+                  return page;
+                }}
+                showSizeChanger={false}
+                current={currentPage}
+                onChange={handlePagechange}
+                className="paginate"
+              />
+            )}
+          </main>
         </section>
       </section>
     </section>

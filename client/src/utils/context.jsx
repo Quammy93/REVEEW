@@ -17,6 +17,7 @@ const AppProvider = ({ children }) => {
   const [showSidebar, setShowSidebar] = React.useState(false);
   const [isProductLoading, setIsProductLoading] = React.useState(false);
   const [productInfo, setProductInfo] = React.useState({});
+    const [businessInfo, setBusinessInfo] = React.useState({});
 
   const [errorMessage, setErrorMessage] = React.useState("");
   const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
@@ -96,6 +97,8 @@ const AppProvider = ({ children }) => {
         setIsServiceContainerOpen,
         isLocationContainerOpen,
         setIsLocationContainerOpen,
+        businessInfo,
+        setBusinessInfo,
       }}
     >
       {children}
