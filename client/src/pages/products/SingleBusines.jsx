@@ -49,13 +49,15 @@ const SingleBusines = () => {
           <div className="website-link">Website</div>
         </article>
       </section>
-      <main>
+      <main className='single-bsn-container'>
 <section>
   <div className='writer-container'> <span>userimage</span> <span>Write a Review</span> <span><Rate value={0} defaultValue={0}/></span></div>
   <div className='bsn-review-info'></div>
   <div className='bsn-reviews'></div>
 </section>
-<section></section>
+<section>
+  <div className='bsn-info'></div>
+</section>
 
 
       </main>
