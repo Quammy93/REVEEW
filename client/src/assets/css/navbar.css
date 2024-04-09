@@ -11,8 +11,14 @@
   color: white;
   background-color: rgb(11, 11, 87);
 }
-nav {
+nav {position: fixed;
+  z-index: 100;
 }
+
+:where(.css-dev-only-do-not-override-djtmh8).ant-rate{z-index: -20;}
+
+
+
 :where(.css-dev-only-do-not-override-pr0fja).ant-input {
   padding: 0;
 }
