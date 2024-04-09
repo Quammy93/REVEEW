@@ -6,12 +6,10 @@ const {
 } = require("../middleware/authentication");
 
 const {
-  createbusiness,
-  getAllbusinesss,
+  createBusiness,
+  getAllBusiness,
   getSinglebusiness,
   updatebusiness,
-
-
 
   deletebusiness,
 } = require("../controllers/businessController");
@@ -20,8 +18,8 @@ const {
 
 router
   .route("/")
-  .post([authenticateUser, authorizeRoles("admin")], createbusiness)
-  .get(getAllbusinesss);
+  .post([authenticateUser, authorizeRoles("admin")], createBusiness)
+  .get(getAllBusiness);
 router
   .route("/:id")
   .get(getSinglebusiness)

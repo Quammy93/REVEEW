@@ -5,7 +5,7 @@ const NotFoundError = require("../errors/NotFoundError");
 const createBusiness = async (req, res) => {
   const { business_Avgrating } = req.body;
   console.log(business_Avgrating);
-  req.body.user = req.user.userId;
+  //req.body.user = req.user.userId;
   const business = await Business.create(req.body);
   res.status(StatusCodes.CREATED).json({ business });
 };
@@ -50,7 +50,7 @@ const getAllBusiness = async (req, res) => {
     };
   }
 
-  let result = business.find(queryObj);
+  let result = Business.find(queryObj);
   //sorting
   if (sort === "a-z") {
     result = result.sort("price");
@@ -68,7 +68,7 @@ const getAllBusiness = async (req, res) => {
 
   result = result.skip(skip).limit(limit);
 
-  const totalCount = await business.countDocuments(queryObj);
+  const totalCount = await Business.countDocuments(queryObj);
   const numOfPages = Math.ceil(totalCount / limit);
 
   //setting content-range header
@@ -78,15 +78,15 @@ const getAllBusiness = async (req, res) => {
   res.set("X-Total-Count", totalCount);
   res.set("Content-Range", `${startRange}-${endRange}/${totalCount}`);
 
-  const businesss = await result;
+  const business = await result;
 
-  res.status(StatusCodes.CREATED).json({ businesss, totalCount, numOfPages });
+  res.status(StatusCodes.OK).json({ business, totalCount, numOfPages });
 };
 
 const getSinglebusiness = async (req, res) => {
   const { id: businessId } = req.params;
 
-  const business = await business.findOne({ _id: businessId });
+  const business = await Business.findOne({ _id: businessId });
 
   if (!business) {
     throw new NotFoundError(`No business with id : ${businessId}`);
@@ -97,7 +97,7 @@ const getSinglebusiness = async (req, res) => {
 const deletebusiness = async (req, res) => {
   const { id: businessId } = req.params;
 
-  const business = await business.findOne({ _id: businessId });
+  const business = await Business.findOne({ _id: businessId });
 
   if (!business) {
     throw new NotFoundError(`No business with id : ${businessId}`);
@@ -109,7 +109,7 @@ const deletebusiness = async (req, res) => {
 const updatebusiness = async (req, res) => {
   const { id: businessId } = req.params;
 
-  const business = await business.findOneAndUpdate(
+  const business = await Business.findOneAndUpdate(
     { _id: businessId },
     req.body,
     {
@@ -126,8 +126,8 @@ const updatebusiness = async (req, res) => {
 };
 
 module.exports = {
-  createbusiness,
-  getAllbusinesss,
+  createBusiness,
+  getAllBusiness,
   getSinglebusiness,
   deletebusiness,
   updatebusiness,

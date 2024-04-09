@@ -7,6 +7,8 @@ const errorHandler = require("./middleware/errorHandler");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 require("express-async-errors");
+const Business = require("./models/Business");
+const businesjson = require("./businessList");
 
 const connectDb = require("./db/ConnectDb");
 require("dotenv").config(); //
@@ -55,7 +57,11 @@ app.use(errorHandler);
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
 
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
+  await app.listen(port, () =>
+    console.log(`Server is running on port ${port}`)
+  );
+
+  await Business.create(businesjson);
 };
 
 start();

@@ -20,10 +20,10 @@ const BusinessSchema = new mongoose.Schema({
 
   numOfReview: { type: Number, default: 0 },
 
-  Business_desc: { type: String },
-  Business_features: { type: [String] },
+  business_desc: { type: String },
+  business_features: { type: [String] },
   specification: { type: [String] },
-  Business_Avgrating: { type: Number, default: 0 },
+  business_Avgrating: { type: Number, default: 0 },
 });
 //deleting the review if a product is remove
 BusinessSchema.pre("remove", async function () {
