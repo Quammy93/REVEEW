@@ -119,36 +119,159 @@
   border: 1px solid gainsboro;
 }
 
-.writer-container{height: 70px; width: 95%; background-color: black; display: flex;justify-content: space-between;align-items: center;}
-
-.bsn-review-info{width: 95%;height: 450px;margin-top: 20px;background-color: black;}
-
-.bsn-reviews{width: 95%;height: 530px;margin-top: 20px;background-color: black;margin-bottom: 10px;}
-.bsn-info{width: 95%;background-color: antiquewhite;height: 400px;}
-.single-bsn-container{display: grid;grid-template-columns: 65% 35%;margin: 40px 60px 0 80px;;}
-
-.writer-avarta{height: 60px; width:60px ;border-radius: 50%;padding:5px;}
-.writer-span{display: flex;justify-content: center;align-items: center;}
-.check1{margin-left: 40px;margin-top: 20px;}
-.div{width: 300px;height: 15px;background-color: white;margin-bottom: 7px;border-radius: 5px;}
-.div2{width: 100px;height: 15px;background-color: rgb(99, 32, 32);margin-bottom: 7px;border-radius: 5px;}
-.review-detail-container{display: flex;justify-content:center ;align-items: center;}
-.div-section{display: flex;justify-content: center;align-items: center;flex-direction: column;margin-top: 7px;}
-.div-section-2{display: flex;flex-direction: column;justify-content: center;align-items: start;margin-bottom: -10px;}
-.div-label{font-size: 15px;margin-bottom: 5px;padding: 0;height: 15px;}
-.progress1 {
-  width: 300px;font-size: larger;
+.writer-container {
+  height: 70px;
+  width: 95%;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.rate-num-rating1{font-size: small;}
-.rev-rate{font-size: 100px;font-weight: 600;}
 
-.ant-progress-inner{height: 12px !important;}
-.ant-progress-bg{height: 12px !important;}
-.ant-progress-outer{height: 0px !important;}
- .progress1.css-dev-only-do-not-override-djtmh8{height: 0px;}
- .span-pro{height: 12px;margin-bottom: 10px;}
- .divider-rev{color: white;background-color: white;}
- .span-padding{padding: 6px;font-size: 18px;border: 1px solid white;}
- .bsn-rev-foot-1{display: flex;justify-content: space-between;align-items: start;padding: 0 40px;margin-bottom: 10px;}
- .bsn-rev-foot-2{display: flex;justify-content: start;align-items: start;margin-left: 40px}
- .x-star{margin-right: 10px;}
+.bsn-review-info {
+  width: 95%;
+  height: 450px;
+  margin-top: 20px;
+  background-color: black;
+}
+
+.bsn-reviews {
+  width: 95%;
+  height: 530px;
+  margin-top: 20px;
+  background-color: black;
+  margin-bottom: 10px;
+}
+.bsn-info {
+  width: 95%;
+  background-color: antiquewhite;
+  height: 700px;
+  padding: 10px;
+}
+.bsn-map {
+  width: 80%;
+  height: 300px;
+  background-color: blue;
+  margin-top: 40px;
+}
+.single-bsn-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  margin: 40px 60px 0 80px;
+}
+
+.writer-avarta {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  padding: 5px;
+}
+.writer-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check1 {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.div {
+  width: 300px;
+  height: 15px;
+  background-color: white;
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+.div2 {
+  width: 100px;
+  height: 15px;
+  background-color: rgb(99, 32, 32);
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+.review-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 7px;
+}
+.div-section-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-bottom: -10px;
+}
+.div-label {
+  font-size: 15px;
+  margin-bottom: 5px;
+  padding: 0;
+  height: 15px;
+}
+.progress1 {
+  width: 300px;
+  font-size: larger;
+}
+.rate-num-rating1 {
+  font-size: small;
+}
+.rev-rate {
+  font-size: 100px;
+  font-weight: 600;
+}
+
+.ant-progress-inner {
+  height: 12px !important;
+}
+.ant-progress-bg {
+  height: 12px !important;
+}
+.ant-progress-outer {
+  height: 0px !important;
+}
+.progress1.css-dev-only-do-not-override-djtmh8 {
+  height: 0px;
+}
+.span-pro {
+  height: 12px;
+  margin-bottom: 10px;
+}
+.divider-rev {
+  color: white;
+  background-color: white;
+}
+.span-padding {
+  padding: 6px;
+  font-size: 18px;
+  border: 1px solid white;
+}
+.bsn-rev-foot-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 0 40px;
+  margin-bottom: 10px;
+}
+.bsn-rev-foot-2 {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  margin-left: 40px;
+}
+.x-star {
+  margin-right: 10px;
+}
+
+.write-bsn-rev-container{width: 500px;height: 650px;background-color: aqua;padding: 30px;margin:20px auto;}
+
+.write-bsn-rev-container h3{font-size: 15px; font-weight:bolder; margin: 0;padding: 0;}
+.write-rev-span{display: flex;flex-direction: column;margin: 20px 0;}
+.rev-input{width: 90%; height: 40px; outline: none;font-size: 17px;}
+.text-area-rev{width: 90%;outline: none;font-size: 17px;padding: 10px;}
+.rev-date-input{width: 200px; height: 30px;font-size: 17px;}

@@ -4,7 +4,7 @@ import axios from "axios";
 const url = "http://localhost:5000/api";
 import  avarta from "../../assets/images/computer-1.jpeg"
 import ReviewDetail from '../../components/ReviewDetail';
-import { Checkbox, Rate, Progress, Divider } from "antd";
+import { Checkbox, Rate, Progress, Divider,Pagination } from "antd";
 
 
 //const url = "/api";
@@ -189,8 +189,53 @@ const SingleBusines = () => {
           </main>
         </section>
         <section>
-          <div className="bsn-info"></div>
+          <div className="bsn-info">
+            <span>
+              <h3>About Jumia</h3>
+              <span>Information provided by various external sources</span>
+              <p>
+                Having been operating for over 3years in classic car guys
+                wouldn’t help when our flight was delayed for a long time
+                because of maintenance. We only got $68 when it cost a couple
+                hundred for what we lost. And we paid over a hundred for this
+                insurance. So the best you could do is refund us since you
+                couldn’t do the reason we booked using your insuranc
+              </p>
+              <h5>Contact</h5>
+              <div>Email:@gmail Phone no :00000000000 Address : Ajah Lagos</div>
+
+              <h5>Category</h5>
+              <span>
+                <p>Resturants</p>
+                <p>Hotel and Relaxation</p>
+              </span>
+            </span>
+          </div>
+          <article className="bsn-map">Track ur way to Jumia</article>
         </section>
+      </main>
+
+      <main>
+        
+          <Pagination
+            total={45}
+            pageSize={4}
+            itemRender={(_, type, page) => {
+              if (type === "prev") {
+                return "Prev";
+              }
+              if (type === "next") {
+                return "Next";
+              }
+
+              return page;
+            }}
+            showSizeChanger={false}
+            current={2}
+           
+            className="paginate"
+          />
+       
       </main>
     </div>
   );

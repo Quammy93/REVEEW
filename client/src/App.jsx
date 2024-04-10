@@ -15,7 +15,8 @@ import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
 import TheReviewee from "./pages/products/TheReviewee";
 import DisplayRevieweeResult from "./pages/products/DisplayRevieweeResult";
-import SingleBusines from "./pages/products/SingleBusines";
+import SingleBusines from "./pages/products/SingleBusines"
+import WriteBusinessReview from "./pages/products/WriteBusinessReview";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             Component={SingleProduct}
           ></Route>
           <Route path="/products/feedback/:id" Component={PostReview}></Route>
+          <Route path="/business/feedback/:id" Component={WriteBusinessReview}></Route>
 
           <Route path="/admin" Component={Admin}></Route>
         </Routes>
