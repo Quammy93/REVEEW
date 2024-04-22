@@ -79,8 +79,8 @@ const ProductDisplay = () => {
     try {
       const response = await getAllProducts();
 
-      const { products, totalCount, numOfPages } = response.data;
-      setProducts(products);
+      const { items, totalCount, numOfPages } = response.data;
+      setProducts(items);
       setTotalCount(totalCount);
       setIsProductLoading(false);
     } catch (error) {
@@ -95,9 +95,9 @@ const ProductDisplay = () => {
   }, [currentPage, value, filter, sort, category]);
 
   let browseCategory = [
-    ...new Set(products.map((product) => product.product_category)),
+    ...new Set(products.map((product) => product.category)),
   ];
-  let brand = [...new Set(products.map((product) => product.product_brand))];
+  let brand = [...new Set(products.map((product) => product.brand))];
   console.log(brand);
 
   const onChange = (e) => {
@@ -187,6 +187,7 @@ const ProductDisplay = () => {
                   {selectedCategory}
                 </p>
                 <h2 className="product-heading">{selectedCategory}</h2>
+               
               </div>
 
               <div className="right-query">
@@ -372,14 +373,8 @@ const ProductDisplay = () => {
               >
                 <main className="products-container">
                   {products?.map((product) => {
-                    const {
-                      _id,
-                      product_category,
-                      product_name,
-                      product_Avgrating,
-                      img,
-                      numOfReview,
-                    } = product;
+                    const { _id, category, name, avgrating, img, numOfReview } =
+                      product;
 
                     return (
                       <section
@@ -392,18 +387,17 @@ const ProductDisplay = () => {
                       >
                         <div className="product-intro">
                           <img src={img} alt="" className="product-img" />
-                          <p className="product-title">{product_name} </p>
+                          <p className="product-title">{name} </p>
                         </div>
                         <span className="rev-rate-span">
-                          {" "}
                           <Rate
                             disabled
-                            defaultValue={product_Avgrating}
-                            value={product_Avgrating}
+                            defaultValue={avgrating}
+                            value={avgrating}
                             className="rev-rate"
-                          />{" "}
+                          />
+                          
                           <p className="rev-num">
-                            {" "}
                             {numOfReview === 0 || numOfReview === 1
                               ? `${numOfReview}  Review`
                               : `${numOfReview}  Reviews`}{" "}
@@ -411,9 +405,7 @@ const ProductDisplay = () => {
                         </span>
                         <button
                           className="prod-rev-btn"
-                          onClick={() =>
-                            handleProduct(product_category, product_name, _id)
-                          }
+                          onClick={() => handleProduct(category, name, _id)}
                         >
                           Reviews
                         </button>

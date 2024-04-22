@@ -85,7 +85,7 @@
   border: none;
   font-size: 10px;
   display: block;
-  width: 80%;
+  width: 90%;
   margin: 10px;
   cursor: pointer;
 }
@@ -391,7 +391,7 @@ li {
     border: none;
     font-size: 17px;
     display: block;
-    width: 100%;
+    width: 90%;
     margin: 10px;
     cursor: pointer;
   }
@@ -527,7 +527,7 @@ li {
     border: none;
     font-size: 10px;
     display: block;
-    width: 80%;
+    width: 90%;
     margin: 10px;
     cursor: pointer;
   }

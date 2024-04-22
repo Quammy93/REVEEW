@@ -218,14 +218,19 @@
   width: 300px;
   font-size: larger;
 }
+
+
+/*
+
 .rate-num-rating1 {
   font-size: small;
 }
+
 .rev-rate {
   font-size: 100px;
   font-weight: 600;
 }
-
+*/
 .ant-progress-inner {
   height: 12px !important;
 }
