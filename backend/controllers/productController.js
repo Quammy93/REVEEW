@@ -1,50 +1,50 @@
-const Product = require("../models/Product");
+const Item = require("../models/Product");
 const { StatusCodes } = require("http-status-codes");
 const NotFoundError = require("../errors/NotFoundError");
 //creating product
-const createProduct = async (req, res) => {
-  const { product_Avgrating } = req.body;
-  console.log(product_Avgrating);
+const createItem = async (req, res) => {
+  const { avgrating } = req.body;
+  console.log(avgrating);
   req.body.user = req.user.userId;
-  const product = await Product.create(req.body);
-  res.status(StatusCodes.CREATED).json({ product });
+  const item = await Item.create(req.body);
+  res.status(StatusCodes.CREATED).json({ item });
 };
 //getting all products
 const getAllProducts = async (req, res) => {
-  const { search, filter, product_Avgrating, product_category, sort,search1 } =
-    req.query;
-  console.log(product_Avgrating);
-  const queryObj = {};
+  const { search, filter, avgrating, category, sort, search1 } = req.query;
+  console.log(avgrating);
+  const queryObj = { type: "product" };
   //filtering by any properties
-  if (product_Avgrating) {
-    queryObj.product_Avgrating = product_Avgrating;
+  if (avgrating) {
+    queryObj.avgrating = avgrating;
   }
 
-  if (product_category) {
-    queryObj.product_category = product_category;
+  if (category) {
+    queryObj.category = category;
   }
   //filtering by group
 
   if (filter) {
     const filtered = filter.split(",");
-    queryObj.product_brand = filtered;
+    queryObj.brand = filtered;
   }
 
   //searching
   if (search) {
-    queryObj.product_name   = { $regex: search, $options: "i" };
-     queryObj.product_brand = { $regex: search, $options: "i" };
-   
+    queryObj.name = { $regex: search, $options: "i" };
+    queryObj.brand = { $regex: search, $options: "i" };
   }
-if(search1){
-queryObj={$or:[{product_name:{ $regex: search1, $options: "i" }},{product_brand:{ $regex: search1, $options: "i" }}]
+  if (search1) {
+    queryObj = {
+      $or: [
+        { name: { $regex: search1, $options: "i" } },
+        { brand: { $regex: search1, $options: "i" } },
+      ],
+    };
+  }
 
-}
-
-}
-
-  let result = Product.find(queryObj);
-//sorting
+  let result = Item.find(queryObj);
+  //sorting
   if (sort === "a-z") {
     result = result.sort("price");
   }
@@ -61,7 +61,7 @@ queryObj={$or:[{product_name:{ $regex: search1, $options: "i" }},{product_brand:
 
   result = result.skip(skip).limit(limit);
 
-  const totalCount = await Product.countDocuments(queryObj);
+  const totalCount = await Item.countDocuments(queryObj);
   const numOfPages = Math.ceil(totalCount / limit);
 
   //setting content-range header
@@ -71,53 +71,120 @@ queryObj={$or:[{product_name:{ $regex: search1, $options: "i" }},{product_brand:
   res.set("X-Total-Count", totalCount);
   res.set("Content-Range", `${startRange}-${endRange}/${totalCount}`);
 
-  const products = await result;
+  const items = await result;
 
-  res.status(StatusCodes.CREATED).json({ products, totalCount, numOfPages });
+  res.status(StatusCodes.CREATED).json({ items, totalCount, numOfPages });
 };
 
-const getSingleProduct = async (req, res) => {
-  const { id: productId } = req.params;
+const getAllBusiness = async (req, res) => {
+  const { search, filter, avgrating, category, sort, search1 } = req.query;
+  console.log(avgrating);
+  const queryObj = { type: "business" };
+  //filtering by any properties
+  if (avgrating) {
+    queryObj.avgrating = avgrating;
+  }
 
-  const product = await Product.findOne({ _id: productId });
+  if (category) {
+    queryObj.category = category;
+  }
+  //filtering by group
 
-  if (!product) {
+  if (filter) {
+    const filtered = filter.split(",");
+    queryObj.brand = filtered;
+  }
+
+  //searching
+  if (search) {
+    queryObj.name = { $regex: search, $options: "i" };
+    queryObj.brand = { $regex: search, $options: "i" };
+  }
+  if (search1) {
+    queryObj = {
+      $or: [
+        { name: { $regex: search1, $options: "i" } },
+        { brand: { $regex: search1, $options: "i" } },
+      ],
+    };
+  }
+
+  let result = Item.find(queryObj);
+  //sorting
+  if (sort === "a-z") {
+    result = result.sort("price");
+  }
+  if (sort === "z-a") {
+    result = result.sort("-price");
+  }
+
+  //pagination
+
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  result = result.skip(skip).limit(limit);
+
+  const totalCount = await Item.countDocuments(queryObj);
+  const numOfPages = Math.ceil(totalCount / limit);
+
+  //setting content-range header
+  const startRange = skip + 1;
+  const endRange = endIndex < totalCount ? endIndex : totalCount;
+
+  res.set("X-Total-Count", totalCount);
+  res.set("Content-Range", `${startRange}-${endRange}/${totalCount}`);
+
+  const items = await result;
+
+  res.status(StatusCodes.CREATED).json({ items, totalCount, numOfPages });
+};
+
+const getSingleItem = async (req, res) => {
+  const { id: itemId } = req.params;
+
+  const item = await Item.findOne({ _id: itemId });
+
+  if (!item) {
     throw new NotFoundError(`No product with id : ${productId}`);
   }
 
-  res.status(StatusCodes.OK).json({ product });
+  res.status(StatusCodes.OK).json({ item });
 };
-const deleteProduct = async (req, res) => {
-  const { id: productId } = req.params;
+const deleteItem = async (req, res) => {
+  const { id: itemId } = req.params;
 
-  const product = await Product.findOne({ _id: productId });
+  const item = await Item.findOne({ _id: itemId });
 
-  if (!product) {
-    throw new NotFoundError(`No product with id : ${productId}`);
+  if (!item) {
+    throw new NotFoundError(`No product with id : ${itemId}`);
   }
 
-  await product.remove();
+  await item.remove();
   res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
-const updateProduct = async (req, res) => {
-  const { id: productId } = req.params;
+const updateItem = async (req, res) => {
+  const { id: itemId } = req.params;
 
-  const product = await Product.findOneAndUpdate({ _id: productId }, req.body, {
+  const item = await Item.findOneAndUpdate({ _id: itemId }, req.body, {
     new: true,
     runValidators: true,
   });
 
-  if (!product) {
-    throw new NotFoundError(`No product with id : ${productId}`);
+  if (!item) {
+    throw new NotFoundError(`No product with id : ${itemId}`);
   }
 
-  res.status(StatusCodes.OK).json({ product });
+  res.status(StatusCodes.OK).json({ item });
 };
 
 module.exports = {
-  createProduct,
+  createItem,
   getAllProducts,
-  getSingleProduct,
-  deleteProduct,
-  updateProduct,
+  getSingleItem,
+  deleteItem,
+  updateItem,
+  getAllBusiness,
 };

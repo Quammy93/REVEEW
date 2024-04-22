@@ -7,16 +7,24 @@ const ReviewsSchema = new mongoose.Schema(
     formattedTimestamp: String,
     review_date: { type: Date, default: Date.now() },
     title: { type: String },
+    type: { type: String },
     comment: { type: String },
     value: { type: Number, default: 0 },
-    reviewer: { type: mongoose.Types.ObjectId, ref: "User" },
-    product_reviewed: { type: mongoose.Types.ObjectId, ref: "Product" },
-    business_reviewed: { type: mongoose.Types.ObjectId, ref: "Business" },
+
+    item_reviewed: { type: mongoose.Types.ObjectId, ref: "Item" },
+    reviewer: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
+
+    experienceDate: { type: Date, default: Date.now() },
   },
   { timestamps: true }
 );
 //preventing a review by user on a product
-ReviewsSchema.index({ product_reviewed: 1, reviewer: 1 }, { unique: true });
+
+ReviewsSchema.index({ item_reviewed: 1, reviewer: 1 }, { unique: true });
 
 ReviewsSchema.pre("save", function () {
   // Format the timestamp before saving
@@ -26,23 +34,23 @@ ReviewsSchema.pre("save", function () {
 });
 
 // calculating average reviews rates
-ReviewsSchema.statics.computeAvgRating = async function (productId) {
+ReviewsSchema.statics.computeAvgRating = async function (itemId) {
   const result = await this.aggregate([
-    { $match: { product_reviewed: productId } },
+    { $match: { item_reviewed: itemId } },
     {
       $group: {
         _id: null,
-        product_Avgrating: { $avg: "$value" },
+        avgrating: { $avg: "$value" },
         numOfReview: { $sum: 1 },
       },
     },
   ]);
 
   try {
-    await this.model("Product").findOneAndUpdate(
-      { _id: productId },
+    await this.model("Item").findOneAndUpdate(
+      { _id: itemId },
       {
-        product_Avgrating: Math.ceil(result[0]?.product_Avgrating || 0),
+        avgrating: Math.ceil(result[0]?.avgrating || 0),
         numOfReview: result[0]?.numOfReview || 0,
       }
     );
@@ -52,12 +60,10 @@ ReviewsSchema.statics.computeAvgRating = async function (productId) {
 };
 
 ReviewsSchema.post("save", async function () {
-  await this.constructor.computeAvgRating(this.product_reviewed);
+  await this.constructor.computeAvgRating(this.item_reviewed);
 });
 ReviewsSchema.post("remove", async function () {
-  await this.constructor.computeAvgRating(this.product_reviewed);
+  await this.constructor.computeAvgRating(this.item_reviewed);
 });
 
 module.exports = mongoose.model("Reviews", ReviewsSchema);
-
-

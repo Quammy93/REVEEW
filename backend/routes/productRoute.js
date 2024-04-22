@@ -6,24 +6,29 @@ const {
 } = require("../middleware/authentication");
 
 const {
-  createProduct,
+  createItem,
   getAllProducts,
-  getSingleProduct,
-  updateProduct,
-  deleteProduct,
+  getSingleItem,
+  updateItem,
+  deleteItem,
+  getAllBusiness,
 } = require("../controllers/productController");
 
 //const { getSingleProductReviews } = require("../controllers/reviewController");
 
 router
-  .route("/")
-  .post([authenticateUser, authorizeRoles("admin")], createProduct)
+  .route("/products")
+  .post([authenticateUser, authorizeRoles("admin")], createItem)
   .get(getAllProducts);
 router
-  .route("/:id")
-  .get(getSingleProduct)
-  .patch([authenticateUser, authorizeRoles("admin")], updateProduct)
-  .delete([authenticateUser, authorizeRoles("admin")], deleteProduct);
+  .route("/services")
+  .post([authenticateUser, authorizeRoles("admin")], createItem)
+  .get(getAllBusiness);
+router
+  .route("/item/:id")
+  .get(getSingleItem)
+  .patch([authenticateUser, authorizeRoles("admin")], updateItem)
+  .delete([authenticateUser, authorizeRoles("admin")], deleteItem);
 
 //router.route("/:id/reviews").get(getSingleProductReviews);
 
