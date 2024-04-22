@@ -26,12 +26,12 @@ const {businessInfo, setBusinessInfo}=useGlobalContext()
    const [value, setValue] = React.useState("");
     const [totalCount, setTotalCount] = React.useState(30);
 
-const handleItemClick= async (item)=>{
+const handleItemClick= async (id)=>{
 
 
-  await setBusinessInfo(item);
+  //await setBusinessInfo(item);
 
-  navigate("/business/hh")
+  navigate(`/business/${id}`)
 
 
 }
@@ -231,7 +231,7 @@ const onChecked=(e)=>{
               <article className="display-business-article" key={_id}>
                 <main
                   className="bsn-art-container"
-                  onClick={() => handleItemClick(item)}
+                  onClick={() => handleItemClick(_id)}
                 >
                   <div>
                     <img src={business_img} alt="" className="bsn-img" />

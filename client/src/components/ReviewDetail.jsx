@@ -2,34 +2,42 @@ import React from 'react'
 import { Checkbox,Rate ,Progress,Divider} from "antd";
 import { IoFilter } from "react-icons/io5";
 
-const ReviewDetail = () => {
+const ReviewDetail = ({
+  rating,
+  revNum,
+  cent5,
+  cent4,
+  cent3,
+  cent2,
+  cent1,
+  revN1,
+  revN2,
+  revN3,
+  revN4,
+  revN5,
+}) => {
+  const plainOptions = ["5", "4", "3", "2", "1"];
 
-
-    const plainOptions = ["5", "4", "3", "2", "1",];
-    
-
-
-
-const onChange = (checkedValues) => {
-  console.log('checked = ', checkedValues);}
+  const onChange = (checkedValues) => {
+    console.log("checked = ", checkedValues);
+  };
 
   return (
     <div>
       <h2>
         Reviews{" "}
         <span>
-          <Rate value={4} defaultValue={4} />
+          <Rate value={rating} defaultValue={rating} />
         </span>
       </h2>
-      <span>69,791 total reviews</span>
+      <span>{revNum} total reviews</span>
 
       <main className="review-detail-container">
-
-        <span className='rev-rate'>4.5</span>
+        <span className="rev-rate">{rating}</span>
         <section>
           <Checkbox.Group
             options={plainOptions}
-            defaultValue={["Apple"]}
+            defaultValue={[""]}
             onChange={onChange}
             className="check check1"
           />
@@ -37,28 +45,28 @@ const onChange = (checkedValues) => {
         <section className="div-section">
           <span className="span-pro">
             {" "}
-            <Progress percent={100} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{19}</span>
+            <Progress percent={cent5} showInfo={false} className="progress1" />
+            <span className="rate-num-rating1">{revN5}</span>
           </span>
           <span className="span-pro">
             {" "}
-            <Progress percent={30} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{19}</span>
+            <Progress percent={cent4} showInfo={false} className="progress1" />
+            <span className="rate-num-rating1">{revN4}</span>
           </span>
           <span className="span-pro">
             {" "}
-            <Progress percent={50} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{19}</span>
+            <Progress percent={cent3} showInfo={false} className="progress1" />
+            <span className="rate-num-rating1">{revN3}</span>
           </span>
           <span className="span-pro">
             {" "}
-            <Progress percent={100} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{19}</span>
+            <Progress percent={cent2} showInfo={false} className="progress1" />
+            <span className="rate-num-rating1">{revN2}</span>
           </span>
           <span className="span-pro">
             {" "}
-            <Progress percent={10} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{19}</span>
+            <Progress percent={cent1} showInfo={false} className="progress1" />
+            <span className="rate-num-rating1">{revN1}</span>
           </span>
 
           {/**   <div className="div">
@@ -75,7 +83,12 @@ const onChange = (checkedValues) => {
 
       <div className="bsn-rev-foot-1">
         {" "}
-        <span className="span-padding">Filter <span><IoFilter/></span></span>{" "}
+        <span className="span-padding">
+          Filter{" "}
+          <span>
+            <IoFilter />
+          </span>
+        </span>{" "}
         <span>
           {" "}
           Sort{" "}
@@ -96,6 +109,6 @@ const onChange = (checkedValues) => {
       </div>
     </div>
   );
-}
+};
 
 export default ReviewDetail

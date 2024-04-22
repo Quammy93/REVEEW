@@ -28,7 +28,7 @@ const PostReview = () => {
 
   const postFeedbaack = (feedback) => {
     axios
-      .post(`${url}/reviews/${id}`, { feedback })
+      .post(`${url}/reviews/${id}?reviewed=product`, { feedback })
       .then((response) => {
         console.log(response);
 

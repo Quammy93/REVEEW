@@ -32,7 +32,7 @@ function App() {
             Component={ProductDisplay}
           ></Route>
           <Route
-            path="/business/:selectedCategory"
+            path="/business/:companyID"
             Component={SingleBusines}
           ></Route>
 

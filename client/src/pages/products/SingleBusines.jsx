@@ -1,30 +1,120 @@
-import React from 'react'
-import Navbar1 from '../../components/Navbar1'
+import React from "react";
+import Navbar1 from "../../components/Navbar1";
 import axios from "axios";
 const url = "http://localhost:5000/api";
-import  avarta from "../../assets/images/computer-1.jpeg"
-import ReviewDetail from '../../components/ReviewDetail';
-import { Checkbox, Rate, Progress, Divider,Pagination } from "antd";
-
+import avarta from "../../assets/images/computer-1.jpeg";
+import ReviewDetail from "../../components/ReviewDetail";
+import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 
 //const url = "/api";
 
-
-
-import { useGlobalContext } from '../../utils/context';
+import { useGlobalContext } from "../../utils/context";
 
 const SingleBusines = () => {
-    const { businessInfo, setBusinessInfo } = useGlobalContext();
-    console.log(businessInfo)
-     const {
-       _id,
-       business_name,
-       business_category,
-       business_location,
-       numOfReview,
-       business_img,
-       business_Avgrating,
-     } = businessInfo
+  const [reviews, setReviews] = React.useState([]);
+  const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
+  const [numOfFourReview, setNumOfFourReview] = React.useState(0);
+  const [numOfThreeReview, setNumOfThreeReview] = React.useState(0);
+  const [numOfTwoReview, setNumOfTwoReview] = React.useState(0);
+  const [numOfOneReview, setNumOfOneReview] = React.useState(0);
+  const [numOfZeroReview, setNumOfZeroReview] = React.useState(0);
+  const [isproductLoading, setIsProductLoading] = React.useState(false);
+  const [isReviewLoading, setIsReviewLoading] = React.useState(false);
+
+  let totalReviews = 0;
+
+  const getAllReviews = async () => {
+    return await axios.get(`${url}/reviews/${id}`).catch((error) => {
+      console.log(error);
+      //toast.error(error.message);
+    });
+  };
+
+  const fetchReview = async () => {
+    setIsReviewLoading(true);
+    try {
+      const response = await getAllReviews();
+
+      const { reviews } = await response.data;
+
+      console.log(response);
+
+      setReviews(reviews);
+      setIsReviewLoading(false);
+      setNumOfZeroReview(response?.data?.numOfZeroReview);
+      setNumOfOneReview(response?.data?.numOfOneReview);
+      setNumOfTwoReview(response?.data?.numOfTwoReview);
+      setNumOfThreeReview(response?.data?.numOfThreeReview);
+      setNumOfFourReview(response?.data?.numOfFourReview);
+      setNumOfFiveReview(response?.data?.numOfFiveReview);
+
+      totalReviews =
+        numOfZeroReview +
+        numOfOneReview +
+        numOfTwoReview +
+        numOfThreeReview +
+        numOfFourReview +
+        numOfFiveReview;
+
+      console.log("totalreview", totalReviews);
+      console.log("num", numOfFiveReview);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    // Use an async function to fetch data
+
+    fetchReview(companyID);
+  }, []);
+
+  const navigate = useNavigate();
+  const { companyID } = useParams();
+  const { businessInfo, setBusinessInfo } = useGlobalContext();
+  console.log(businessInfo);
+
+  const getCompany = async (id) => {
+    return await axios.get(`${url}/business/${id}`).catch((error) => {
+      console.log(error);
+      //toast.error(error.message);
+    });
+  };
+
+  const fetchData = async (id) => {
+    // setIsProductLoading(true);
+    try {
+      const response = await getCompany(id);
+
+      const { business } = response.data;
+
+      console.log(response);
+      setBusinessInfo(business);
+
+      //  setIsProductLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    // Use an async function to fetch data
+
+    fetchData(companyID);
+  }, []);
+
+  const {
+    _id,
+    business_name,
+    business_category,
+    business_location,
+    numOfReview,
+    business_img,
+    business_Avgrating,
+    business_desc,
+  } = businessInfo;
+
   return (
     <div>
       <Navbar1 />
@@ -58,14 +148,28 @@ const SingleBusines = () => {
             {" "}
             <span className="writer-span">
               <img src={avarta} alt="" className="writer-avarta" />
-              <span>Write a Review</span>
+
+              <Link to={`/business/feedback/${_id}?reviewed=product`}>
+                Write a Review
+              </Link>
             </span>{" "}
             <span>
-              <Rate value={3} defaultValue={3} />
+              <Rate
+                value={business_Avgrating}
+                defaultValue={business_Avgrating}
+              />
             </span>
           </div>
           <div className="bsn-review-info">
-            <ReviewDetail />
+            <ReviewDetail
+              rating={business_Avgrating}
+              revNum={numOfReview}
+              revN1={numOfOneReview}
+              revN2={numOfTwoReview}
+              revN3={numOfThreeReview}
+              revN4={numOfFourReview}
+              revN5={numOfFiveReview}
+            />
           </div>
           <main>
             {" "}
@@ -191,16 +295,9 @@ const SingleBusines = () => {
         <section>
           <div className="bsn-info">
             <span>
-              <h3>About Jumia</h3>
+              <h3>About {business_name}</h3>
               <span>Information provided by various external sources</span>
-              <p>
-                Having been operating for over 3years in classic car guys
-                wouldn’t help when our flight was delayed for a long time
-                because of maintenance. We only got $68 when it cost a couple
-                hundred for what we lost. And we paid over a hundred for this
-                insurance. So the best you could do is refund us since you
-                couldn’t do the reason we booked using your insuranc
-              </p>
+              <p>{business_desc}</p>
               <h5>Contact</h5>
               <div>Email:@gmail Phone no :00000000000 Address : Ajah Lagos</div>
 
@@ -211,34 +308,31 @@ const SingleBusines = () => {
               </span>
             </span>
           </div>
-          <article className="bsn-map">Track ur way to Jumia</article>
+          <article className="bsn-map">Track ur way to {business_name}</article>
         </section>
       </main>
 
       <main>
-        
-          <Pagination
-            total={45}
-            pageSize={4}
-            itemRender={(_, type, page) => {
-              if (type === "prev") {
-                return "Prev";
-              }
-              if (type === "next") {
-                return "Next";
-              }
+        <Pagination
+          total={45}
+          pageSize={4}
+          itemRender={(_, type, page) => {
+            if (type === "prev") {
+              return "Prev";
+            }
+            if (type === "next") {
+              return "Next";
+            }
 
-              return page;
-            }}
-            showSizeChanger={false}
-            current={2}
-           
-            className="paginate"
-          />
-       
+            return page;
+          }}
+          showSizeChanger={false}
+          current={2}
+          className="paginate"
+        />
       </main>
     </div>
   );
-}
+};
 
-export default SingleBusines
+export default SingleBusines;

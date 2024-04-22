@@ -268,10 +268,12 @@
   margin-right: 10px;
 }
 
-.write-bsn-rev-container{width: 500px;height: 650px;background-color: aqua;padding: 30px;margin:20px auto;}
+.write-bsn-rev-container{width: 500px;height: 650px;background-color: aqua;padding: 30px;margin:20px auto;border-radius: 5px;}
 
 .write-bsn-rev-container h3{font-size: 15px; font-weight:bolder; margin: 0;padding: 0;}
 .write-rev-span{display: flex;flex-direction: column;margin: 20px 0;}
-.rev-input{width: 90%; height: 40px; outline: none;font-size: 17px;}
-.text-area-rev{width: 90%;outline: none;font-size: 17px;padding: 10px;}
-.rev-date-input{width: 200px; height: 30px;font-size: 17px;}
+.rev-input{width: 90%; height: 40px; outline: none;font-size: 17px;border-radius: 5px;outline: none;padding: 10px;}
+.text-area-rev{width: 90%;outline: none;font-size: 17px;padding: 10px;border-radius: 5px;outline: none;}
+.rev-date-input{width: 200px; height: 30px;font-size: 17px; border-radius: 5px;outline: none;padding: 10px;}
+.rev-submit{display: flex;justify-content: center;align-items: center;}
+.rev-submit-btn{padding: 10px;font-size: 18px; width: 150px;border-radius: 5px; outline: none;cursor: pointer;}
