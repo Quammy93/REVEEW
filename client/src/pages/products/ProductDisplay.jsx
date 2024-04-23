@@ -49,7 +49,7 @@ const ProductDisplay = () => {
   const [totalCount, setTotalCount] = React.useState(30);
   const [sort, setSort] = React.useState("");
   const [searchValue, setSearchValue] = React.useState("");
-  // const [filtered, setFiltered] = React.useState([]);
+  const [productWithoutFilter, setProductWithoutFilter] = React.useState([]);
   const [filter, setFilter] = React.useState([]);
   const [category, setCategory] = React.useState(clickedCategory || "");
   // const [sortedUp, setSortedUp] = React.useState("");
@@ -64,7 +64,7 @@ const ProductDisplay = () => {
   const getAllProducts = async () => {
     return await axios
       .get(
-        `${url}/products?page=${currentPage}&limit=${limit}&sort=${sort}&product_Avgrating=${value}&product_category=${category}&search=${searchValue}&filter=${filter.join(
+        `${url}/products?page=${currentPage}&limit=${limit}&sort=${sort}&avgrating=${value}&category=${category}&search=${searchValue}&filter=${filter.join(
           ","
         )}`
       )
@@ -72,6 +72,12 @@ const ProductDisplay = () => {
         console.log(error);
         //toast.error(error.message);
       });
+  };
+
+  const getProductsWithoutFilter = async () => {
+    return await axios.get(`${url}/products`).catch((error) => {
+      console.log(error);
+    });
   };
 
   const fetchData = async () => {
@@ -89,25 +95,43 @@ const ProductDisplay = () => {
   };
 
   React.useEffect(() => {
+    getProductsWithoutFilter().then((response) => {
+      console.log(response.data.items);
+      setProductWithoutFilter(response.data.items);
+    });
+  }, []);
+
+  React.useEffect(() => {
     // Use an async function to fetch data
 
     fetchData();
   }, [currentPage, value, filter, sort, category]);
 
   let browseCategory = [
-    ...new Set(products.map((product) => product.category)),
+    ...new Set(productWithoutFilter.map((product) => product.category)),
   ];
-  let brand = [...new Set(products.map((product) => product.brand))];
+  let brand = [
+    ...new Set(products.map((product) => product.brand)),
+    "All Brand",
+  ];
   console.log(brand);
 
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
+
     setShowFilter(false);
   };
   const onChecked = async (checkedValues) => {
     console.log("checked", checkedValues);
-    setFilter(checkedValues);
+
+  
+   let newcheckedValues = checkedValues.map((item) =>
+      item === "All Brand" ? " " : item
+   );
+
+    setFilter(newcheckedValues);
+    console.log("checked", newcheckedValues);
     setShowFilter(false);
     //localStorage.setItem("filteredBrand", checkedValues);
     //setFiltered(checkedValues);
@@ -116,21 +140,7 @@ const ProductDisplay = () => {
     setCurrentPage(page);
     console.log(page);
   };
-  const plainOptions = ["Apple", "Pear", "Orange"];
-  const options = [
-    {
-      label: "Apple",
-      value: "Apple",
-    },
-    {
-      label: "Pear",
-      value: "Pear",
-    },
-    {
-      label: "Orange",
-      value: "Orange",
-    },
-  ];
+
   const openCategorySubLinks = () => {
     setToggleCategory(!toggleCategory);
   };
@@ -187,7 +197,6 @@ const ProductDisplay = () => {
                   {selectedCategory}
                 </p>
                 <h2 className="product-heading">{selectedCategory}</h2>
-               
               </div>
 
               <div className="right-query">
@@ -252,7 +261,13 @@ const ProductDisplay = () => {
                       <li>
                         {browseCategory?.map((item, id) => {
                           return (
-                            <p className="brw-cat-p" key={id}>
+                            <p
+                              className="brw-cat-p"
+                              key={id}
+                              onClick={() => {
+                                setCategory(item);
+                              }}
+                            >
                               {item}
                             </p>
                           );
@@ -396,7 +411,7 @@ const ProductDisplay = () => {
                             value={avgrating}
                             className="rev-rate"
                           />
-                          
+
                           <p className="rev-num">
                             {numOfReview === 0 || numOfReview === 1
                               ? `${numOfReview}  Review`
