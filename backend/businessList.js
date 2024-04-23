@@ -152,8 +152,8 @@ const businessJson = [
       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/64/3509201/5.jpg?3924",
     ],
 
-    "  product_category": "Appliances",
-    "  price": 88,
+    category: "Appliances",
+    price: 88,
     brand: "Hisense",
     desc: "Electronic Control-line handler Led lighting Total no frost Ice maker Freezer rank Tempered glass Shelves 2L Bottle balcony",
     features: [
@@ -209,8 +209,8 @@ const businessJson = [
       "https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/64/3509201/5.jpg?3924",
     ],
 
-    "  product_category": "Appliances",
-    "  price": 88,
+    category: "Appliances",
+    price: 88,
     brand: "Hisense",
     desc: "Electronic Control-line handler Led lighting Total no frost Ice maker Freezer rank Tempered glass Shelves 2L Bottle balcony",
     features: [
