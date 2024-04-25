@@ -14,7 +14,9 @@ const {
   authorizeRoles,
 } = require("../middleware/authentication");
 
-router.route("/:id").post(createReview);
+router
+  .route("/:id")
+  .post(authenticateUser, authorizeRoles("admin"), createReview);
 router.route("/:id").get(getAllReviews);
 router
   .route("/modify/:id")

@@ -8,6 +8,7 @@ const createReview = async (req, res) => {
   console.log(req.body);
   const { id } = req.params;
   const { userId } = req.user;
+  console.log("user", userId);
 
   const { feedback } = req.body;
   const title = feedback.title;
@@ -23,8 +24,8 @@ const createReview = async (req, res) => {
     title: title,
     comment: comment,
     value: value,
-    //item_reviewed : id,
-    // reviewer: userId,
+    item_reviewed: id,
+    reviewer: userId,
   });
   res.status(StatusCodes.OK).json({ review });
 };
