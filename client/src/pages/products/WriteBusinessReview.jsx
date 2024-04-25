@@ -7,8 +7,7 @@ const url = "http://localhost:5000/api";
 //const url = "/api";
 
 const WriteBusinessReview = () => {
-
-  const {id}=useParams()
+  const { id } = useParams();
   const [title, setTitle] = React.useState("");
   const [comment, setComment] = React.useState("");
   const [value, setValue] = React.useState(3);
@@ -16,11 +15,17 @@ const WriteBusinessReview = () => {
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
   const postFeedBack = async (feedback) => {
-    await axios.post(`${url}/reviews/${id}?reviewed=business`, { feedback }).catch((erro) => {
-      console.log(erro);
-    });
+    await axios
+      .post(`${url}/reviews/${id}?reviewed=business`, { feedback })
+      .catch((erro) => {
+        console.log(erro);
+      });
     console.log("sent successfuly");
   };
+
+  const urlLocation = useLocation();
+
+  const queryName = new URLSearchParams(urlLocation.search).get("queryName");
 
   const handleSubmit = () => {
     const feedback = {
@@ -34,9 +39,9 @@ const WriteBusinessReview = () => {
 
   return (
     <section className="write-bsn-rev-container">
-      <div>Gullwing Motor</div>
+      <div>{queryName}</div>
       <Divider />
-      <h3>Rate Gullwing Motor</h3>
+      <h3>Rate {queryName}</h3>
       <span>
         <Rate tooltips={desc} onChange={setValue} value={value} />
         {value ? <span className="ant-rate-text">{desc[value - 1]}</span> : ""}

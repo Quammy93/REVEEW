@@ -12,54 +12,43 @@ import { useNavigate } from "react-router-dom";
 import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
 
 const DisplayRevieweeResult = () => {
+  const navigate = useNavigate();
 
-  const navigate=useNavigate()
-
-const {businessInfo, setBusinessInfo}=useGlobalContext()
+  const { businessInfo, setBusinessInfo } = useGlobalContext();
 
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
-
 
   const [business, setBusiness] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [limit, setLimit] = React.useState(8);
-   const [value, setValue] = React.useState("");
-    const [totalCount, setTotalCount] = React.useState(30);
+  const [value, setValue] = React.useState("");
+  const [totalCount, setTotalCount] = React.useState(30);
 
-const handleItemClick= async (id)=>{
+  const handleItemClick = async (id) => {
+    //await setBusinessInfo(item);
 
-
-  //await setBusinessInfo(item);
-
-  navigate(`/business/${id}`)
-
-
-}
-
-
-
-
+    navigate(`/business/${id}`);
+  };
 
   const getAllBusiness = async () => {
-    return await axios.get(`${url}/business`).catch((error) => {
+    return await axios.get(`${url}/services`).catch((error) => {
       console.log(error);
       //toast.error(error.message);
     });
   };
-   const handlePagechange = (page) => {
-     setCurrentPage(page);
-     console.log(page);
-   };
+  const handlePagechange = (page) => {
+    setCurrentPage(page);
+    console.log(page);
+  };
   const onChange = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
-   // setShowFilter(false);
+    // setShowFilter(false);
   };
 
-const onChecked=(e)=>{
-  console.log(e.target.checked)
-
-}
+  const onChecked = (e) => {
+    console.log(e.target.checked);
+  };
 
   const fetchData = async () => {
     //setIsProductLoading(true);
@@ -68,10 +57,10 @@ const onChecked=(e)=>{
 
       console.log(response.data);
 
-      console.log(business);
+      //console.log(business);
 
       //  const { products, totalCount, numOfPages } = response.data;
-      setBusiness(response.data.business);
+      setBusiness(response.data.items);
       //  setTotalCount(totalCount);
       //setIsProductLoading(false);
     } catch (error) {
@@ -219,12 +208,12 @@ const onChecked=(e)=>{
           {business.map((item) => {
             const {
               _id,
-              business_name,
-              business_category,
-              business_location,
+              name,
+              category,
+              location,
               numOfReview,
-              business_img,
-              business_Avgrating,
+              img,
+              avgrating,
             } = item;
 
             return (
@@ -234,16 +223,16 @@ const onChecked=(e)=>{
                   onClick={() => handleItemClick(_id)}
                 >
                   <div>
-                    <img src={business_img} alt="" className="bsn-img" />
+                    <img src={img} alt="" className="bsn-img" />
                   </div>
                   <div>
-                    <h2>{business_name}</h2>
+                    <h2>{name}</h2>
                     <span>
                       {" "}
-                      <Rate tooltips={desc} value={business_Avgrating} />
+                      <Rate tooltips={desc} value={avgrating} />
                       <p>{numOfReview} Reviews</p>
                     </span>
-                    <span>{business_location}</span>
+                    <span>{location}</span>
                   </div>
                 </main>
                 <div>Most Relevant</div>

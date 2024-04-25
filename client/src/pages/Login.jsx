@@ -1,7 +1,8 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+//const url https://reveew.onrender.com/api/login
+const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";
@@ -16,14 +17,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../utils/context";
 
 const Login = () => {
-  const { user, setUser,} = useGlobalContext();
+  const { user, setUser } = useGlobalContext();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const userLogin = async (credentials) => {
-   
     return await axios
       .post(`${url}/login`, credentials)
       .then((response) => {
@@ -78,7 +78,7 @@ const Login = () => {
         //  console.log(error.request);
         //  console.log(error.message);
       });
-      setLoading(false)
+    setLoading(false);
   };
   return (
     <div className="login-wrapper">
@@ -140,7 +140,12 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-btn" loading={loading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-btn"
+              loading={loading}
+            >
               Log in
             </Button>
             <p style={{ color: "red" }}>

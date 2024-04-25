@@ -225,12 +225,12 @@
 .rate-num-rating1 {
   font-size: small;
 }
-
-.rev-rate {
+*/
+.rev-rate-review-detail {
   font-size: 100px;
   font-weight: 600;
 }
-*/
+.review-detail-main-container{padding: 10px;}
 .ant-progress-inner {
   height: 12px !important;
 }

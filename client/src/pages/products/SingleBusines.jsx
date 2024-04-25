@@ -24,17 +24,17 @@ const SingleBusines = () => {
 
   let totalReviews = 0;
 
-  const getAllReviews = async () => {
+  const getAllReviews = async (id) => {
     return await axios.get(`${url}/reviews/${id}`).catch((error) => {
       console.log(error);
       //toast.error(error.message);
     });
   };
 
-  const fetchReview = async () => {
+  const fetchReview = async (id) => {
     setIsReviewLoading(true);
     try {
-      const response = await getAllReviews();
+      const response = await getAllReviews(id);
 
       const { reviews } = await response.data;
 
@@ -76,7 +76,7 @@ const SingleBusines = () => {
   console.log(businessInfo);
 
   const getCompany = async (id) => {
-    return await axios.get(`${url}/business/${id}`).catch((error) => {
+    return await axios.get(`${url}/item/${id}`).catch((error) => {
       console.log(error);
       //toast.error(error.message);
     });
@@ -87,10 +87,10 @@ const SingleBusines = () => {
     try {
       const response = await getCompany(id);
 
-      const { business } = response.data;
+      const { item } = response.data;
 
       console.log(response);
-      setBusinessInfo(business);
+      setBusinessInfo(item);
 
       //  setIsProductLoading(false);
     } catch (error) {
@@ -104,16 +104,8 @@ const SingleBusines = () => {
     fetchData(companyID);
   }, []);
 
-  const {
-    _id,
-    business_name,
-    business_category,
-    business_location,
-    numOfReview,
-    business_img,
-    business_Avgrating,
-    business_desc,
-  } = businessInfo;
+  const { _id, name, category, location, numOfReview, img, avgrating, desc } =
+    businessInfo;
 
   return (
     <div>
@@ -127,16 +119,16 @@ const SingleBusines = () => {
         <article className="display-business-article-single-bsn">
           <main className="bsn-art-container-single-bsn">
             <div>
-              <img src={business_img} alt="" className="bsn-img-single-bsn" />
+              <img src={img} alt="" className="bsn-img-single-bsn" />
             </div>
             <div className="bsn-div">
-              <h2>{business_name}</h2>
+              <h2>{name}</h2>
               <span>
                 {" "}
-                <Rate value={business_Avgrating} />
+                <Rate value={avgrating} />
                 <p>{numOfReview} Reviews</p>
               </span>
-              <span>{business_location}</span>
+              <span>{location}</span>
             </div>
           </main>
           <div className="website-link">Website</div>
@@ -149,20 +141,17 @@ const SingleBusines = () => {
             <span className="writer-span">
               <img src={avarta} alt="" className="writer-avarta" />
 
-              <Link to={`/business/feedback/${_id}?reviewed=product`}>
+              <Link to={`/business/feedback/${_id}?reviewed=product&queryName=${name}`}>
                 Write a Review
               </Link>
             </span>{" "}
             <span>
-              <Rate
-                value={business_Avgrating}
-                defaultValue={business_Avgrating}
-              />
+              <Rate value={avgrating} defaultValue={avgrating} />
             </span>
           </div>
           <div className="bsn-review-info">
             <ReviewDetail
-              rating={business_Avgrating}
+              rating={avgrating}
               revNum={numOfReview}
               revN1={numOfOneReview}
               revN2={numOfTwoReview}
@@ -295,9 +284,9 @@ const SingleBusines = () => {
         <section>
           <div className="bsn-info">
             <span>
-              <h3>About {business_name}</h3>
+              <h3>About {name}</h3>
               <span>Information provided by various external sources</span>
-              <p>{business_desc}</p>
+              <p>{desc}</p>
               <h5>Contact</h5>
               <div>Email:@gmail Phone no :00000000000 Address : Ajah Lagos</div>
 
@@ -308,7 +297,7 @@ const SingleBusines = () => {
               </span>
             </span>
           </div>
-          <article className="bsn-map">Track ur way to {business_name}</article>
+          <article className="bsn-map">Track ur way to {name}</article>
         </section>
       </main>
 

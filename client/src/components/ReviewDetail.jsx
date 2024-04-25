@@ -23,7 +23,7 @@ const ReviewDetail = ({
   };
 
   return (
-    <div>
+    <div className='review-detail-main-container'>
       <h2>
         Reviews{" "}
         <span>
@@ -33,7 +33,7 @@ const ReviewDetail = ({
       <span>{revNum} total reviews</span>
 
       <main className="review-detail-container">
-        <span className="rev-rate">{rating}</span>
+        <span className="rev-rate-review-detail">{rating}</span>
         <section>
           <Checkbox.Group
             options={plainOptions}
