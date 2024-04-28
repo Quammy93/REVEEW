@@ -11,34 +11,63 @@ import ServiceCategory from "./ServiceCategory";
 import Location from "./Location";
 const url = "http://localhost:5000/api";
 //const url = "/api";
+import { connect } from "react-redux";
+import {
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_SEARCH_RESULT,
+  OPEN_SUBMENU,
+  CLOSE_SUBMENU,
+  SET_IS_LOADING_SEARCH,
+  SET_IS_LOCATION_CONTAINER_OPEN,
+  SET_IS_SERVICE_CONTAINER_OPEN,
+  SET_SERVICE_CATEGORY,
+  SET_SERVICE_LOCATION
+} from "../redux/action";
 
-export default function Navbar2() {
-  const {
-    closeSubmenu,
-    openSubmenu,
-   
-    searchItem,
-    setSearchItem,
-   
-    setSearchResult,
-   
-    setIsSearching,
-   
-    setIsLoadingSearch,
-    serviceCategory,
-    setServiceCategory,
-    serviceLocation,
-    setServiceLocation,
-   
-    setIsLocationContainerOpen,
+const Navbar4 = ({
+  searchItem,
+  setSearchItem,
+  setIsSearching,
+  setSearchResult,
+  closesubemenu,
+  opensubemenu,
+  setIsLoadingSearch,
+  serviceCategory,
+  serviceLocation,
+  setServiceCategory,
+  setServiceLocation,
+
+  setIsLocationContainerOpen,
+
+  setIsServiceContainerOpen,
   
-    setIsServiceContainerOpen,
+}) => {
+  const {
+    // closeSubmenu,
+    // openSubmenu,
+
+    // searchItem,
+    // setSearchItem,
+
+    //  setSearchResult,
+
+    //  setIsSearching,
+
+    // setIsLoadingSearch,
+    //  serviceCategory,
+  //  setServiceCategory,
+    // serviceLocation,
+   // setServiceLocation,
+
+   // setIsLocationContainerOpen,
+
+   // setIsServiceContainerOpen,
   } = useGlobalContext();
-   
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
-      closeSubmenu();
+      closesubemenu();
     }
     console.log(e.target.classList);
   };
@@ -50,7 +79,7 @@ export default function Navbar2() {
     console.log(tempBtnLocation);
     const center = (tempBtnLocation.left + tempBtnLocation.right) / 2;
     const bottom = tempBtnLocation.bottom;
-    openSubmenu(page, { center, bottom });
+    opensubemenu(page, { center, bottom });
   };
 
   const handleSearch = async (e) => {
@@ -157,4 +186,40 @@ export default function Navbar2() {
       <SearchResult />
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    searchItem: state.appFunctions.searchItem,
+    serviceCategory: state.business.serviceCategory,
+    serviceLocation: state.business.serviceLocation,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    opensubemenu: (text, coordinate) =>
+      dispatch({ type: OPEN_SUBMENU, payload: { text, coordinate } }),
+
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+    setSearchResult: (result) =>
+      dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setServiceCategory: (category) =>
+      dispatch({ type: SET_SERVICE_CATEGORY, payload: { category: category } }),
+    setServiceLocation: (location) =>
+      dispatch({ type: SET_SERVICE_LOCATION, payload: { location: location } }),
+    setServiceCategory: (status) =>
+      dispatch({ type: SET_IS_LOCATION_CONTAINER_OPEN, payload: { status: status } }),
+    setServiceCategory: (status) =>
+      dispatch({ type: SET_IS_SERVICE_CONTAINER_OPEN, payload: { status: status } }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar4);

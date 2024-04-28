@@ -14,6 +14,7 @@ const NavLinks = () => {
    
     setProducts,
     
+    
     setIsProductLoading,
   } = useGlobalContext();
   const navigate = useNavigate();

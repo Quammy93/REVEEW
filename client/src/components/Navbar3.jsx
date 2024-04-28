@@ -7,26 +7,38 @@ import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:5000/api";
-//const url = "/api";
 
-export default function Navbar3() {
+//const url = "/api";
+import { connect } from "react-redux";
+
+import {
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_SEARCH_RESULT,
+  OPEN_SUBMENU,
+  CLOSE_SUBMENU,
+  SET_IS_LOADING_SEARCH,
+} from "../redux/action";
+const Navbar3 = ({
+  searchItem,
+  setSearchItem,
+  setIsSearching,
+  setSearchResult,
+  closesubemenu,
+  opensubemenu,
+  setIsLoadingSearch,
+}) => {
   const {
-    closeSubmenu,
-    openSubmenu,
-   
-    searchItem,
-    setSearchItem,
-   
-    setSearchResult,
-  
-    setIsSearching,
-   
-    setIsLoadingSearch,
+    //  searchItem,
+    // setSearchItem,
+    //  setSearchResult,
+    //  setIsSearching,
+    //  setIsLoadingSearch,
   } = useGlobalContext();
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
-      closeSubmenu();
+      closesubemenu();
     }
     console.log(e.target.classList);
   };
@@ -38,7 +50,7 @@ export default function Navbar3() {
     console.log(tempBtnLocation);
     const center = (tempBtnLocation.left + tempBtnLocation.right) / 2;
     const bottom = tempBtnLocation.bottom;
-    openSubmenu(page, { center, bottom });
+     opensubemenu(page, { center, bottom });
   };
 
   const handleSearch = async (e) => {
@@ -83,11 +95,8 @@ export default function Navbar3() {
         <div>
           <img src={logo2} alt="" className="newlogo" />
         </div>
-     
 
         <div className="end-nav-list">
-     
-
           <Link to={"/login"}>
             <button className="sign-in-btn">Sign In</button>
           </Link>
@@ -97,4 +106,29 @@ export default function Navbar3() {
       <SearchResult />
     </>
   );
-}
+};
+const mapStateToProps = (state) => {
+  return {
+    searchItem: state.appFunctions.searchItem,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    opensubemenu: (text, coordinate) =>
+      dispatch({ type: OPEN_SUBMENU, payload: { text, coordinate } }),
+
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+    setSearchResult: (result) =>
+      dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps) (Navbar3)
