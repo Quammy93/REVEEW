@@ -1,17 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Navbar2 from "../components/Navbar2";
-import SubMenu from "antd/es/menu/SubMenu";
+
 import { useGlobalContext } from "../utils/context";
 import sublinks from "../utils/data";
 import { connect } from "react-redux";
 
 import "../assets/css/hero.css";
 
-import SubHero from "../components/SubHero";
-import Recommend from "./Recommend";
+
+
 import Footer from "../components/Footer";
-import MostReview from "../components/MostReview";
+
 import Sidebar from "../components/Sidebar";
 import img from "../assets/images/main8.jpg";
 import img4 from "../assets/images/main6.jpg";

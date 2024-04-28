@@ -1,5 +1,5 @@
 import sublinks from "../../utils/data";
-import { CLOSE_SUBMENU, OPEN_SUBMENU, SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,SET_IS_LOADING_SEARCH } from "../action";
+import { CLOSE_SUBMENU, OPEN_SUBMENU, SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,SET_IS_LOADING_SEARCH,SET_SHOW_SIDEBAR } from "../action";
 
 // reducers/productReducer.js
 const initialState = {
@@ -60,6 +60,9 @@ const appFunctionsReducer = (state = initialState, action) => {
    if (action.type == SET_IS_LOADING_SEARCH) {
      return { ...state, isLoadingSearch: action.payload.status };
    }
+ if (action.type == SET_SHOW_SIDEBAR) {
+   return { ...state, showSidebar: action.payload.status };
+ }
 
   return state;
 };

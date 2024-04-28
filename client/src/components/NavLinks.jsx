@@ -6,16 +6,22 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
 const url = "/api";
+import { connect } from "react-redux";
+import { SET_PRODUCTS,SET_IS_PRODUCTLOADING,SET_SHOW_SIDEBAR } from "../redux/action";
 
-const NavLinks = () => {
+
+const NavLinks = ({
+  setProducts,
+
+  setIsProductLoading,
+  setShowSidebar,
+}) => {
   const {
-   
-    setShowSidebar,
-   
-    setProducts,
-    
-    
-    setIsProductLoading,
+   // setShowSidebar,
+
+    //  setProducts,
+
+    //   setIsProductLoading,
   } = useGlobalContext();
   const navigate = useNavigate();
 
@@ -52,14 +58,14 @@ const NavLinks = () => {
   };
 
   const fetchData = async (category) => {
-     setIsProductLoading(true);
+    setIsProductLoading(true);
     try {
       const response = await getAllProducts(category);
 
       const { products, totalCount, numOfPages } = response.data;
       setProducts(products);
       // setTotalCount(totalCount);
-        setIsProductLoading(false);
+      setIsProductLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -111,11 +117,21 @@ const NavLinks = () => {
               },
             ],
           },
-         
         ]}
       ></Menu>
     </section>
   );
 };
 
-export default NavLinks;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setProducts: (products) =>
+      dispatch({ type: SET_PRODUCTS, payload: { products: products } }),
+    setIsProductLoading: (status) =>
+      dispatch({ type: SET_IS_PRODUCTLOADING, payload: { status: status } }),
+    setShowSidebar: (status) =>
+      dispatch({ type: SET_SHOW_SIDEBAR, payload: { status: status } }),
+  };
+};
+
+export default connect(null,mapDispatchToProps) (NavLinks);

@@ -215,10 +215,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({ type: SET_SERVICE_CATEGORY, payload: { category: category } }),
     setServiceLocation: (location) =>
       dispatch({ type: SET_SERVICE_LOCATION, payload: { location: location } }),
-    setServiceCategory: (status) =>
-      dispatch({ type: SET_IS_LOCATION_CONTAINER_OPEN, payload: { status: status } }),
-    setServiceCategory: (status) =>
-      dispatch({ type: SET_IS_SERVICE_CONTAINER_OPEN, payload: { status: status } }),
+    setIsLocationContainerOpen: (status) =>
+      dispatch({
+        type: SET_IS_LOCATION_CONTAINER_OPEN,
+        payload: { status: status },
+      }),
+    setIsServiceContainerOpen: (status) =>
+      dispatch({
+        type: SET_IS_SERVICE_CONTAINER_OPEN,
+        payload: { status: status },
+      }),
   };
 };
 

@@ -5,22 +5,36 @@ const url = "http://localhost:5000/api";
 //const url = "/api";
 import { useNavigate } from "react-router-dom";
 import { Rate } from "antd";
+import { connect } from "react-redux";
+import {
+  SET_PRODUCT_INFO,
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_IS_LOADING_SEARCH
+} from "../redux/action";
 
-const SearchResult = () => {
- 
+
+
+const SearchResult = ({
+  searchResult,
+  IsSearching,
+  isLoadingSearch,
+  setSearchItem,
+  setIsSearching,
+  setIsLoadingSearch,
+  setProductInfo,
+}) => {
   const {
-    searchResult,
-   
-    setProductInfo,
-    setSearchItem,
-    IsSearching,
-    setIsSearching,
-    isLoadingSearch,
-    setIsLoadingSearch,
+    // searchResult,
+
+   // setProductInfo,
+    //setSearchItem,
+    // IsSearching,
+    //setIsSearching,
+    //isLoadingSearch,
+    //setIsLoadingSearch,
   } = useGlobalContext();
   const navigate = useNavigate();
-
- 
 
   console.log(searchResult);
 
@@ -32,7 +46,6 @@ const SearchResult = () => {
   };
 
   const fetchData = async (id) => {
-   
     try {
       const response = await getAllProducts(id);
       setIsLoadingSearch(false);
@@ -49,10 +62,10 @@ const SearchResult = () => {
 
   const handleSearch = async (category, product, id) => {
     //console.log("hllllllli");
-   // setIsLoadingSearch(true);
-     console.log("looading", isLoadingSearch);
+    // setIsLoadingSearch(true);
+    console.log("looading", isLoadingSearch);
     await fetchData(id);
-   // setIsLoadingSearch(false);
+    // setIsLoadingSearch(false);
     navigate(`/products/${category}/${product}/${id}`);
     handlSearchResultClick();
   };
@@ -75,7 +88,9 @@ const SearchResult = () => {
           {isLoadingSearch ? "Searching..." : "Search results"}
         </h5>
 
-        <div>{!isLoadingSearch && searchResult.length == 0 && "No result found"}</div>
+        <div>
+          {!isLoadingSearch && searchResult.length == 0 && "No result found"}
+        </div>
 
         <div>
           {searchResult.map((result) => {
@@ -116,7 +131,33 @@ const SearchResult = () => {
       </section>
     </section>
   );
-  
 };
 
-export default SearchResult;
+
+const mapStateToProps = (state) => {
+  return {
+    isLoadingSearch: state.appFunctions.isLoadingSearch,
+    searchResult: state.appFunctions.searchResult,
+    IsSearching: state.appFunctions.IsSearching,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setProductInfo:(product)=>dispatch({type:SET_PRODUCT_INFO,payload:{product:product}})
+  };
+};
+
+
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps) (SearchResult);

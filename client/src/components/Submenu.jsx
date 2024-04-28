@@ -163,7 +163,7 @@ const mapStateToProps=(state)=>{
 
 }
 
-const mapDIspatchToProps=(dispatch)=>{
+const mapDispatchToProps=(dispatch)=>{
 
 
 return{
@@ -176,4 +176,4 @@ setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{stat
 }
 
 
-export default connect(mapStateToProps,mapDIspatchToProps)  (Submenu);
+export default connect(mapStateToProps,mapDispatchToProps)  (Submenu);
