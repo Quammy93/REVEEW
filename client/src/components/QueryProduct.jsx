@@ -7,7 +7,7 @@ import { useParams,Link } from "react-router-dom";
 
 
 const QueryProduct = () => {
-  const { categoryClicked } = useGlobalContext();
+  
 
   const { selectedCategory } = useParams();
 

@@ -16,23 +16,22 @@ export default function Navbar2() {
   const {
     closeSubmenu,
     openSubmenu,
-    isSidebarOpen,
-    setIsSidebarOpen,
+   
     searchItem,
     setSearchItem,
-    searchResult,
+   
     setSearchResult,
-    isSearching,
+   
     setIsSearching,
-    isLoadingSearch,
+   
     setIsLoadingSearch,
     serviceCategory,
     setServiceCategory,
     serviceLocation,
     setServiceLocation,
-    isLocationContainerOpen,
+   
     setIsLocationContainerOpen,
-    isServiceContainerOpen,
+  
     setIsServiceContainerOpen,
   } = useGlobalContext();
    

@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { Rate } from "antd";
 
 const SearchResult = () => {
+ 
   const {
     searchResult,
-    setSearchResult,
-    productInfo,
+   
     setProductInfo,
     setSearchItem,
     IsSearching,
@@ -116,6 +116,7 @@ const SearchResult = () => {
       </section>
     </section>
   );
+  
 };
 
 export default SearchResult;

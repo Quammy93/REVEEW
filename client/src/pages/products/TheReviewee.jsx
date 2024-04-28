@@ -36,9 +36,9 @@ const suggestions = [
     setServiceCategory,
     serviceLocation,
     setServiceLocation,
-    isLocationContainerOpen,
+   
     setIsLocationContainerOpen,
-    isServiceContainerOpen,
+    
     setIsServiceContainerOpen,
   } = useGlobalContext();
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];

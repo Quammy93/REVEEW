@@ -9,11 +9,11 @@ const url = "/api";
 
 const NavLinks = () => {
   const {
-    showSidebar,
+   
     setShowSidebar,
-    products,
+   
     setProducts,
-    isProductLoading,
+    
     setIsProductLoading,
   } = useGlobalContext();
   const navigate = useNavigate();

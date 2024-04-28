@@ -13,15 +13,14 @@ export default function Navbar3() {
   const {
     closeSubmenu,
     openSubmenu,
-    isSidebarOpen,
-    setIsSidebarOpen,
+   
     searchItem,
     setSearchItem,
-    searchResult,
+   
     setSearchResult,
-    isSearching,
+  
     setIsSearching,
-    isLoadingSearch,
+   
     setIsLoadingSearch,
   } = useGlobalContext();
 

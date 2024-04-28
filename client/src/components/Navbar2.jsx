@@ -7,27 +7,28 @@ import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:5000/api";
+import { connect } from "react-redux";
+import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
 //const url = "/api";
 
-export default function Navbar2() {
+const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch }) => {
   const {
-    closeSubmenu,
-    openSubmenu,
-    isSidebarOpen,
-    setIsSidebarOpen,
-    searchItem,
-    setSearchItem,
-    searchResult,
-    setSearchResult,
-    isSearching,
-    setIsSearching,
-    isLoadingSearch,
-    setIsLoadingSearch,
+    // closeSubmenu,
+    // openSubmenu,
+
+   // searchItem,
+   // setSearchItem,
+
+   // setSearchResult,
+
+   // setIsSearching,
+
+   // setIsLoadingSearch,
   } = useGlobalContext();
-  
+
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
-      closeSubmenu();
+      closesubemenu();
     }
     console.log(e.target.classList);
   };
@@ -39,7 +40,7 @@ export default function Navbar2() {
     console.log(tempBtnLocation);
     const center = (tempBtnLocation.left + tempBtnLocation.right) / 2;
     const bottom = tempBtnLocation.bottom;
-    openSubmenu(page, { center, bottom });
+    opensubemenu(page, { center, bottom });
   };
 
   const handleSearch = async (e) => {
@@ -53,17 +54,17 @@ export default function Navbar2() {
 
   const fetchData = async (searchValue) => {
     // setIsProductLoading(true);
-    setIsLoadingSearch(true)
+    setIsLoadingSearch(true);
     try {
       const response = await getAllProducts(searchValue);
 
       // const { products, numOfPages } = response.data;
-     // setProducts(products);
+      // setProducts(products);
       setSearchResult(response?.data?.products);
       console.log("products", response?.data?.products);
 
-    //  setIsProductLoading(false);
-    setIsLoadingSearch(false)
+      //  setIsProductLoading(false);
+      setIsLoadingSearch(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -109,14 +110,41 @@ export default function Navbar2() {
 
         <div className="end-nav-list">
           <div>Contact Us</div>
-
-          <Link to={"/login"}>
-            <button className="sign-in-btn">Sign In</button>
-          </Link>
+          <div>
+            <Link to={"/login"}>
+              {/* <button className="sign-in-btn">Sign In</button>* */}
+              <button className="sign-in-btn">
+                <b>S</b>
+              </button>
+            </Link>
+          </div>
         </div>
       </nav>
       <Submenu />
       <SearchResult />
     </>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    searchItem: state.appFunctions.searchItem,
+  };
+};
+const mapDispatchToProps = (dispatch,ownProps) => {
+   console.log(ownProps);
+  return {
+    closesubemenu: () => dispatch({type:CLOSE_SUBMENU}),
+    opensubemenu: (text,coordinate) => dispatch({type:OPEN_SUBMENU,payload:{text,coordinate}}),
+   
+    setSearchItem:(search)=>dispatch({type:SET_SEARCH_ITEM,payload:{input:search}}),
+    
+    setIsSearching:(status)=>dispatch({type:SET_IS_SEARCHING,payload:{status:status}}),
+     setSearchResult:(result)=>dispatch({type:SET_SEARCH_RESULT,payload:{result:result}}),
+     setIsLoadingSearch:(status)=>dispatch({type:SET_IS_LOADING_SEARCH,payload:{status:status}})
+  };
+};
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar2);

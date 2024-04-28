@@ -20,9 +20,9 @@ const AppProvider = ({ children }) => {
     const [businessInfo, setBusinessInfo] = React.useState({});
 
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
-  const [page, setPage] = React.useState({ page: "", links: [] });
-  const [location, setLocation] = React.useState({});
+  //const [isShowSubmenu, setIsShowSubmenu] = React.useState(false);
+  //const [page, setPage] = React.useState({ page: "", links: [] });
+ // const [location, setLocation] = React.useState({});
   const [searchItem, setSearchItem] = React.useState("");
   const [searchResult, setSearchResult] = React.useState([]);
   const [IsSearching, setIsSearching] = React.useState(false);
@@ -51,7 +51,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        setIsShowSubmenu,
+       // setIsShowSubmenu,
         products,
         setProducts,
         brands,
@@ -76,9 +76,9 @@ const AppProvider = ({ children }) => {
         setIsProductLoading,
         openSubmenu,
         closeSubmenu,
-        isShowSubmenu,
-        page,
-        location,
+       // isShowSubmenu,
+       // page,
+      //  location,
         searchItem,
         setSearchItem,
         searchResult,

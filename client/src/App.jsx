@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import Home from "./pages/Home";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,12 +15,19 @@ import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
 import TheReviewee from "./pages/products/TheReviewee";
 import DisplayRevieweeResult from "./pages/products/DisplayRevieweeResult";
-import SingleBusines from "./pages/products/SingleBusines"
+import SingleBusines from "./pages/products/SingleBusines";
 import WriteBusinessReview from "./pages/products/WriteBusinessReview";
+
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './redux/rootReducer'; 
+
+const store = createStore(rootReducer);
+
 
 function App() {
   return (
-    <div>
+     <Provider store={store}>
       <ToastContainer position="top-center" />
       <BrowserRouter>
         <Routes>
@@ -31,10 +38,7 @@ function App() {
             path="/products/:selectedCategory"
             Component={ProductDisplay}
           ></Route>
-          <Route
-            path="/business/:companyID"
-            Component={SingleBusines}
-          ></Route>
+          <Route path="/business/:companyID" Component={SingleBusines}></Route>
 
           <Route path="/write-review" Component={TheReviewee}></Route>
           <Route
@@ -47,12 +51,15 @@ function App() {
             Component={SingleProduct}
           ></Route>
           <Route path="/products/feedback/:id" Component={PostReview}></Route>
-          <Route path="/business/feedback/:id" Component={WriteBusinessReview}></Route>
+          <Route
+            path="/business/feedback/:id"
+            Component={WriteBusinessReview}
+          ></Route>
 
           <Route path="/admin" Component={Admin}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 

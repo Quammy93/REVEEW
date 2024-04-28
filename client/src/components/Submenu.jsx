@@ -4,25 +4,29 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 //const url = "/api";
 const url = "http://localhost:5000/api";
+import { connect } from "react-redux";
+import { SET_PRODUCTS,SET_IS_PRODUCTLOADING } from "../redux/action";
 
-const Submenu = () => {
+
+const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProductLoading}) => {
+  
   const container = React.useRef();
+
   const {
-    setProducts,
-    setIsShowSubmenu,
-    setIsProductLoading,
-    location,
-    isShowSubmenu,
-    page: { page, links },
-    closeSubmenu,
+   // setProducts,
+    //setIsShowSubmenu,
+   // setIsProductLoading,
+  //  location,
+   // isShowSubmenu,
+  //  page: { page, links },
+  //  closeSubmenu,
   } = useGlobalContext();
 
   const navigate = useNavigate();
 
   const loadProduct = async (category) => {
-    closeSubmenu();
+    //  closeSubmenu();
     await fetchData(category);
-    // return navigate(`/products/${category}?category=${category}`);
   };
 
   const getAllProducts = async (category) => {
@@ -31,7 +35,6 @@ const Submenu = () => {
       .get(`${url}/products?page=${1}&limit=${6}&product_category=${category}`)
       .catch((error) => {
         console.log(error);
-        //toast.error(error.message);
       });
   };
 
@@ -42,7 +45,7 @@ const Submenu = () => {
 
       const { products, totalCount, numOfPages } = response.data;
       setProducts(products);
-      // setTotalCount(totalCount);
+
       setIsProductLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -51,6 +54,7 @@ const Submenu = () => {
 
   // setting up usestate ref
   const [columns, setColumns] = React.useState("col-2");
+ 
   React.useEffect(() => {
     setColumns("col-2");
     //setting up the location of the submenu
@@ -60,6 +64,7 @@ const Submenu = () => {
     submenuNode.style.top = `${bottom}px`;
     //setting up the column of the submenu
 
+   
     if (links.length === 3) {
       setColumns("col-3");
     }
@@ -72,7 +77,6 @@ const Submenu = () => {
     <aside
       className={`${isShowSubmenu ? "submenu show" : "submenu"}`}
       ref={container}
-    
     >
       <div className="sub-page-title">
         {" "}
@@ -114,13 +118,13 @@ const Submenu = () => {
     <aside
       className={`${isShowSubmenu ? "submenu show" : "submenu"}`}
       ref={container}
-    
     >
       <div className="sub-page-title">
         {" "}
         <b>{page}</b>
       </div>
 
+     
       <div className={`submenu-center ${columns}`}>
         {links.map((link, index) => {
           const { url, icon, label } = link;
@@ -137,9 +141,39 @@ const Submenu = () => {
             </Link>
           );
         })}
+    
+    
+    
       </div>
+     
     </aside>
+ 
   );
+
 };
 
-export default Submenu;
+
+const mapStateToProps=(state)=>{
+
+  return {
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
+    page: state.appFunctions.page,
+    location: state.appFunctions.location,
+  };
+
+}
+
+const mapDIspatchToProps=(dispatch)=>{
+
+
+return{
+setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
+setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{status:status}})
+
+
+}
+
+}
+
+
+export default connect(mapStateToProps,mapDIspatchToProps)  (Submenu);

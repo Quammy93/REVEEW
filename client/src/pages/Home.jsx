@@ -4,6 +4,7 @@ import Navbar2 from "../components/Navbar2";
 import SubMenu from "antd/es/menu/SubMenu";
 import { useGlobalContext } from "../utils/context";
 import sublinks from "../utils/data";
+import { connect } from "react-redux";
 
 import "../assets/css/hero.css";
 
@@ -39,14 +40,27 @@ import icon19 from "../assets/images/icon19.gif";
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
 import logo from "../assets/images/Group 2.png";
+import {CLOSE_SUBMENU} from "../redux/action"
 
-const Home = () => {
-  const {
-    showSidebar,
-    closeSubmenu,
-   
-  } = useGlobalContext();
+
+const Home = ({ showSidebar, closesubemenu }) => {
+  //const {closeSubmenu } = useGlobalContext();
   let loggedUser = { name: "", role: "" };
+
+  //handling page
+  /** 
+   const openSubmenu = (text, coordinates) => {
+     const page = sublinks.find((link) => {
+       if (link.page === text) {
+         return link;
+       }
+     });
+     setPage(page);
+     setLocation(coordinates);
+     setIsShowSubmenu(true);
+   };
+ */
+
   // localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
   return (
     <main>
@@ -60,7 +74,7 @@ const Home = () => {
         <Navbar2 />
 
         {/**hero */}
-        <div className="hero-aside" onMouseOver={closeSubmenu}>
+        <div className="hero-aside" onMouseOver={closesubemenu}>
           <img src={img} alt="" className="hero-image" />
           <div className="overlay"></div>
           <div className="intro-container">
@@ -235,22 +249,16 @@ const Home = () => {
               </div>
 
               <ul className="explore-category-list">
-                {
-sublinks[0].links.map((link,index)=>{
-const {label,icon}=link
+                {sublinks[0].links.map((link, index) => {
+                  const { label, icon } = link;
 
-return (
-  <li className="cat-list">
-    <span className="list-icon">{icon}</span> <span className="list-label">{label}</span>
-  </li>
-);
-
-
-})
-
-
-                }
-              
+                  return (
+                    <li className="cat-list">
+                      <span className="list-icon">{icon}</span>{" "}
+                      <span className="list-label">{label}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </main>
           </article>
@@ -308,4 +316,16 @@ return (
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    showSidebar: state.appFunctions.showSidebar,
+  }
+}
+ const mapDispatchToProps = (dispatch) => {
+ 
+  return { 
+    closesubemenu:()=> dispatch({type:CLOSE_SUBMENU})
+  }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

@@ -14,7 +14,7 @@ import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
 const DisplayRevieweeResult = () => {
   const navigate = useNavigate();
 
-  const { businessInfo, setBusinessInfo } = useGlobalContext();
+ 
 
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 

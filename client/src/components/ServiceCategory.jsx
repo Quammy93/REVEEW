@@ -9,7 +9,7 @@ const businessCategory = [
 ];
 const ServiceCategory = () => {
   const {
-    serviceCategory,
+   
     setServiceCategory,
     isServiceContainerOpen,
     setIsServiceContainerOpen,
