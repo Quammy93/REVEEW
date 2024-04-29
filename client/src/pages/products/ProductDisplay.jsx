@@ -22,19 +22,28 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
+import { SET_IS_PRODUCTLOADING,SET_PRODUCTS,CLOSE_SUBMENU } from "../../redux/action";
+import { connect } from "react-redux";
 
-const ProductDisplay = () => {
+const ProductDisplay = ({
+  showSidebar,
+  isProductLoading,
+  setIsProductLoading,
+  products,
+  setProducts,
+  closeSubmenu,
+}) => {
   let { selectedCategory } = useParams();
   //console.log("select", selectedCategory);
   // let selectedCategory = localStorage.getItem("category");
   console.log(selectedCategory);
   const {
-    showSidebar,
-    isProductLoading,
-    setIsProductLoading,
-    products,
-    setProducts,
-    closeSubmenu,
+   // showSidebar,
+   // isProductLoading,
+   // setIsProductLoading,
+  //  products,
+  //  setProducts,
+  //  closeSubmenu,
   } = useGlobalContext();
 
   let clickedCategory = selectedCategory;
@@ -125,10 +134,9 @@ const ProductDisplay = () => {
   const onChecked = async (checkedValues) => {
     console.log("checked", checkedValues);
 
-  
-   let newcheckedValues = checkedValues.map((item) =>
+    let newcheckedValues = checkedValues.map((item) =>
       item === "All Brand" ? " " : item
-   );
+    );
 
     setFilter(newcheckedValues);
     console.log("checked", newcheckedValues);
@@ -461,4 +469,25 @@ const ProductDisplay = () => {
   );
 };
 
-export default ProductDisplay;
+
+const mapStateToProps=(state)=>{
+  return {
+    showSidebar: state.appFunctions.showSidebar,
+    isProductLoading: state.product.isProductLoading,
+   
+    products: state.product.products,
+  
+   
+  };
+}
+
+const mapDispatchToProps=(dispatch)=>{
+  return {
+    setIsProductLoading:(status)=>dispactch({type:SET_IS_PRODUCTLOADING,payload:{status,status}}),
+     setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products,products}}),
+     closeSubmenu:()=>dispatch({type:CLOSE_SUBMENU})
+  };
+}
+ 
+
+export default connect(mapStateToProps,mapDispatchToProps) (ProductDisplay);
