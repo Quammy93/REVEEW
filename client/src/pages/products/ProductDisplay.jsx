@@ -483,8 +483,8 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
   return {
-    setIsProductLoading:(status)=>dispactch({type:SET_IS_PRODUCTLOADING,payload:{status,status}}),
-     setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products,products}}),
+    setIsProductLoading:(status)=>dispactch({type:SET_IS_PRODUCTLOADING,payload:{status:status}}),
+     setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
      closeSubmenu:()=>dispatch({type:CLOSE_SUBMENU})
   };
 }

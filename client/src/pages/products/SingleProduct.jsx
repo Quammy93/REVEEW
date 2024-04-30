@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import Navbar2 from "../../components/Navbar2"
+import Navbar2 from "../../components/Navbar2";
 import "../../assets/css/singleProduct.css";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Rate, Progress } from "antd";
@@ -8,11 +8,13 @@ import axios from "axios";
 const url = "http://localhost:5000/api";
 import { useGlobalContext } from "../../utils/context";
 //const url = "/api";
+
 import { Alert, Space, Spin } from "antd";
+import { connect } from "react-redux";
+import { SET_PRODUCT_INFO } from "../../redux/action";
 
-
-const SingleProduct = () => {
-  const {productInfo, setProductInfo}=useGlobalContext()
+const SingleProduct = ({ productInfo, setProductInfo }) => {
+  // const { productInfo, setProductInfo } = useGlobalContext();
   const location = useLocation();
   const { category, product, id } = useParams();
   const navigate = useNavigate();
@@ -456,4 +458,15 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+const mapStateToProps = (state) => {
+  return {
+    productInfo: state.product.productInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) =>
+  (product = dispatch({
+    type: SET_PRODUCT_INFO,
+    payload: { product: product },
+  }));
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

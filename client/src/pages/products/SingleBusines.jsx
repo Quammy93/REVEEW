@@ -6,12 +6,14 @@ import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
 import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import { SET_BUSINESS_INFO } from "../../redux/action";
+import { connect } from "react-redux";
 
 //const url = "/api";
 
 import { useGlobalContext } from "../../utils/context";
 
-const SingleBusines = () => {
+const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -72,7 +74,7 @@ const SingleBusines = () => {
 
   const navigate = useNavigate();
   const { companyID } = useParams();
-  const { businessInfo, setBusinessInfo } = useGlobalContext();
+  // const { businessInfo, setBusinessInfo } = useGlobalContext();
   console.log(businessInfo);
 
   const getCompany = async (id) => {
@@ -141,7 +143,9 @@ const SingleBusines = () => {
             <span className="writer-span">
               <img src={avarta} alt="" className="writer-avarta" />
 
-              <Link to={`/business/feedback/${_id}?reviewed=product&queryName=${name}`}>
+              <Link
+                to={`/business/feedback/${_id}?reviewed=product&queryName=${name}`}
+              >
                 Write a Review
               </Link>
             </span>{" "}
@@ -324,4 +328,15 @@ const SingleBusines = () => {
   );
 };
 
-export default SingleBusines;
+const mapStateToProps = (state) => {
+  return {
+    businessInfo: state.business.businessInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setBusinessInfo:(business)=>dispatch({type:SET_BUSINESS_INFO,payload:{business:business}})
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SingleBusines);

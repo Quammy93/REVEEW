@@ -10,40 +10,49 @@ import Footer from "../../components/Footer";
 import ServiceCategory from "../../components/ServiceCategory";
 import Location from "../../components/Location";
 import { useGlobalContext } from "../../utils/context";
-const TheReviewee = () => {
+import { connect } from "react-redux";
+import { SET_SERVICE_CATEGORY,SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN,SET_IS_SERVICE_CONTAINER_OPEN } from "../../redux/action";
 
-const suggestions = [
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-  { name: "Gramma's Kitchen", img: "" },
-];
+const TheReviewee = ({
+  serviceCategory,
+  setServiceCategory,
+  serviceLocation,
+  setServiceLocation,
 
+  setIsLocationContainerOpen,
+
+  setIsServiceContainerOpen,
+}) => {
+  const suggestions = [
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "" },
+  ];
 
   const {
-    serviceCategory,
-    setServiceCategory,
-    serviceLocation,
-    setServiceLocation,
-   
-    setIsLocationContainerOpen,
-    
-    setIsServiceContainerOpen,
+   // serviceCategory,
+   // setServiceCategory,
+   // serviceLocation,
+   // setServiceLocation,
+
+   // setIsLocationContainerOpen,
+
+  //  setIsServiceContainerOpen,
   } = useGlobalContext();
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [value, setValue] = React.useState(0);
-
 
   return (
     <div>
@@ -184,4 +193,34 @@ const suggestions = [
   );
 };
 
-export default TheReviewee;
+const mapStateToProps = (state) => {
+  return {
+     serviceCategory: state.business. serviceCategory,
+      serviceLocation: state.business.  serviceLocation,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    setServiceCategory: (category) =>
+      dispatch({ type: SET_SERVICE_CATEGORY, payload: { category: category } }),
+
+    setIsServiceContainerOpen: (status) =>
+      dispatch({
+        type: SET_IS_SERVICE_CONTAINER_OPEN,
+        payload: { status: status },
+      }),
+       setServiceLocation: (location) =>
+      dispatch({ type: SET_SERVICE_LOCATION, payload: { location: location } }),
+
+    setIsLocationContainerOpen: (status) =>
+      dispatch({
+        type: SET_IS_LOCATION_CONTAINER_OPEN,
+        payload: { status: status },
+      }),
+  };
+};
+
+
+
+export default  connect (mapStateToProps,mapDispatchToProps)(TheReviewee);
