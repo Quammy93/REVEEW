@@ -27,6 +27,8 @@ const Navbar3 = ({
   closesubemenu,
   opensubemenu,
   setIsLoadingSearch,
+  isLogin,
+  user,
 }) => {
   const {
     //  searchItem,
@@ -50,7 +52,7 @@ const Navbar3 = ({
     console.log(tempBtnLocation);
     const center = (tempBtnLocation.left + tempBtnLocation.right) / 2;
     const bottom = tempBtnLocation.bottom;
-     opensubemenu(page, { center, bottom });
+    opensubemenu(page, { center, bottom });
   };
 
   const handleSearch = async (e) => {
@@ -92,14 +94,18 @@ const Navbar3 = ({
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <div>
+        <a href="/">
           <img src={logo2} alt="" className="newlogo" />
-        </div>
+        </a>
 
         <div className="end-nav-list">
-          <Link to={"/login"}>
-            <button className="sign-in-btn">Sign In</button>
-          </Link>
+          {isLogin ? (
+            <b>S</b>
+          ) : (
+            <Link to={"/login"}>
+              <button className="sign-in-btn">Sign In</button>
+            </Link>
+          )}
         </div>
       </nav>
       <Submenu />
@@ -110,6 +116,8 @@ const Navbar3 = ({
 const mapStateToProps = (state) => {
   return {
     searchItem: state.appFunctions.searchItem,
+    user: state.user.user,
+    isLogin: state.user.isLogin,
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -1,13 +1,23 @@
 // reducers/userReducer.js
+
+import { SET_USER,SET_IS_LOGIN } from "../action";
+
+
 const initialState = {
   // Initial user state
-  user:{ name: "", userId: "", role: ""}
+  user:{ },
+  isLogin:false
 };
 
 const userReducer = (state = initialState, action) => {
   // Handle actions and return new state accordingly
 
-  console.log(state);
+ if(action.type==SET_USER){
+  return {...state,user:action.payload.user}
+ }
+ if(action.type==SET_IS_LOGIN){
+  return { ...state,isLogin:action.payload.status}
+ }
 
   return state;
 };

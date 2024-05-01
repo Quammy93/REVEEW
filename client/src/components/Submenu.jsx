@@ -9,30 +9,31 @@ import { SET_PRODUCTS,SET_IS_PRODUCTLOADING } from "../redux/action";
 
 
 const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProductLoading}) => {
-  
   const container = React.useRef();
 
   const {
-   // setProducts,
+    // setProducts,
     //setIsShowSubmenu,
-   // setIsProductLoading,
-  //  location,
-   // isShowSubmenu,
-  //  page: { page, links },
-  //  closeSubmenu,
+    // setIsProductLoading,
+    //  location,
+    // isShowSubmenu,
+    //  page: { page, links },
+    //  closeSubmenu,
   } = useGlobalContext();
 
   const navigate = useNavigate();
 
+  /**
   const loadProduct = async (category) => {
     //  closeSubmenu();
     await fetchData(category);
   };
 
+ 
   const getAllProducts = async (category) => {
     console.log(category);
     return await axios
-      .get(`${url}/products?page=${1}&limit=${6}&product_category=${category}`)
+      .get(`${url}/products?page=${1}&limit=${6}&category=${category}`)
       .catch((error) => {
         console.log(error);
       });
@@ -52,9 +53,10 @@ const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProd
     }
   };
 
+ */
   // setting up usestate ref
   const [columns, setColumns] = React.useState("col-2");
- 
+
   React.useEffect(() => {
     setColumns("col-2");
     //setting up the location of the submenu
@@ -64,7 +66,6 @@ const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProd
     submenuNode.style.top = `${bottom}px`;
     //setting up the column of the submenu
 
-   
     if (links.length === 3) {
       setColumns("col-3");
     }
@@ -124,32 +125,23 @@ const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProd
         <b>{page}</b>
       </div>
 
-     
       <div className={`submenu-center ${columns}`}>
         {links.map((link, index) => {
           const { url, icon, label } = link;
 
           return (
-            <Link
-              key={index}
-              to={url}
+            <a key={index} href={url} 
               className="submenu-links"
-              onClick={() => loadProduct(label)}
+              onClick={() => console.log("....presing")} //loadProduct(label)}
             >
               {icon}
               {label}
-            </Link>
+            </a>
           );
         })}
-    
-    
-    
       </div>
-     
     </aside>
- 
   );
-
 };
 
 
@@ -168,6 +160,7 @@ const mapDispatchToProps=(dispatch)=>{
 
 return{
 setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
+
 setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{status:status}})
 
 

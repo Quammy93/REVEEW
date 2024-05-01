@@ -9,7 +9,7 @@ export const SET_SHOW_SIDEBAR = "SET_SHOW_SIDEBAR";
 
 export const SET_PRODUCTS = "SET_PRODUCTS";
 export const SET_IS_PRODUCTLOADING = "SET_IS_PRODUCTLOADING";
-export const SET_PRODUCT_INFO = " SET_PRODUCT_INFO";
+export const SET_PRODUCT_INFO = "SET_PRODUCT_INFO";
 
 export const SET_SERVICE_LOCATION = " SET_SERVICE_LOCATION";
 export const SET_SERVICE_CATEGORY = " SET_SERVICE_CATEGORY";
@@ -19,6 +19,9 @@ export const SET_IS_LOCATION_CONTAINER_OPEN =
 export const SET_IS_SERVICE_CONTAINER_OPEN = " SET_IS_SERVICE_CONTAINER_OPEN ";
 export const SET_BUSINESS_INFO = "SET_BUSINESS_INFO";
 
+
+export const SET_USER = "SET_USER";
+export const SET_IS_LOGIN = "SET_IS_LOGIN";
 /**
 export const closeSubmenu = () => {
   return { type: CLOSE_SUBMENU };

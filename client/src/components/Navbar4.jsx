@@ -41,28 +41,23 @@ const Navbar4 = ({
   setIsLocationContainerOpen,
 
   setIsServiceContainerOpen,
-  
+  isLogin,
+  user,
 }) => {
   const {
     // closeSubmenu,
     // openSubmenu,
-
     // searchItem,
     // setSearchItem,
-
     //  setSearchResult,
-
     //  setIsSearching,
-
     // setIsLoadingSearch,
     //  serviceCategory,
-  //  setServiceCategory,
+    //  setServiceCategory,
     // serviceLocation,
-   // setServiceLocation,
-
-   // setIsLocationContainerOpen,
-
-   // setIsServiceContainerOpen,
+    // setServiceLocation,
+    // setIsLocationContainerOpen,
+    // setIsServiceContainerOpen,
   } = useGlobalContext();
 
   const handleSubmenu = (e) => {
@@ -121,9 +116,9 @@ const Navbar4 = ({
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <div>
+        <a href="/">
           <img src={logo2} alt="" className="newlogo" />
-        </div>
+        </a>
         <ul className="mid-nav-list">
           <li className="list-search">
             <form action="" className="reviewee-form">
@@ -171,15 +166,21 @@ const Navbar4 = ({
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Features
           </li>
-          <li> Write A Review</li>
+          <a href="/write-review" className=".a">
+            <li> Write A Review</li>
+          </a>
         </ul>
 
         <div className="end-nav-list">
           <div>Contact Us</div>
 
-          <Link to={"/login"}>
-            <button className="sign-in-btn">Sign In</button>
-          </Link>
+          {isLogin ? (
+            <b>S</b>
+          ) : (
+            <Link to={"/login"}>
+              <button className="sign-in-btn">Sign In</button>
+            </Link>
+          )}
         </div>
       </nav>
       <Submenu />
@@ -193,6 +194,8 @@ const mapStateToProps = (state) => {
     searchItem: state.appFunctions.searchItem,
     serviceCategory: state.business.serviceCategory,
     serviceLocation: state.business.serviceLocation,
+    user: state.user.user,
+    isLogin: state.user.isLogin,
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {

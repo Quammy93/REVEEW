@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
 //const url = "/api";
 
-const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch }) => {
+const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch ,isLogin,user}) => {
   const {
     // closeSubmenu,
     // openSubmenu,
@@ -82,9 +82,9 @@ const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, clos
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <div>
+        <a href="">
           <img src={logo2} alt="" className="newlogo" />
-        </div>
+        </a>
         <ul className="mid-nav-list">
           <li className="list-search">
             <span className="search-icon-cat">
@@ -105,18 +105,22 @@ const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, clos
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Features
           </li>
-          <li> Write A Review</li>
+          <a href="/write-review" className="a">
+            <li> Write A Review</li>
+          </a>
         </ul>
 
         <div className="end-nav-list">
           <div>Contact Us</div>
           <div>
-            <Link to={"/login"}>
-              {/* <button className="sign-in-btn">Sign In</button>* */}
-              <button className="sign-in-btn">
-                <b>S</b>
-              </button>
-            </Link>
+            {isLogin ?  <b>S</b>: <Link to={"/login"}>
+              
+              
+              
+             <button className="sign-in-btn">Sign In</button>
+             
+            </Link>}
+           
           </div>
         </div>
       </nav>
@@ -129,6 +133,8 @@ const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, clos
 const mapStateToProps = (state) => {
   return {
     searchItem: state.appFunctions.searchItem,
+    user: state.user.user,
+    isLogin: state.user.isLogin,
   };
 };
 const mapDispatchToProps = (dispatch,ownProps) => {

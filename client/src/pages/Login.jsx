@@ -15,9 +15,11 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../utils/context";
+import { SET_USER, SET_IS_LOGIN } from "../redux/action";
+import { connect } from "react-redux";
 
-const Login = () => {
-  const { user, setUser } = useGlobalContext();
+const Login = ({ user, isLogin, setUser,setIsLogin }) => {
+  // const { user, setUser } = useGlobalContext();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,12 +33,13 @@ const Login = () => {
         if (response.status == "200") {
           console.log(response.data.user);
           setUser(response.data.user);
+          setIsLogin(true)
 
-          localStorage.setItem("loggedIn", true);
-          localStorage.setItem(
-            "loggedUser",
-            JSON.stringify(response.data.user)
-          );
+       //   localStorage.setItem("loggedIn", true);
+        //  localStorage.setItem(
+        //    "loggedUser",
+         ///   JSON.stringify(response.data.user)
+       //   );
           toast.success("Login successfully");
         }
       })
@@ -158,4 +161,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return { user: state.user.user, isLogin: state.user.isLogin };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
+    setIsLogin: (status) =>
+      dispatch({ type: SET_IS_LOGIN, payload: { statu: status } }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

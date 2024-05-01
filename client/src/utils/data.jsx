@@ -97,7 +97,7 @@ const sublinks = [
       {
         label: "Service Review",
         icon: { feature3 },
-        url: "/Our Company",
+        url: "/search-review",
       },
       {
         label: "Location Review",

@@ -253,7 +253,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
                   const { label, icon } = link;
 
                   return (
-                    <li className="cat-list">
+                    <li className="cat-list" key={index}>
                       <span className="list-icon">{icon}</span>{" "}
                       <span className="list-label">{label}</span>
                     </li>
