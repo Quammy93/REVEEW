@@ -57,9 +57,8 @@ app.use(errorHandler);
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
 
-
   await app.listen(port, () =>
-    console.log(`Server is running on port ${port}`)
+    console.log(`Server is running on port : ${port}`)
   );
 
   // await Item.create(businesjson);
