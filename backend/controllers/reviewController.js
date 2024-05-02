@@ -5,6 +5,8 @@ const { StatusCodes } = require("http-status-codes");
 
 //creating review
 const createReview = async (req, res) => {
+
+
   console.log(req.body);
   const { id } = req.params;
   const { userId } = req.user;

@@ -10,6 +10,7 @@ require("express-async-errors");
 
 const businesjson = require("./businessList");
 const Item = require("./models/Product");
+const Reviews = require("./models/Reviews");
 
 const connectDb = require("./db/ConnectDb");
 require("dotenv").config(); //
@@ -55,6 +56,7 @@ app.use(errorHandler);
 
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
+
 
   await app.listen(port, () =>
     console.log(`Server is running on port ${port}`)
