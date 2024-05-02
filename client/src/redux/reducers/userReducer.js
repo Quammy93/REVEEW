@@ -6,7 +6,7 @@ import { SET_USER,SET_IS_LOGIN } from "../action";
 const initialState = {
   // Initial user state
   user:{ },
-  isLogin:false
+  isLogin:false,
 };
 
 const userReducer = (state = initialState, action) => {

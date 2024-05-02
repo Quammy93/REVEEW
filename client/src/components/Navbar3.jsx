@@ -6,9 +6,9 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 
-//const url = "/api";
+const url = "/api";
 import { connect } from "react-redux";
 
 import {
@@ -37,7 +37,9 @@ const Navbar3 = ({
     //  setIsSearching,
     //  setIsLoadingSearch,
   } = useGlobalContext();
+  console.log("....user", user);
 
+  const { name } = user;
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closesubemenu();
@@ -100,7 +102,7 @@ const Navbar3 = ({
 
         <div className="end-nav-list">
           {isLogin ? (
-            <b>S</b>
+            <b>{name.charAt(0).toUpperCase()}</b>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>

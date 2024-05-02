@@ -20,48 +20,63 @@ import WriteBusinessReview from "./pages/products/WriteBusinessReview";
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { PersistGate } from "redux-persist/integration/react";
 import rootReducer from './redux/rootReducer'; 
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"], // persist only the user reducer
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+const persistor = persistStore(store);
 
 function App() {
   return (
-     <Provider store={store}>
-      <ToastContainer position="top-center" />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" Component={Home}></Route>
-          <Route path="/login" Component={Login}></Route>
-          <Route path="/register" Component={Register}></Route>
-          <Route
-            path="/products/:selectedCategory"
-            Component={ProductDisplay}
-          ></Route>
-          <Route path="/business/:companyID" Component={SingleBusines}></Route>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor} >
+        <ToastContainer position="top-center" />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" Component={Home}></Route>
+            <Route path="/login" Component={Login}></Route>
+            <Route path="/register" Component={Register}></Route>
+            <Route
+              path="/products/:selectedCategory"
+              Component={ProductDisplay}
+            ></Route>
+            <Route
+              path="/business/:companyID"
+              Component={SingleBusines}
+            ></Route>
 
-          <Route path="/write-review" Component={TheReviewee}></Route>
-          <Route
-            path="/search-review"
-            Component={DisplayRevieweeResult}
-          ></Route>
+            <Route path="/write-review" Component={TheReviewee}></Route>
+            <Route
+              path="/search-review"
+              Component={DisplayRevieweeResult}
+            ></Route>
 
-          <Route
-            path="/products/:selectedCategory/:product/:id"
-            Component={SingleProduct}
-          ></Route>
-          <Route path="/products/feedback/:id" Component={PostReview}></Route>
-          <Route
-            path="/business/feedback/:id"
-            Component={WriteBusinessReview}
-          ></Route>
+            <Route
+              path="/products/:selectedCategory/:product/:id"
+              Component={SingleProduct}
+            ></Route>
+            <Route path="/products/feedback/:id" Component={PostReview}></Route>
+            <Route
+              path="/business/feedback/:id"
+              Component={WriteBusinessReview}
+            ></Route>
 
-          <Route path="/admin" Component={Admin}></Route>
-        </Routes>
-      </BrowserRouter>
+            <Route path="/admin" Component={Admin}></Route>
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 }

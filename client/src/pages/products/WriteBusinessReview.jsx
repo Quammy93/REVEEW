@@ -2,9 +2,9 @@ import React from "react";
 import { Checkbox, Rate, Progress, Divider } from "antd";
 import axios from "axios";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 
-//const url = "/api";
+const url = "/api";
 
 const WriteBusinessReview = () => {
   const { id } = useParams();

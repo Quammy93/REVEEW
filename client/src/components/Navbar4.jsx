@@ -9,8 +9,8 @@ import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import ServiceCategory from "./ServiceCategory";
 import Location from "./Location";
-const url = "http://localhost:5000/api";
-//const url = "/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 import { connect } from "react-redux";
 import {
   SET_SEARCH_ITEM,
@@ -22,7 +22,7 @@ import {
   SET_IS_LOCATION_CONTAINER_OPEN,
   SET_IS_SERVICE_CONTAINER_OPEN,
   SET_SERVICE_CATEGORY,
-  SET_SERVICE_LOCATION
+  SET_SERVICE_LOCATION,
 } from "../redux/action";
 
 const Navbar4 = ({
@@ -60,6 +60,9 @@ const Navbar4 = ({
     // setIsServiceContainerOpen,
   } = useGlobalContext();
 
+  console.log("....user", user);
+
+  const { name } = user;
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closesubemenu();
@@ -175,7 +178,7 @@ const Navbar4 = ({
           <div>Contact Us</div>
 
           {isLogin ? (
-            <b>S</b>
+            <b>{name.charAt(0).toUpperCase()}</b>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>

@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar1 from "../../components/Navbar1";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
 import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
@@ -9,7 +9,7 @@ import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { SET_BUSINESS_INFO } from "../../redux/action";
 import { connect } from "react-redux";
 
-//const url = "/api";
+const url = "/api";
 
 import { useGlobalContext } from "../../utils/context";
 

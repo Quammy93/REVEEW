@@ -5,9 +5,9 @@ import "../../assets/css/singleProduct.css";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 import { useGlobalContext } from "../../utils/context";
-//const url = "/api";
+const url = "/api";
 
 import { Alert, Space, Spin } from "antd";
 import { connect } from "react-redux";
