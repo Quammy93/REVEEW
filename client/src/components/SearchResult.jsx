@@ -1,8 +1,8 @@
 import React from "react";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-const url = "http://localhost:5000/api";
-//const url = "/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 import { useNavigate } from "react-router-dom";
 import { Rate } from "antd";
 import { connect } from "react-redux";

@@ -1,8 +1,8 @@
 import React from "react";
 import "antd/dist/antd";
-//const url = "/api";
+const url = "/api";
 //const url https://reveew.onrender.com/api/login
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";
@@ -18,7 +18,7 @@ import { useGlobalContext } from "../utils/context";
 import { SET_USER, SET_IS_LOGIN } from "../redux/action";
 import { connect } from "react-redux";
 
-const Login = ({ user, isLogin, setUser,setIsLogin }) => {
+const Login = ({ user, isLogin, setUser, setIsLogin }) => {
   // const { user, setUser } = useGlobalContext();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
@@ -33,13 +33,13 @@ const Login = ({ user, isLogin, setUser,setIsLogin }) => {
         if (response.status == "200") {
           console.log(response.data.user);
           setUser(response.data.user);
-          setIsLogin(true)
+          setIsLogin(true);
 
-       //   localStorage.setItem("loggedIn", true);
-        //  localStorage.setItem(
-        //    "loggedUser",
-         ///   JSON.stringify(response.data.user)
-       //   );
+          //   localStorage.setItem("loggedIn", true);
+          //  localStorage.setItem(
+          //    "loggedUser",
+          ///   JSON.stringify(response.data.user)
+          //   );
           toast.success("Login successfully");
         }
       })
@@ -168,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
     setIsLogin: (status) =>
-      dispatch({ type: SET_IS_LOGIN, payload: { statu: status } }),
+      dispatch({ type: SET_IS_LOGIN, payload: { status: status } }),
   };
 };
 

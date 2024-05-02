@@ -6,8 +6,8 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const url = "http://localhost:5000/api";
-//const url = "/api";
+//const url = "http://localhost:5000/api";
+const url = "/api";
 
 export default function Navbar1() {
   const {

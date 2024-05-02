@@ -6,10 +6,10 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const url = "http://localhost:5000/api";
+//const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
 import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
-//const url = "/api";
+const url = "/api";
 
 const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch ,isLogin,user}) => {
   const {
@@ -25,6 +25,8 @@ const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, clos
 
    // setIsLoadingSearch,
   } = useGlobalContext();
+  console.log("....user",user)
+const {name}=user
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -113,14 +115,13 @@ const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, clos
         <div className="end-nav-list">
           <div>Contact Us</div>
           <div>
-            {isLogin ?  <b>S</b>: <Link to={"/login"}>
-              
-              
-              
-             <button className="sign-in-btn">Sign In</button>
-             
-            </Link>}
-           
+            {isLogin ? (
+              <b> {name.charAt(0).toUpperCase()}</b>
+            ) : (
+              <Link to={"/login"}>
+                <button className="sign-in-btn">Sign In</button>
+              </Link>
+            )}
           </div>
         </div>
       </nav>
