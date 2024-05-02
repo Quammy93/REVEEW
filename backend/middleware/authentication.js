@@ -4,6 +4,7 @@ const UnauthorizedError = require("../errors/UnauthorizedError");
 
 const authenticateUser = async (req, res, next) => {
   const { token } = req.cookies;
+  
   console.log(token);
 
   if (!token) {

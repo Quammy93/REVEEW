@@ -1,0 +1,284 @@
+.display-review-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+}
+.display-review-top h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+.select-sort {
+  margin-left: 5px;
+}
+.display-business-container {
+  display: grid;
+  grid-template-columns: 24% 74%;
+}
+.display-business-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background-color: aqua;
+  width: 100%;
+  height: 150px;
+  margin: 10px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.business-filter {
+  width: 90%;
+  height: 500px;
+  background-color: bisque;
+  margin-left: 15px;
+  padding: 10px;
+}
+.bsn-img {
+  height: 120px;
+  width: 120px;
+  margin-right: 5px;
+}
+.bsn-art-container {
+  display: flex;
+  padding: 15px;
+}
+.bsn-art-container h2 {
+  font-size: 20px;
+  font-weight: 600px;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.display-business-article p {
+  margin-bottom: 0;
+}
+
+.radio-any {
+  border: 1px solid gainsboro;
+  padding: 5px;
+  font-weight: bold;
+  color: blue;
+}
+.select-service {
+  width: 80%;
+  padding: 5px;
+  font-size: 18px;
+  outline: none;
+}
+.location {
+  margin: 0;
+}
+.bsn-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 80%;
+}
+
+.display-business-article-single-bsn {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  background-color: aqua;
+  width: 100%;
+  height: 250px;
+  cursor: pointer;
+  font-weight: bolder;
+  align-items: center;
+}
+.bsn-img-single-bsn {
+  height: 200px;
+  width: 200px;
+  margin-right: 20px;
+}
+.bsn-art-container-single-bsn {
+  display: grid;
+  padding: 15px;
+  justify-content: space-between;
+  grid-template-columns: 1fr 1.5fr;
+  align-items: center;
+}
+.bsn-art-container-single-bsn h2 {
+  font-size: 30px;
+  font-weight: 600px;
+  padding: 0;
+  margin-bottom: 5px;
+  font-family: sans-serif, Helvetica, sans-serif;
+}
+
+.website-link {
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid gainsboro;
+  width: 300px;
+  margin-left: -5%;
+  border-radius: 15px;
+}
+.bsn-div {
+  width: 300px;
+  border: 1px solid gainsboro;
+}
+
+.writer-container {
+  height: 70px;
+  width: 95%;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bsn-review-info {
+  width: 95%;
+  height: 450px;
+  margin-top: 20px;
+  background-color: black;
+}
+
+.bsn-reviews {
+  width: 95%;
+  height: 530px;
+  margin-top: 20px;
+  background-color: black;
+  margin-bottom: 10px;
+}
+.bsn-info {
+  width: 95%;
+  background-color: antiquewhite;
+  height: 700px;
+  padding: 10px;
+}
+.bsn-map {
+  width: 80%;
+  height: 300px;
+  background-color: blue;
+  margin-top: 40px;
+}
+.single-bsn-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  margin: 40px 60px 0 80px;
+}
+
+.writer-avarta {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  padding: 5px;
+}
+.writer-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.check1 {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.div {
+  width: 300px;
+  height: 15px;
+  background-color: white;
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+.div2 {
+  width: 100px;
+  height: 15px;
+  background-color: rgb(99, 32, 32);
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+.review-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 7px;
+}
+.div-section-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-bottom: -10px;
+}
+.div-label {
+  font-size: 15px;
+  margin-bottom: 5px;
+  padding: 0;
+  height: 15px;
+}
+.progress1 {
+  width: 300px;
+  font-size: larger;
+}
+
+
+/*
+
+.rate-num-rating1 {
+  font-size: small;
+}
+*/
+.rev-rate-review-detail {
+  font-size: 100px;
+  font-weight: 600;
+}
+.review-detail-main-container{padding: 10px;}
+.ant-progress-inner {
+  height: 12px !important;
+}
+.ant-progress-bg {
+  height: 12px !important;
+}
+.ant-progress-outer {
+  height: 0px !important;
+}
+.progress1.css-dev-only-do-not-override-djtmh8 {
+  height: 0px;
+}
+.span-pro {
+  height: 12px;
+  margin-bottom: 10px;
+}
+.divider-rev {
+  color: white;
+  background-color: white;
+}
+.span-padding {
+  padding: 6px;
+  font-size: 18px;
+  border: 1px solid white;
+}
+.bsn-rev-foot-1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 0 40px;
+  margin-bottom: 10px;
+}
+.bsn-rev-foot-2 {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  margin-left: 40px;
+}
+.x-star {
+  margin-right: 10px;
+}
+
+.write-bsn-rev-container{width: 500px;height: 650px;background-color: aqua;padding: 30px;margin:20px auto;border-radius: 5px;}
+
+.write-bsn-rev-container h3{font-size: 15px; font-weight:bolder; margin: 0;padding: 0;}
+.write-rev-span{display: flex;flex-direction: column;margin: 20px 0;}
+.rev-input{width: 90%; height: 40px; outline: none;font-size: 17px;border-radius: 5px;outline: none;padding: 10px;}
+.text-area-rev{width: 90%;outline: none;font-size: 17px;padding: 10px;border-radius: 5px;outline: none;}
+.rev-date-input{width: 200px; height: 30px;font-size: 17px; border-radius: 5px;outline: none;padding: 10px;}
+.rev-submit{display: flex;justify-content: center;align-items: center;}
+.rev-submit-btn{padding: 10px;font-size: 18px; width: 150px;border-radius: 5px; outline: none;cursor: pointer;}

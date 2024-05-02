@@ -15,9 +15,11 @@ import axios from "axios";
 //const url = "http://localhost:5000/api";
 const url = "/api";
 import User from "./User";
+import { connect } from "react-redux";
+import { SET_SHOW_SIDEBAR } from "../redux/action";
 
-const Sidebar = () => {
-  const { showSidebar, setShowSidebar } = useGlobalContext();
+const Sidebar = ({ showSidebar, setShowSidebar }) => {
+  const {  } = useGlobalContext();
   console.log(showSidebar);
 
   const closesidebar = () => {
@@ -41,11 +43,30 @@ const Sidebar = () => {
       <NavLinks />
 
       <div className="user-detail">
-      
         <User />
       </div>
     </div>
   );
 };
 
-export default Sidebar;
+
+const mapStateToProps = (state) => {
+  return {
+    showSidebar: state.appFunctions.showSidebar,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    setShowSidebar: (status) =>
+      dispatch({
+        type: SET_SHOW_SIDEBAR,
+        payload: { status: status },
+      }),
+
+  };
+};
+
+
+
+export default  connect(mapStateToProps,mapDispatchToProps) (Sidebar);

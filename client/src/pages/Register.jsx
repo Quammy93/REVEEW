@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import "../assets/css/navbar.css";
@@ -29,7 +29,7 @@ const Register = () => {
       console.log(error.response.data.msg);
       console.log(error.response.data.msg);
       setLoading(false);
-    
+
       toast.error(error.response.data.msg);
     });
   };
@@ -45,10 +45,8 @@ const Register = () => {
         if (response.status === 201) {
           console.log(response.data.token);
 
-          
           toast.success("Registered successfully");
 
-        
           console.log("done");
         }
         setLoading(false);
@@ -58,7 +56,6 @@ const Register = () => {
       })
       .catch((error) => {
         // console.log(error.response);
-       
       });
   };
 
@@ -108,13 +105,11 @@ const Register = () => {
           <h2 className="reg-heading" style={{ color: "white" }}>
             Reveew
           </h2>
-          
 
           <h4 className="reg-sub-heading" style={{ color: "white" }}>
             Register Your account
           </h4>
           <Form
-           
             form={form}
             name="register"
             onFinish={onFinish}
@@ -151,7 +146,6 @@ const Register = () => {
             </Form.Item>
             <Form.Item
               name="email"
-            
               rules={[
                 {
                   type: "email",
@@ -190,7 +184,6 @@ const Register = () => {
 
             <Form.Item
               name="confirm"
-              
               dependencies={["password"]}
               hasFeedback
               rules={[

@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import {AppProvider} from "./utils/context.jsx";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AppProvider>

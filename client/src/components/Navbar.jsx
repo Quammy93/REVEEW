@@ -31,6 +31,8 @@ const Navbar = () => {
     setProducts,
     isProductLoading,
     setIsProductLoading,
+    isSearching,
+    setIsSearching,
   } = useGlobalContext();
 
   // console.log("name", loggedUser.name);
@@ -58,9 +60,7 @@ const Navbar = () => {
 
   const getAllProducts = async (searchValue) => {
     return await axios
-      .get(
-        `${url}/products?page=${1}&limit=${8}&search=${searchValue}`
-      )
+      .get(`${url}/products?page=${1}&limit=${8}&search=${searchValue}`)
       .catch((error) => {
         console.log(error);
         //toast.error(error.message);
@@ -72,9 +72,9 @@ const Navbar = () => {
     try {
       const response = await getAllProducts(searchValue);
 
-      const { products,numOfPages } = response.data;
+      const { products, numOfPages } = response.data;
       setProducts(products);
-     
+
       setIsProductLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -83,6 +83,11 @@ const Navbar = () => {
 
   const onSearch = (value, _e, info) => {
     console.log(info?.source, value);
+    if (value === "") {
+      setIsSearching(false);
+    } else {
+      setIsSearching(true);
+    }
     fetchData(value);
   };
 

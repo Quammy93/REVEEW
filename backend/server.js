@@ -8,6 +8,10 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 require("express-async-errors");
 
+const businesjson = require("./businessList");
+const Item = require("./models/Product");
+const Reviews = require("./models/Reviews");
+
 const connectDb = require("./db/ConnectDb");
 require("dotenv").config(); //
 
@@ -18,11 +22,10 @@ const corsOptions = {
 
 const AuthRoute = require("./routes/auth");
 const reviewRoute = require("./routes/reviewRoute");
-const feedRoutes = require("./routes/feedRoute");
+
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
 
-const Feed = require("./models/Feed");
 // middleware
 app.use(express.json());
 app.use(cors());
@@ -34,9 +37,10 @@ app.use(express.static(path.resolve(__dirname, "../client/dist")));
 app.use("/api", AuthRoute);
 app.use("/api/reviews", reviewRoute);
 //app.use('/api', AuthRoute)
-app.use("/api/feeds", feedRoutes);
+
 app.use("/api/users", userRoute);
-app.use("/api/products", productRoute);
+app.use("/api", productRoute);
+
 app.get("/doc");
 
 app.get("/doc", (req, res) => {
@@ -53,7 +57,12 @@ app.use(errorHandler);
 const start = async () => {
   await connectDb(process.env.MONGO_URL);
 
-  app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+  await app.listen(port, () =>
+    console.log(`Server is running on port ${port}`)
+  );
+
+  // await Item.create(businesjson);
 };
 
 start();

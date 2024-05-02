@@ -1,16 +1,62 @@
 import React from "react";
 import { useGlobalContext } from "../utils/context";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+//const url = "/api";
+const url = "http://localhost:5000/api";
+import { connect } from "react-redux";
+import { SET_PRODUCTS,SET_IS_PRODUCTLOADING } from "../redux/action";
 
-const Submenu = () => {
+
+const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProductLoading}) => {
   const container = React.useRef();
+
   const {
-    location,
-    isShowSubmenu,
-    page: { page, links },
+    // setProducts,
+    //setIsShowSubmenu,
+    // setIsProductLoading,
+    //  location,
+    // isShowSubmenu,
+    //  page: { page, links },
+    //  closeSubmenu,
   } = useGlobalContext();
 
+  const navigate = useNavigate();
+
+  /**
+  const loadProduct = async (category) => {
+    //  closeSubmenu();
+    await fetchData(category);
+  };
+
+ 
+  const getAllProducts = async (category) => {
+    console.log(category);
+    return await axios
+      .get(`${url}/products?page=${1}&limit=${6}&category=${category}`)
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const fetchData = async (category) => {
+    setIsProductLoading(true);
+    try {
+      const response = await getAllProducts(category);
+
+      const { products, totalCount, numOfPages } = response.data;
+      setProducts(products);
+
+      setIsProductLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+ */
   // setting up usestate ref
   const [columns, setColumns] = React.useState("col-2");
+
   React.useEffect(() => {
     setColumns("col-2");
     //setting up the location of the submenu
@@ -84,7 +130,10 @@ const Submenu = () => {
           const { url, icon, label } = link;
 
           return (
-            <a key={index} href={url} className="submenu-links">
+            <a key={index} href={url} 
+              className="submenu-links"
+              onClick={() => console.log("....presing")} //loadProduct(label)}
+            >
               {icon}
               {label}
             </a>
@@ -95,4 +144,29 @@ const Submenu = () => {
   );
 };
 
-export default Submenu;
+
+const mapStateToProps=(state)=>{
+
+  return {
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
+    page: state.appFunctions.page,
+    location: state.appFunctions.location,
+  };
+
+}
+
+const mapDispatchToProps=(dispatch)=>{
+
+
+return{
+setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
+
+setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{status:status}})
+
+
+}
+
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)  (Submenu);

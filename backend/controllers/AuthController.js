@@ -27,10 +27,11 @@ const register = async (req, res) => {
 };
 const login = async (req, res) => {
   const { email, password } = req.body;
+  console.log(email)
   if (!email || !password) {
     throw new BadRequestError("Please provide email and password");
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email:email });
 
   if (!user) {
     throw new UnAunthenticatedError("Invalid credentials,user not found");
@@ -55,7 +56,7 @@ const logout = (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + 1000),
   });
-  res.status(StatusCodes.OK).json({ msg: "user logged out!" });
+  res.status(StatusCodes.OK).json({user:{}, msg: "user logged out!" });
 };
 
 module.exports = { register, login, logout };

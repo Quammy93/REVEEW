@@ -1,19 +1,25 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
+import Navbar2 from "../../components/Navbar2";
 import "../../assets/css/singleProduct.css";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { Rate, Progress } from "antd";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+import { useGlobalContext } from "../../utils/context";
+//const url = "/api";
+
 import { Alert, Space, Spin } from "antd";
+import { connect } from "react-redux";
+import { SET_PRODUCT_INFO } from "../../redux/action";
 
-
-const SingleProduct = () => {
+const SingleProduct = ({ productInfo, setProductInfo }) => {
+  // const { productInfo, setProductInfo } = useGlobalContext();
+  console.log(productInfo)
   const location = useLocation();
   const { category, product, id } = useParams();
   const navigate = useNavigate();
-  const [productInfo, setProductInfo] = React.useState({});
+
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -27,7 +33,7 @@ const SingleProduct = () => {
   let totalReviews = 0;
 
   const getAllProducts = async () => {
-    return await axios.get(`${url}/products/${id}`).catch((error) => {
+    return await axios.get(`${url}/item/${id}`).catch((error) => {
       console.log(error);
       //toast.error(error.message);
     });
@@ -45,11 +51,12 @@ const SingleProduct = () => {
     try {
       const response = await getAllProducts();
 
-      const { product } = response.data;
+      const { item } = response.data;
 
       console.log(response);
 
-      setProductInfo(product);
+      console.log("productInfo",item)
+      setProductInfo(item);
       setIsProductLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -63,15 +70,15 @@ const SingleProduct = () => {
   }, []);
   console.log(productInfo);
   const {
-    product_name,
-    product_desc,
+    name,
+    desc,
     price,
-    product_Avgrating,
+    avgrating,
     numOfReview,
     img,
-    products_imgs,
-    product_brand,
-    product_features,
+    imgs,
+    brand,
+    features,
     specification,
   } = productInfo;
 
@@ -117,7 +124,7 @@ const SingleProduct = () => {
   return (
     <div>
       <main className="navbar-section">
-        <Navbar />
+        <Navbar2 />
       </main>
       {isproductLoading && (
         <div className="product-spin">
@@ -173,7 +180,7 @@ const SingleProduct = () => {
                     </h2>
                     <div className="underline"></div>
                     <main className="description">
-                      <p>{product_desc}</p>
+                      <p>{desc}</p>
                       <p>Price:${price}</p>
                     </main>
                   </div>
@@ -192,7 +199,7 @@ const SingleProduct = () => {
                         </h4>
                         <div className="underline"></div>
                         <ul className="key-lists">
-                          {product_features?.map((item) => {
+                          {features?.map((item) => {
                             return `
                               ${item}
                           `;
@@ -222,14 +229,14 @@ const SingleProduct = () => {
                           <main className="average-rating-container">
                             <div>
                               <p className="avg-rate-p">
-                                <b>{product_Avgrating}</b> <span>/</span>5
+                                <b>{avgrating}</b> <span>/</span>5
                               </p>
                             </div>
 
                             <div>
                               <Rate
-                                value={product_Avgrating}
-                                defaultValue={product_Avgrating}
+                                value={avgrating}
+                                defaultValue={avgrating}
                               />
                             </div>
                             <p>{numOfReview} verified ratings</p>
@@ -453,4 +460,16 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+const mapStateToProps = (state) => {
+  return {
+    productInfo: state.product.productInfo,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setProductInfo: (product) =>
+      dispatch({ type: SET_PRODUCT_INFO, payload: { product: product } }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

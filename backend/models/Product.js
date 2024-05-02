@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 
-const ProductSchema = new mongoose.Schema({
-  product_name: { type: String },
+const ItemSchema = new mongoose.Schema({
+  name: { type: String },
+  type: {
+    type: String,
+    enum: ["business", "product"],
+  },
   img: { type: String },
-  product_imgs: { type: [String] },
-  product_category: {
+  imgs: { type: [String] },
+  category: {
     type: String,
     enum: [
       "Appliances",
@@ -12,20 +16,28 @@ const ProductSchema = new mongoose.Schema({
       "Phone and tablet",
       "Electronics",
       "Fashion",
+      "Restaurants",
+      "Transport and Logistic",
+      "Hotel",
+      "Travel and Booking",
     ],
+  },
+  location: {
+    type: String,
+    enum: ["Lagos", "Ibadan", "Oyo", "Osun", "Ondo"],
   },
   price: { type: Number },
   numOfReview: { type: Number, default: 0 },
-  product_subCategory: { type: String },
-  product_brand: { type: String },
-  product_desc: { type: String },
-  product_features: { type: [String] },
+  subCategory: { type: String },
+  brand: { type: String },
+  desc: { type: String },
+  features: { type: [String] },
   specification: { type: [String] },
-  product_Avgrating: { type: Number, default: 0 },
+  avgrating: { type: Number, default: 0 },
 });
 //deleting the review if a product is remove
-ProductSchema.pre("remove", async function () {
-  await this.model("Reviews").deleteMany({ product: this._id });
+ItemSchema.pre("remove", async function () {
+  await this.model("Reviews").deleteMany({ item: this._id });
 });
 
-module.exports = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model("Item", ItemSchema);

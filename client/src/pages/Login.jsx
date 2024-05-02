@@ -1,7 +1,8 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+//const url https://reveew.onrender.com/api/login
+const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";
@@ -14,16 +15,17 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "../utils/context";
+import { SET_USER, SET_IS_LOGIN } from "../redux/action";
+import { connect } from "react-redux";
 
-const Login = () => {
-  const { user, setUser,} = useGlobalContext();
+const Login = ({ user, isLogin, setUser,setIsLogin }) => {
+  // const { user, setUser } = useGlobalContext();
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const userLogin = async (credentials) => {
-   
     return await axios
       .post(`${url}/login`, credentials)
       .then((response) => {
@@ -31,12 +33,13 @@ const Login = () => {
         if (response.status == "200") {
           console.log(response.data.user);
           setUser(response.data.user);
+          setIsLogin(true)
 
-          localStorage.setItem("loggedIn", true);
-          localStorage.setItem(
-            "loggedUser",
-            JSON.stringify(response.data.user)
-          );
+       //   localStorage.setItem("loggedIn", true);
+        //  localStorage.setItem(
+        //    "loggedUser",
+         ///   JSON.stringify(response.data.user)
+       //   );
           toast.success("Login successfully");
         }
       })
@@ -78,7 +81,7 @@ const Login = () => {
         //  console.log(error.request);
         //  console.log(error.message);
       });
-      setLoading(false)
+    setLoading(false);
   };
   return (
     <div className="login-wrapper">
@@ -140,7 +143,12 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-btn" loading={loading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-btn"
+              loading={loading}
+            >
               Log in
             </Button>
             <p style={{ color: "red" }}>
@@ -153,4 +161,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return { user: state.user.user, isLogin: state.user.isLogin };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
+    setIsLogin: (status) =>
+      dispatch({ type: SET_IS_LOGIN, payload: { statu: status } }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
