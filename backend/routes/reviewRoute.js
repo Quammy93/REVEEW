@@ -16,7 +16,7 @@ const {
 
 router
   .route("/:id")
-  .post(authenticateUser, authorizeRoles("admin"), createReview);
+  .post(authenticateUser, authorizeRoles("admin", "user"), createReview);
 router.route("/:id").get(getAllReviews);
 router
   .route("/modify/:id")

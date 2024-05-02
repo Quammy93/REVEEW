@@ -60,7 +60,7 @@ const start = async () => {
     console.log(`Server is running on port ${port}`)
   );
 
- // await Item.create(businesjson);
+  // await Item.create(businesjson);
 };
 
 start();
