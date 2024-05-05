@@ -157,3 +157,34 @@ aside {
 .service-container {
   padding: 10px;
 }
+
+.business-review-article {
+  padding: 10px;
+}
+.review-reaction {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+}
+.review-reaction span span {
+  margin-right: 10px;
+}
+.reviewer-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.review-duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.writer-container {
+  padding: 10px;
+}

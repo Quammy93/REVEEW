@@ -1,29 +1,44 @@
 import React from "react";
 import { Checkbox, Rate, Progress, Divider } from "antd";
 import axios from "axios";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  useParams,
+  useNavigate,
+  useLocation,
+  redirect,
+} from "react-router-dom";
+import SingleBusines from "./SingleBusines";
 //const url = "http://localhost:5000/api";
 
 const url = "/api";
 
 const WriteBusinessReview = () => {
+  const urlLocation = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const [title, setTitle] = React.useState("");
   const [comment, setComment] = React.useState("");
   const [value, setValue] = React.useState(3);
   const [experienceDate, setExperienceDate] = React.useState(Date.now());
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+  const single = urlLocation.state?.single?.pathname || "/";
 
   const postFeedBack = async (feedback) => {
     await axios
       .post(`${url}/reviews/${id}?reviewed=business`, { feedback })
-      .catch((erro) => {
-        console.log(erro);
+      .then(() => {
+        console.log("sent successfuly");
+        navigate(single, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(error.response.status);
+        if (error.response.status == "401") {
+          navigate("/login", { state: { from: urlLocation }, replace: true });
+          toast.warning("Login to Post a Review");
+        }
       });
-    console.log("sent successfuly");
   };
-
-  const urlLocation = useLocation();
 
   const queryName = new URLSearchParams(urlLocation.search).get("queryName");
 

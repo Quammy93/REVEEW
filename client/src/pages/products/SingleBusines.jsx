@@ -8,6 +8,9 @@ import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { SET_BUSINESS_INFO } from "../../redux/action";
 import { connect } from "react-redux";
+import { IoMdFlag } from "react-icons/io";
+import { FaReply } from "react-icons/fa";
+import { AiTwotoneLike } from "react-icons/ai";
 
 const url = "/api";
 
@@ -25,6 +28,7 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
   const [isReviewLoading, setIsReviewLoading] = React.useState(false);
 
   let totalReviews = 0;
+  const urlLocation = useLocation();
 
   const getAllReviews = async (id) => {
     return await axios.get(`${url}/reviews/${id}`).catch((error) => {
@@ -106,6 +110,14 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
     fetchData(companyID);
   }, []);
 
+
+
+ 
+
+
+
+
+
   const { _id, name, category, location, numOfReview, img, avgrating, desc } =
     businessInfo;
 
@@ -143,11 +155,16 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
             <span className="writer-span">
               <img src={avarta} alt="" className="writer-avarta" />
 
-              <Link
-                to={`/business/feedback/${_id}?reviewed=product&queryName=${name}`}
+              <p
+                onClick={() => {
+                  navigate(
+                    `/business/feedback/${_id}?reviewed=product&queryName=${name}`,
+                    { state: { single: urlLocation }, replace: true }
+                  );
+                }}
               >
                 Write a Review
-              </Link>
+              </p>
             </span>{" "}
             <span>
               <Rate value={avgrating} defaultValue={avgrating} />
@@ -162,128 +179,82 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
               revN3={numOfThreeReview}
               revN4={numOfFourReview}
               revN5={numOfFiveReview}
+              cent5={Math.round((numOfFiveReview / numOfReview) * 100)}
+              cent4={Math.round((numOfFourReview / numOfReview) * 100)}
+              cent3={Math.round((numOfThreeReview / numOfReview) * 100)}
+              cent2={Math.round((numOfTwoReview / numOfReview) * 100)}
+              cent1={Math.round((numOfOneReview / numOfReview) * 100)}
             />
           </div>
           <main>
-            {" "}
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
+
+
+            { reviews.map((review)=>{
+
+const {_id,title,comment,value,reviewer,formattedTimestamp}=review
+
+return (
+  <div className="bsn-reviews">
+    <div className="writer-container">
+      {" "}
+      <span className="writer-span">
+        <img src={avarta} alt="" className="writer-avarta" />
+        <span className="reviewer-detail">
+          <span>{reviewer.name}</span>
+          <span>{formattedTimestamp}</span>
+        </span>
+      </span>{" "}
+    </div>
+    <Divider className="divider-rev" />
+    <article className="review-duration">
+      {" "}
+      <span>
+        <Rate value={5} defaultValue={5} /> Verified{" "}
+      </span>
+      19 hours ago
+    </article>
+    <article className="business-review-article">
+      <h3>
+        <b>{title}</b>
+      </h3>
+      <p>{comment}</p>
+      <p>
+        {" "}
+        <b>Date of Experience:</b>
+        {formattedTimestamp}
+      </p>
+    </article>
+    <Divider className="divider-rev" />
+    <div className="review-reaction">
+      <span>
+        <span>
+          <AiTwotoneLike />
+        </span>
+        <span>
+          <FaReply />
+        </span>
+        <span>
+          <IoMdFlag />
+        </span>
+      </span>
+    </div>
+  </div>
+);
+
+
+            })
+
+
+            }
+           
+           
+          
           </main>
+
+
+
+
+
         </section>
         <section>
           <div className="bsn-info">
@@ -336,7 +307,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setBusinessInfo:(business)=>dispatch({type:SET_BUSINESS_INFO,payload:{business:business}})
+    setBusinessInfo: (business) =>
+      dispatch({ type: SET_BUSINESS_INFO, payload: { business: business } }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBusines);
