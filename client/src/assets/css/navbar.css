@@ -464,7 +464,7 @@ nav {
 
   background-color: black;
   position: absolute;
-  transform: translate(50%, -1%);
+  transform: translate(60%, 250%);
   z-index: 500;
   border-radius: 5px;
   

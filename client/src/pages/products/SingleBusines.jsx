@@ -228,13 +228,16 @@ return (
     <div className="review-reaction">
       <span>
         <span>
-          <AiTwotoneLike />
+          <AiTwotoneLike className="review-reaction-icon" />
         </span>
         <span>
-          <FaReply />
+          <FaReply className="review-reaction-icon" />
         </span>
         <span>
-          <IoMdFlag />
+          <IoMdFlag
+            className="review-reaction-icon"
+            style={{ color: "red" }}
+          />
         </span>
       </span>
     </div>

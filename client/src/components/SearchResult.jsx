@@ -89,11 +89,11 @@ const SearchResult = ({
         </h5>
 
         <div>
-          {!isLoadingSearch && searchResult.length == 0 && "No result found"}
+          {!isLoadingSearch && searchResult?.length == 0 && "No result found"}
         </div>
 
         <div>
-          {searchResult.map((result) => {
+          {searchResult?.map((result) => {
             const {
               _id,
               product_Avgrating,

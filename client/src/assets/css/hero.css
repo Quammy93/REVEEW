@@ -27,10 +27,10 @@
   align-items: start;
   width: 420px;
   padding: 10px;
+  transition: all 0.5s ease;
 }
 .hero-article-main:hover {
-  transform: scale(115%);
-  transition: 2s linear;
+  transform: scale(1.1);
 }
 .hero-feature-article {
   display: grid;
