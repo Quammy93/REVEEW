@@ -3,12 +3,18 @@
   width: 80%;
 
   position: absolute;
-  top: 750px;
+  top: 115%;
   padding: 20px 0px 0px 60px;
 }
 
 .hero-container h3 {
   margin-bottom: 30px;
+}
+
+.hero-image,
+.overlay {
+  margin-top: 68px;
+  height: 100vh;
 }
 
 .hero-main {
@@ -161,9 +167,11 @@
 .self-btn {
   padding: 15px;
   border: none;
-  font-size: medium;
-  background-color: blue;
+  font-size: 18px;
+  background-color:#232c59 ;
   border-radius: 5px;
+  color: white;
+  cursor: pointer;
 }
 .hero2-display {
   padding: 20px 0;

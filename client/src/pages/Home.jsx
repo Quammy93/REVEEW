@@ -250,11 +250,11 @@ const Home = ({ showSidebar, closesubemenu }) => {
 
               <ul className="explore-category-list">
                 {sublinks[0].links.map((link, index) => {
-                  const { label, icon } = link;
+                  const { label, icon,icon1 } = link;
 
                   return (
                     <li className="cat-list" key={index}>
-                      <span className="list-icon">{icon}</span>{" "}
+                      <span className="list-icon">{icon1}</span>{" "}
                       <span className="list-label">{label}</span>
                     </li>
                   );
