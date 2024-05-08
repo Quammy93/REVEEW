@@ -3,34 +3,50 @@ import logo2 from "../assets/images/Group 2.png";
 import { useGlobalContext } from "../utils/context";
 import Submenu from "./Submenu";
 import SearchResult from "./SearchResult";
+import { useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 
-export default function Navbar1() {
+import { connect } from "react-redux";
+import {
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_SEARCH_RESULT,
+  OPEN_SUBMENU,
+  CLOSE_SUBMENU,
+  SET_IS_LOADING_SEARCH,
+} from "../redux/action";
+
+const Navbar1=({
+  searchItem,
+  setSearchItem,
+  setIsSearching,
+  setSearchResult,
+  closesubemenu,
+  opensubemenu,
+  setIsLoadingSearch,
+  isLogin,
+  user,
+})=> {
   const {
-    closeSubmenu,
-    openSubmenu,
-    isSidebarOpen,
-    setIsSidebarOpen,
-    searchItem,
-    setSearchItem,
-    searchResult,
-    setSearchResult,
-    isSearching,
-    setIsSearching,
-    isLoadingSearch,
-    setIsLoadingSearch,
+   
   } = useGlobalContext();
+
+  const { name } = user;
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
-      closeSubmenu();
+      closesubemenu();
     }
     console.log(e.target.classList);
   };
+
+
+
+  const navigate=useNavigate()
 
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
@@ -39,7 +55,7 @@ export default function Navbar1() {
     console.log(tempBtnLocation);
     const center = (tempBtnLocation.left + tempBtnLocation.right) / 2;
     const bottom = tempBtnLocation.bottom;
-    openSubmenu(page, { center, bottom });
+    opensubemenu(page, { center, bottom });
   };
 
   const handleSearch = async (e) => {
@@ -59,8 +75,8 @@ export default function Navbar1() {
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
@@ -81,9 +97,9 @@ export default function Navbar1() {
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <div>
+        <a href="/">
           <img src={logo2} alt="" className="newlogo" />
-        </div>
+        </a>
         <ul className="mid-nav-list">
           <li className="list-search">
             <span className="search-icon-cat">
@@ -104,15 +120,24 @@ export default function Navbar1() {
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Features
           </li>
-          <li> Write A Review</li>
+
+          <a href="/write-review" className="a">
+            <li> Write A Review</li>
+          </a>
         </ul>
 
         <div className="end-nav-list">
           <div>Contact Us</div>
 
-          <Link to={"/login"}>
-            <button className="sign-in-btn">Sign In</button>
-          </Link>
+          <div>
+            {isLogin ? (
+              <b> {name.charAt(0).toUpperCase()}</b>
+            ) : (
+              <Link to={"/login"}>
+                <button className="sign-in-btn">Sign In</button>
+              </Link>
+            )}
+          </div>
         </div>
       </nav>
       <Submenu />
@@ -120,3 +145,32 @@ export default function Navbar1() {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    searchItem: state.appFunctions.searchItem,
+    user: state.user.user,
+    isLogin: state.user.isLogin,
+  };
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    opensubemenu: (text, coordinate) =>
+      dispatch({ type: OPEN_SUBMENU, payload: { text, coordinate } }),
+
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+    setSearchResult: (result) =>
+      dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (Navbar1)

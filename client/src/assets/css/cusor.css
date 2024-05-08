@@ -1,0 +1,21 @@
+/* CursorGradient.css */
+.cursor-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 40000;
+}
+
+.gradient {
+  position: absolute;
+  width: 10px; /* Adjust size of the gradient circle */
+  height: 10px; /* Adjust size of the gradient circle */
+  background: radial-gradient(circle, gold,#232c59 );
+  border-radius: 50%; /* Make it circular */
+  transition: transform 0.2s ease;
+  pointer-events: none;
+  z-index: 400000;
+}

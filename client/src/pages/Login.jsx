@@ -1,8 +1,8 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "/api";
+//const url = "/api";
 //const url https://reveew.onrender.com/api/login
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";

@@ -1,3 +1,4 @@
+import * as actionCreators from "./redux/action";
 
 import Home from "./pages/Home";
 import "slick-carousel/slick/slick.css";
@@ -17,11 +18,12 @@ import TheReviewee from "./pages/products/TheReviewee";
 import DisplayRevieweeResult from "./pages/products/DisplayRevieweeResult";
 import SingleBusines from "./pages/products/SingleBusines";
 import WriteBusinessReview from "./pages/products/WriteBusinessReview";
+import Cusor from "./components/Cusor";
 
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { PersistGate } from "redux-persist/integration/react";
-import rootReducer from './redux/rootReducer'; 
+import rootReducer from "./redux/rootReducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 const persistConfig = {
@@ -31,9 +33,12 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+
+
 const store = createStore(
   persistedReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 })
 );
 
 const persistor = persistStore(store);
@@ -41,7 +46,8 @@ const persistor = persistStore(store);
 function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor} >
+      <PersistGate loading={null} persistor={persistor}>
+        <Cusor />
         <ToastContainer position="top-center" />
         <BrowserRouter>
           <Routes>

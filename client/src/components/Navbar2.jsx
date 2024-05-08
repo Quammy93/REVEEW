@@ -6,10 +6,10 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
 import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
-const url = "/api";
+//const url = "/api";
 
 const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch ,isLogin,user}) => {
   const {
@@ -62,11 +62,12 @@ const {name}=user
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
+      console.log()
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -84,7 +85,7 @@ const {name}=user
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <a href="">
+        <a href="/">
           <img src={logo2} alt="" className="newlogo" />
         </a>
         <ul className="mid-nav-list">

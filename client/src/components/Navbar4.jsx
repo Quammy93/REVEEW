@@ -9,8 +9,8 @@ import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import ServiceCategory from "./ServiceCategory";
 import Location from "./Location";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 import { connect } from "react-redux";
 import {
   SET_SEARCH_ITEM,
@@ -97,8 +97,8 @@ const Navbar4 = ({
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
@@ -169,7 +169,7 @@ const Navbar4 = ({
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Features
           </li>
-          <a href="/write-review" className=".a">
+          <a href="/write-review" className="a">
             <li> Write A Review</li>
           </a>
         </ul>

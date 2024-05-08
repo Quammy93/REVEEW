@@ -3,8 +3,8 @@ import Navbar4 from "../../components/Navbar4";
 import "../../assets/css/displayreview.css";
 //import { Rate } from "antd";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 
 import { useGlobalContext } from "../../utils/context";
 import { useNavigate } from "react-router-dom";

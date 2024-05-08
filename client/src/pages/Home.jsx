@@ -5,12 +5,17 @@ import Navbar2 from "../components/Navbar2";
 import { useGlobalContext } from "../utils/context";
 import sublinks from "../utils/data";
 import { connect } from "react-redux";
+import Typed from "typed.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import "../assets/css/hero.css";
 
-
-
 import Footer from "../components/Footer";
+
+import compass from "../assets/images/stepImages/compass.png";
+import right from "../assets/images/stepImages/right.png";
+import rightArrow from "../assets/images/stepImages/right-arrow.png";
 
 import Sidebar from "../components/Sidebar";
 import img from "../assets/images/main8.jpg";
@@ -40,12 +45,29 @@ import icon19 from "../assets/images/icon19.gif";
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
 import logo from "../assets/images/Group 2.png";
-import {CLOSE_SUBMENU} from "../redux/action"
-
+import { CLOSE_SUBMENU } from "../redux/action";
 
 const Home = ({ showSidebar, closesubemenu }) => {
+  AOS.init();
   //const {closeSubmenu } = useGlobalContext();
   let loggedUser = { name: "", role: "" };
+
+  const el = React.useRef();
+
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ["read", "post"],
+      typeSpeed: 200,
+      backSpeed: 200,
+      backDelay: 1000,
+      loop: true,
+    });
+
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
 
   //handling page
   /** 
@@ -77,18 +99,35 @@ const Home = ({ showSidebar, closesubemenu }) => {
         <div className="hero-aside" onMouseOver={closesubemenu}>
           <img src={img} alt="" className="hero-image" />
           <div className="overlay"></div>
-          <div className="intro-container">
-            <h4>
-              Read reviews ,Post Review .Find the brand and product you can
-              trust
-            </h4>
-            <p>Share your experience to help other make the right decision</p>
-            <button className="overlay-btn">Get Started</button>
-          </div>
+          <section className="intro-main-container">
+            <div
+              className="intro-container"
+              data-aos="fade-right"
+              data-aos-anchor-placement="top-center"
+            >
+              <h4>
+                <p className="intro-heading">
+                  <span ref={el}> Read</span>{" "}
+                  <span className="intro-heading1">reviews</span>{" "}
+                </p>
+                <main>
+                  <p>Find the brand and product you can trust</p>
+                  <p>
+                    Share your experience to help other make the right decision
+                  </p>
+                </main>
+              </h4>
+
+              <div className="overlay-btn-div">
+                {" "}
+                <button className="overlay-btn">Get Started</button>
+              </div>
+            </div>
+          </section>
         </div>
         {/**hero */}
 
-        <main className="hero-main">
+        <main className="hero-main" onMouseOver={closesubemenu}>
           <section className="hero-container">
             <h3>Features Builts For Everyone</h3>
 
@@ -190,7 +229,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
           </section>
         </main>
 
-        <aside className="hero-all">
+        <aside className="hero-all" onMouseOver={closesubemenu}>
           <section className="hero2-display">
             <div>
               <main className="self-img">
@@ -223,11 +262,20 @@ const Home = ({ showSidebar, closesubemenu }) => {
                 Sign up on reveew by filing the sign up form and get started w
               </p>
             </div>
+            <div className="step-img-div">
+              {" "}
+              <img src={right} alt="" className="step-img" />
+            </div>
 
             <div className="hero-step-container">
               <span className="hero-step-icon">2</span>
               <h3>Read Reviews</h3>
               <p>You can read reviews of others from their experience </p>
+            </div>
+
+            <div className="step-img-div">
+              {" "}
+              <img src={compass} alt="" className="step-img" />
             </div>
             <div className="hero-step-container">
               <span className="hero-step-icon">3</span>
@@ -250,7 +298,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
 
               <ul className="explore-category-list">
                 {sublinks[0].links.map((link, index) => {
-                  const { label, icon,icon1 } = link;
+                  const { label, icon, icon1 } = link;
 
                   return (
                     <li className="cat-list" key={index}>
@@ -266,7 +314,6 @@ const Home = ({ showSidebar, closesubemenu }) => {
           <section className="hero-abs">
             <div className="hero-abs1">
               <div className="hero-abs1-container">
-                <img src={logo} alt="" />
                 <h3>
                   Trustpilot is a review platform that’s open to everyone. Share
                   your experiences to help others make better choices and
@@ -287,6 +334,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
               </p>
             </div>
           </section>
+
           <main className="hero3">
             <section className="hero-contact-us">
               <div className="hero-contact">
@@ -319,13 +367,12 @@ const Home = ({ showSidebar, closesubemenu }) => {
 const mapStateToProps = (state) => {
   return {
     showSidebar: state.appFunctions.showSidebar,
-  }
-}
- const mapDispatchToProps = (dispatch) => {
- 
-  return { 
-    closesubemenu:()=> dispatch({type:CLOSE_SUBMENU})
-  }
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+  };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

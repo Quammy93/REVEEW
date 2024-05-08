@@ -6,9 +6,9 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 
-const url = "/api";
+//const url = "/api";
 import { connect } from "react-redux";
 
 import {
@@ -74,8 +74,8 @@ const Navbar3 = ({
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);

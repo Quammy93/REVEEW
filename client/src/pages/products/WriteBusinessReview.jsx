@@ -8,9 +8,9 @@ import {
   redirect,
 } from "react-router-dom";
 import SingleBusines from "./SingleBusines";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 
-const url = "/api";
+//const url = "/api";
 
 const WriteBusinessReview = () => {
   const urlLocation = useLocation();

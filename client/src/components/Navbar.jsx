@@ -8,8 +8,8 @@ import { FaUser, FaSortDown, FaCaretRight, FaBars } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = React.useState(false);

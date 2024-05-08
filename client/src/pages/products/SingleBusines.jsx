@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar1 from "../../components/Navbar1";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
 import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
@@ -12,7 +12,7 @@ import { IoMdFlag } from "react-icons/io";
 import { FaReply } from "react-icons/fa";
 import { AiTwotoneLike } from "react-icons/ai";
 
-const url = "/api";
+//const url = "/api";
 
 import { useGlobalContext } from "../../utils/context";
 
