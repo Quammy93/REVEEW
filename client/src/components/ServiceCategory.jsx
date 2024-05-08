@@ -30,7 +30,7 @@ const ServiceCategory = ({
   return (
     <article
       className={`${
-        isServiceContainerOpen ? "business-category show" : "business-category"
+        isServiceContainerOpen ? "business-category1 show" : "business-category1"
       }`}
       onMouseLeave={() => {
         setIsServiceContainerOpen(false);

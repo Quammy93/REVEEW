@@ -96,30 +96,30 @@ const SearchResult = ({
           {searchResult?.map((result) => {
             const {
               _id,
-              product_Avgrating,
-              product_brand,
-              product_category,
-              product_name,
+              avgrating,
+              brand,
+              category,
+              name,
             } = result;
 
             return (
               <div
                 key={_id}
                 onClick={() =>
-                  handleSearch(product_category, product_name, _id)
+                  handleSearch(category,name, _id)
                 }
                 className="search-result-div"
               >
-                <h5>{product_name}</h5>
+                <h5>{name}</h5>
                 <span className="search-result-container-list">
                   {" "}
-                  <h6>Category-{product_category}</h6>
+                  <h6>Category-{category}</h6>
                   <h6>120k Reviews</h6>
                   <span>
                     <Rate
                       disabled
-                      defaultValue={product_Avgrating}
-                      value={product_Avgrating}
+                      defaultValue={avgrating}
+                      value={avgrating}
                       className="rev-rate"
                     />
                   </span>

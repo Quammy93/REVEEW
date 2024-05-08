@@ -58,45 +58,47 @@ const TheReviewee = ({
     <div>
       <Navbar3 />
       <div className="reviewee-container">
-        <main>
+        <main className="review-input-container-main">
           <h2>Find a business to review</h2>
           <h4>
             Review anything from your favorite patio spot to your local flower
             shop.
           </h4>
-          <form action="" className="reviewee-form">
-            <div className="therevieweeinput">
+          <form action="" className="reviewee-form1">
+            <div className="therevieweeinput1">
               <aside>
                 {" "}
                 <input
                   type="text"
                   placeholder="try resturants,hotel..."
-                  className="find-reviewee-inpt1"
+                  className="find-reviewee-inpt11"
                   name="serviceCategory"
                   value={serviceCategory}
                   onChange={(e) => setServiceCategory(e.target.value)}
                   onClick={(e) => {
-                    if (e.target.className == "find-reviewee-inpt1") {
+                    if (e.target.className == "find-reviewee-inpt11") {
                       setIsServiceContainerOpen(true);
                     }
                   }}
                 />
               </aside>
-              <input
-                type="text"
-                className="find-reviewee-inpt2"
-                placeholder="location"
-                name="serviceLocation"
-                value={serviceLocation}
-                onChange={(e) => setServiceLocation(e.target.value)}
-                onClick={(e) => {
-                  if (e.target.className == "find-reviewee-inpt2") {
-                    setIsLocationContainerOpen(true);
-                  }
-                }}
-              />{" "}
-              <span className="reviewee-icon-div">
-                <IoSearch className="reviewee-icon" />
+              <span className="flex-input2-icon">
+                <input
+                  type="text"
+                  className="find-reviewee-inpt21"
+                  placeholder="location"
+                  name="serviceLocation"
+                  value={serviceLocation}
+                  onChange={(e) => setServiceLocation(e.target.value)}
+                  onClick={(e) => {
+                    if (e.target.className == "find-reviewee-inpt21") {
+                      setIsLocationContainerOpen(true);
+                    }
+                  }}
+                />{" "}
+                <span className="reviewee-icon-div1">
+                  <IoSearch className="reviewee-icon1" />
+                </span>
               </span>
             </div>
           </form>

@@ -25,7 +25,7 @@ const Location = () => {
   };
   return (
     <article className={`${
-        isLocationContainerOpen ? "location-category show" : "location-category"
+        isLocationContainerOpen ? "location-category1 show" : "location-category1"
       }`} 
    onMouseLeave={()=>{setIsLocationContainerOpen(false)}}>
       <ul className="service-container">

@@ -543,11 +543,16 @@ nav {
 .search-result-container {
   width: 500px;
 
-  background-color: black;
+  background-color: white;
   position: absolute;
-  transform: translate(60%, 250%);
-  z-index: 500;
+ 
+  z-index: 10000;
   border-radius: 5px;
+  padding:20px;
+  margin-top: 5%;
+  left: 20%;
+  transition: all 1s ease-in-out;
+
 }
 
 .not-searching {
@@ -559,22 +564,29 @@ nav {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.search-result-container h5,
+.search-result-container h5{margin: 0;
+  padding: 0;}
+
+
 .search-result-container h6 {
   margin: 0;
-  padding: 0;
+  padding:0;
 }
 .search-result-div {
   cursor: pointer;
-  background-color: antiquewhite;
-  padding: 5px;
+  background-color: white;
+  padding:10px;
   margin: 3px 0;
 }
 .search-result-div:hover {
-  background-color: white;
+  background-color: gainsboro;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  
 }
 .search-result-heading {
-  color: white;
-  padding: 5px;
+  color: black;
+  padding: 0;
   margin: 5px 0;
+  font-size: 16px;
 }
