@@ -11,7 +11,11 @@ import ServiceCategory from "../../components/ServiceCategory";
 import Location from "../../components/Location";
 import { useGlobalContext } from "../../utils/context";
 import { connect } from "react-redux";
-import { SET_SERVICE_CATEGORY,SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN,SET_IS_SERVICE_CONTAINER_OPEN } from "../../redux/action";
+import { SET_SERVICE_CATEGORY,SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN,SET_IS_SERVICE_CONTAINER_OPEN ,SET_BUSINESS_SEARCHED} from "../../redux/action";
+import axios from "axios";
+const url = "http://localhost:5000/api";
+//const url = "/api";
+import { useNavigate } from "react-router-dom";
 
 const TheReviewee = ({
   serviceCategory,
@@ -22,6 +26,7 @@ const TheReviewee = ({
   setIsLocationContainerOpen,
 
   setIsServiceContainerOpen,
+  setBusinessSearched,
 }) => {
   const suggestions = [
     { name: "Gramma's Kitchen", img: "" },
@@ -41,15 +46,35 @@ const TheReviewee = ({
     { name: "Gramma's Kitchen", img: "" },
   ];
 
+ 
+  const navigate = useNavigate();
+
+  const getSearchedBusiness = async (category, location) => {
+    return await axios
+      .get(`${url}/services?category=${category}&location=${location}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchBusiness = async () => {
+    const response = await getSearchedBusiness(
+      serviceCategory,
+      serviceLocation
+    );
+    console.log(response.data);
+    setBusinessSearched(response.data.items);
+    navigate("/review-list");
+  };
+
   const {
-   // serviceCategory,
-   // setServiceCategory,
-   // serviceLocation,
-   // setServiceLocation,
-
-   // setIsLocationContainerOpen,
-
-  //  setIsServiceContainerOpen,
+    // serviceCategory,
+    // setServiceCategory,
+    // serviceLocation,
+    // setServiceLocation,
+    // setIsLocationContainerOpen,
+    //  setIsServiceContainerOpen,
   } = useGlobalContext();
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
   const [value, setValue] = React.useState(0);
@@ -78,10 +103,8 @@ const TheReviewee = ({
                   onClick={(e) => {
                     if (e.target.className == "find-reviewee-inpt11") {
                       setIsServiceContainerOpen(true);
-                       setIsLocationContainerOpen(false);
-                     
+                      setIsLocationContainerOpen(false);
                     }
-                    
                   }}
                 />
               </aside>
@@ -97,13 +120,14 @@ const TheReviewee = ({
                     if (e.target.className == "find-reviewee-inpt21") {
                       setIsLocationContainerOpen(true);
                       setIsServiceContainerOpen(false);
-                       
-                   }
-               
+                    }
                   }}
                 />{" "}
                 <span className="reviewee-icon-div1">
-                  <IoSearch className="reviewee-icon1" />
+                  <IoSearch
+                    className="reviewee-icon1"
+                    onClick={fetchBusiness}
+                  />
                 </span>
               </span>
             </div>
@@ -218,7 +242,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: SET_IS_SERVICE_CONTAINER_OPEN,
         payload: { status: status },
       }),
-       setServiceLocation: (location) =>
+    setServiceLocation: (location) =>
       dispatch({ type: SET_SERVICE_LOCATION, payload: { location: location } }),
 
     setIsLocationContainerOpen: (status) =>
@@ -226,6 +250,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: SET_IS_LOCATION_CONTAINER_OPEN,
         payload: { status: status },
       }),
+    setBusinessSearched: (result) =>
+      dispatch({ type: SET_BUSINESS_SEARCHED, payload: { result: result } }),
   };
 };
 

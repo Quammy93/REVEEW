@@ -285,8 +285,13 @@ aside {
   font-size: 25px;
   cursor: pointer;
 }
-
+.reviewee-container-parent{width: 100vw;}
+.list-article-main1{}
 .list-heading-desc{font-family:" Open Sans", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size: 25px; font-weight: 500;}
 .list-article-main{width: 50%;margin-left: 50px;}  
 .list-article{ display: flex; margin-bottom: 10px;border-radius:10px;box-shadow:1px 1px 5px 5px gainsboro;}
-.list-desc{}  
+.list-desc{} 
+.reviewee-wrapper{display:grid;grid-template-columns: 65% 35%} 
+.reviewee-map{width: 100%;height: 100%;margin-left: -50px;    position: 'relative',}
+
+

@@ -10,7 +10,17 @@ import Footer from "../../components/Footer";
 import ServiceCategory from "../../components/ServiceCategory";
 import Location from "../../components/Location";
 import { useGlobalContext } from "../../utils/context";
+import MapComponent from "../../components/MapComponent";
 import { connect } from "react-redux";
+ const mapStyle = {
+   position: "absolute",
+   top: 0,
+   left: 0,
+   width: "100%",
+   height: "100%",
+   
+    // Ensure the map is behind other content
+ };
 
 import axios from "axios";
 const url = "http://localhost:5000/api";
@@ -19,7 +29,8 @@ import {
   SET_SERVICE_CATEGORY,
   SET_SERVICE_LOCATION,
   SET_IS_LOCATION_CONTAINER_OPEN,
-  SET_IS_SERVICE_CONTAINER_OPEN,
+  SET_IS_SERVICE_CONTAINER_OPEN,SET_BUSINESS_SEARCHED
+
 } from "../../redux/action";
 
 const ReveewSearchResult = ({
@@ -31,18 +42,9 @@ const ReveewSearchResult = ({
   setIsLocationContainerOpen,
 
   setIsServiceContainerOpen,
+  setBusinessSearched,
+  businessSearched,
 }) => {
-
-
-const [business, setBusiness] = React.useState([]);
-
-
-
-
-
-
-
-
   const getSearchedBusiness = async (category, location) => {
     return await axios
       .get(`${url}/services?category=${category}&location=${location}`)
@@ -58,7 +60,7 @@ const [business, setBusiness] = React.useState([]);
       serviceLocation
     );
     console.log(response.data);
-    setBusiness(response.data.items);
+    setBusinessSearched(response.data.items);
   };
 
   const {
@@ -75,83 +77,92 @@ const [business, setBusiness] = React.useState([]);
   return (
     <div>
       <Navbar3 />
-      <div className="reviewee-container">
-        
-        <main className="review-input-container-main">
-          <h2>Find a business to review</h2>
-          <h4>
-            Review anything from your favorite patio spot to your local flower
-            shop.
-          </h4>
-          <form action="" className="reviewee-form1">
-            <div className="therevieweeinput1">
-              <aside>
-                {" "}
-                <input
-                  type="text"
-                  placeholder="try resturants,hotel..."
-                  className="find-reviewee-inpt11"
-                  name="serviceCategory"
-                  value={serviceCategory}
-                  onChange={(e) => setServiceCategory(e.target.value)}
-                  onClick={(e) => {
-                    if (e.target.className == "find-reviewee-inpt11") {
-                      setIsServiceContainerOpen(true);
-                      setIsLocationContainerOpen(false);
-                    }
-                  }}
-                />
-              </aside>
-              <span className="flex-input2-icon">
-                <input
-                  type="text"
-                  className="find-reviewee-inpt21"
-                  placeholder="location"
-                  name="serviceLocation"
-                  value={serviceLocation}
-                  onChange={(e) => setServiceLocation(e.target.value)}
-                  onClick={(e) => {
-                    if (e.target.className == "find-reviewee-inpt21") {
-                      setIsLocationContainerOpen(true);
-                      setIsServiceContainerOpen(false);
-                    }
-                  }}
-                />{" "}
-                <span className="reviewee-icon-div1" onClick={fetchBusiness}>
-                  <IoSearch className="reviewee-icon1" />
-                </span>
-              </span>
-            </div>
-          </form>
-          <ServiceCategory />
-          <Location />
-        </main>
-       hello
-      </div>
-      <section>
-     {
-business.map((item)=>{
-console.log(item)
-    const { img, name, avgrating } = item;
+      <main className="reviewee-wrapper">
+        <div className="reviewee-container-parent">
+          <div className="reviewee-container">
+            <main className="review-input-container-main">
+              <h2>Find a business to review</h2>
+              <h4>
+                Review anything from your favorite patio spot to your local
+                flower shop.
+              </h4>
+              <form action="" className="reviewee-form1">
+                <div className="therevieweeinput1">
+                  <aside>
+                    {" "}
+                    <input
+                      type="text"
+                      placeholder="try resturants,hotel..."
+                      className="find-reviewee-inpt11"
+                      name="serviceCategory"
+                      value={serviceCategory}
+                      onChange={(e) => setServiceCategory(e.target.value)}
+                      onClick={(e) => {
+                        if (e.target.className == "find-reviewee-inpt11") {
+                          setIsServiceContainerOpen(true);
+                          setIsLocationContainerOpen(false);
+                        }
+                      }}
+                    />
+                  </aside>
+                  <span className="flex-input2-icon">
+                    <input
+                      type="text"
+                      className="find-reviewee-inpt21"
+                      placeholder="location"
+                      name="serviceLocation"
+                      value={serviceLocation}
+                      onChange={(e) => setServiceLocation(e.target.value)}
+                      onClick={(e) => {
+                        if (e.target.className == "find-reviewee-inpt21") {
+                          setIsLocationContainerOpen(true);
+                          setIsServiceContainerOpen(false);
+                        }
+                      }}
+                    />{" "}
+                    <span
+                      className="reviewee-icon-div1"
+                      onClick={fetchBusiness}
+                    >
+                      <IoSearch className="reviewee-icon1" />
+                    </span>
+                  </span>
+                </div>
+              </form>
+              <ServiceCategory />
+              <Location />
+            </main>
+          </div>
+          <section className="list-article-main1">
+            {businessSearched.map((item) => {
+              console.log(item);
+              const { img, name, avgrating } = item;
 
-    return (
-      <article className="list-article-main">
-        <div className="list-article">
-          <div>
-            <img src={img} alt="" className="visited-image" />
-          </div>
-          <div className="list-desc">
-            {" "}
-            <h3 className="list-heading-desc">{name} </h3>
-            <Rate tooltips={desc} onChange={setValue} value={avgrating} />
-          </div>
+              return (
+                <article className="list-article-main">
+                  <div className="list-article">
+                    <div>
+                      <img src={img} alt="" className="visited-image" />
+                    </div>
+                    <div className="list-desc">
+                      {" "}
+                      <h3 className="list-heading-desc">{name} </h3>
+                      <Rate
+                        tooltips={desc}
+                        onChange={setValue}
+                        value={avgrating}
+                      />
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </section>
         </div>
-      </article>
-    );
-})
-     }
-      </section>
-
+        <div>
+          <MapComponent style={mapStyle} />
+        </div>
+      </main>
       <Footer />
     </div>
   );
@@ -161,6 +172,7 @@ const mapStateToProps = (state) => {
   return {
     serviceCategory: state.business.serviceCategory,
     serviceLocation: state.business.serviceLocation,
+    businessSearched: state.business.businessSearched,
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -181,6 +193,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({
         type: SET_IS_LOCATION_CONTAINER_OPEN,
         payload: { status: status },
+      }),
+    setBusinessSearched: (result) =>
+      dispatch({
+        type: SET_BUSINESS_SEARCHED,
+        payload: { result: result },
       }),
   };
 };
