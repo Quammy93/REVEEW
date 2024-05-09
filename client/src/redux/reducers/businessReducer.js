@@ -23,7 +23,7 @@ if (action.type == SET_IS_LOCATION_CONTAINER_OPEN) {
   return { ...state, isLocationContainerOpen: action.payload.status };
 }
 if (action.type == SET_IS_SERVICE_CONTAINER_OPEN) {
-  return { ...state, isLocationContainerOpen: action.payload.status };
+  return { ...state, isServiceContainerOpen: action.payload.status };
 }
 if (action.type == SET_BUSINESS_INFO) {
   return { ...state, businessInfo: action.payload.business };

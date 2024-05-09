@@ -19,6 +19,7 @@ import DisplayRevieweeResult from "./pages/products/DisplayRevieweeResult";
 import SingleBusines from "./pages/products/SingleBusines";
 import WriteBusinessReview from "./pages/products/WriteBusinessReview";
 import Cusor from "./components/Cusor";
+import ReveewSearchResult from "./pages/products/ReveewSearchResult";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -64,6 +65,7 @@ function App() {
             ></Route>
 
             <Route path="/write-review" Component={TheReviewee}></Route>
+            <Route path="/review-list" Component={ReveewSearchResult}></Route>
             <Route
               path="/search-review"
               Component={DisplayRevieweeResult}

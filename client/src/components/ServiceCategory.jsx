@@ -39,7 +39,7 @@ const ServiceCategory = ({
       <ul className="service-container">
         {businessCategory.map((item) => {
           return (
-            <li
+            <li key={item}
               className="bus-cat-list"
               onMouseOver={() => clicking({ item })}
               onClick={() => setIsServiceContainerOpen(false)}

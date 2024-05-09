@@ -78,7 +78,10 @@ const TheReviewee = ({
                   onClick={(e) => {
                     if (e.target.className == "find-reviewee-inpt11") {
                       setIsServiceContainerOpen(true);
+                       setIsLocationContainerOpen(false);
+                     
                     }
+                    
                   }}
                 />
               </aside>
@@ -93,7 +96,10 @@ const TheReviewee = ({
                   onClick={(e) => {
                     if (e.target.className == "find-reviewee-inpt21") {
                       setIsLocationContainerOpen(true);
-                    }
+                      setIsServiceContainerOpen(false);
+                       
+                   }
+               
                   }}
                 />{" "}
                 <span className="reviewee-icon-div1">
