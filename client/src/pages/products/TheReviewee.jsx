@@ -29,24 +29,27 @@ const TheReviewee = ({
   setBusinessSearched,
 }) => {
   const suggestions = [
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
-    { name: "Gramma's Kitchen", img: "" },
+    { name: "Gramma's Kitchen", img: "",id:1 },
+    { name: "Gramma's Kitchen", img: "" ,id:2},
+    { name: "Gramma's Kitchen", img: "",id:3 },
+    { name: "Gramma's Kitchen", img: "" ,id:15},
+    { name: "Gramma's Kitchen", img: "" ,id:4},
+    { name: "Gramma's Kitchen", img: "",id:5 },
+    { name: "Gramma's Kitchen", img: "" ,id:6},
+    { name: "Gramma's Kitchen", img: "" ,id:7},
+    { name: "Gramma's Kitchen", img: "",id:8 },
+    { name: "Gramma's Kitchen", img: "",id:9 },
+    { name: "Gramma's Kitchen", img: "",id:10 },
+    { name: "Gramma's Kitchen", img: "",id:11 },
+    { name: "Gramma's Kitchen", img: "" ,id:12},
+    { name: "Gramma's Kitchen", img: "" ,id:13},
+    { name: "Gramma's Kitchen", img: "" ,id:14},
   ];
 
  
+const [suggested ,setSuggested]=React.useState(suggestions)
+const  [issuggestLoading,setIssuggestLoading]=React.useState(false)
+
   const navigate = useNavigate();
 
   const getSearchedBusiness = async (category, location) => {
@@ -67,6 +70,18 @@ const TheReviewee = ({
     setBusinessSearched(response.data.items);
     navigate("/review-list");
   };
+
+const handleCloseSuggestion=(id)=>{
+
+const newSuggestion=suggested.filter((item)=>item.id!==id)
+
+setSuggested(newSuggestion)
+console.log("new",newSuggestion)
+console.log("old",suggestions)
+
+}
+
+
 
   const {
     // serviceCategory,
@@ -142,84 +157,40 @@ const TheReviewee = ({
       <section className="reviewee-section">
         <h3>Visited one of these places recently?</h3>
         <div className="visited-container">
-          <article className="visited-article">
-            <div>
-              <img src={cake} alt="" className="visited-image" />
-            </div>
-            <div className="visited-desc">
-              {" "}
-              <h3>Grandma's </h3>
-              <p>Do you recommend this business?</p>
-              <Rate tooltips={desc} onChange={setValue} value={value} />
-              {value ? <span>{desc[value - 1]}</span> : null}
-            </div>
-            <span>
-              <MdClose className="close-visited" />
-            </span>
-          </article>
-          <article className="visited-article">
-            <div>
-              <img src={cake} alt="" className="visited-image" />
-            </div>
-            <div className="visited-desc">
-              {" "}
-              <h3>Grandma's </h3>
-              <p>Do you recommend this business?</p>
-              <Rate tooltips={desc} onChange={setValue} value={value} />
-              {value ? <span>{desc[value - 1]}</span> : null}
-            </div>
-            <span>
-              <MdClose className="close-visited" />
-            </span>
-          </article>
-          <article className="visited-article">
-            <div>
-              <img src={cake} alt="" className="visited-image" />
-            </div>
-            <div className="visited-desc">
-              {" "}
-              <h3>Grandma's </h3>
-              <p>Do you recommend this business?</p>
-              <Rate tooltips={desc} onChange={setValue} value={value} />
-              {value ? <span>{desc[value - 1]}</span> : null}
-            </div>
-            <span>
-              <MdClose className="close-visited" />
-            </span>
-          </article>
-          <article className="visited-article">
-            <div>
-              <img src={cake} alt="" className="visited-image" />
-            </div>
-            <div className="visited-desc">
-              {" "}
-              <h3>Grandma's </h3>
-              <p>Do you recommend this business?</p>
-              <Rate tooltips={desc} onChange={setValue} value={value} />
-              {value ? <span>{desc[value - 1]}</span> : null}
-            </div>
-            <span>
-              <MdClose className="close-visited" />
-            </span>
-          </article>
-          <article className="visited-article">
-            <div>
-              <img src={cake} alt="" className="visited-image" />
-            </div>
-            <div className="visited-desc">
-              {" "}
-              <h3>Grandma's </h3>
-              <p>Do you recommend this business?</p>
-              <Rate tooltips={desc} onChange={setValue} value={value} />
-              {value ? <span>{desc[value - 1]}</span> : null}
-            </div>
-            <span>
-              <MdClose className="close-visited" />
-            </span>
-          </article>
+          {issuggestLoading && "Loading..."}
+          {suggested.length == 0 &&
+            !issuggestLoading &&
+            "We’re out of suggestions for you right now. Keep on using Yelp and we’ll have some more for you soon."}
+
+          {suggested.map((item, index) => {
+            const { name, img, id } = item;
+
+            return (
+              <article className="visited-article" key={id}>
+                <div>
+                  <img src={cake} alt="" className="visited-image" />
+                </div>
+                <div className="visited-desc">
+                  {" "}
+                  <h3>{name}</h3>
+                  <p>Do you recommend this business?</p>
+                  <Rate tooltips={desc} onChange={setValue} value={value} />
+                  {value ? <span>{desc[value - 1]}</span> : null}
+                </div>
+                <span>
+                  <MdClose
+                    className="close-visited"
+                    onClick={() => {
+                      handleCloseSuggestion(id);
+                    }}
+                  />
+                </span>
+              </article>
+            );
+          })}
         </div>
       </section>
-      <span>Show more suggestions</span>
+
       <Footer />
     </div>
   );

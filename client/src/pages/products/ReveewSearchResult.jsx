@@ -45,6 +45,10 @@ const ReveewSearchResult = ({
   setBusinessSearched,
   businessSearched,
 }) => {
+
+const [issearchingBusiness, setIssearchingBusiness] = React.useState(false);
+
+
   const getSearchedBusiness = async (category, location) => {
     return await axios
       .get(`${url}/services?category=${category}&location=${location}`)
@@ -134,6 +138,9 @@ const ReveewSearchResult = ({
             </main>
           </div>
           <section className="list-article-main1">
+            {issearchingBusiness && "Loading..."}
+            {businessSearched?.length==0  && !issearchingBusiness && "Loading..."}
+
             {businessSearched.map((item) => {
               console.log(item);
               const { img, name, avgrating } = item;

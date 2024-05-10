@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../components/Footer";
 import Navbar4 from "../../components/Navbar4";
 import "../../assets/css/displayreview.css";
 //import { Rate } from "antd";
@@ -235,7 +236,11 @@ const DisplayRevieweeResult = () => {
                     <span>{location}</span>
                   </div>
                 </main>
-                <div>Most Relevant</div>
+                <article className="reveewee-review-btn-div">
+                  {" "}
+                  <div>Most Relevant</div>
+                  <button className="reveewee-review-btn"> Review</button>
+                </article>
               </article>
             );
           })}
@@ -264,6 +269,7 @@ const DisplayRevieweeResult = () => {
           </main>
         </section>
       </section>
+      <Footer/>
     </section>
   );
 };
