@@ -178,18 +178,22 @@ aside {
   cursor: pointer;
 }
 .business-category {
-  width: 410px;
-  height: 450px;
-  background-color: black;
-  z-index: 1000000;
+  width: 260px;
+  
+   background-color: white;
+  z-index: 100;
+  top: 90%;
 
   position: absolute;
 
   display: none;
+  margin-left: -200px;
+    border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .business-category1 {
   width: 29%;
-  height: 450px;
+
   background-color: white;
   z-index: 1000;
 
@@ -214,18 +218,23 @@ aside {
   display: block;
 }
 .location-category {
-  width: 260px;
-  height: 250px;
-  background-color: antiquewhite;
+  width: 200px;
+ 
+  background-color: white;
   z-index: 100;
   position: absolute;
   margin-top: 5px;
   transform: translateX(164%);
   display: none;
+   top: 90%;
+   left: 130px;
+   border-radius: 5px;
+   box-shadow: 1px 1px 5px 5px gainsboro;
+
 }
 .location-category1 {
   width: 19%;
-  height: 250px;
+ 
   background-color: white;
   z-index: 100;
   position: absolute;

@@ -7,8 +7,9 @@ import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
-import ServiceCategory from "./ServiceCategory";
-import Location from "./Location";
+import ServiceCategory1 from "./ServiceCategory1";
+import Location1 from "./Location1";
+import { useNavigate } from "react-router-dom";
 const url = "http://localhost:5000/api";
 //const url = "/api";
 import { connect } from "react-redux";
@@ -23,6 +24,7 @@ import {
   SET_IS_SERVICE_CONTAINER_OPEN,
   SET_SERVICE_CATEGORY,
   SET_SERVICE_LOCATION,
+  SET_BUSINESS_SEARCHED,
 } from "../redux/action";
 
 const Navbar4 = ({
@@ -41,6 +43,7 @@ const Navbar4 = ({
   setIsLocationContainerOpen,
 
   setIsServiceContainerOpen,
+  setBusinessSearched,
   isLogin,
   user,
 }) => {
@@ -63,6 +66,49 @@ const Navbar4 = ({
   console.log("....user", user);
 
   const { name } = user;
+
+
+
+
+
+
+
+
+  const navigate = useNavigate();
+
+  const getSearchedBusiness = async (category, location) => {
+    return await axios
+      .get(`${url}/services?category=${category}&location=${location}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchBusiness = async () => {
+    const response = await getSearchedBusiness(
+      serviceCategory,
+      serviceLocation
+    );
+    console.log(response.data);
+    setBusinessSearched(response.data.items);
+    navigate("/review-list");
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closesubemenu();
@@ -138,6 +184,7 @@ const Navbar4 = ({
                     onClick={(e) => {
                       if (e.target.className == "find-reviewee-inpt1") {
                         setIsServiceContainerOpen(true);
+                        setIsLocationContainerOpen(false);
                       }
                     }}
                   />
@@ -152,16 +199,17 @@ const Navbar4 = ({
                   onClick={(e) => {
                     if (e.target.className == "find-reviewee-inpt2") {
                       setIsLocationContainerOpen(true);
+                      setIsServiceContainerOpen(false);
                     }
                   }}
                 />{" "}
                 <span className="reviewee-icon-div">
-                  <IoSearch className="reviewee-icon" />
+                  <IoSearch className="reviewee-icon" onClick={fetchBusiness} />
                 </span>
               </div>
             </form>
-            <ServiceCategory />
-            <Location />
+            <ServiceCategory1 />
+            <Location1 />
           </li>
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Categories
@@ -231,6 +279,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: SET_IS_SERVICE_CONTAINER_OPEN,
         payload: { status: status },
       }),
+    setBusinessSearched: (result) =>
+      dispatch({ type: SET_BUSINESS_SEARCHED, payload: { result: result } }),
   };
 };
 
