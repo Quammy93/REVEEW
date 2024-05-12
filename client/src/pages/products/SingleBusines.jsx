@@ -195,7 +195,7 @@ const {_id,title,comment,value,reviewer,formattedTimestamp}=review
 
 return (
   <div className="bsn-reviews">
-    <div className="writer-container">
+    <div className="writer-container1">
       {" "}
       <span className="writer-span">
         <img src={avarta} alt="" className="writer-avarta" />
@@ -205,7 +205,7 @@ return (
         </span>
       </span>{" "}
     </div>
-    <Divider className="divider-rev" />
+   
     <article className="review-duration">
       {" "}
       <span>

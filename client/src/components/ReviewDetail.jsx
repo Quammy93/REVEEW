@@ -23,7 +23,7 @@ const ReviewDetail = ({
   };
 
   return (
-    <div className='review-detail-main-container'>
+    <div className="review-detail-main-container">
       <h2>
         Reviews{" "}
         <span>
@@ -32,44 +32,65 @@ const ReviewDetail = ({
       </h2>
       <span>{revNum} total reviews</span>
 
-      <main className="review-detail-container">
-        <span className="rev-rate-review-detail">{rating}</span>
-        <section>
-          <Checkbox.Group
-            options={plainOptions}
-            defaultValue={[""]}
-            onChange={onChange}
-            className="check check1"
-          />
-        </section>
-        <section className="div-section">
-          <span className="span-pro">
-            {" "}
-            <Progress percent={cent5} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{revN5}</span>
-          </span>
-          <span className="span-pro">
-            {" "}
-            <Progress percent={cent4} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{revN4}</span>
-          </span>
-          <span className="span-pro">
-            {" "}
-            <Progress percent={cent3} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{revN3}</span>
-          </span>
-          <span className="span-pro">
-            {" "}
-            <Progress percent={cent2} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{revN2}</span>
-          </span>
-          <span className="span-pro">
-            {" "}
-            <Progress percent={cent1} showInfo={false} className="progress1" />
-            <span className="rate-num-rating1">{revN1}</span>
-          </span>
+      
+        <main className="review-detail-container">
+          <span className="rev-rate-review-detail">{rating}</span>
+          <section>
+            <Checkbox.Group
+              options={plainOptions}
+              defaultValue={[""]}
+              onChange={onChange}
+              className="check check1"
+            />
+          </section>
+          <section className="div-section">
+            <span className="span-pro">
+              {" "}
+              <Progress
+                percent={cent5}
+                showInfo={false}
+                className="progress1"
+              />
+              <span className="rate-num-rating1">{revN5}</span>
+            </span>
+            <span className="span-pro">
+              {" "}
+              <Progress
+                percent={cent4}
+                showInfo={false}
+                className="progress1"
+              />
+              <span className="rate-num-rating1">{revN4}</span>
+            </span>
+            <span className="span-pro">
+              {" "}
+              <Progress
+                percent={cent3}
+                showInfo={false}
+                className="progress1"
+              />
+              <span className="rate-num-rating1">{revN3}</span>
+            </span>
+            <span className="span-pro">
+              {" "}
+              <Progress
+                percent={cent2}
+                showInfo={false}
+                className="progress1"
+              />
+              <span className="rate-num-rating1">{revN2}</span>
+            </span>
+            <span className="span-pro">
+              {" "}
+              <Progress
+                percent={cent1}
+                showInfo={false}
+                className="progress1"
+              />
+              <span className="rate-num-rating1">{revN1}</span>
+            </span>
 
-          {/**   <div className="div">
+            {/**   <div className="div">
             {" "}
             <div className="div2"></div>
           </div>
@@ -77,8 +98,10 @@ const ReviewDetail = ({
           <div className="div"></div>
           <div className="div"></div>
           <div className="div"></div> */}
-        </section>
-      </main>
+          </section>
+        </main>
+      
+
       <Divider className="divider-rev" />
 
       <div className="bsn-rev-foot-1">

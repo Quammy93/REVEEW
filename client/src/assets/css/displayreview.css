@@ -19,27 +19,42 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
-  
+
   width: 100%;
   height: 150px;
   margin: 10px;
   padding: 0 20px;
   cursor: pointer;
-border: 1px solid gainsboro;
+  border: 1px solid gainsboro;
   border-radius: 5px;
 }
 .business-filter {
   width: 90%;
   height: 500px;
-  background-color:  #232c59;
+  background-color: #232c59;
   margin-left: 15px;
   padding: 10px;
   border-radius: 5px;
   color: white;
 }
 
-.reveewee-review-btn-div{display: flex; justify-content: space-between; align-items:center ;flex-direction: column;height: 100%;padding: 10px;}
-.reveewee-review-btn{background-color: #232c59;color: white;padding:10px  30px; border: none;outline: none; border-radius: 5px;font-size: 15px;}
+.reveewee-review-btn-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+}
+.reveewee-review-btn {
+  background-color: #232c59;
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 15px;
+}
 
 .bsn-img {
   height: 120px;
@@ -65,7 +80,7 @@ border: 1px solid gainsboro;
   border: 1px solid gainsboro;
   padding: 5px;
   font-weight: bold;
-  color:white;
+  color: white;
   border-radius: 3px;
 }
 .select-service {
@@ -88,12 +103,14 @@ border: 1px solid gainsboro;
   display: flex;
   justify-content: space-around;
   align-items: start;
-  background-color: aqua;
+  background-color: white;
   width: 100%;
   height: 250px;
   cursor: pointer;
   font-weight: bolder;
   align-items: center;
+  margin-top: 40px;
+  box-shadow: 1px 1px 1px 1px gainsboro;
 }
 .bsn-img-single-bsn {
   height: 200px;
@@ -131,25 +148,42 @@ border: 1px solid gainsboro;
 .writer-container {
   height: 70px;
   width: 95%;
-  background-color: black;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 2px gainsboro;
+}
+.writer-container1 {
+  height: 70px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 2px gainsboro;
 }
 
 .bsn-review-info {
   width: 95%;
   height: 450px;
   margin-top: 20px;
-  background-color: black;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 2px gainsboro;
+  border: 1px solid gainsboro;
 }
 
 .bsn-reviews {
   width: 95%;
 
   margin-top: 20px;
-  background-color: black;
+  background-color: white;
   margin-bottom: 10px;
+  border: 2px solid gainsboro;
+  border-radius: 5px;
 }
 .bsn-info {
   width: 95%;
@@ -180,10 +214,15 @@ border: 1px solid gainsboro;
   justify-content: center;
   align-items: center;
 }
+.writer-span p {
+  padding: 0;
+  margin: 0;
+}
 .check1 {
   margin-left: 40px;
   margin-top: 20px;
 }
+
 .div {
   width: 300px;
   height: 15px;
@@ -199,16 +238,18 @@ border: 1px solid gainsboro;
   border-radius: 5px;
 }
 .review-detail-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 10% 10% 70%;
+  height: 150px;
 }
 .div-section {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
-  margin-top: 7px;
+
+  margin-left: 20px;
+  height: 143px;
 }
 .div-section-2 {
   display: flex;
@@ -222,12 +263,12 @@ border: 1px solid gainsboro;
   margin-bottom: 5px;
   padding: 0;
   height: 15px;
+  color: #000;
 }
 .progress1 {
   width: 300px;
-  font-size: larger;
+  font-size: medium;
 }
-
 
 /*
 
@@ -238,8 +279,11 @@ border: 1px solid gainsboro;
 .rev-rate-review-detail {
   font-size: 100px;
   font-weight: 600;
+  margin: auto;
 }
-.review-detail-main-container{padding: 10px;}
+.review-detail-main-container {
+  padding: 10px;
+}
 .ant-progress-inner {
   height: 12px !important;
 }
@@ -252,19 +296,34 @@ border: 1px solid gainsboro;
 .progress1.css-dev-only-do-not-override-djtmh8 {
   height: 0px;
 }
-.span-pro {
-  height: 12px;
-  margin-bottom: 10px;
+
+:where(.css-dev-only-do-not-override-djtmh8).ant-checkbox + span .span-pro {
+  color: #000 !important;
+}
+
+.ant-checkbox-wrapper {
+  color: #000;
+}
+
+  .ant-progress-inner {
+  height: 10px;
+}
+
+span.span-pro {
+  height: 23px;
 }
 .divider-rev {
   color: white;
   background-color: white;
 }
 .span-padding {
-  padding: 6px;
-  font-size: 18px;
-  border: 1px solid white;
+  padding: 4px;
+  font-size: 15px;
+  border: 2px solid gainsboro;
+
+ 
 }
+.x-star{background-color: #232c59;color: white;padding: auto;font-size: 14px;border-radius: 5px;border: none;}
 .bsn-rev-foot-1 {
   display: flex;
   justify-content: space-between;
@@ -282,12 +341,61 @@ border: 1px solid gainsboro;
   margin-right: 10px;
 }
 
-.write-bsn-rev-container{width: 500px;height: 650px;background-color: aqua;padding: 30px;margin:20px auto;border-radius: 5px;}
+.write-bsn-rev-container {
+  width: 500px;
+  height: 650px;
+  background-color: aqua;
+  padding: 30px;
+  margin: 20px auto;
+  border-radius: 5px;
+}
 
-.write-bsn-rev-container h3{font-size: 15px; font-weight:bolder; margin: 0;padding: 0;}
-.write-rev-span{display: flex;flex-direction: column;margin: 20px 0;}
-.rev-input{width: 90%; height: 40px; outline: none;font-size: 17px;border-radius: 5px;outline: none;padding: 10px;}
-.text-area-rev{width: 90%;outline: none;font-size: 17px;padding: 10px;border-radius: 5px;outline: none;}
-.rev-date-input{width: 200px; height: 30px;font-size: 17px; border-radius: 5px;outline: none;padding: 10px;}
-.rev-submit{display: flex;justify-content: center;align-items: center;}
-.rev-submit-btn{padding: 10px;font-size: 18px; width: 150px;border-radius: 5px; outline: none;cursor: pointer;}
+.write-bsn-rev-container h3 {
+  font-size: 15px;
+  font-weight: bolder;
+  margin: 0;
+  padding: 0;
+}
+.write-rev-span {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+.rev-input {
+  width: 90%;
+  height: 40px;
+  outline: none;
+  font-size: 17px;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+}
+.text-area-rev {
+  width: 90%;
+  outline: none;
+  font-size: 17px;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+}
+.rev-date-input {
+  width: 200px;
+  height: 30px;
+  font-size: 17px;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px;
+}
+.rev-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rev-submit-btn {
+  padding: 10px;
+  font-size: 18px;
+  width: 150px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
