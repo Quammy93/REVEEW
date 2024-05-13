@@ -6,7 +6,7 @@ import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
 import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
-import { SET_BUSINESS_INFO } from "../../redux/action";
+import { SET_BUSINESS_INFO, SET_REVIEW_QUERIED } from "../../redux/action";
 import { connect } from "react-redux";
 import { IoMdFlag } from "react-icons/io";
 import { FaReply } from "react-icons/fa";
@@ -16,7 +16,7 @@ import { AiTwotoneLike } from "react-icons/ai";
 
 import { useGlobalContext } from "../../utils/context";
 
-const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
+const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorted,setReviewQueried }) => {
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -30,12 +30,15 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
   let totalReviews = 0;
   const urlLocation = useLocation();
 
+  console.log("filtering",reviewChecked,reviewSorted)
+
   const getAllReviews = async (id) => {
     return await axios.get(`${url}/reviews/${id}`).catch((error) => {
       console.log(error);
       //toast.error(error.message);
     });
   };
+
 
   const fetchReview = async (id) => {
     setIsReviewLoading(true);
@@ -110,14 +113,6 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
     fetchData(companyID);
   }, []);
 
-
-
- 
-
-
-
-
-
   const { _id, name, category, location, numOfReview, img, avgrating, desc } =
     businessInfo;
 
@@ -187,77 +182,68 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
             />
           </div>
           <main>
+            {reviews.map((review) => {
+              const {
+                _id,
+                title,
+                comment,
+                value,
+                reviewer,
+                formattedTimestamp,
+              } = review;
 
+              return (
+                <div className="bsn-reviews">
+                  <div className="writer-container1">
+                    {" "}
+                    <span className="writer-span">
+                      <img src={avarta} alt="" className="writer-avarta" />
+                      <span className="reviewer-detail">
+                        <span>{reviewer.name}</span>
+                        <span>{formattedTimestamp}</span>
+                      </span>
+                    </span>{" "}
+                  </div>
 
-            { reviews.map((review)=>{
-
-const {_id,title,comment,value,reviewer,formattedTimestamp}=review
-
-return (
-  <div className="bsn-reviews">
-    <div className="writer-container1">
-      {" "}
-      <span className="writer-span">
-        <img src={avarta} alt="" className="writer-avarta" />
-        <span className="reviewer-detail">
-          <span>{reviewer.name}</span>
-          <span>{formattedTimestamp}</span>
-        </span>
-      </span>{" "}
-    </div>
-   
-    <article className="review-duration">
-      {" "}
-      <span>
-        <Rate value={5} defaultValue={5} /> Verified{" "}
-      </span>
-      19 hours ago
-    </article>
-    <article className="business-review-article">
-      <h3>
-        <b>{title}</b>
-      </h3>
-      <p>{comment}</p>
-      <p>
-        {" "}
-        <b>Date of Experience:</b>
-        {formattedTimestamp}
-      </p>
-    </article>
-    <Divider className="divider-rev" />
-    <div className="review-reaction">
-      <span>
-        <span>
-          <AiTwotoneLike className="review-reaction-icon" />
-        </span>
-        <span>
-          <FaReply className="review-reaction-icon" />
-        </span>
-        <span>
-          <IoMdFlag
-            className="review-reaction-icon"
-            style={{ color: "red" }}
-          />
-        </span>
-      </span>
-    </div>
-  </div>
-);
-
-
-            })
-
-
-            }
-           
-           
-          
+                  <article className="review-duration">
+                    {" "}
+                    <span>
+                      <Rate value={5} defaultValue={5} /> Verified{" "}
+                    </span>
+                    19 hours ago
+                  </article>
+                  <article className="business-review-article">
+                    <h3>
+                      <b>{title}</b>
+                    </h3>
+                    <p>{comment}</p>
+                    <p>
+                      {" "}
+                      <b>Date of Experience:</b>
+                      {formattedTimestamp}
+                    </p>
+                  </article>
+                  <Divider className="divider-rev" />
+                  <div className="review-reaction">
+                    <span>
+                      <span>
+                        <AiTwotoneLike className="review-reaction-icon" />
+                      </span>
+                      <span>
+                        <FaReply className="review-reaction-icon" />
+                      </span>
+                      <span>
+                        <IoMdFlag
+                          className="review-reaction-icon"
+                          style={{ color: "red" }}
+                        />
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </main>
-
-
-
-
-
         </section>
         <section>
           <div className="bsn-info">
@@ -305,6 +291,8 @@ return (
 const mapStateToProps = (state) => {
   return {
     businessInfo: state.business.businessInfo,
+    reviewChecked: state.appFunctions.reviewChecked,
+    reviewSorted: state.appFunctions.reviewSorted,
   };
 };
 
@@ -312,6 +300,12 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setBusinessInfo: (business) =>
       dispatch({ type: SET_BUSINESS_INFO, payload: { business: business } }),
+    setReviewQueried: (queried) => {
+      dispatch({
+        type: SET_REVIEW_QUERIED,
+        payload: { queried: queried },
+      });
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBusines);

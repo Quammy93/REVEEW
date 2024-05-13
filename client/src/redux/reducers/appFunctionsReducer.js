@@ -1,5 +1,6 @@
 import sublinks from "../../utils/data";
-import { CLOSE_SUBMENU, OPEN_SUBMENU, SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,SET_IS_LOADING_SEARCH,SET_SHOW_SIDEBAR } from "../action";
+
+import { CLOSE_SUBMENU, OPEN_SUBMENU, SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,SET_IS_LOADING_SEARCH,SET_SHOW_SIDEBAR,SET_REVIEW_CHECKED,SET_REVIEW_SORTED,SET_REVIEW_QUERIED } from "../action";
 
 // reducers/productReducer.js
 const initialState = {
@@ -22,6 +23,9 @@ const initialState = {
   serviceLocation: "",
   isServiceContainerOpen: false,
   isLocationContainerOpen: false,
+  reviewChecked:[],
+  reviewSorted:"",
+  reviewQueried:[]
 };
 
 const openSubmenu = (state, text, coordinate) => {
@@ -63,6 +67,16 @@ const appFunctionsReducer = (state = initialState, action) => {
  if (action.type == SET_SHOW_SIDEBAR) {
    return { ...state, showSidebar: action.payload.status };
  }
+
+  if (action.type == SET_REVIEW_CHECKED) {
+    return { ...state, reviewChecked: action.payload.checked };
+  }
+  if (action.type == SET_REVIEW_SORTED) {
+    return { ...state, reviewSorted: action.payload.sorted };
+  }
+  if (action.type == SET_REVIEW_QUERIED) {
+    return { ...state, reviewQueried: action.payload.queried };
+  }
 
   return state;
 };

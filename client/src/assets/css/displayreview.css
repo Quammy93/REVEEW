@@ -186,10 +186,12 @@
   border-radius: 5px;
 }
 .bsn-info {
-  width: 95%;
-  background-color: antiquewhite;
+  width: 100%;
+  background-color:#232c59;
   height: 700px;
   padding: 10px;
+  color: white;
+  border-radius: 5px;
 }
 .bsn-map {
   width: 80%;

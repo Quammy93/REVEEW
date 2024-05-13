@@ -23,13 +23,8 @@ export const SET_BUSINESS_SEARCHED = "SET_BUSINESS_SEARCHED";
 
 export const SET_USER = "SET_USER";
 export const SET_IS_LOGIN = "SET_IS_LOGIN";
-/**
-export const closeSubmenu = () => {
-  return { type: CLOSE_SUBMENU };
-};
 
 
-export const openSubmenu = (text,coordinates) => {
-  return { type: OPEN_SUBMENU, payload: { text, coordinates } };
-};
- */
+export const SET_REVIEW_CHECKED = "SET_REVIEW_CHECKED";
+export const SET_REVIEW_SORTED = "SET_REVIEW_SORTED";
+export const SET_REVIEW_QUERIED= "SET_REVIEW_QUERIED";
