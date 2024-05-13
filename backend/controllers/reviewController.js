@@ -45,9 +45,12 @@ const deleteReview = async (req, res) => {
 const updateReview = (req, res) => {
   res.status(200).json("creating review");
 };
+
 const getAllReviews = async (req, res) => {
   const { id } = req.params;
-  console.log("id", id);
+
+  
+
   const item_reviewed = id;
   const reviews = await Reviews.find({
     item_reviewed: item_reviewed,

@@ -11,7 +11,7 @@ const createItem = async (req, res) => {
 };
 //getting all products
 const getAllProducts = async (req, res) => {
-  const { search, filter, avgrating, category, sort, search1 } = req.query;
+  const { search, filter, avgrating, category, sort, search1, } = req.query;
   console.log(avgrating);
   const queryObj = { type: "product" };
   //filtering by any properties
@@ -22,6 +22,7 @@ const getAllProducts = async (req, res) => {
   if (category) {
     queryObj.category = category;
   }
+    
   //filtering by group
 
   if (filter) {
@@ -77,7 +78,7 @@ const getAllProducts = async (req, res) => {
 };
 
 const getAllBusiness = async (req, res) => {
-  const { search, filter, avgrating, category, sort, search1 } = req.query;
+  const { search, filter, avgrating, category, sort, search1,location } = req.query;
   console.log(avgrating);
   const queryObj = { type: "business" };
   //filtering by any properties
@@ -88,6 +89,11 @@ const getAllBusiness = async (req, res) => {
   if (category) {
     queryObj.category = category;
   }
+
+if (location) {
+  queryObj.location = location;
+}
+
   //filtering by group
 
   if (filter) {
