@@ -15,14 +15,13 @@ import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
 const DisplayRevieweeResult = () => {
   const navigate = useNavigate();
 
- 
-
   const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
   const [business, setBusiness] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [limit, setLimit] = React.useState(8);
   const [value, setValue] = React.useState("");
+  const [location, setLocation] = React.useState("");
   const [totalCount, setTotalCount] = React.useState(30);
 
   const handleItemClick = async (id) => {
@@ -32,10 +31,12 @@ const DisplayRevieweeResult = () => {
   };
 
   const getAllBusiness = async () => {
-    return await axios.get(`${url}/services`).catch((error) => {
-      console.log(error);
-      //toast.error(error.message);
-    });
+    return await axios
+      .get(`${url}/services?location=${location}&avgrating=${value}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
   };
   const handlePagechange = (page) => {
     setCurrentPage(page);
@@ -46,6 +47,9 @@ const DisplayRevieweeResult = () => {
     setValue(e.target.value);
     // setShowFilter(false);
   };
+
+  console.log("value", value);
+  console.log("location", location);
 
   const onChecked = (e) => {
     console.log(e.target.checked);
@@ -73,7 +77,7 @@ const DisplayRevieweeResult = () => {
     // Use an async function to fetch data
 
     fetchData();
-  }, []);
+  }, [value, location]);
 
   return (
     <section>
@@ -157,8 +161,13 @@ const DisplayRevieweeResult = () => {
                             style={{ backgroundColor: "white" }}
                           />
                         </Radio>
-                        <Radio value={""}>
-                          <span className="radio-any">All Ratings</span>
+                        <Radio
+                          value={""}
+                          onClick={() => {
+                            setValue("");
+                          }}
+                        >
+                          <span className="radio-any">All Ratings </span>
                         </Radio>
                       </Space>
                     </Radio.Group>
@@ -168,7 +177,14 @@ const DisplayRevieweeResult = () => {
             </ul>
             <p className="cat-title location">Location </p>
 
-            <select name="" id="" className="select-service">
+            <select
+              name=""
+              id=""
+              className="select-service"
+              onChange={(e) => {
+                setLocation(e.target.value);
+              }}
+            >
               <option value="Lagos">Lagos</option>
               <option value="Ibadan">Ibadan</option>
               <option value="Oyo">Oyo</option>
@@ -219,10 +235,7 @@ const DisplayRevieweeResult = () => {
 
             return (
               <article className="display-business-article" key={_id}>
-                <main
-                  className="bsn-art-container"
-                  onClick={() => handleItemClick(_id)}
-                >
+                <main className="bsn-art-container">
                   <div>
                     <img src={img} alt="" className="bsn-img" />
                   </div>
@@ -239,7 +252,13 @@ const DisplayRevieweeResult = () => {
                 <article className="reveewee-review-btn-div">
                   {" "}
                   <div>Most Relevant</div>
-                  <button className="reveewee-review-btn"> Review</button>
+                  <button
+                    className="reveewee-review-btn"
+                    onClick={() => handleItemClick(_id)}
+                  >
+                    {" "}
+                    Review
+                  </button>
                 </article>
               </article>
             );
@@ -269,7 +288,7 @@ const DisplayRevieweeResult = () => {
           </main>
         </section>
       </section>
-      <Footer/>
+      <Footer />
     </section>
   );
 };
