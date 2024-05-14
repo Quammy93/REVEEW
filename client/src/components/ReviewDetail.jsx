@@ -100,7 +100,7 @@ const ReviewDetail = ({
         <span>
           {" "}
           Sort{" "}
-          <span className="span-padding">
+          <span className="span-padding1">
             <select
               name=""
               id=""
@@ -108,19 +108,38 @@ const ReviewDetail = ({
                 setReviewSorted(e.target.value);
               }}
             >
-              <option value="Most Review">Most Review</option>
-              <option value="Most Liked">Most Liked</option>
-              <option value="Most Flaged">Most Flaged</option>
+              <option value="most-recent">Most Recent</option>
+              <option value="most-liked">Most Liked</option>
+     
             </select>
           </span>
         </span>
       </div>
       <div className="bsn-rev-foot-2">
-        <span className="span-padding x-star">5-star X</span>
-        <span className="span-padding x-star">4-star X</span>
-        <span className="span-padding x-star">3-star X</span>
-        <span className="span-padding x-star">2-star X</span>
-        <span className="span-padding x-star">1-star X</span>
+        {reviewQueried.map((query)=>{
+
+          if(query=== "most-recent"){
+        return  <span className="span-padding x-star" key={query}>Most Recent </span>;  
+          }
+          else if(query=== "most-liked"){
+          return   <span className="span-padding x-star" key={query}>
+               Most Liked
+             </span>;  
+          }
+         
+          else{ 
+            return <span className="span-padding x-star" key={query}>{query} star </span>;
+          }
+         
+
+        })
+        
+        
+      
+        
+        }
+       
+       
       </div>
     </div>
   );

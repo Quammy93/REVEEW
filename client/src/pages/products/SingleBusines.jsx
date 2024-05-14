@@ -11,12 +11,22 @@ import { connect } from "react-redux";
 import { IoMdFlag } from "react-icons/io";
 import { FaReply } from "react-icons/fa";
 import { AiTwotoneLike } from "react-icons/ai";
+import MapComponent from "../../components/MapComponent";
 
 //const url = "/api";
 
+let combinedQuerry = [];
+
 import { useGlobalContext } from "../../utils/context";
 
-const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorted,setReviewQueried }) => {
+
+const SingleBusines = ({
+  businessInfo,
+  setBusinessInfo,
+  reviewChecked,
+  reviewSorted,
+  setReviewQueried,
+}) => {
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -30,15 +40,28 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
   let totalReviews = 0;
   const urlLocation = useLocation();
 
-  console.log("filtering",reviewChecked,reviewSorted)
+
+  // Function to split values and add them to the combined array
+  function addValuesToArray(queryObject, key) {
+    if (queryObject[key]) {
+      const values = queryObject[key].split(",");
+      combinedQuerry.push(...values);
+
+    }
+  }
 
   const getAllReviews = async (id) => {
-    return await axios.get(`${url}/reviews/${id}`).catch((error) => {
-      console.log(error);
-      //toast.error(error.message);
-    });
+    return await axios
+      .get(
+        `${url}/reviews/${id}?sort=${reviewSorted}&filter=${reviewChecked.join(
+          ","
+        )}`
+      )
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
   };
-
 
   const fetchReview = async (id) => {
     setIsReviewLoading(true);
@@ -47,8 +70,31 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
 
       const { reviews } = await response.data;
 
-      console.log(response);
+      console.log("response", response);
 
+      const { requestQuerry } = await response.data;
+      console.log("requestQuerry", requestQuerry);
+
+      
+
+      // Add 'filter' and 'sort' values to the combined array
+    //  addValuesToArray(requestQuerry, "filter");
+      //addValuesToArray(requestQuerry, "sort");
+
+    // console.log(new Set(combinedQuerry)); // Output: ['5', '4', 'most-liked']
+    //  setReviewQueried( new Set(combinedQuerry));
+   //console.log(combinedQuerry)
+
+
+  function updateCombinedArray() {
+    combinedQuerry = [];
+    addValuesToArray(requestQuerry, "filter");
+    addValuesToArray(requestQuerry, "sort");
+   
+  }
+ updateCombinedArray();
+ console.log(new Set(combinedQuerry));
+ setReviewQueried([...new Set(combinedQuerry)]);
       setReviews(reviews);
       setIsReviewLoading(false);
       setNumOfZeroReview(response?.data?.numOfZeroReview);
@@ -77,7 +123,7 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
     // Use an async function to fetch data
 
     fetchReview(companyID);
-  }, []);
+  }, [reviewChecked, reviewSorted]);
 
   const navigate = useNavigate();
   const { companyID } = useParams();
@@ -112,6 +158,16 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
 
     fetchData(companyID);
   }, []);
+
+  const mapStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+
+    // Ensure the map is behind other content
+  };
 
   const { _id, name, category, location, numOfReview, img, avgrating, desc } =
     businessInfo;
@@ -208,7 +264,7 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
                   <article className="review-duration">
                     {" "}
                     <span>
-                      <Rate value={5} defaultValue={5} /> Verified{" "}
+                      <Rate value={value} defaultValue={value} /> Verified{" "}
                     </span>
                     19 hours ago
                   </article>
@@ -261,7 +317,11 @@ const SingleBusines = ({ businessInfo, setBusinessInfo,reviewChecked,reviewSorte
               </span>
             </span>
           </div>
-          <article className="bsn-map">Track ur way to {name}</article>
+
+          <article className="bsn-map">
+            <h3>Track ur way to {name}</h3>
+            <MapComponent style={mapStyle} />
+          </article>
         </section>
       </main>
 

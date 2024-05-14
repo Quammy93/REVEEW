@@ -133,10 +133,10 @@
 }
 
 .website-link {
-  padding: 20px;
-  font-size: 20px;
+  padding: 10px;
+  font-size: 15px;
   border: 1px solid gainsboro;
-  width: 300px;
+  width: 200px;
   margin-left: -5%;
   border-radius: 15px;
 }
@@ -188,22 +188,40 @@
 .bsn-info {
   width: 100%;
   background-color:#232c59;
-  height: 700px;
+  min-height: 100px;
   padding: 10px;
   color: white;
   border-radius: 5px;
 }
+.bsn-info h3,.bsn-info h5{font-size: 20px;font-weight: 600;margin: 0;padding: 0;}
+.bsn-info p,.bsn-info span{color: rgb(230, 225, 225);}
+
+
 .bsn-map {
   width: 80%;
   height: 300px;
-  background-color: blue;
+ 
   margin-top: 40px;
 }
+.bsn-map h3{
+  margin: 0;
+  color: #232c59;
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .single-bsn-container {
   display: grid;
   grid-template-columns: 65% 35%;
   margin: 40px 60px 0 80px;
 }
+select{width: 120px;  padding: 4px;
+  font-size: 15px;
+  border: 2px solid gainsboro;outline: none}
+
+  option{outline: none;border: none !important;}
+ 
+
 
 .writer-avarta {
   height: 60px;
@@ -319,13 +337,13 @@ span.span-pro {
   background-color: white;
 }
 .span-padding {
-  padding: 4px;
+ 
+padding: 4px;
   font-size: 15px;
-  border: 2px solid gainsboro;
-
+  border: 2px solid gainsboro;outline: none
  
 }
-.x-star{background-color: #232c59;color: white;padding: auto;font-size: 14px;border-radius: 5px;border: none;}
+.x-star{background-color: #232c59;color: white;padding:10px 20px;font-size: 16px;border-radius: 5px;border: none;}
 .bsn-rev-foot-1 {
   display: flex;
   justify-content: space-between;
