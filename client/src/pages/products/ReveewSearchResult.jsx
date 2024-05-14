@@ -4,7 +4,7 @@ import "../../assets/css/thereviewee.css";
 import { IoSearch } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import reviewee from "../../assets/images/reviewee1.jpg";
-import cake from "../../assets/images/cake1.jpg";
+
 import { Rate } from "antd";
 import Footer from "../../components/Footer";
 import ServiceCategory from "../../components/ServiceCategory";

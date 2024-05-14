@@ -15,7 +15,7 @@ import Footer from "../components/Footer";
 
 import compass from "../assets/images/stepImages/compass.png";
 import right from "../assets/images/stepImages/right.png";
-import rightArrow from "../assets/images/stepImages/right-arrow.png";
+
 
 import Sidebar from "../components/Sidebar";
 import img from "../assets/images/main8.jpg";
@@ -23,28 +23,20 @@ import img4 from "../assets/images/main6.jpg";
 import img49 from "../assets/images/main49.jpg";
 import img20 from "../assets/images/main20.jpg";
 import img21 from "../assets/images/main21.jpg";
-import icon1 from "../assets/images/icon1.gif";
-import icon2 from "../assets/images/icon2.gif";
+
 import icon3 from "../assets/images/icon3.gif";
-import icon4 from "../assets/images/icon4.gif";
-import icon5 from "../assets/images/icon5.gif";
-import icon6 from "../assets/images/icon6.gif";
-import icon7 from "../assets/images/icon7.gif";
-import icon8 from "../assets/images/icon8.gif";
-import icon9 from "../assets/images/icon9.gif";
+
 import icon10 from "../assets/images/icon10.gif";
 import icon11 from "../assets/images/icon11.gif";
-import icon12 from "../assets/images/icon12.gif";
-import icon13 from "../assets/images/icon13.gif";
-import icon14 from "../assets/images/icon14.gif";
+
 import icon15 from "../assets/images/icon15.gif";
-import icon16 from "../assets/images/icon16.gif";
+
 import icon17 from "../assets/images/icon17.gif";
 import icon18 from "../assets/images/icon18.gif";
-import icon19 from "../assets/images/icon19.gif";
+
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
-import logo from "../assets/images/Group 2.png";
+
 import { CLOSE_SUBMENU } from "../redux/action";
 
 const Home = ({ showSidebar, closesubemenu }) => {

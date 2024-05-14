@@ -11,7 +11,7 @@ import {
   BsReverseLayoutTextWindowReverse,
 } from "react-icons/bs";
 import "../assets/css/register.css";
-import logo from "../assets/images/revlogo.png";
+import logo from "../assets/images/Group 2.png";
 //import { userRegistration } from "../utils/axios";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../utils/context";

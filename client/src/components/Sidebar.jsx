@@ -6,7 +6,7 @@ import "../assets/css/navbar.css";
 import "../assets/css/sidebar.css";
 import { Button, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import logo1 from "../assets/images/revlogo.png";
+import logo1 from "../assets/images/Group 2.png";
 import { FaUser, FaSortDown, FaCaretRight, FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdOutlineExitToApp } from "react-icons/md";
