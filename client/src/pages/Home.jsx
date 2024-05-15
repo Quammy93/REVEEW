@@ -37,10 +37,30 @@ import icon18 from "../assets/images/icon18.gif";
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
 
-import { CLOSE_SUBMENU } from "../redux/action";
+import { CLOSE_SUBMENU ,SET_IS_SEARCHING} from "../redux/action";
 
-const Home = ({ showSidebar, closesubemenu }) => {
-  AOS.init();
+const Home = ({
+  showSidebar,
+  closesubemenu,
+  closeSearchContainer,
+  isShowSubmenu,
+}) => {
+  if (isShowSubmenu == true) {
+    closeSearchContainer(false);
+  	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    AOS.init();
   //const {closeSubmenu } = useGlobalContext();
   let loggedUser = { name: "", role: "" };
 
@@ -76,6 +96,11 @@ const Home = ({ showSidebar, closesubemenu }) => {
  */
 
   // localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+  const handleHero = () => {
+    closesubemenu();
+    closeSearchContainer(false);
+  };
+
   return (
     <main>
       <div className="sidecheck">
@@ -88,7 +113,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
         <Navbar2 />
 
         {/**hero */}
-        <div className="hero-aside" onMouseOver={closesubemenu}>
+        <div className="hero-aside" onMouseOver={handleHero}>
           <img src={img} alt="" className="hero-image" />
           <div className="overlay"></div>
           <section className="intro-main-container">
@@ -98,10 +123,14 @@ const Home = ({ showSidebar, closesubemenu }) => {
               data-aos-anchor-placement="top-center"
             >
               <h4>
-                <p className="intro-heading">
-                  <span ref={el}> Read</span>{" "}
-                  <span className="intro-heading1">reviews</span>{" "}
-                </p>
+                <div className="flex-title">
+                  <p className="intro-heading">
+                    <span ref={el}> Read</span>{" "}
+                  </p>
+                  <p className="intro-heading">
+                    <span className="intro-heading1">reviews</span>{" "}
+                  </p>
+                </div>
                 <main>
                   <p>Find the brand and product you can trust</p>
                   <p>
@@ -112,14 +141,17 @@ const Home = ({ showSidebar, closesubemenu }) => {
 
               <div className="overlay-btn-div">
                 {" "}
-                <button className="overlay-btn">Get Started</button>
+                <a href="/products/All Products?category=All Products">
+                  {" "}
+                  <button className="overlay-btn">Get Started</button>
+                </a>
               </div>
             </div>
           </section>
         </div>
         {/**hero */}
 
-        <main className="hero-main" onMouseOver={closesubemenu}>
+        <main className="hero-main" onMouseOver={handleHero}>
           <section className="hero-container">
             <h3>Features Builts For Everyone</h3>
 
@@ -221,7 +253,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
           </section>
         </main>
 
-        <aside className="hero-all" onMouseOver={closesubemenu}>
+        <aside className="hero-all" onMouseOver={handleHero}>
           <section className="hero2-display">
             <div>
               <main className="self-img">
@@ -240,7 +272,10 @@ const Home = ({ showSidebar, closesubemenu }) => {
                     trust
                   </p>
 
-                  <button className="self-btn">Write a Review</button>
+                  <a href="/products/All Products?category=All Products">
+                    {" "}
+                    <button className="self-btn">Write a Review</button>
+                  </a>
                 </div>
               </main>
               <article></article>
@@ -284,7 +319,10 @@ const Home = ({ showSidebar, closesubemenu }) => {
               <div className="explore-category-heading">
                 <h2>Explore categories</h2>
                 <span className="explore-btn">
-                  <p>Explore More</p>
+                  <a href="/products/All Products?category=All Products">
+                    {" "}
+                    <p>Explore More</p>
+                  </a>
                 </span>
               </div>
 
@@ -311,7 +349,10 @@ const Home = ({ showSidebar, closesubemenu }) => {
                   your experiences to help others make better choices and
                   encourage companies to up their game
                 </h3>
-                <button className="hero-abs1-btn"> Get Started</button>
+                <a href="/products/All Products?category=All Products">
+                  {" "}
+                  <button className="hero-abs1-btn"> Get Started</button>
+                </a>
               </div>
             </div>
             <div className="hero-abs2">
@@ -359,11 +400,13 @@ const Home = ({ showSidebar, closesubemenu }) => {
 const mapStateToProps = (state) => {
   return {
     showSidebar: state.appFunctions.showSidebar,
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) => dispatch({ type: SET_IS_SEARCHING, payload: { status: status }}),
   };
 };
 
