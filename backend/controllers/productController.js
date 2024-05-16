@@ -98,7 +98,7 @@ if (location) {
 
   if (filter) {
     const filtered = filter.split(",");
-    queryObj.brand = filtered;
+    queryObj.avgrating = filtered;
   }
 
   //searching
@@ -117,12 +117,16 @@ if (location) {
 
   let result = Item.find(queryObj);
   //sorting
-  if (sort === "a-z") {
-    result = result.sort("price");
+  if (sort === "high-rate") {
+    result = result.sort("avgrating");
   }
-  if (sort === "z-a") {
-    result = result.sort("-price");
+  if (sort === "most-reviewed") {
+    result = result.sort("numOfReview");
   }
+    if (sort === "recommended") {
+      result = result.sort("recommended");
+    }
+
 
   //pagination
 

@@ -63,7 +63,8 @@ const getAllReviews = async (req, res) => {
     const filtered = filter.split(",");
     queryObj.value = filtered;
   }
-
+  
+ 
   let result = Reviews.find(queryObj).populate({
     path: "reviewer",
     select: "name ",
