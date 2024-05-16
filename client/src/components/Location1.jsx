@@ -6,7 +6,7 @@ import {
   SET_IS_LOCATION_CONTAINER_OPEN,
 } from "../redux/action";
 
-const businessCategory = ["Lagos", "Abuja", "Ibadan", "PH", "Oyo"];
+const businessCategory = ["Current","Lagos", "Abuja", "Ibadan", "PH", "Oyo"];
 
 const Location1 = ({
   setServiceLocation,

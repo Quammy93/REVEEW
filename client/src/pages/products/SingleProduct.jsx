@@ -13,9 +13,19 @@ import { useGlobalContext } from "../../utils/context";
 
 import { Alert, Space, Spin } from "antd";
 import { connect } from "react-redux";
-import { SET_PRODUCT_INFO } from "../../redux/action";
+import {
+  SET_PRODUCT_INFO,
+  CLOSE_SUBMENU,
+  SET_IS_SEARCHING,
+} from "../../redux/action";
 
-const SingleProduct = ({ productInfo, setProductInfo }) => {
+const SingleProduct = ({
+  productInfo,
+  setProductInfo,
+  closesubemenu,
+  closeSearchContainer,
+  isShowSubmenu,
+}) => {
   // const { productInfo, setProductInfo } = useGlobalContext();
   console.log(productInfo);
   const location = useLocation();
@@ -47,6 +57,10 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
       //toast.error(error.message);
     });
   };
+
+
+
+
 
   const fetchData = async () => {
     setIsProductLoading(true);
@@ -123,8 +137,28 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
     fetchReview();
   }, []);
 
+
+
+if (isShowSubmenu == true) {
+  closeSearchContainer(false);
+}
+    
+    const handleHero = () => {
+      closesubemenu();
+      closeSearchContainer(false);
+    };
+ 
+
+
+
+
+
+
+
+
+
   return (
-    <div>
+    <div >
       <main className="navbar-section">
         <Navbar2 />
       </main>
@@ -145,7 +179,7 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
 
       {!isproductLoading && product.length == [] && <div>No data Product</div>}
       {!isproductLoading && product.length > 0 && (
-        <div>
+        <div onMouseOver={handleHero}>
           {" "}
           <section className="single-product-link">
             <div className="left-query">
@@ -445,7 +479,9 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
                     {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-details">
                       Product Details
                     </HashLink>*/}
-                    <Link to={"product-details"} offset={-100}>Product Overview</Link>
+                    <Link to={"product-details"} offset={-100}>
+                      Product Overview
+                    </Link>
                   </h2>
                   <h2>
                     <Link to={"product-specificaton"} offset={-100}>
@@ -456,7 +492,9 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
                     </HashLink>  */}
                   </h2>
                   <h2>
-                    <Link to={"product-review"} offset={-100}>Reviews</Link>
+                    <Link to={"product-review"} offset={-100}>
+                      Reviews
+                    </Link>
                     {/** <HashLink to="/products/:selectedCategory/:product/:id#product-review">
                       Reviews
                     </HashLink>*/}
@@ -474,6 +512,7 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
 const mapStateToProps = (state) => {
   return {
     productInfo: state.product.productInfo,
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
   };
 };
 
@@ -481,6 +520,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setProductInfo: (product) =>
       dispatch({ type: SET_PRODUCT_INFO, payload: { product: product } }),
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);

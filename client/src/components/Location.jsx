@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import { SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN } from '../redux/action';
 
 const businessCategory = [
+  "Current",
   "Lagos",
   "Abuja",
   "Ibadan",

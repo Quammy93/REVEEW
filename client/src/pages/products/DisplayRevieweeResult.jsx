@@ -9,13 +9,16 @@ const url = "http://localhost:5000/api";
 
 import { useGlobalContext } from "../../utils/context";
 import { useNavigate } from "react-router-dom";
+import { Rating } from "@mui/material";
 
-import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
+import { Space,Spin, Radio,  Checkbox, Pagination } from "antd";
+import { connect } from "react-redux";
+import { CLOSE_SUBMENU } from "../../redux/action";
 
-const DisplayRevieweeResult = () => {
+const DisplayRevieweeResult = ({closesubemenu}) => {
   const navigate = useNavigate();
 
-  const desc = ["terrible", "bad", "normal", "good", "wonderful"];
+  const desc = ["Terrible", "Bad", "Normal", "Good", "Excellent"];
 
   const [business, setBusiness] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -23,6 +26,7 @@ const DisplayRevieweeResult = () => {
   const [value, setValue] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [totalCount, setTotalCount] = React.useState(30);
+  const [isLoading,setIsLoading] = React.useState(false);
 
   const handleItemClick = async (id) => {
     //await setBusinessInfo(item);
@@ -32,7 +36,9 @@ const DisplayRevieweeResult = () => {
 
   const getAllBusiness = async () => {
     return await axios
-      .get(`${url}/services?location=${location}&avgrating=${value}`)
+      .get(
+        `${url}/services?page=${currentPage}&limit=${limit}&location=${location}&avgrating=${value}`
+      )
       .catch((error) => {
         console.log(error);
         //toast.error(error.message);
@@ -56,7 +62,7 @@ const DisplayRevieweeResult = () => {
   };
 
   const fetchData = async () => {
-    //setIsProductLoading(true);
+    setIsLoading(true);
     try {
       const response = await getAllBusiness();
 
@@ -66,8 +72,8 @@ const DisplayRevieweeResult = () => {
 
       //  const { products, totalCount, numOfPages } = response.data;
       setBusiness(response.data.items);
-      //  setTotalCount(totalCount);
-      //setIsProductLoading(false);
+       setTotalCount(response.data.totalCount);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -77,7 +83,7 @@ const DisplayRevieweeResult = () => {
     // Use an async function to fetch data
 
     fetchData();
-  }, [value, location]);
+  }, [value, location,currentPage]);
 
   return (
     <section>
@@ -101,8 +107,11 @@ const DisplayRevieweeResult = () => {
           </div>
         </article>
       </main>
-      <section className="display-business-container">
-        <main className="business-filter">
+      <section
+        className="display-business-container"
+        onMouseOver={closesubemenu}
+      >
+        <main className="business-filter" onMouseOver={closesubemenu}>
           <article>
             <ul>
               <li className="browse-cat">
@@ -120,45 +129,51 @@ const DisplayRevieweeResult = () => {
                     >
                       <Space direction="vertical">
                         <Radio value={5}>
-                          <Rate
-                            disabled
-                            defaultValue={5}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={5}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio value={4}>
-                          <Rate
-                            disabled
-                            defaultValue={4}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={4}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio value={3}>
-                          <Rate
-                            disabled
-                            defaultValue={3}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={3}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio value={2}>
-                          <Rate
-                            disabled
-                            defaultValue={2}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={2}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio value={1}>
-                          <Rate
-                            disabled
-                            defaultValue={1}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={1}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio value={0}>
-                          <Rate
-                            disabled
-                            defaultValue={0}
-                            style={{ backgroundColor: "white" }}
+                          <Rating
+                            name="read-only"
+                            value={0}
+                            readOnly
+                            className="ui"
                           />
                         </Radio>
                         <Radio
@@ -185,18 +200,8 @@ const DisplayRevieweeResult = () => {
                 setLocation(e.target.value);
               }}
             >
-              <option value="Lagos">Lagos</option>
-              <option value="Ibadan">Ibadan</option>
-              <option value="Oyo">Oyo</option>
-              <option value="Lagos">Lagos</option>
-              <option value="Ibadan">Ibadan</option>
-              <option value="Oyo">Oyo</option>
-              <option value="Lagos">Lagos</option>
-              <option value="Ibadan">Ibadan</option>
-              <option value="Oyo">Oyo</option>
-              <option value="Lagos">Lagos</option>
-              <option value="Ibadan">Ibadan</option>
-              <option value="Oyo">Oyo</option>
+              <option value="">Any</option>
+              <option value="current">Current Location</option>
               <option value="Lagos">Lagos</option>
               <option value="Ibadan">Ibadan</option>
               <option value="Oyo">Oyo</option>
@@ -221,51 +226,78 @@ const DisplayRevieweeResult = () => {
             </div>
           </main>
         </main>
-        <section>
-          {business.map((item) => {
-            const {
-              _id,
-              name,
-              category,
-              location,
-              numOfReview,
-              img,
-              avgrating,
-            } = item;
 
-            return (
-              <article className="display-business-article" key={_id}>
-                <main className="bsn-art-container">
-                  <div>
-                    <img src={img} alt="" className="bsn-img" />
-                  </div>
-                  <div>
-                    <h2>{name}</h2>
-                    <span>
-                      {" "}
-                      <Rate tooltips={desc} value={avgrating} />
-                      <p>{numOfReview} Reviews</p>
-                    </span>
-                    <span>{location}</span>
-                  </div>
-                </main>
-                <article className="reveewee-review-btn-div">
-                  {" "}
-                  <div>Most Relevant</div>
-                  <button
-                    className="reveewee-review-btn"
-                    onClick={() => handleItemClick(_id)}
-                  >
+        {/**business display container */}
+        <section onMouseOver={closesubemenu}>
+          {isLoading && (
+            <div className="product-spin">
+              <Space
+                direction="vertical"
+                style={{
+                  width: "100%",
+                }}
+              >
+                <Spin tip="Loading" size="large">
+                  <div className="content " />
+                </Spin>{" "}
+              </Space>
+            </div>
+          )}
+          {!isLoading && business.length == [] && <div>No Result Found</div>}
+
+          {!isLoading &&
+            business.length != [] &&
+            business.map((item) => {
+              const {
+                _id,
+                name,
+                category,
+                location,
+                numOfReview,
+                img,
+                avgrating,
+              } = item;
+
+              return (
+                <article className="display-business-article" key={_id}>
+                  <main className="bsn-art-container">
+                    <div>
+                      <img src={img} alt="" className="bsn-img" />
+                    </div>
+                    <div>
+                      <h2>
+                        <b>{name}</b>
+                      </h2>
+                      <span>
+                        {" "}
+                        <Rating
+                          name="read-only"
+                          value={avgrating}
+                          readOnly
+                          className="ui"
+                        />
+                        <p>{numOfReview} Reviews</p>
+                      </span>
+                      <span>{location}</span>
+                    </div>
+                  </main>
+                  <article className="reveewee-review-btn-div">
                     {" "}
-                    Review
-                  </button>
+                    <div>Most Relevant</div>
+                    <button
+                      className="reveewee-review-btn"
+                      onClick={() => handleItemClick(_id)}
+                    >
+                      {" "}
+                      Review
+                    </button>
+                  </article>
                 </article>
-              </article>
-            );
-          })}
+              );
+            })}
 
-          <main>
-            {business.length != [] && (
+          {!isLoading && business.length != [] && (
+            <main>
               <Pagination
                 total={totalCount}
                 pageSize={limit}
@@ -284,13 +316,20 @@ const DisplayRevieweeResult = () => {
                 onChange={handlePagechange}
                 className="paginate"
               />
-            )}
-          </main>
+            </main>
+          )}
         </section>
       </section>
-      <Footer />
+      <Footer  />
     </section>
   );
 };
 
-export default DisplayRevieweeResult;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+   
+  };
+};
+
+export default connect(null,mapDispatchToProps) (DisplayRevieweeResult);
