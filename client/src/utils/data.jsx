@@ -42,7 +42,7 @@ const sublinks = [
         label: "Resturant",
         icon: restaurant,
         icon1: <IoRestaurantOutline />,
-        url: "/products/resturant&bar?category= resturant&bar",
+        url: "/services?category=Restaurants",
       },
       {
         label: "Fashion",

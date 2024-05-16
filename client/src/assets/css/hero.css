@@ -6,14 +6,6 @@
   top: 115%;
   padding: 20px 0px 0px 60px;
 }
-.arrow {
-    width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-left: 100px solid black; /* Adjust color as needed */
-  border-radius: 50%;
-}
 
 .flex-title{display: grid;grid-template-columns: 40% 60%;}
 

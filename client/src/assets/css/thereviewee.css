@@ -53,6 +53,7 @@ aside {
   grid-template-columns: 55% 40%;
   height: 320px;
   padding: 50px 0 0 50px;
+  margin-top: 50px;
 }
 .reviewee-container h4 {
   font-size: 18px;
@@ -179,8 +180,8 @@ aside {
 }
 .business-category {
   width: 260px;
-  
-   background-color: white;
+
+  background-color: white;
   z-index: 100;
   top: 90%;
 
@@ -188,7 +189,7 @@ aside {
 
   display: none;
   margin-left: -200px;
-    border-radius: 5px;
+  border-radius: 5px;
   box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .business-category1 {
@@ -203,7 +204,6 @@ aside {
   margin-top: 5px;
   border-radius: 5px;
   box-shadow: 1px 1px 5px 5px gainsboro;
- 
 }
 .business-category.show {
   display: block;
@@ -219,22 +219,21 @@ aside {
 }
 .location-category {
   width: 200px;
- 
+
   background-color: white;
   z-index: 100;
   position: absolute;
   margin-top: 5px;
   transform: translateX(164%);
   display: none;
-   top: 90%;
-   left: 130px;
-   border-radius: 5px;
-   box-shadow: 1px 1px 5px 5px gainsboro;
-
+  top: 90%;
+  left: 130px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .location-category1 {
   width: 19%;
- 
+
   background-color: white;
   z-index: 100;
   position: absolute;
@@ -243,8 +242,7 @@ aside {
   display: none;
   margin-left: -30px;
   border-radius: 5px;
-   box-shadow: 1px 1px 5px 5px gainsboro;
-   
+  box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .bus-cat-list {
   padding: 8px;
@@ -261,8 +259,14 @@ aside {
 .business-review-article {
   padding: 10px;
 }
-.business-review-article h3{font-size: 20px;margin: 0 0 10px 0;}
-.business-review-article p{margin: 0 0 10px 0;padding: 0;}
+.business-review-article h3 {
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+.business-review-article p {
+  margin: 0 0 10px 0;
+  padding: 0;
+}
 .review-reaction {
   display: flex;
   justify-content: start;
@@ -296,13 +300,34 @@ aside {
   font-size: 25px;
   cursor: pointer;
 }
-.reviewee-container-parent{width: 100vw;}
-.list-article-main1{}
-.list-heading-desc{font-family:" Open Sans", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size: 25px; font-weight: 500;}
-.list-article-main{width: 50%;margin-left: 50px;}  
-.list-article{ display: flex; margin-bottom: 10px;border-radius:10px;box-shadow:1px 1px 5px 5px gainsboro;}
-.list-desc{} 
-.reviewee-wrapper{display:grid;grid-template-columns: 65% 35%} 
-.reviewee-map{width: 100%;height: 100%;margin-left: -50px;    position: 'relative',}
+.reviewee-container-parent {
+  width: 100vw;
+}
 
+.list-heading-desc {
+  font-family: " Open Sans", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+.list-article-main {
+  width: 50%;
+  margin-left: 50px;
+}
+.list-article {
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
+}
 
+.reviewee-wrapper {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+.reviewee-map {
+  width: 100%;
+  height: 100%;
+  margin-left: -50px;
+  position: "relative";
+}

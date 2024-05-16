@@ -2,8 +2,10 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import Navbar2 from "../../components/Navbar2";
 import "../../assets/css/singleProduct.css";
-import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Rate, Progress } from "antd";
+import { Rating } from "@mui/material";
+import { Link, animateScroll as scroll } from "react-scroll";
 import axios from "axios";
 const url = "http://localhost:5000/api";
 import { useGlobalContext } from "../../utils/context";
@@ -15,7 +17,7 @@ import { SET_PRODUCT_INFO } from "../../redux/action";
 
 const SingleProduct = ({ productInfo, setProductInfo }) => {
   // const { productInfo, setProductInfo } = useGlobalContext();
-  console.log(productInfo)
+  console.log(productInfo);
   const location = useLocation();
   const { category, product, id } = useParams();
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
 
       console.log(response);
 
-      console.log("productInfo",item)
+      console.log("productInfo", item);
       setProductInfo(item);
       setIsProductLoading(false);
     } catch (error) {
@@ -234,9 +236,11 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
                             </div>
 
                             <div>
-                              <Rate
+                              <Rating
+                                name="read-only"
                                 value={avgrating}
-                                defaultValue={avgrating}
+                                readOnly
+                                size="large"
                               />
                             </div>
                             <p>{numOfReview} verified ratings</p>
@@ -401,7 +405,12 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
                               </div>
 
                               <div>
-                                <Rate defaultValue={value} value={value} />
+                                <Rating
+                                  name="read-only"
+                                  value={value}
+                                  readOnly
+                                  className="ui"
+                                />
                               </div>
                               <h3 className="margin-off review-title">
                                 {title}
@@ -436,16 +445,18 @@ const SingleProduct = ({ productInfo, setProductInfo }) => {
                     {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-details">
                       Product Details
                     </HashLink>*/}
-                    <a href="#product-details">Product Overview</a>
+                    <Link to={"product-details"} offset={-100}>Product Overview</Link>
                   </h2>
                   <h2>
-                    <a href="#product-specificaton">Product Features</a>{" "}
+                    <Link to={"product-specificaton"} offset={-100}>
+                      Product Features
+                    </Link>{" "}
                     {/**  <HashLink to="/products/:selectedCategory/:product/:id#product-specificaton"> 
                       Product Specification
                     </HashLink>  */}
                   </h2>
                   <h2>
-                    <a href="#product-review">Reviews</a>
+                    <Link to={"product-review"} offset={-100}>Reviews</Link>
                     {/** <HashLink to="/products/:selectedCategory/:product/:id#product-review">
                       Reviews
                     </HashLink>*/}

@@ -55,6 +55,7 @@ a {
 .product-review-heading {
   padding: 20px 0 0 20px;
   font-size: 20px;
+  font-weight: 600;
 }
 
 .key-features-heading {
@@ -141,7 +142,7 @@ a {
 }
 .reviewer-container {
   display: flex;
-  justify-content: space-between;
+ gap: 10px;
   width: 170px;
 }
 .reviewer-2 {
@@ -178,6 +179,7 @@ a {
 }
 .user-name {
   text-transform: capitalize;
+  font-weight: 600;
 }
 .post-review-btn {
   margin: 60px 0 20px 0;
