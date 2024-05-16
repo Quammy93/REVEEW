@@ -27,6 +27,7 @@ const DisplayRevieweeResult = ({closesubemenu}) => {
   const [location, setLocation] = React.useState("");
   const [totalCount, setTotalCount] = React.useState(30);
   const [isLoading,setIsLoading] = React.useState(false);
+  const [sortValue, setSortValue] = React.useState("");  
 
   const handleItemClick = async (id) => {
     //await setBusinessInfo(item);
@@ -37,7 +38,7 @@ const DisplayRevieweeResult = ({closesubemenu}) => {
   const getAllBusiness = async () => {
     return await axios
       .get(
-        `${url}/services?page=${currentPage}&limit=${limit}&location=${location}&avgrating=${value}`
+        `${url}/services?page=${currentPage}&limit=${limit}&location=${location}&avgrating=${value}&sort=${sortValue}`
       )
       .catch((error) => {
         console.log(error);
@@ -83,7 +84,7 @@ const DisplayRevieweeResult = ({closesubemenu}) => {
     // Use an async function to fetch data
 
     fetchData();
-  }, [value, location,currentPage]);
+  }, [value, location,currentPage,sortValue]);
 
   return (
     <section>
@@ -97,9 +98,9 @@ const DisplayRevieweeResult = ({closesubemenu}) => {
             <h2>Best Restuarants around Lagos</h2>
             <span>
               <label htmlFor="">sort -</label>
-              <select name="sort" id="" className="select-sort">
-                <option value="Recommended">All</option>
-                <option value="Recommended">Recommended</option>
+              <select name="sort" id="" className="select-sort" onChange={(e)=>setSortValue(e.target.value)}>
+                <option value="">Any</option>
+                <option value="recommended">Recommended</option>
                 <option value="most-reviewed">Most Reviewed</option>
                 <option value="high-rate">Highest Rating</option>
               </select>

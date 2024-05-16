@@ -4,8 +4,9 @@ import axios from "axios";
 const url = "http://localhost:5000/api";
 import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
-import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
+import { Rate, Divider, Pagination } from "antd";
+import { Rating } from "@mui/material";
+import {  useParams, useNavigate, useLocation } from "react-router-dom";
 import { SET_BUSINESS_INFO, SET_REVIEW_QUERIED } from "../../redux/action";
 import { connect } from "react-redux";
 import { IoMdFlag } from "react-icons/io";
@@ -190,7 +191,12 @@ const SingleBusines = ({
               <h2>{name}</h2>
               <span>
                 {" "}
-                <Rate value={avgrating} />
+                <Rating
+                  name="read-only"
+                  value={avgrating}
+                  readOnly
+                  size="large"
+                />
                 <p>{numOfReview} Reviews</p>
               </span>
               <span>{location}</span>
@@ -218,7 +224,7 @@ const SingleBusines = ({
               </p>
             </span>{" "}
             <span>
-              <Rate value={avgrating} defaultValue={avgrating} />
+              <Rating name="no-value" value={null} />
             </span>
           </div>
           <div className="bsn-review-info">
@@ -255,8 +261,12 @@ const SingleBusines = ({
                     <span className="writer-span">
                       <img src={avarta} alt="" className="writer-avarta" />
                       <span className="reviewer-detail">
-                        <span>{reviewer.name}</span>
-                        <span>{formattedTimestamp}</span>
+                        <span>
+                          <b>{reviewer.name}</b>
+                        </span>
+                        <span style={{ fontSize: "13px" }}>
+                          {formattedTimestamp}
+                        </span>
                       </span>
                     </span>{" "}
                   </div>
@@ -264,7 +274,8 @@ const SingleBusines = ({
                   <article className="review-duration">
                     {" "}
                     <span>
-                      <Rate value={value} defaultValue={value} /> Verified{" "}
+                      <Rating name="read-only" value={value} readOnly />{" "}
+                      Verified{" "}
                     </span>
                     19 hours ago
                   </article>

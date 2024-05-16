@@ -1,5 +1,6 @@
 import React from "react";
-import { Checkbox, Rate, Progress, Divider } from "antd";
+import { Checkbox, Progress, Divider } from "antd";
+import { Rating } from "@mui/material";
 import { IoFilter } from "react-icons/io5";
 
 import { connect } from "react-redux";
@@ -34,7 +35,7 @@ const ReviewDetail = ({
       <h2>
         Reviews{" "}
         <span>
-          <Rate value={rating} defaultValue={rating} />
+          <Rating name="read-only" value={rating} readOnly size="large" />
         </span>
       </h2>
       <span>{revNum} total reviews</span>
@@ -108,38 +109,35 @@ const ReviewDetail = ({
                 setReviewSorted(e.target.value);
               }}
             >
+              <option value="">Any</option>
               <option value="most-recent">Most Recent</option>
               <option value="most-liked">Most Liked</option>
-     
             </select>
           </span>
         </span>
       </div>
       <div className="bsn-rev-foot-2">
-        {reviewQueried.map((query)=>{
-
-          if(query=== "most-recent"){
-        return  <span className="span-padding x-star" key={query}>Most Recent </span>;  
+        {reviewQueried.map((query) => {
+          if (query === "most-recent") {
+            return (
+              <span className="span-padding x-star" key={query}>
+                Most Recent{" "}
+              </span>
+            );
+          } else if (query === "most-liked") {
+            return (
+              <span className="span-padding x-star" key={query}>
+                Most Liked
+              </span>
+            );
+          } else {
+            return (
+              <span className="span-padding x-star" key={query}>
+                {query} star{" "}
+              </span>
+            );
           }
-          else if(query=== "most-liked"){
-          return   <span className="span-padding x-star" key={query}>
-               Most Liked
-             </span>;  
-          }
-         
-          else{ 
-            return <span className="span-padding x-star" key={query}>{query} star </span>;
-          }
-         
-
-        })
-        
-        
-      
-        
-        }
-       
-       
+        })}
       </div>
     </div>
   );

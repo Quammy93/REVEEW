@@ -307,6 +307,7 @@ select{width: 120px;  padding: 4px;
 .review-detail-main-container {
   padding: 10px;
 }
+.review-detail-main-container h2{margin: 0;padding: 0;font-size: 30px;font-weight: 500;}
 .ant-progress-inner {
   height: 12px !important;
 }
