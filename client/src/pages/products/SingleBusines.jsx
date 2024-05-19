@@ -6,7 +6,7 @@ import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
 import { Rate, Divider, Pagination } from "antd";
 import { Rating } from "@mui/material";
-import {  useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { SET_BUSINESS_INFO, SET_REVIEW_QUERIED } from "../../redux/action";
 import { connect } from "react-redux";
 import { IoMdFlag } from "react-icons/io";
@@ -19,7 +19,6 @@ import MapComponent from "../../components/MapComponent";
 let combinedQuerry = [];
 
 import { useGlobalContext } from "../../utils/context";
-
 
 const SingleBusines = ({
   businessInfo,
@@ -41,13 +40,11 @@ const SingleBusines = ({
   let totalReviews = 0;
   const urlLocation = useLocation();
 
-
   // Function to split values and add them to the combined array
   function addValuesToArray(queryObject, key) {
     if (queryObject[key]) {
       const values = queryObject[key].split(",");
       combinedQuerry.push(...values);
-
     }
   }
 
@@ -76,26 +73,22 @@ const SingleBusines = ({
       const { requestQuerry } = await response.data;
       console.log("requestQuerry", requestQuerry);
 
-      
-
       // Add 'filter' and 'sort' values to the combined array
-    //  addValuesToArray(requestQuerry, "filter");
+      //  addValuesToArray(requestQuerry, "filter");
       //addValuesToArray(requestQuerry, "sort");
 
-    // console.log(new Set(combinedQuerry)); // Output: ['5', '4', 'most-liked']
-    //  setReviewQueried( new Set(combinedQuerry));
-   //console.log(combinedQuerry)
+      // console.log(new Set(combinedQuerry)); // Output: ['5', '4', 'most-liked']
+      //  setReviewQueried( new Set(combinedQuerry));
+      //console.log(combinedQuerry)
 
-
-  function updateCombinedArray() {
-    combinedQuerry = [];
-    addValuesToArray(requestQuerry, "filter");
-    addValuesToArray(requestQuerry, "sort");
-   
-  }
- updateCombinedArray();
- console.log(new Set(combinedQuerry));
- setReviewQueried([...new Set(combinedQuerry)]);
+      function updateCombinedArray() {
+        combinedQuerry = [];
+        addValuesToArray(requestQuerry, "filter");
+        addValuesToArray(requestQuerry, "sort");
+      }
+      updateCombinedArray();
+      console.log(new Set(combinedQuerry));
+      setReviewQueried([...new Set(combinedQuerry)]);
       setReviews(reviews);
       setIsReviewLoading(false);
       setNumOfZeroReview(response?.data?.numOfZeroReview);
@@ -125,6 +118,10 @@ const SingleBusines = ({
 
     fetchReview(companyID);
   }, [reviewChecked, reviewSorted]);
+
+  React.useEffect(() => {
+    fetchReview(companyID);
+  }, []);
 
   const navigate = useNavigate();
   const { companyID } = useParams();
@@ -173,6 +170,8 @@ const SingleBusines = ({
   const { _id, name, category, location, numOfReview, img, avgrating, desc } =
     businessInfo;
 
+  console.log("avgrating", avgrating);
+
   return (
     <div>
       <Navbar1 />
@@ -191,12 +190,7 @@ const SingleBusines = ({
               <h2>{name}</h2>
               <span>
                 {" "}
-                <Rating
-                  name="read-only"
-                  value={avgrating}
-                  readOnly
-                  size="large"
-                />
+               <Rate value={avgrating}/>
                 <p>{numOfReview} Reviews</p>
               </span>
               <span>{location}</span>

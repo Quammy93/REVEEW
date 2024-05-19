@@ -2,6 +2,7 @@ import React from "react";
 import { Checkbox, Progress, Divider } from "antd";
 import { Rating } from "@mui/material";
 import { IoFilter } from "react-icons/io5";
+import {Rate} from "antd";
 
 import { connect } from "react-redux";
 import { SET_REVIEW_CHECKED, SET_REVIEW_SORTED } from "../redux/action";
@@ -35,7 +36,8 @@ const ReviewDetail = ({
       <h2>
         Reviews{" "}
         <span>
-          <Rating name="read-only" value={rating} readOnly size="large" />
+          {/**<Rating name="read-only" value={rating} readOnly size="large" /> */}
+          <Rate value={rating}/>
         </span>
       </h2>
       <span>{revNum} total reviews</span>
