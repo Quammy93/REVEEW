@@ -30,7 +30,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user"], // persist only the user reducer
+//  whitelist, // persist only the user reducer
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

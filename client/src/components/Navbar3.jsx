@@ -18,6 +18,7 @@ import {
   OPEN_SUBMENU,
   CLOSE_SUBMENU,
   SET_IS_LOADING_SEARCH,
+  SET_USER,
 } from "../redux/action";
 const Navbar3 = ({
   searchItem,
@@ -29,6 +30,7 @@ const Navbar3 = ({
   setIsLoadingSearch,
   isLogin,
   user,
+  setUser,
 }) => {
   const {
     //  searchItem,
@@ -37,7 +39,19 @@ const Navbar3 = ({
     //  setIsSearching,
     //  setIsLoadingSearch,
   } = useGlobalContext();
-  console.log("....user", user);
+
+  const showUser = () => {
+    axios.get(`${url}/users/showuser`).then((response) => {
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+    });
+  };
+
+  React.useEffect(() => {
+    showUser();
+  }, []);
+
+  // console.log("....user", user);
 
   const { name } = user;
   const handleSubmenu = (e) => {
@@ -138,6 +152,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
     setIsLoadingSearch: (status) =>
       dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 

@@ -25,6 +25,7 @@ import {
   SET_SERVICE_CATEGORY,
   SET_SERVICE_LOCATION,
   SET_BUSINESS_SEARCHED,
+  SET_USER,
 } from "../redux/action";
 
 const Navbar4 = ({
@@ -46,6 +47,7 @@ const Navbar4 = ({
   setBusinessSearched,
   isLogin,
   user,
+  setUser,
 }) => {
   const {
     // closeSubmenu,
@@ -62,17 +64,20 @@ const Navbar4 = ({
     // setIsLocationContainerOpen,
     // setIsServiceContainerOpen,
   } = useGlobalContext();
+  const showUser = () => {
+    axios.get(`${url}/users/showuser`).then((response) => {
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+    });
+  };
 
-  console.log("....user", user);
+  React.useEffect(() => {
+    showUser();
+  }, []);
+
+  // console.log("....user", user);
 
   const { name } = user;
-
-
-
-
-
-
-
 
   const navigate = useNavigate();
 
@@ -94,20 +99,6 @@ const Navbar4 = ({
     setBusinessSearched(response.data.items);
     navigate("/review-list");
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -281,6 +272,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       }),
     setBusinessSearched: (result) =>
       dispatch({ type: SET_BUSINESS_SEARCHED, payload: { result: result } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 

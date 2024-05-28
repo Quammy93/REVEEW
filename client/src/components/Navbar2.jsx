@@ -8,25 +8,52 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
-import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
+import {
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_SEARCH_RESULT,
+  OPEN_SUBMENU,
+  CLOSE_SUBMENU,
+  SET_IS_LOADING_SEARCH,
+  SET_USER,
+} from "../redux/action";
 //const url = "/api";
 
-const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch ,isLogin,user}) => {
+const Navbar2 = ({
+  searchItem,
+  setSearchItem,
+  setIsSearching,
+  setSearchResult,
+  closesubemenu,
+  opensubemenu,
+  setIsLoadingSearch,
+  isLogin,
+  user,
+  setUser,
+}) => {
   const {
     // closeSubmenu,
     // openSubmenu,
-
-   // searchItem,
-   // setSearchItem,
-
-   // setSearchResult,
-
-   // setIsSearching,
-
-   // setIsLoadingSearch,
+    // searchItem,
+    // setSearchItem,
+    // setSearchResult,
+    // setIsSearching,
+    // setIsLoadingSearch,
   } = useGlobalContext();
-  console.log("....user",user)
-const {name}=user
+
+  const showUser = () => {
+    axios.get(`${url}/users/showuser`).then((response) => {
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+    });
+  };
+
+  React.useEffect(() => {
+    showUser();
+  }, []);
+
+  console.log("....user", user);
+  const { name } = user;
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -67,7 +94,7 @@ const {name}=user
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
-      console.log()
+      console.log();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -139,20 +166,24 @@ const mapStateToProps = (state) => {
     isLogin: state.user.isLogin,
   };
 };
-const mapDispatchToProps = (dispatch,ownProps) => {
-   console.log(ownProps);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
   return {
-    closesubemenu: () => dispatch({type:CLOSE_SUBMENU}),
-    opensubemenu: (text,coordinate) => dispatch({type:OPEN_SUBMENU,payload:{text,coordinate}}),
-   
-    setSearchItem:(search)=>dispatch({type:SET_SEARCH_ITEM,payload:{input:search}}),
-    
-    setIsSearching:(status)=>dispatch({type:SET_IS_SEARCHING,payload:{status:status}}),
-     setSearchResult:(result)=>dispatch({type:SET_SEARCH_RESULT,payload:{result:result}}),
-     setIsLoadingSearch:(status)=>dispatch({type:SET_IS_LOADING_SEARCH,payload:{status:status}})
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    opensubemenu: (text, coordinate) =>
+      dispatch({ type: OPEN_SUBMENU, payload: { text, coordinate } }),
+
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+    setSearchResult: (result) =>
+      dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Navbar2);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar2);

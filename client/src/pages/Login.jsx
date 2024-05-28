@@ -33,7 +33,7 @@ const Login = ({ user, isLogin, setUser, setIsLogin }) => {
         setLoading(false);
         if (response.status == "200") {
           console.log(response.data.user);
-          setUser(response.data.user);
+          
           setIsLogin(true);
 
           //   localStorage.setItem("loggedIn", true);
