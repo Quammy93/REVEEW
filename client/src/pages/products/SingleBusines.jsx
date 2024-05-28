@@ -7,7 +7,12 @@ import ReviewDetail from "../../components/ReviewDetail";
 import { Rate, Divider, Pagination } from "antd";
 import { Rating } from "@mui/material";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { SET_BUSINESS_INFO, SET_REVIEW_QUERIED } from "../../redux/action";
+import {
+  SET_BUSINESS_INFO,
+  SET_REVIEW_QUERIED,
+  CLOSE_SUBMENU,
+  SET_IS_SEARCHING,
+} from "../../redux/action";
 import { connect } from "react-redux";
 import { IoMdFlag } from "react-icons/io";
 import { FaReply } from "react-icons/fa";
@@ -26,6 +31,9 @@ const SingleBusines = ({
   reviewChecked,
   reviewSorted,
   setReviewQueried,
+  closesubemenu,
+  closeSearchContainer,
+  isShowSubmenu,
 }) => {
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
@@ -39,6 +47,17 @@ const SingleBusines = ({
 
   let totalReviews = 0;
   const urlLocation = useLocation();
+
+  
+if (isShowSubmenu == true) {
+  closeSearchContainer(false);
+}
+
+const handleHero = () => {
+  closesubemenu();
+  closeSearchContainer(false);
+};
+ 
 
   // Function to split values and add them to the combined array
   function addValuesToArray(queryObject, key) {
@@ -175,7 +194,7 @@ const SingleBusines = ({
   return (
     <div>
       <Navbar1 />
-      <section>
+      <section onMouseOver={handleHero}>
         <span>
           Money & Insurance - Insurance -Travel Insurance Company- Heymondo
           Italia
@@ -190,7 +209,7 @@ const SingleBusines = ({
               <h2>{name}</h2>
               <span>
                 {" "}
-               <Rate value={avgrating}/>
+                <Rate value={avgrating} />
                 <p>{numOfReview} Reviews</p>
               </span>
               <span>{location}</span>
@@ -199,7 +218,7 @@ const SingleBusines = ({
           <div className="website-link">Website</div>
         </article>
       </section>
-      <main className="single-bsn-container">
+      <main className="single-bsn-container" onMouseOver={handleHero}>
         <section>
           <div className="writer-container">
             {" "}
@@ -330,7 +349,7 @@ const SingleBusines = ({
         </section>
       </main>
 
-      <main>
+      <main onMouseOver={handleHero}>
         <Pagination
           total={45}
           pageSize={4}
@@ -358,6 +377,7 @@ const mapStateToProps = (state) => {
     businessInfo: state.business.businessInfo,
     reviewChecked: state.appFunctions.reviewChecked,
     reviewSorted: state.appFunctions.reviewSorted,
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
   };
 };
 
@@ -371,6 +391,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: { queried: queried },
       });
     },
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBusines);
