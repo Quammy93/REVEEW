@@ -24,7 +24,6 @@ const Login = ({ user, isLogin, setUser, setIsLogin }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
- 
 
   const userLogin = async (credentials) => {
     return await axios
@@ -33,7 +32,7 @@ const Login = ({ user, isLogin, setUser, setIsLogin }) => {
         setLoading(false);
         if (response.status == "200") {
           console.log(response.data.user);
-          
+          // setUser(response.data.user);
           setIsLogin(true);
 
           //   localStorage.setItem("loggedIn", true);

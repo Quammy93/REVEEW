@@ -1,4 +1,6 @@
 
+
+li{font-size: 14px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
 .ant-checkbox-wrapper span{color:rgba(255, 255, 255, 0.754) ;}
 /**rev-rate*/
 
@@ -34,6 +36,12 @@ nav {
   justify-content: center;
   align-items: center;
 }
+
+.user-nav{background-color: white;width: 200px ;position: absolute;right: 0;top: 100%;padding: 10px;}
+.user-navlist{display: flex;flex-direction: column;justify-content: center;align-items: start; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+.a-user{padding: 5px;margin-bottom: 5px;width: 100%; color: #000;}
+.a-user:hover{background-color: rgb(220, 220, 220);color: white;}
+
 
 /*:where(.css-dev-only-do-not-override-djtmh8).ant-rate{z-index: -20;}/***/
 
@@ -84,6 +92,8 @@ nav {
 }
 .end-nav-list {
   width: 170px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .mid-nav-list,
 .end-nav-list {

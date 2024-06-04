@@ -10,7 +10,9 @@ import { IoSearch } from "react-icons/io5";
 import ServiceCategory1 from "./ServiceCategory1";
 import Location1 from "./Location1";
 import { useNavigate } from "react-router-dom";
+import UserNavigation from "./UserNavigation";
 const url = "http://localhost:5000/api";
+import { Avatar } from "antd";
 //const url = "/api";
 import { connect } from "react-redux";
 import {
@@ -209,7 +211,7 @@ const Navbar4 = ({
             Features
           </li>
           <a href="/write-review" className="a">
-            <li> Write A Review</li>
+            <li>Review</li>
           </a>
         </ul>
 
@@ -217,13 +219,14 @@ const Navbar4 = ({
           <div>Contact Us</div>
 
           {isLogin ? (
-            <b>{name.charAt(0).toUpperCase()}</b>
+            <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>
             </Link>
           )}
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />

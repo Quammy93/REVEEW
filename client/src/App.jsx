@@ -10,8 +10,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SingleProduct from "./pages/products/SingleProduct";
 import PostReview from "./pages/PostReview";
 import UserFeature from "./components/UserFeature";
-import Admin from "./pages/adminPanel/Admin";
-import Stat from "./pages/adminPanel/adminPages/Stat";
+
+
 import { ToastContainer } from "react-toastify";
 import Sidebar from "./components/Sidebar";
 import TheReviewee from "./pages/products/TheReviewee";
@@ -23,26 +23,27 @@ import ReveewSearchResult from "./pages/products/ReveewSearchResult";
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { PersistGate } from "redux-persist/integration/react";
+//import { PersistGate } from "redux-persist/integration/react";
 import rootReducer from "./redux/rootReducer";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-const persistConfig = {
-  key: "root",
-  storage,
+//import { persistStore, persistReducer } from "redux-persist";
+//import storage from "redux-persist/lib/storage";
+//const persistConfig = {
+//  key: "root",
+//  storage,
 //  whitelist, // persist only the user reducer
-};
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+//};
+//const persistedReducer = persistReducer(rootReducer);
 
 
 
 const store = createStore(
-  persistedReducer,
+//  persistedReducer,
+rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 })
 );
 
-const persistor = persistStore(store);
+//const persistor = persistStore(store);
 
 function App() {
 
@@ -52,44 +53,39 @@ function App() {
   
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Cusor />
-        <ToastContainer position="top-center" />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" Component={Home}></Route>
-            <Route path="/login" Component={Login}></Route>
-            <Route path="/register" Component={Register}></Route>
-            <Route
-              path="/products/:selectedCategory"
-              Component={ProductDisplay}
-            ></Route>
-            <Route
-              path="/business/:companyID"
-              Component={SingleBusines}
-            ></Route>
+      {/**<PersistGate loading={null} persistor={persistor}> */}
+      <Cusor />
+      <ToastContainer position="top-center" />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" Component={Home}></Route>
+          <Route path="/login" Component={Login}></Route>
+          <Route path="/register" Component={Register}></Route>
+          <Route
+            path="/products/:selectedCategory"
+            Component={ProductDisplay}
+          ></Route>
+          <Route path="/business/:companyID" Component={SingleBusines}></Route>
 
-            <Route path="/write-review" Component={TheReviewee}></Route>
-            <Route path="/review-list" Component={ReveewSearchResult}></Route>
-            <Route
-              path="/search-review"
-              Component={DisplayRevieweeResult}
-            ></Route>
+          <Route path="/write-review" Component={TheReviewee}></Route>
+          <Route path="/review-list" Component={ReveewSearchResult}></Route>
+          <Route
+            path="/search-review"
+            Component={DisplayRevieweeResult}
+          ></Route>
 
-            <Route
-              path="/products/:selectedCategory/:product/:id"
-              Component={SingleProduct}
-            ></Route>
-            <Route path="/products/feedback/:id" Component={PostReview}></Route>
-            <Route
-              path="/business/feedback/:id"
-              Component={WriteBusinessReview}
-            ></Route>
-
-            <Route path="/admin" Component={Admin}></Route>
-          </Routes>
-        </BrowserRouter>
-      </PersistGate>
+          <Route
+            path="/products/:selectedCategory/:product/:id"
+            Component={SingleProduct}
+          ></Route>
+          <Route path="/products/feedback/:id" Component={PostReview}></Route>
+          <Route
+            path="/business/feedback/:id"
+            Component={WriteBusinessReview}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+      {/** </PersistGate> */}
     </Provider>
   );
 }

@@ -7,6 +7,8 @@ import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:5000/api";
+import { Avatar } from "antd";
+import UserNavigation from "./UserNavigation";
 
 //const url = "/api";
 import { connect } from "react-redux";
@@ -116,13 +118,14 @@ const Navbar3 = ({
 
         <div className="end-nav-list">
           {isLogin ? (
-            <b>{name.charAt(0).toUpperCase()}</b>
+            <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>
             </Link>
           )}
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />

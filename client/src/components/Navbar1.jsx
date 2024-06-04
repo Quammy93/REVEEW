@@ -3,10 +3,12 @@ import logo2 from "../assets/images/Group 2.png";
 import { useGlobalContext } from "../utils/context";
 import Submenu from "./Submenu";
 import SearchResult from "./SearchResult";
+import UserNavigation from "./UserNavigation";
 import { useNavigate } from "react-router-dom";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Avatar } from "antd";
 const url = "http://localhost:5000/api";
 //const url = "/api";
 
@@ -143,7 +145,7 @@ const Navbar1 = ({
           </li>
 
           <a href="/write-review" className="a">
-            <li> Write A Review</li>
+            <li> Review</li>
           </a>
         </ul>
 
@@ -152,7 +154,7 @@ const Navbar1 = ({
 
           <div>
             {isLogin ? (
-              <b> {name.charAt(0).toUpperCase()}</b>
+              <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
             ) : (
               <Link to={"/login"}>
                 <button className="sign-in-btn">Sign In</button>
@@ -160,6 +162,7 @@ const Navbar1 = ({
             )}
           </div>
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />

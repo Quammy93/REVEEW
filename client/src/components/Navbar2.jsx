@@ -3,11 +3,13 @@ import logo2 from "../assets/images/Group 2.png";
 import { useGlobalContext } from "../utils/context";
 import Submenu from "./Submenu";
 import SearchResult from "./SearchResult";
+import UserNavigation from "./UserNavigation";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
+import { Avatar } from "antd";
 import {
   SET_SEARCH_ITEM,
   SET_IS_SEARCHING,
@@ -41,19 +43,30 @@ const Navbar2 = ({
     // setIsLoadingSearch,
   } = useGlobalContext();
 
-  const showUser = () => {
-    axios.get(`${url}/users/showuser`).then((response) => {
+  const verifyUserToken = async () => {
+    try {
+      const response = await axios.get(`${url}/users/showuser`);
       console.log("response", response.data.user);
       setUser(response.data.user);
-    });
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // Save user to local storage
+    } catch (error) {
+      console.error("Error verifying user token:", error);
+      localStorage.removeItem("user"); // Clear local storage if token is invalid
+      setUser(null); // Clear user state
+    }
   };
 
   React.useEffect(() => {
-    showUser();
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Load user from local storage
+      verifyUserToken(); // Verify token even if user data exists in local storage
+    } else {
+      verifyUserToken(); // Fetch user if not found in local storage
+    }
   }, []);
-
-  console.log("....user", user);
-  const { name } = user;
+  console.log("....user2", user);
+  const { name } = user || {};
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -136,15 +149,15 @@ const Navbar2 = ({
             Features
           </li>
           <a href="/write-review" className="a">
-            <li> Write A Review</li>
+            <li>Review</li>
           </a>
         </ul>
 
         <div className="end-nav-list">
-          <div>Contact Us</div>
+          <div>ContactUs</div>
           <div>
-            {isLogin ? (
-              <b> {name.charAt(0).toUpperCase()}</b>
+            {name ? (
+              <Avatar>{name && name?.charAt(0).toUpperCase()}</Avatar>
             ) : (
               <Link to={"/login"}>
                 <button className="sign-in-btn">Sign In</button>
@@ -152,6 +165,7 @@ const Navbar2 = ({
             )}
           </div>
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />
