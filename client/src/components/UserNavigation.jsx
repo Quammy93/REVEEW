@@ -5,7 +5,7 @@ const url = "http://localhost:5000/api";
 
 const LogMeOut = async () => {
   await axios
-    .get(`${url}/users/logout`)
+    .get(`${url}/logout`)
     .then((response) => {
       if (response.status === 200) {
         navigate("/");
