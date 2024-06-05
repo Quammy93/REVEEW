@@ -7,10 +7,13 @@ import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
-import ServiceCategory from "./ServiceCategory";
-import Location from "./Location";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+import ServiceCategory1 from "./ServiceCategory1";
+import Location1 from "./Location1";
+import { useNavigate } from "react-router-dom";
+import UserNavigation from "./UserNavigation";
+const url = "http://localhost:5000/api";
+import { Avatar } from "antd";
+//const url = "/api";
 import { connect } from "react-redux";
 import {
   SET_SEARCH_ITEM,
@@ -23,6 +26,8 @@ import {
   SET_IS_SERVICE_CONTAINER_OPEN,
   SET_SERVICE_CATEGORY,
   SET_SERVICE_LOCATION,
+  SET_BUSINESS_SEARCHED,
+  SET_USER,
 } from "../redux/action";
 
 const Navbar4 = ({
@@ -41,8 +46,10 @@ const Navbar4 = ({
   setIsLocationContainerOpen,
 
   setIsServiceContainerOpen,
+  setBusinessSearched,
   isLogin,
   user,
+  setUser,
 }) => {
   const {
     // closeSubmenu,
@@ -59,10 +66,42 @@ const Navbar4 = ({
     // setIsLocationContainerOpen,
     // setIsServiceContainerOpen,
   } = useGlobalContext();
+  const showUser = () => {
+    axios.get(`${url}/users/showuser`).then((response) => {
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+    });
+  };
 
-  console.log("....user", user);
+  React.useEffect(() => {
+    showUser();
+  }, []);
+
+  // console.log("....user", user);
 
   const { name } = user;
+
+  const navigate = useNavigate();
+
+  const getSearchedBusiness = async (category, location) => {
+    return await axios
+      .get(`${url}/services?category=${category}&location=${location}`)
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
+  };
+
+  const fetchBusiness = async () => {
+    const response = await getSearchedBusiness(
+      serviceCategory,
+      serviceLocation
+    );
+    console.log(response.data);
+    setBusinessSearched(response.data.items);
+    navigate("/review-list");
+  };
+
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
       closesubemenu();
@@ -97,8 +136,8 @@ const Navbar4 = ({
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
@@ -138,6 +177,7 @@ const Navbar4 = ({
                     onClick={(e) => {
                       if (e.target.className == "find-reviewee-inpt1") {
                         setIsServiceContainerOpen(true);
+                        setIsLocationContainerOpen(false);
                       }
                     }}
                   />
@@ -152,16 +192,17 @@ const Navbar4 = ({
                   onClick={(e) => {
                     if (e.target.className == "find-reviewee-inpt2") {
                       setIsLocationContainerOpen(true);
+                      setIsServiceContainerOpen(false);
                     }
                   }}
                 />{" "}
                 <span className="reviewee-icon-div">
-                  <IoSearch className="reviewee-icon" />
+                  <IoSearch className="reviewee-icon" onClick={fetchBusiness} />
                 </span>
               </div>
             </form>
-            <ServiceCategory />
-            <Location />
+            <ServiceCategory1 />
+            <Location1 />
           </li>
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Categories
@@ -169,8 +210,8 @@ const Navbar4 = ({
           <li className="link-btn" onMouseOver={displaySubmenu}>
             Features
           </li>
-          <a href="/write-review" className=".a">
-            <li> Write A Review</li>
+          <a href="/write-review" className="a">
+            <li>Review</li>
           </a>
         </ul>
 
@@ -178,13 +219,14 @@ const Navbar4 = ({
           <div>Contact Us</div>
 
           {isLogin ? (
-            <b>{name.charAt(0).toUpperCase()}</b>
+            <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>
             </Link>
           )}
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />
@@ -231,6 +273,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         type: SET_IS_SERVICE_CONTAINER_OPEN,
         payload: { status: status },
       }),
+    setBusinessSearched: (result) =>
+      dispatch({ type: SET_BUSINESS_SEARCHED, payload: { result: result } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 

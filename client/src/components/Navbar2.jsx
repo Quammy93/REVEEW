@@ -3,30 +3,70 @@ import logo2 from "../assets/images/Group 2.png";
 import { useGlobalContext } from "../utils/context";
 import Submenu from "./Submenu";
 import SearchResult from "./SearchResult";
+import UserNavigation from "./UserNavigation";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
-import { SET_SEARCH_ITEM,SET_IS_SEARCHING,SET_SEARCH_RESULT,OPEN_SUBMENU, CLOSE_SUBMENU,SET_IS_LOADING_SEARCH } from "../redux/action";
-const url = "/api";
+import { Avatar } from "antd";
+import {
+  SET_SEARCH_ITEM,
+  SET_IS_SEARCHING,
+  SET_SEARCH_RESULT,
+  OPEN_SUBMENU,
+  CLOSE_SUBMENU,
+  SET_IS_LOADING_SEARCH,
+  SET_USER,
+} from "../redux/action";
+//const url = "/api";
 
-const Navbar2 = ({searchItem,setSearchItem,setIsSearching, setSearchResult, closesubemenu,opensubemenu,setIsLoadingSearch ,isLogin,user}) => {
+const Navbar2 = ({
+  searchItem,
+  setSearchItem,
+  setIsSearching,
+  setSearchResult,
+  closesubemenu,
+  opensubemenu,
+  setIsLoadingSearch,
+  isLogin,
+  user,
+  setUser,
+}) => {
   const {
     // closeSubmenu,
     // openSubmenu,
-
-   // searchItem,
-   // setSearchItem,
-
-   // setSearchResult,
-
-   // setIsSearching,
-
-   // setIsLoadingSearch,
+    // searchItem,
+    // setSearchItem,
+    // setSearchResult,
+    // setIsSearching,
+    // setIsLoadingSearch,
   } = useGlobalContext();
-  console.log("....user",user)
-const {name}=user
+
+  const verifyUserToken = async () => {
+    try {
+      const response = await axios.get(`${url}/users/showuser`);
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+      localStorage.setItem("user", JSON.stringify(response.data.user)); // Save user to local storage
+    } catch (error) {
+      console.error("Error verifying user token:", error);
+      localStorage.removeItem("user"); // Clear local storage if token is invalid
+      setUser(null); // Clear user state
+    }
+  };
+
+  React.useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Load user from local storage
+      verifyUserToken(); // Verify token even if user data exists in local storage
+    } else {
+      verifyUserToken(); // Fetch user if not found in local storage
+    }
+  }, []);
+  console.log("....user2", user);
+  const { name } = user || {};
 
   const handleSubmenu = (e) => {
     if (!e.target.classList.contains("link-btn")) {
@@ -62,11 +102,12 @@ const {name}=user
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
+      console.log();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -84,7 +125,7 @@ const {name}=user
   return (
     <>
       <nav onMouseOver={handleSubmenu}>
-        <a href="">
+        <a href="/">
           <img src={logo2} alt="" className="newlogo" />
         </a>
         <ul className="mid-nav-list">
@@ -108,15 +149,15 @@ const {name}=user
             Features
           </li>
           <a href="/write-review" className="a">
-            <li> Write A Review</li>
+            <li>Review</li>
           </a>
         </ul>
 
         <div className="end-nav-list">
-          <div>Contact Us</div>
+          <div>ContactUs</div>
           <div>
-            {isLogin ? (
-              <b> {name.charAt(0).toUpperCase()}</b>
+            {name ? (
+              <Avatar>{name && name?.charAt(0).toUpperCase()}</Avatar>
             ) : (
               <Link to={"/login"}>
                 <button className="sign-in-btn">Sign In</button>
@@ -124,6 +165,7 @@ const {name}=user
             )}
           </div>
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />
@@ -138,20 +180,24 @@ const mapStateToProps = (state) => {
     isLogin: state.user.isLogin,
   };
 };
-const mapDispatchToProps = (dispatch,ownProps) => {
-   console.log(ownProps);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log(ownProps);
   return {
-    closesubemenu: () => dispatch({type:CLOSE_SUBMENU}),
-    opensubemenu: (text,coordinate) => dispatch({type:OPEN_SUBMENU,payload:{text,coordinate}}),
-   
-    setSearchItem:(search)=>dispatch({type:SET_SEARCH_ITEM,payload:{input:search}}),
-    
-    setIsSearching:(status)=>dispatch({type:SET_IS_SEARCHING,payload:{status:status}}),
-     setSearchResult:(result)=>dispatch({type:SET_SEARCH_RESULT,payload:{result:result}}),
-     setIsLoadingSearch:(status)=>dispatch({type:SET_IS_LOADING_SEARCH,payload:{status:status}})
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    opensubemenu: (text, coordinate) =>
+      dispatch({ type: OPEN_SUBMENU, payload: { text, coordinate } }),
+
+    setSearchItem: (search) =>
+      dispatch({ type: SET_SEARCH_ITEM, payload: { input: search } }),
+
+    setIsSearching: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
+    setSearchResult: (result) =>
+      dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
+    setIsLoadingSearch: (status) =>
+      dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Navbar2);
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar2);

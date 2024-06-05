@@ -3,8 +3,8 @@ export const OPEN_SUBMENU = "OPEN_MENU";
 export const IS_SHOW_SUBMENU = "IS_SHOW_SUBMENU";
 export const SET_SEARCH_ITEM = "SET_SEARCH_ITEM";
 export const SET_IS_SEARCHING = "SET_IS_SEARCHING";
-export const SET_SEARCH_RESULT = "SET_SEARCH_RESUL";
-export const SET_IS_LOADING_SEARCH = "SET_SEARCH_RESUL";
+export const SET_SEARCH_RESULT = "SET_SEARCH_RESULT";
+export const SET_IS_LOADING_SEARCH = "SET_IS_LOADING_SEARCH";
 export const SET_SHOW_SIDEBAR = "SET_SHOW_SIDEBAR";
 
 export const SET_PRODUCTS = "SET_PRODUCTS";
@@ -18,17 +18,13 @@ export const SET_IS_LOCATION_CONTAINER_OPEN =
   " SET_IS_LOCATION_CONTAINER_OPEN ";
 export const SET_IS_SERVICE_CONTAINER_OPEN = " SET_IS_SERVICE_CONTAINER_OPEN ";
 export const SET_BUSINESS_INFO = "SET_BUSINESS_INFO";
+export const SET_BUSINESS_SEARCHED = "SET_BUSINESS_SEARCHED";
 
 
 export const SET_USER = "SET_USER";
 export const SET_IS_LOGIN = "SET_IS_LOGIN";
-/**
-export const closeSubmenu = () => {
-  return { type: CLOSE_SUBMENU };
-};
 
 
-export const openSubmenu = (text,coordinates) => {
-  return { type: OPEN_SUBMENU, payload: { text, coordinates } };
-};
- */
+export const SET_REVIEW_CHECKED = "SET_REVIEW_CHECKED";
+export const SET_REVIEW_SORTED = "SET_REVIEW_SORTED";
+export const SET_REVIEW_QUERIED= "SET_REVIEW_QUERIED";

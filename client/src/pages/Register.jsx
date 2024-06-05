@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 
 import { FaUser, FaLock, FaHotel } from "react-icons/fa";
 import "../assets/css/navbar.css";
@@ -11,7 +11,7 @@ import {
   BsReverseLayoutTextWindowReverse,
 } from "react-icons/bs";
 import "../assets/css/register.css";
-import logo from "../assets/images/revlogo.png";
+import logo from "../assets/images/Group 2.png";
 //import { userRegistration } from "../utils/axios";
 import { toast } from "react-toastify";
 import { useGlobalContext } from "../utils/context";

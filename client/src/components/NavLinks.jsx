@@ -5,7 +5,8 @@ import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-const url = "/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
 import { SET_PRODUCTS,SET_IS_PRODUCTLOADING,SET_SHOW_SIDEBAR } from "../redux/action";
 

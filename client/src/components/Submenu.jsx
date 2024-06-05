@@ -2,13 +2,18 @@ import React from "react";
 import { useGlobalContext } from "../utils/context";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-const url = "/api";
-//const url = "http://localhost:5000/api";
+//const url = "/api";
+const url = "http://localhost:5000/api";
 import { connect } from "react-redux";
-import { SET_PRODUCTS,SET_IS_PRODUCTLOADING } from "../redux/action";
+import { SET_PRODUCTS, SET_IS_PRODUCTLOADING } from "../redux/action";
 
-
-const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProductLoading}) => {
+const Submenu = ({
+  isShowSubmenu,
+  page: { page, links },
+  location,
+  setProducts,
+  setIsProductLoading,
+}) => {
   const container = React.useRef();
 
   const {
@@ -122,7 +127,7 @@ const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProd
     >
       <div className="sub-page-title">
         {" "}
-        <b>{page}</b>
+        <b className="category-1">{page}</b>
       </div>
 
       <div className={`submenu-center ${columns}`}>
@@ -130,43 +135,38 @@ const Submenu = ({isShowSubmenu,page:{page,links},location,setProducts,setIsProd
           const { url, icon, label } = link;
 
           return (
-            <a key={index} href={url} 
+            <a
+              key={index}
+              href={url}
               className="submenu-links"
               onClick={() => console.log("....presing")} //loadProduct(label)}
             >
-              {icon}
-              {label}
+              <img src={icon} alt="" className="icon-image" />
+              <div className="icon-label"> {label}</div>
             </a>
-          );
+          )
         })}
       </div>
     </aside>
   );
 };
 
-
-const mapStateToProps=(state)=>{
-
+const mapStateToProps = (state) => {
   return {
     isShowSubmenu: state.appFunctions.isShowSubmenu,
     page: state.appFunctions.page,
     location: state.appFunctions.location,
   };
+};
 
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setProducts: (products) =>
+      dispatch({ type: SET_PRODUCTS, payload: { products: products } }),
 
-const mapDispatchToProps=(dispatch)=>{
+    setIsProductLoading: (status) =>
+      dispatch({ type: SET_IS_PRODUCTLOADING, payload: { status: status } }),
+  };
+};
 
-
-return{
-setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
-
-setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{status:status}})
-
-
-}
-
-}
-
-
-export default connect(mapStateToProps,mapDispatchToProps)  (Submenu);
+export default connect(mapStateToProps, mapDispatchToProps)(Submenu);

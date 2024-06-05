@@ -6,9 +6,11 @@ import SearchResult from "./SearchResult";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
+import { Avatar } from "antd";
+import UserNavigation from "./UserNavigation";
 
-const url = "/api";
+//const url = "/api";
 import { connect } from "react-redux";
 
 import {
@@ -18,6 +20,7 @@ import {
   OPEN_SUBMENU,
   CLOSE_SUBMENU,
   SET_IS_LOADING_SEARCH,
+  SET_USER,
 } from "../redux/action";
 const Navbar3 = ({
   searchItem,
@@ -29,6 +32,7 @@ const Navbar3 = ({
   setIsLoadingSearch,
   isLogin,
   user,
+  setUser,
 }) => {
   const {
     //  searchItem,
@@ -37,7 +41,19 @@ const Navbar3 = ({
     //  setIsSearching,
     //  setIsLoadingSearch,
   } = useGlobalContext();
-  console.log("....user", user);
+
+  const showUser = () => {
+    axios.get(`${url}/users/showuser`).then((response) => {
+      console.log("response", response.data.user);
+      setUser(response.data.user);
+    });
+  };
+
+  React.useEffect(() => {
+    showUser();
+  }, []);
+
+  // console.log("....user", user);
 
   const { name } = user;
   const handleSubmenu = (e) => {
@@ -74,8 +90,8 @@ const Navbar3 = ({
 
       // const { products, numOfPages } = response.data;
       // setProducts(products);
-      setSearchResult(response?.data?.products);
-      console.log("products", response?.data?.products);
+      setSearchResult(response?.data?.items);
+      console.log("products", response?.data?.items);
 
       //  setIsProductLoading(false);
       setIsLoadingSearch(false);
@@ -102,13 +118,14 @@ const Navbar3 = ({
 
         <div className="end-nav-list">
           {isLogin ? (
-            <b>{name.charAt(0).toUpperCase()}</b>
+            <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
           ) : (
             <Link to={"/login"}>
               <button className="sign-in-btn">Sign In</button>
             </Link>
           )}
         </div>
+        <UserNavigation />
       </nav>
       <Submenu />
       <SearchResult />
@@ -138,6 +155,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch({ type: SET_SEARCH_RESULT, payload: { result: result } }),
     setIsLoadingSearch: (status) =>
       dispatch({ type: SET_IS_LOADING_SEARCH, payload: { status: status } }),
+    setUser: (user) => dispatch({ type: SET_USER, payload: { user: user } }),
   };
 };
 

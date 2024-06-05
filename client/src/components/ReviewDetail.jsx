@@ -1,6 +1,11 @@
-import React from 'react'
-import { Checkbox,Rate ,Progress,Divider} from "antd";
+import React from "react";
+import { Checkbox, Progress, Divider } from "antd";
+import { Rating } from "@mui/material";
 import { IoFilter } from "react-icons/io5";
+import {Rate} from "antd";
+
+import { connect } from "react-redux";
+import { SET_REVIEW_CHECKED, SET_REVIEW_SORTED } from "../redux/action";
 
 const ReviewDetail = ({
   rating,
@@ -15,19 +20,24 @@ const ReviewDetail = ({
   revN3,
   revN4,
   revN5,
+  reviewQueried,
+  setReviewChecked,
+  setReviewSorted,
 }) => {
   const plainOptions = ["5", "4", "3", "2", "1"];
 
   const onChange = (checkedValues) => {
     console.log("checked = ", checkedValues);
+    setReviewChecked(checkedValues);
   };
 
   return (
-    <div className='review-detail-main-container'>
+    <div className="review-detail-main-container">
       <h2>
         Reviews{" "}
         <span>
-          <Rate value={rating} defaultValue={rating} />
+          {/**<Rating name="read-only" value={rating} readOnly size="large" /> */}
+          <Rate value={rating}/>
         </span>
       </h2>
       <span>{revNum} total reviews</span>
@@ -79,6 +89,7 @@ const ReviewDetail = ({
           <div className="div"></div> */}
         </section>
       </main>
+
       <Divider className="divider-rev" />
 
       <div className="bsn-rev-foot-1">
@@ -92,23 +103,67 @@ const ReviewDetail = ({
         <span>
           {" "}
           Sort{" "}
-          <span className="span-padding">
-            <select name="" id="">
-              <option value="Most Review">Most Review</option>
-              <option value="Most Review">Most Review</option>
+          <span className="span-padding1">
+            <select
+              name=""
+              id=""
+              onChange={(e) => {
+                setReviewSorted(e.target.value);
+              }}
+            >
+              <option value="">Any</option>
+              <option value="most-recent">Most Recent</option>
+              <option value="most-liked">Most Liked</option>
             </select>
           </span>
         </span>
       </div>
       <div className="bsn-rev-foot-2">
-        <span className="span-padding x-star">5-star X</span>
-        <span className="span-padding x-star">4-star X</span>
-        <span className="span-padding x-star">3-star X</span>
-        <span className="span-padding x-star">2-star X</span>
-        <span className="span-padding x-star">1-star X</span>
+        {reviewQueried.map((query) => {
+          if (query === "most-recent") {
+            return (
+              <span className="span-padding x-star" key={query}>
+                Most Recent{" "}
+              </span>
+            );
+          } else if (query === "most-liked") {
+            return (
+              <span className="span-padding x-star" key={query}>
+                Most Liked
+              </span>
+            );
+          } else {
+            return (
+              <span className="span-padding x-star" key={query}>
+                {query} star{" "}
+              </span>
+            );
+          }
+        })}
       </div>
     </div>
   );
 };
 
-export default ReviewDetail
+const mapStateToProps = (state) => {
+  return {
+    reviewQueried: state.appFunctions.reviewQueried,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setReviewChecked: (checked) =>
+      dispatch({
+        type: SET_REVIEW_CHECKED,
+        payload: { checked: checked },
+      }),
+    setReviewSorted: (sorted) =>
+      dispatch({
+        type: SET_REVIEW_SORTED,
+        payload: { sorted: sorted },
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewDetail);

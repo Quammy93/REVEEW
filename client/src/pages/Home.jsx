@@ -5,12 +5,17 @@ import Navbar2 from "../components/Navbar2";
 import { useGlobalContext } from "../utils/context";
 import sublinks from "../utils/data";
 import { connect } from "react-redux";
+import Typed from "typed.js";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 import "../assets/css/hero.css";
 
-
-
 import Footer from "../components/Footer";
+
+import compass from "../assets/images/stepImages/compass.png";
+import right from "../assets/images/stepImages/right.png";
+
 
 import Sidebar from "../components/Sidebar";
 import img from "../assets/images/main8.jpg";
@@ -18,34 +23,63 @@ import img4 from "../assets/images/main6.jpg";
 import img49 from "../assets/images/main49.jpg";
 import img20 from "../assets/images/main20.jpg";
 import img21 from "../assets/images/main21.jpg";
-import icon1 from "../assets/images/icon1.gif";
-import icon2 from "../assets/images/icon2.gif";
+
 import icon3 from "../assets/images/icon3.gif";
-import icon4 from "../assets/images/icon4.gif";
-import icon5 from "../assets/images/icon5.gif";
-import icon6 from "../assets/images/icon6.gif";
-import icon7 from "../assets/images/icon7.gif";
-import icon8 from "../assets/images/icon8.gif";
-import icon9 from "../assets/images/icon9.gif";
+
 import icon10 from "../assets/images/icon10.gif";
 import icon11 from "../assets/images/icon11.gif";
-import icon12 from "../assets/images/icon12.gif";
-import icon13 from "../assets/images/icon13.gif";
-import icon14 from "../assets/images/icon14.gif";
+
 import icon15 from "../assets/images/icon15.gif";
-import icon16 from "../assets/images/icon16.gif";
+
 import icon17 from "../assets/images/icon17.gif";
 import icon18 from "../assets/images/icon18.gif";
-import icon19 from "../assets/images/icon19.gif";
+
 import icon20 from "../assets/images/icon20.gif";
 import icon21 from "../assets/images/icon21.gif";
-import logo from "../assets/images/Group 2.png";
-import {CLOSE_SUBMENU} from "../redux/action"
 
+import { CLOSE_SUBMENU ,SET_IS_SEARCHING} from "../redux/action";
 
-const Home = ({ showSidebar, closesubemenu }) => {
+const Home = ({
+  showSidebar,
+  closesubemenu,
+  closeSearchContainer,
+  isShowSubmenu,
+}) => {
+  if (isShowSubmenu == true) {
+    closeSearchContainer(false);
+  	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    AOS.init();
   //const {closeSubmenu } = useGlobalContext();
   let loggedUser = { name: "", role: "" };
+
+  const el = React.useRef();
+
+  React.useEffect(() => {
+    const typed = new Typed(el.current, {
+      strings: ["read", "post"],
+      typeSpeed: 200,
+      backSpeed: 200,
+      backDelay: 1000,
+      loop: true,
+    });
+
+    return () => {
+      // Destroy Typed instance during cleanup to stop animation
+      typed.destroy();
+    };
+  }, []);
 
   //handling page
   /** 
@@ -62,6 +96,11 @@ const Home = ({ showSidebar, closesubemenu }) => {
  */
 
   // localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+  const handleHero = () => {
+    closesubemenu();
+    closeSearchContainer(false);
+  };
+
   return (
     <main>
       <div className="sidecheck">
@@ -74,21 +113,45 @@ const Home = ({ showSidebar, closesubemenu }) => {
         <Navbar2 />
 
         {/**hero */}
-        <div className="hero-aside" onMouseOver={closesubemenu}>
+        <div className="hero-aside" onMouseOver={handleHero}>
           <img src={img} alt="" className="hero-image" />
           <div className="overlay"></div>
-          <div className="intro-container">
-            <h4>
-              Read reviews ,Post Review .Find the brand and product you can
-              trust
-            </h4>
-            <p>Share your experience to help other make the right decision</p>
-            <button className="overlay-btn">Get Started</button>
-          </div>
+          <section className="intro-main-container">
+            <div
+              className="intro-container"
+              data-aos="fade-right"
+              data-aos-anchor-placement="top-center"
+            >
+              <h4>
+                <div className="flex-title">
+                  <p className="intro-heading">
+                    <span ref={el}> Read</span>{" "}
+                  </p>
+                  <p className="intro-heading">
+                    <span className="intro-heading1">reviews</span>{" "}
+                  </p>
+                </div>
+                <main>
+                  <p>Find the brand and product you can trust</p>
+                  <p>
+                    Share your experience to help other make the right decision
+                  </p>
+                </main>
+              </h4>
+
+              <div className="overlay-btn-div">
+                {" "}
+                <a href="/products/All Products?category=All Products">
+                  {" "}
+                  <button className="overlay-btn">Get Started</button>
+                </a>
+              </div>
+            </div>
+          </section>
         </div>
         {/**hero */}
 
-        <main className="hero-main">
+        <main className="hero-main" onMouseOver={handleHero}>
           <section className="hero-container">
             <h3>Features Builts For Everyone</h3>
 
@@ -190,7 +253,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
           </section>
         </main>
 
-        <aside className="hero-all">
+        <aside className="hero-all" onMouseOver={handleHero}>
           <section className="hero2-display">
             <div>
               <main className="self-img">
@@ -209,7 +272,10 @@ const Home = ({ showSidebar, closesubemenu }) => {
                     trust
                   </p>
 
-                  <button className="self-btn">Write a Review</button>
+                  <a href="/products/All Products?category=All Products">
+                    {" "}
+                    <button className="self-btn">Write a Review</button>
+                  </a>
                 </div>
               </main>
               <article></article>
@@ -223,11 +289,20 @@ const Home = ({ showSidebar, closesubemenu }) => {
                 Sign up on reveew by filing the sign up form and get started w
               </p>
             </div>
+            <div className="step-img-div">
+              {" "}
+              <img src={right} alt="" className="step-img" />
+            </div>
 
             <div className="hero-step-container">
               <span className="hero-step-icon">2</span>
               <h3>Read Reviews</h3>
               <p>You can read reviews of others from their experience </p>
+            </div>
+
+            <div className="step-img-div">
+              {" "}
+              <img src={compass} alt="" className="step-img" />
             </div>
             <div className="hero-step-container">
               <span className="hero-step-icon">3</span>
@@ -244,17 +319,20 @@ const Home = ({ showSidebar, closesubemenu }) => {
               <div className="explore-category-heading">
                 <h2>Explore categories</h2>
                 <span className="explore-btn">
-                  <p>Explore More</p>
+                  <a href="/products/All Products?category=All Products">
+                    {" "}
+                    <p>Explore More</p>
+                  </a>
                 </span>
               </div>
 
               <ul className="explore-category-list">
                 {sublinks[0].links.map((link, index) => {
-                  const { label, icon } = link;
+                  const { label, icon, icon1 } = link;
 
                   return (
                     <li className="cat-list" key={index}>
-                      <span className="list-icon">{icon}</span>{" "}
+                      <span className="list-icon">{icon1}</span>{" "}
                       <span className="list-label">{label}</span>
                     </li>
                   );
@@ -266,13 +344,15 @@ const Home = ({ showSidebar, closesubemenu }) => {
           <section className="hero-abs">
             <div className="hero-abs1">
               <div className="hero-abs1-container">
-                <img src={logo} alt="" />
                 <h3>
                   Trustpilot is a review platform that’s open to everyone. Share
                   your experiences to help others make better choices and
                   encourage companies to up their game
                 </h3>
-                <button className="hero-abs1-btn"> Get Started</button>
+                <a href="/products/All Products?category=All Products">
+                  {" "}
+                  <button className="hero-abs1-btn"> Get Started</button>
+                </a>
               </div>
             </div>
             <div className="hero-abs2">
@@ -287,6 +367,7 @@ const Home = ({ showSidebar, closesubemenu }) => {
               </p>
             </div>
           </section>
+
           <main className="hero3">
             <section className="hero-contact-us">
               <div className="hero-contact">
@@ -319,13 +400,14 @@ const Home = ({ showSidebar, closesubemenu }) => {
 const mapStateToProps = (state) => {
   return {
     showSidebar: state.appFunctions.showSidebar,
-  }
-}
- const mapDispatchToProps = (dispatch) => {
- 
-  return { 
-    closesubemenu:()=> dispatch({type:CLOSE_SUBMENU})
-  }
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) => dispatch({ type: SET_IS_SEARCHING, payload: { status: status }}),
+  };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

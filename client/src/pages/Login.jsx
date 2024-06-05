@@ -1,8 +1,8 @@
 import React from "react";
 import "antd/dist/antd";
-const url = "/api";
+//const url = "/api";
 //const url https://reveew.onrender.com/api/login
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import { Button, Checkbox, Form, Input } from "antd";
 import "../assets/css/login.css";
 import axios from "axios";
@@ -32,7 +32,7 @@ const Login = ({ user, isLogin, setUser, setIsLogin }) => {
         setLoading(false);
         if (response.status == "200") {
           console.log(response.data.user);
-          setUser(response.data.user);
+          // setUser(response.data.user);
           setIsLogin(true);
 
           //   localStorage.setItem("loggedIn", true);

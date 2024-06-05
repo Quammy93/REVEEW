@@ -30,7 +30,7 @@ const ServiceCategory = ({
   return (
     <article
       className={`${
-        isServiceContainerOpen ? "business-category show" : "business-category"
+        isServiceContainerOpen ? "business-category1 show" : "business-category1"
       }`}
       onMouseLeave={() => {
         setIsServiceContainerOpen(false);
@@ -39,7 +39,7 @@ const ServiceCategory = ({
       <ul className="service-container">
         {businessCategory.map((item) => {
           return (
-            <li
+            <li key={item}
               className="bus-cat-list"
               onMouseOver={() => clicking({ item })}
               onClick={() => setIsServiceContainerOpen(false)}

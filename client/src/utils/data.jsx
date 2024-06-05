@@ -11,7 +11,19 @@ import feature4 from "../assets/images/feature4.jpg";
 import feature5 from "../assets/images/feature5.jpg";
 import feature6 from "../assets/images/feature6.jpg";
 
-import { FaLaptopHouse } from "react-icons/fa";
+import fashion from '../assets/images/iconImages/fashion.png'
+import appliances from "../assets/images/iconImages/appliances.png";
+import computing from "../assets/images/iconImages/computing.png";
+import electronic from "../assets/images/iconImages/electronic.png";
+import medical from "../assets/images/iconImages/medical.png";
+import phone from "../assets/images/iconImages/phone.png";
+import restaurant from "../assets/images/iconImages/restaurant.png";
+import travel from "../assets/images/iconImages/travel.png";
+import service from "../assets/images/iconImages/service.png";
+
+
+
+
 
 import {
   MdConnectWithoutContact,
@@ -27,60 +39,54 @@ const sublinks = [
     page: "Categories",
     links: [
       {
-        label: "Resturant & Bar",
-        icon: <IoRestaurantOutline />,
-        url: "/products/resturant&bar?category= resturant&bar",
+        label: "Resturant",
+        icon: restaurant,
+        icon1: <IoRestaurantOutline />,
+        url: "/services?category=Restaurants",
       },
       {
         label: "Fashion",
-        icon: <PiDress />,
+        icon: fashion,
+        icon1: <PiDress />,
         url: "/products/Fashion?category=Fashion",
       },
       {
         label: "Travel and vacation",
-        icon: <SiYourtraveldottv />,
+        icon: travel,
+        icon1: <SiYourtraveldottv />,
         url: "/products/Travel&vacation?category= travel&vacation",
       },
 
       {
-        label: "Food",
-        icon: <PiBowlFood />,
-        url: "/products/food?category=food",
-      },
-      {
         label: "Health & Medical",
-        icon: <MdOutlineMedicalServices />,
+        icon: medical,
+        icon1: <MdOutlineMedicalServices />,
         url: "/products/health&medical?category=health&medical",
-      },
-      {
-        label: "Media & Publicity",
-        icon: <TiMediaPlay />,
-        url: "/products/Medial&publicity?category= Media&publicity",
       },
 
       {
         label: "Electronic & Tech",
-        icon: <PiTelevision />,
+        icon: electronic,
+        icon1: <PiTelevision />,
         url: "/products/Electronics&tech?category= Electronics",
       },
       {
         label: "Computing",
-        icon: <FaComputer />,
+        icon: computing,
+        icon1: <FaComputer />,
         url: "/products/Computing?category= Computing",
       },
-      {
-        label: "Education & Training",
-        icon: <MdOutlineCastForEducation />,
-        url: "/products/Education&training?category= Education&training",
-      },
+
       {
         label: "Phone & Tablet",
-        icon: <MdOutlinePhoneAndroid />,
+        icon: phone,
+        icon1: <MdOutlinePhoneAndroid />,
         url: "/products/ Phone and tablet?category= Phone and tablet",
       },
       {
-        label: "Business Services",
-        icon: <IoRestaurantOutline />,
+        label: "Services",
+        icon: service,
+        icon1: <IoRestaurantOutline />,
         url: "/products/business&services?category=business&services",
       },
     ],

@@ -3,13 +3,13 @@ import "antd/dist/antd";
 import "../assets/css/navbar.css";
 import { Button, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import logo1 from "../assets/images/revlogo.png";
+import logo1 from "../assets/images/Group 2.png";
 import { FaUser, FaSortDown, FaCaretRight, FaBars } from "react-icons/fa";
 import { MdOutlineExitToApp } from "react-icons/md";
 import { useGlobalContext } from "../utils/context";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
-const url = "/api";
+const url = "http://localhost:5000/api";
+//const url = "/api";
 
 const User = () => {
 

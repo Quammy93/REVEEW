@@ -1,19 +1,40 @@
 import React from "react";
 import Navbar1 from "../../components/Navbar1";
 import axios from "axios";
-//const url = "http://localhost:5000/api";
+const url = "http://localhost:5000/api";
 import avarta from "../../assets/images/computer-1.jpeg";
 import ReviewDetail from "../../components/ReviewDetail";
-import { Checkbox, Rate, Progress, Divider, Pagination } from "antd";
-import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
-import { SET_BUSINESS_INFO } from "../../redux/action";
+import { Rate, Divider, Pagination } from "antd";
+import { Rating } from "@mui/material";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  SET_BUSINESS_INFO,
+  SET_REVIEW_QUERIED,
+  CLOSE_SUBMENU,
+  SET_IS_SEARCHING,
+} from "../../redux/action";
 import { connect } from "react-redux";
+import { IoMdFlag } from "react-icons/io";
+import { FaReply } from "react-icons/fa";
+import { AiTwotoneLike } from "react-icons/ai";
+import MapComponent from "../../components/MapComponent";
 
-const url = "/api";
+//const url = "/api";
+
+let combinedQuerry = [];
 
 import { useGlobalContext } from "../../utils/context";
 
-const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
+const SingleBusines = ({
+  businessInfo,
+  setBusinessInfo,
+  reviewChecked,
+  reviewSorted,
+  setReviewQueried,
+  closesubemenu,
+  closeSearchContainer,
+  isShowSubmenu,
+}) => {
   const [reviews, setReviews] = React.useState([]);
   const [numOfFiveReview, setNumOfFiveReview] = React.useState(0);
   const [numOfFourReview, setNumOfFourReview] = React.useState(0);
@@ -25,12 +46,38 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
   const [isReviewLoading, setIsReviewLoading] = React.useState(false);
 
   let totalReviews = 0;
+  const urlLocation = useLocation();
+
+  
+if (isShowSubmenu == true) {
+  closeSearchContainer(false);
+}
+
+const handleHero = () => {
+  closesubemenu();
+  closeSearchContainer(false);
+};
+ 
+
+  // Function to split values and add them to the combined array
+  function addValuesToArray(queryObject, key) {
+    if (queryObject[key]) {
+      const values = queryObject[key].split(",");
+      combinedQuerry.push(...values);
+    }
+  }
 
   const getAllReviews = async (id) => {
-    return await axios.get(`${url}/reviews/${id}`).catch((error) => {
-      console.log(error);
-      //toast.error(error.message);
-    });
+    return await axios
+      .get(
+        `${url}/reviews/${id}?sort=${reviewSorted}&filter=${reviewChecked.join(
+          ","
+        )}`
+      )
+      .catch((error) => {
+        console.log(error);
+        //toast.error(error.message);
+      });
   };
 
   const fetchReview = async (id) => {
@@ -40,8 +87,27 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
 
       const { reviews } = await response.data;
 
-      console.log(response);
+      console.log("response", response);
 
+      const { requestQuerry } = await response.data;
+      console.log("requestQuerry", requestQuerry);
+
+      // Add 'filter' and 'sort' values to the combined array
+      //  addValuesToArray(requestQuerry, "filter");
+      //addValuesToArray(requestQuerry, "sort");
+
+      // console.log(new Set(combinedQuerry)); // Output: ['5', '4', 'most-liked']
+      //  setReviewQueried( new Set(combinedQuerry));
+      //console.log(combinedQuerry)
+
+      function updateCombinedArray() {
+        combinedQuerry = [];
+        addValuesToArray(requestQuerry, "filter");
+        addValuesToArray(requestQuerry, "sort");
+      }
+      updateCombinedArray();
+      console.log(new Set(combinedQuerry));
+      setReviewQueried([...new Set(combinedQuerry)]);
       setReviews(reviews);
       setIsReviewLoading(false);
       setNumOfZeroReview(response?.data?.numOfZeroReview);
@@ -69,6 +135,10 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
   React.useEffect(() => {
     // Use an async function to fetch data
 
+    fetchReview(companyID);
+  }, [reviewChecked, reviewSorted]);
+
+  React.useEffect(() => {
     fetchReview(companyID);
   }, []);
 
@@ -106,13 +176,25 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
     fetchData(companyID);
   }, []);
 
+  const mapStyle = {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+
+    // Ensure the map is behind other content
+  };
+
   const { _id, name, category, location, numOfReview, img, avgrating, desc } =
     businessInfo;
+
+  console.log("avgrating", avgrating);
 
   return (
     <div>
       <Navbar1 />
-      <section>
+      <section onMouseOver={handleHero}>
         <span>
           Money & Insurance - Insurance -Travel Insurance Company- Heymondo
           Italia
@@ -136,21 +218,26 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
           <div className="website-link">Website</div>
         </article>
       </section>
-      <main className="single-bsn-container">
+      <main className="single-bsn-container" onMouseOver={handleHero}>
         <section>
           <div className="writer-container">
             {" "}
             <span className="writer-span">
               <img src={avarta} alt="" className="writer-avarta" />
 
-              <Link
-                to={`/business/feedback/${_id}?reviewed=product&queryName=${name}`}
+              <p
+                onClick={() => {
+                  navigate(
+                    `/business/feedback/${_id}?reviewed=product&queryName=${name}`,
+                    { state: { single: urlLocation }, replace: true }
+                  );
+                }}
               >
                 Write a Review
-              </Link>
+              </p>
             </span>{" "}
             <span>
-              <Rate value={avgrating} defaultValue={avgrating} />
+              <Rating name="no-value" value={null} />
             </span>
           </div>
           <div className="bsn-review-info">
@@ -162,127 +249,80 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
               revN3={numOfThreeReview}
               revN4={numOfFourReview}
               revN5={numOfFiveReview}
+              cent5={Math.round((numOfFiveReview / numOfReview) * 100)}
+              cent4={Math.round((numOfFourReview / numOfReview) * 100)}
+              cent3={Math.round((numOfThreeReview / numOfReview) * 100)}
+              cent2={Math.round((numOfTwoReview / numOfReview) * 100)}
+              cent1={Math.round((numOfOneReview / numOfReview) * 100)}
             />
           </div>
           <main>
-            {" "}
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
-            <div className="bsn-reviews">
-              <div className="writer-container">
-                {" "}
-                <span className="writer-span">
-                  <img src={avarta} alt="" className="writer-avarta" />
-                  <span>Ifeoluwa</span>
-                  <span>12 December 2023</span>
-                </span>{" "}
-              </div>
-              <Divider className="divider-rev" />
-              <article>
-                {" "}
-                <span>
-                  <Rate value={5} defaultValue={5} /> Verified{" "}
-                </span>
-                19 hours ago
-              </article>
-              <article>
-                <h3>
-                  <b>We booked flight with this and it went horribly wrong.</b>
-                </h3>
-                <p>
-                  We booked flight with this and it went horribly wrong. You
-                  guys wouldn’t help when our flight was delayed for a long time
-                  because of maintenance. We only got $68 when it cost a couple
-                  hundred for what we lost. And we paid over a hundred for this
-                  insurance. So the best you could do is refund us since you
-                  couldn’t do the reason we booked using your insurance.
-                </p>
-                <p>
-                  {" "}
-                  <b>Date of Experience:</b>10 December 2023
-                </p>
-              </article>
-              <Divider className="divider-rev" />
-              <span>useful</span>
-              <span>Reply</span>
-              <span>Flag</span>
-            </div>
+            {reviews.map((review) => {
+              const {
+                _id,
+                title,
+                comment,
+                value,
+                reviewer,
+                formattedTimestamp,
+              } = review;
+
+              return (
+                <div className="bsn-reviews">
+                  <div className="writer-container1">
+                    {" "}
+                    <span className="writer-span">
+                      <img src={avarta} alt="" className="writer-avarta" />
+                      <span className="reviewer-detail">
+                        <span>
+                          <b>{reviewer.name}</b>
+                        </span>
+                        <span style={{ fontSize: "13px" }}>
+                          {formattedTimestamp}
+                        </span>
+                      </span>
+                    </span>{" "}
+                  </div>
+
+                  <article className="review-duration">
+                    {" "}
+                    <span>
+                      <Rating name="read-only" value={value} readOnly />{" "}
+                      Verified{" "}
+                    </span>
+                    19 hours ago
+                  </article>
+                  <article className="business-review-article">
+                    <h3>
+                      <b>{title}</b>
+                    </h3>
+                    <p>{comment}</p>
+                    <p>
+                      {" "}
+                      <b>Date of Experience:</b>
+                      {formattedTimestamp}
+                    </p>
+                  </article>
+                  <Divider className="divider-rev" />
+                  <div className="review-reaction">
+                    <span>
+                      <span>
+                        <AiTwotoneLike className="review-reaction-icon" />
+                      </span>
+                      <span>
+                        <FaReply className="review-reaction-icon" />
+                      </span>
+                      <span>
+                        <IoMdFlag
+                          className="review-reaction-icon"
+                          style={{ color: "red" }}
+                        />
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </main>
         </section>
         <section>
@@ -301,11 +341,15 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
               </span>
             </span>
           </div>
-          <article className="bsn-map">Track ur way to {name}</article>
+
+          <article className="bsn-map">
+            <h3>Track ur way to {name}</h3>
+            <MapComponent style={mapStyle} />
+          </article>
         </section>
       </main>
 
-      <main>
+      <main onMouseOver={handleHero}>
         <Pagination
           total={45}
           pageSize={4}
@@ -331,12 +375,25 @@ const SingleBusines = ({ businessInfo, setBusinessInfo }) => {
 const mapStateToProps = (state) => {
   return {
     businessInfo: state.business.businessInfo,
+    reviewChecked: state.appFunctions.reviewChecked,
+    reviewSorted: state.appFunctions.reviewSorted,
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setBusinessInfo:(business)=>dispatch({type:SET_BUSINESS_INFO,payload:{business:business}})
+    setBusinessInfo: (business) =>
+      dispatch({ type: SET_BUSINESS_INFO, payload: { business: business } }),
+    setReviewQueried: (queried) => {
+      dispatch({
+        type: SET_REVIEW_QUERIED,
+        payload: { queried: queried },
+      });
+    },
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBusines);

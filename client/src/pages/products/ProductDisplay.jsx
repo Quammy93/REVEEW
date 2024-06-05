@@ -13,16 +13,23 @@ import { useGlobalContext } from "../../utils/context";
 import { useNavigate, Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Sidebar from "../../components/Sidebar";
-//const url = "http://localhost:5000/api";
-const url = "/api";
-import { Alert, Spin } from "antd";
+const url = "http://localhost:5000/api";
+//const url = "/api";
+import { Spin } from "antd";
 //import { getAllProducts } from "../../utils/axios";
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
 
-import { Space, Rate, Radio, Input, Checkbox, Pagination } from "antd";
-import { SET_IS_PRODUCTLOADING,SET_PRODUCTS,CLOSE_SUBMENU } from "../../redux/action";
+import { Space, Radio, Input, Checkbox, Pagination } from "antd";
+import { Rating } from "@mui/material";
+import { Rate } from "antd";
+import {
+  SET_IS_PRODUCTLOADING,
+  SET_PRODUCTS,
+  CLOSE_SUBMENU,
+  SET_IS_SEARCHING,
+} from "../../redux/action";
 import { connect } from "react-redux";
 
 const ProductDisplay = ({
@@ -31,22 +38,33 @@ const ProductDisplay = ({
   setIsProductLoading,
   products,
   setProducts,
-  closeSubmenu,
+  closesubemenu,
+  isShowSubmenu,
+  closeSearchContainer,
 }) => {
   let { selectedCategory } = useParams();
   //console.log("select", selectedCategory);
   // let selectedCategory = localStorage.getItem("category");
- // console.log(selectedCategory);
+  // console.log(selectedCategory);
   const {
-   // showSidebar,
-   // isProductLoading,
-   // setIsProductLoading,
-  //  products,
-  //  setProducts,
-  //  closeSubmenu,
+    // showSidebar,
+    // isProductLoading,
+    // setIsProductLoading,
+    //  products,
+    //  setProducts,
+    //  closeSubmenu,
   } = useGlobalContext();
 
-  console.log(products)
+  if (isShowSubmenu == true) {
+    closeSearchContainer(false);
+  }
+
+  const handleHero = () => {
+    closesubemenu();
+    closeSearchContainer(false);
+  };
+
+  console.log(products);
   let clickedCategory = selectedCategory;
   if (clickedCategory === "All Products") {
     clickedCategory = "";
@@ -79,14 +97,14 @@ const ProductDisplay = ({
         )}`
       )
       .catch((error) => {
-    //    console.log(error);
+        //    console.log(error);
         //toast.error(error.message);
       });
   };
 
   const getProductsWithoutFilter = async () => {
     return await axios.get(`${url}/products`).catch((error) => {
-    //  console.log(error);
+      //  console.log(error);
     });
   };
 
@@ -127,27 +145,27 @@ const ProductDisplay = ({
   console.log(brand);
 
   const onChange = (e) => {
- //   console.log("radio checked", e.target.value);
+    //   console.log("radio checked", e.target.value);
     setValue(e.target.value);
 
     setShowFilter(false);
   };
   const onChecked = async (checkedValues) => {
- //   console.log("checked", checkedValues);
+    //   console.log("checked", checkedValues);
 
     let newcheckedValues = checkedValues.map((item) =>
       item === "All Brand" ? " " : item
     );
 
     setFilter(newcheckedValues);
- //   console.log("checked", newcheckedValues);
+    //   console.log("checked", newcheckedValues);
     setShowFilter(false);
     //localStorage.setItem("filteredBrand", checkedValues);
     //setFiltered(checkedValues);
   };
   const handlePagechange = (page) => {
     setCurrentPage(page);
- //   console.log(page);
+    //   console.log(page);
   };
 
   const openCategorySubLinks = () => {
@@ -193,11 +211,10 @@ const ProductDisplay = ({
         {!isProductLoading && products.length == [] && (
           <div>No Result Found</div>
         )}
-
+  {!isProductLoading && products.length > 0 && ("" )}
  */}
-        {/**  {!isProductLoading && products.length > 0 && ("")} */}
 
-        <div onMouseOver={closeSubmenu}>
+        <div onMouseOver={handleHero}>
           {" "}
           <div className="query-top product-query">
             <div className="left-query">
@@ -338,45 +355,51 @@ const ProductDisplay = ({
                       >
                         <Space direction="vertical">
                           <Radio value={5}>
-                            <Rate
-                              disabled
-                              defaultValue={5}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={5}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                           <Radio value={4}>
-                            <Rate
-                              disabled
-                              defaultValue={4}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={4}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                           <Radio value={3}>
-                            <Rate
-                              disabled
-                              defaultValue={3}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={3}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                           <Radio value={2}>
-                            <Rate
-                              disabled
-                              defaultValue={2}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={2}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                           <Radio value={1}>
-                            <Rate
-                              disabled
-                              defaultValue={1}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={1}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                           <Radio value={0}>
-                            <Rate
-                              disabled
-                              defaultValue={0}
-                              style={{ backgroundColor: "white" }}
+                            <Rating
+                              name="read-only"
+                              value={0}
+                              readOnly
+                              className="ui"
                             />
                           </Radio>
                         </Space>
@@ -458,54 +481,43 @@ const ProductDisplay = ({
                 })}
 
                  */}
-                {!isProductLoading && products.length != [] && (
+                {!isProductLoading &&
+                  products.length != [] &&
                   products?.map((product) => {
-                      const {
-                        _id,
-                        category,
-                        name,
-                        avgrating,
-                        img,
-                        numOfReview,
-                      } = product;
-console.log(product)
-                      return (
-                        <section
-                          className={`${
-                            showFilter
-                              ? "product-section-container show-filter-cont"
-                              : "product-section-container"
-                          }`}
-                          key={_id}
-                        >
-                          <div className="product-intro">
-                            <img src={img} alt="" className="product-img" />
-                            <p className="product-title">{name} </p>
-                          </div>
-                          <span className="rev-rate-span">
-                            <Rate
-                              disabled
-                              defaultValue={avgrating}
-                              value={avgrating}
-                              className="rev-rate"
-                            />
+                    const { _id, category, name, avgrating, img, numOfReview } =
+                      product;
+                    console.log(product);
+                    return (
+                      <section
+                        className={`${
+                          showFilter
+                            ? "product-section-container show-filter-cont"
+                            : "product-section-container"
+                        }`}
+                        key={_id}
+                      >
+                        <div className="product-intro">
+                          <img src={img} alt="" className="product-img" />
+                          <p className="product-title">{name} </p>
+                        </div>
+                        <span className="rev-rate-span">
+                          <Rating name="read-only" value={avgrating} readOnly />
 
-                            <p className="rev-num">
-                              {numOfReview === 0 || numOfReview === 1
-                                ? `${numOfReview}  Review`
-                                : `${numOfReview}  Reviews`}{" "}
-                            </p>
-                          </span>
-                          <button
-                            className="prod-rev-btn"
-                            onClick={() => handleProduct(category, name, _id)}
-                          >
-                            Reviews
-                          </button>
-                        </section>
-                      );
-                    })
-                )}
+                          <p className="rev-num">
+                            {numOfReview === 0 || numOfReview === 1
+                              ? `${numOfReview}  Review`
+                              : `${numOfReview}  Reviews`}{" "}
+                          </p>
+                        </span>
+                        <button
+                          className="prod-rev-btn"
+                          onClick={() => handleProduct(category, name, _id)}
+                        >
+                          Reviews
+                        </button>
+                      </section>
+                    );
+                  })}
               </main>
 
               {products.length != [] && (
@@ -539,25 +551,26 @@ console.log(product)
   );
 };
 
-
-const mapStateToProps=(state)=>{
+const mapStateToProps = (state) => {
   return {
     showSidebar: state.appFunctions.showSidebar,
     isProductLoading: state.product.isProductLoading,
-   
+
     products: state.product.products,
-  
-   
+    isShowSubmenu: state.appFunctions.isShowSubmenu,
   };
-}
+};
 
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    setIsProductLoading:(status)=>dispatch({type:SET_IS_PRODUCTLOADING,payload:{status:status}}),
-     setProducts:(products)=>dispatch({type:SET_PRODUCTS,payload:{products:products}}),
-     closeSubmenu:()=>dispatch({type:CLOSE_SUBMENU})
+    setIsProductLoading: (status) =>
+      dispatch({ type: SET_IS_PRODUCTLOADING, payload: { status: status } }),
+    setProducts: (products) =>
+      dispatch({ type: SET_PRODUCTS, payload: { products: products } }),
+    closesubemenu: () => dispatch({ type: CLOSE_SUBMENU }),
+    closeSearchContainer: (status) =>
+      dispatch({ type: SET_IS_SEARCHING, payload: { status: status } }),
   };
-}
- 
+};
 
-export default connect(mapStateToProps,mapDispatchToProps) (ProductDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDisplay);

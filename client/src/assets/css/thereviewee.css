@@ -1,16 +1,31 @@
 .find-reviewee-inpt1 {
-  width: 420px;
+  width: 270px;
   border-right: none;
+  border-radius: 5px 0 0 5px;
 }
 .find-reviewee-inpt2 {
-  width: 270px;
+  width: 170px;
   border-left: none;
   margin-left: -2px;
 }
+
+.find-reviewee-inpt11 {
+  width: 100%;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  margin-top: 7px;
+}
+.find-reviewee-inpt21 {
+  width: 100%;
+  border-left: none;
+  margin-left: -2px;
+  margin-top: -8px;
+}
+
 aside::after {
   content: "|";
-  font-size: 30px;
-  margin-left: -7px;
+  font-size: 20px;
+  margin-left: -6px;
 }
 
 aside {
@@ -19,18 +34,26 @@ aside {
 
 .find-reviewee-inpt1,
 .find-reviewee-inpt2 {
-  height: 50px;
+  height: 30px;
   padding: 10px;
-  font-size: x-large;
+  font-size: medium;
+  outline: none;
+}
+
+.find-reviewee-inpt11,
+.find-reviewee-inpt21 {
+  height: 50px;
+  padding: 7px;
+  font-size: medium;
   outline: none;
 }
 
 .reviewee-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
+  display: grid;
+  grid-template-columns: 55% 40%;
   height: 320px;
   padding: 50px 0 0 50px;
+  margin-top: 50px;
 }
 .reviewee-container h4 {
   font-size: 18px;
@@ -59,8 +82,6 @@ aside {
 }
 
 .reviewee-form {
-  width: 740px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,7 +90,7 @@ aside {
 }
 .therevieweeinput {
   display: flex;
-  width: 740px;
+
   justify-content: center;
   align-items: center;
 }
@@ -83,10 +104,46 @@ aside {
   justify-content: center;
   align-items: center;
   background-color: #232c59;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.reviewee-form1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.therevieweeinput1 {
+  display: grid;
+  grid-template-columns: 55% 40%;
+
+  width: 100%;
+}
+
+.reviewee-icon1 {
+  color: white;
+  font-size: 30px;
+}
+.reviewee-icon-div1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #232c59;
   height: 50px;
   width: 50px;
   cursor: pointer;
 }
+
+.flex-input2-icon {
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
 .visited-container {
   display: flex;
   flex-wrap: wrap;
@@ -122,29 +179,70 @@ aside {
   cursor: pointer;
 }
 .business-category {
-  width: 410px;
-  height: 450px;
-  background-color: black;
+  width: 260px;
+
+  background-color: white;
   z-index: 100;
+  top: 90%;
+
   position: absolute;
-  margin-top: 5px;
+
   display: none;
+  margin-left: -200px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
+}
+.business-category1 {
+  width: 29%;
+
+  background-color: white;
+  z-index: 1000;
+
+  position: absolute;
+
+  display: none;
+  margin-top: 5px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .business-category.show {
+  display: block;
+}
+.business-category1.show {
   display: block;
 }
 .location-category.show {
   display: block;
 }
+.location-category1.show {
+  display: block;
+}
 .location-category {
-  width: 260px;
-  height: 250px;
-  background-color: antiquewhite;
+  width: 200px;
+
+  background-color: white;
   z-index: 100;
   position: absolute;
   margin-top: 5px;
   transform: translateX(164%);
   display: none;
+  top: 90%;
+  left: 130px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
+}
+.location-category1 {
+  width: 19%;
+
+  background-color: white;
+  z-index: 100;
+  position: absolute;
+  margin-top: 5px;
+  transform: translateX(164%);
+  display: none;
+  margin-left: -30px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
 }
 .bus-cat-list {
   padding: 8px;
@@ -156,4 +254,82 @@ aside {
 }
 .service-container {
   padding: 10px;
+}
+
+.business-review-article {
+  padding: 10px;
+}
+.business-review-article h3 {
+  font-size: 16px;
+  margin: 0 0 10px 0;
+  
+}
+.business-review-article p {
+  margin: 0 0 10px 0;
+  padding: 0;
+  font-size: 13px;
+}
+.review-reaction {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+}
+.review-reaction span span {
+  margin-right: 10px;
+}
+.reviewer-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.review-duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.writer-container {
+  padding: 10px;
+}
+
+.review-reaction-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+.reviewee-container-parent {
+  width: 100vw;
+}
+
+.list-heading-desc {
+  font-family: " Open Sans", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+}
+.list-article-main {
+  width: 50%;
+  margin-left: 50px;
+}
+.list-article {
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 5px gainsboro;
+}
+
+.reviewee-wrapper {
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+.reviewee-map {
+  width: 100%;
+  height: 100%;
+  margin-left: -50px;
+  position: "relative";
 }

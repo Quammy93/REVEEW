@@ -1,5 +1,5 @@
 // reducers/userReducer.js
-import { SET_SERVICE_CATEGORY,SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN,SET_IS_SERVICE_CONTAINER_OPEN,SET_BUSINESS_INFO } from "../action";
+import { SET_SERVICE_CATEGORY,SET_SERVICE_LOCATION,SET_IS_LOCATION_CONTAINER_OPEN,SET_IS_SERVICE_CONTAINER_OPEN,SET_BUSINESS_INFO,SET_BUSINESS_SEARCHED } from "../action";
 
 
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
   isServiceContainerOpen: false,
   isLocationContainerOpen: false,
   businessInfo:{},
+  businessSearched:[]
 };
 
 const businessReducer = (state = initialState, action) => {
@@ -23,10 +24,13 @@ if (action.type == SET_IS_LOCATION_CONTAINER_OPEN) {
   return { ...state, isLocationContainerOpen: action.payload.status };
 }
 if (action.type == SET_IS_SERVICE_CONTAINER_OPEN) {
-  return { ...state, isLocationContainerOpen: action.payload.status };
+  return { ...state, isServiceContainerOpen: action.payload.status };
 }
 if (action.type == SET_BUSINESS_INFO) {
   return { ...state, businessInfo: action.payload.business };
+}
+if (action.type == SET_BUSINESS_SEARCHED) {
+  return { ...state, businessSearched: action.payload.result };
 }
  
   return state;
