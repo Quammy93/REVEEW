@@ -9,6 +9,8 @@ const checkPermisions = require("../JWT/checkPermision");
 
 //showing current user
 const showCurrentUser = (req, res) => {
+  // const { userId } = req.user;
+  console.log(req.user);
   res.status(StatusCodes.OK).json({ user: req.user });
 };
 //getting all the users

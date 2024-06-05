@@ -118,10 +118,10 @@ if (location) {
   let result = Item.find(queryObj);
   //sorting
   if (sort === "high-rate") {
-    result = result.sort("avgrating");
+    result = result.sort("-avgrating");
   }
   if (sort === "most-reviewed") {
-    result = result.sort("numOfReview");
+    result = result.sort("-numOfReview");
   }
     if (sort === "recommended") {
       result = result.sort("recommended");
