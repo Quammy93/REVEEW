@@ -3,7 +3,7 @@ const CustomError = require("../errors/CustomError");
 const UnAunthenticatedError = require("../errors/UnAunthenticatedError");
 const UnauthorizedError = require("./UnauthorizedError");
 
-modules.exports = {
+module.exports = {
   CustomError,
   BadrequestError,
   UnAunthenticatedError,

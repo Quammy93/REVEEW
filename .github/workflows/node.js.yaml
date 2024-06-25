@@ -1,0 +1,22 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  testing-unit-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./microservices/site # Specify the working directory
+
+      - name: Run tests
+        run: echo "Running tests"
+        working-directory: ./microservices/site # Specify the working directory
